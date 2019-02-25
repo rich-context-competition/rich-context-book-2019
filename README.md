@@ -11,12 +11,12 @@ The goal is to manage the process via github issues on this repo. Feedback on th
 
 ## Book Schedule
 
-[x] Draft white papers – Feb 15 
-[] Review and edit by Ian/Julia - March 15
-[] Second draft by June 15 
-[] Send for review
-[] Response by August 15 
-[] Final versions October 15
+- [x] Draft white papers – Feb 15 
+- [] Review and edit by Ian/Julia - March 15  
+- [] Second draft by June 15  
+- [] Send for review  
+- [] Response by August 15  
+- [] Final versions October 15  
 
 
 ## Book Outline
