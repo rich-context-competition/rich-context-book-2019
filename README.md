@@ -21,8 +21,16 @@ The goal is to manage the process via github issues on this repo. Feedback on th
 
 ## Book Outline
 
-1. Editors’ overview   
-2. Competition design   
-3. Competition Evaluation  
-4.-10. Technical Chapters  
-11.  Future Agenda
+Book structure
+Editors’ overview  
+Why it matters: use case – Bundesbank 
+Competition Design – Jonathan
+  - Text  
+  - Data  
+  - Github  
+Technical approaches  
+  - Text  
+  - Code  
+  - Documentation  
+The future from information science (Bob Allen)   
+The future for AI (editors).   
