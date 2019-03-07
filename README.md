@@ -21,10 +21,10 @@ The goal is to manage the process via github issues on this repo. Feedback on th
 
 ## Book Outline
 
-Book structure
+Book structure  
 Editors’ overview  
-Why it matters: use case – Bundesbank 
-Competition Design – Jonathan
+Why it matters: use case – Bundesbank  
+Competition Design – Jonathan  
   - Text  
   - Data  
   - Github  
