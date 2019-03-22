@@ -1,0 +1,22 @@
+ 
+Dear colleagues:
+Congratulations.  We are delighted to tell you that we have selected your team to continue on to Phase II of the Rich Context Competition! We have attached your final phase I submission’s quantitative evaluation. We will return to you a summary of your qualitative evaluation next week. 
+ 
+As a Rich Context Competition finalist, your team will receive $2,000 for your accomplishment and we will pay for two nights of accommodation and Economy air travel for one representative of your team to attend the Competition workshop in New York City on February 15, 2019. At the workshop, each finalist team will present their work and a winner will be selected. We will follow up with a logistics email for workshop accomodation and travel.
+ 
+Phase II will involve testing your model against an unlabeled corpus of publications that represents the general use case of interest - finding datasets used in social science publications. We have been provided such a corpus by SAGE Publishing, which includes datasets from sources other than the ones used in Phase I.  The corpus will represent selected research areas: Education, Health Care, Agriculture, Finance, Criminal Justice, and Welfare.
+ 
+The evaluation of Phase II will have two components, since a gold standard is not available.  First, the judges will take a random set of publications and score precision and recall based on that set.   Second, as our technical judges suggested, since this phase of the competition is to be much more collaborative, you to help us design the evaluation.  As such, we ask that your team supply us with a short, one-page description of your planned approach for working on the Phase II challenge. We want you to tell us (broadly) your approach – your secret sauce – and tell us how would you like to be evaluated.  We’ll combine the responses from all the finalists in refining the evaluation process for this phase. Please respond with your one-page summary by Wednesday, December 19.
+ 
+You will be able to run up to two tests on the new corpus between December 20 and February 1. Final submissions are due February 1.  We also continue to make available the Phase I holdout to check your work against labeled data.
+ 
+Many thanks for your hard and fruitful work on this effort and we look forward to working with you over coming months and to seeing you here in New York in the New Year.
+ 
+Julia Lane
+Professor, Center for Urban Science and Progress and Wagner School
+Provostial Fellow
+New York University
+Phone 646 208 4990
+Check out our training courses at https://coleridgeinitiative.org/training
+ 
+rcc-14-final-precision_recall_graph.pdf
