@@ -1,6 +1,5 @@
 ---
-bibliography:
-- 'bibliography.bib'
+bibliography: 'bibliography.bib'
 ---
 
 Introduction
