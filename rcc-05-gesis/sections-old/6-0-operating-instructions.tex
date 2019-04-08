@@ -1,0 +1,234 @@
+\section{Technical Documentation}
+\label{sec:techdoc}
+%(Documentation on how to install, train, configure, and run the model program)
+The project contains the following modules listed in the order in which they are excecuted.
+
+%=====================================================================================
+%=====================================================================================
+\subsection{Pre-processing}
+%=====================================================================================
+\subsubsection{PDF Text Extraction}
+\textbf{Module name : }
+
+Cermine_NlmJat_extractor\\
+\textbf{Function: }
+
+Converts each PDF files of a given folder to JATS XML Format. Each input PDF File is transformed to one XML File.\\
+\textbf{Bash function call: }
+\begin{lstlisting}
+java -jar target/cermineXMLextraction-1.0.0-jar-with-dependencies.jar
+\end{lstlisting}
+\textbf{Parameter (2): }
+\begin{lstlisting}
+-s <source folder>\
+-t <target folder>
+\end{lstlisting}
+\textbf{Returns: }
+
+XML Files in JATS XML Format.\\
+\textbf{Build: }
+
+This is a Java program using Maven build tool.\\
+\textbf{build call: }
+
+mvn install
+
+%=====================================================================================
+\subsubsection{Extraction of text from JATS XML}
+\textbf{Module name : }
+
+preprocess-rcc-data\\
+\textbf{Function: }
+
+Transform text from JATX XML Format into a JSON File containing a list of textfields with essential metadata for each JATS XML file of a given folder.\\
+\textbf{Bash function call: }
+\begin{lstlisting}
+`python3  ./jats_text_extractor.py `
+\end{lstlisting}
+\textbf{Parameter (4): }
+\begin{lstlisting}
+<source folder>
+<target folder>
+<limiting number of files to transform (-1: all)> 
+<number of cores to use for multiprocessing (-1: all)>
+\end{lstlisting}
+\textbf{Returns: }
+
+A JSON File for each given XML File in the source folder
+
+%=====================================================================================
+\subsubsection{Metadata Extraction}
+\textbf{Module name : }
+
+preprocess-rcc-data\\
+\textbf{Function: }
+
+Extracts structured metadata and references from all JATS XML files in a given folder into two Files.
+One containing the metadata from all Publications in JATS XML files and one containing all references from the JATS XML Files.
+The target file format is JSON.\\
+\textbf{Bash function call: }
+\begin{lstlisting}
+python3  ./jats_metadata_extractor.py
+\end{lstlisting}
+\textbf{Parameter (3): }
+\begin{lstlisting}
+<source folder>
+<target filename for metadata>
+<target filename for references>
+\end{lstlisting}
+\textbf{Returns: }
+
+Two JSON files containing metadata and references from all XML Files
+
+%=====================================================================================
+%=====================================================================================
+\subsection{Dataset Mentions}
+%=====================================================================================
+\subsubsection{Dataset Mention Extraction}
+\textbf{Module: }
+
+dataset-mention-extraction\\
+\textbf{Function:}
+
+Extract dataset mentions from all JSON Files from a given folder with a given spacy model.\\
+\textbf{Bash function call: }
+\begin{lstlisting}
+python3  ./predict_mentions.py
+\end{lstlisting}
+\textbf{Parameter (4): }
+\begin{lstlisting}
+<source folder>
+<name of spacy model folder>
+<target filename rcc-output>
+<target filename internal format>
+\end{lstlisting}
+\textbf{Returns: }
+
+Two JSON files containing the found dataset mentions in all given JSON Files.
+One in RCC defined output.
+One in Internal format including the senctence the dataset mention occures.\\
+\textbf{Train: }
+
+For training we submit a jupyter notebook with all needed code.
+\emph{Train_spacy_ner_prod.ipynb}\\
+\textbf{Build (For training only): }
+
+Install english spacy language model.
+This can be done with `python -m spacy download en`.
+
+\begin{comment}
+\textfg{}
+For evaluation we first predict with the predictor which is used in production `predict_mentions.py`. We run this script on the test data and the result is a new field in paragraph data called `predicted_standoff`.
+During evaluation with `evaluate.py` this filed is compared to the `standoff` field. The only parameter `evaluate.py` needs is the filename of the test data and the filename where the results should be saved in json format.
+\end{comment}
+
+
+%=====================================================================================
+\subsubsection{Dataset Linking (only Phase 1)}
+\textbf{Module: }
+
+dataset-prediction\\
+\textbf{Function: }
+
+Links dataset mentions given a JSON file in internal format to datasets listed in a given JSON File.\\
+\textbf{Bash function call:}
+\begin{lstlisting}
+python3  ./retrieve.py
+\end{lstlisting}
+\textbf{Parameter (3): }
+\begin{lstlisting}
+<JSON filename of extracted mentions>
+<JSON filename of dataset list to match>
+<output filename for dataset citations>
+\end{lstlisting}
+\textbf{Returns: }
+
+JSON file in the format defined by the competition containing information about links between publications and datasets.
+
+%=====================================================================================
+%=====================================================================================
+\subsection{Research Method Extraction}
+\textbf{Module name : }
+
+research-method-extractor\\
+\textbf{Function: }
+
+Extracts research method terms from JSON files with text information from publications.\\
+\textbf{Bash function call: }
+\begin{lstlisting}
+java -jar target/gesisents-0.1-jar-with-dependencies.jar
+\end{lstlisting}
+\textbf{Parameter (3): }
+\begin{lstlisting}
+<source folder>
+<target file name>
+<Limit to reduce the number of processed files (-1:all)>
+\end{lstlisting}
+\textbf{Returns: }
+
+A JSON file in the format defined by the competition containing information about publications and research methods.
+\textbf{Build: }
+
+This is a Java program using Maven build tool.\\
+\textbf{build call: }
+
+mvn install
+
+
+%=====================================================================================
+%=====================================================================================
+\subsection{Research Field Classifier}
+\textbf{Module name : }
+
+research-field-detector\\
+\textbf{Function: }
+
+Classifies given abstracts with classoz Labels\\
+\textbf{Bash function call: }
+\begin{lstlisting}
+python3  ./fasttext_predictor.py
+\end{lstlisting}
+\textbf{Parameter (4): }
+\begin{lstlisting}
+<filename of JSON file with abstracts>
+<filename of fasttext model>
+<filename of label dictionary in JSON>
+<target filename labels in >
+\end{lstlisting}
+\textbf{Returns: }
+
+A JSON file in the format defined by the competition containing information about publications and research fields.
+
+\begin{comment}
+#### 1. The classifier of FastText library (word embedding),
+For training the fastText algorithm, the following code should be run:
+```sh
+python train_fastext_model.py
+```
+ In this code, for training the classifier, negative sampling 25 , epoch 150 , and ngram 2 are used as parameters. Also for applying the trained model on some test samples, the following script should be used:
+ ```sh
+python fasttext_predictor.py data_filename model_filename  label_dict  target
+```
+#### 2. Random forest algorithm from skilearn library
+For training a random forest model, the following command can be used:
+ ```sh
+python train_sklearn_model.py
+```
+For training the classifier,  n_estimators=500, and random_state=42 are used as prameters. For applying the trained model on tes# Research Field Detector
+t data, the following code should be use:
+ ```sh
+python sklearn_predictor.py
+```
+\subsubsection{SSOAR -- Metadata Harvestor}
+For this reason a code is implemented to harvest metadata information. Here you can see how to run the harvestor 
+
+code:
+```sh
+python harvest_ssoar.py
+```
+\subsubsection*{Evaluation}
+For the evaluation, the following file can be used:
+```sh
+ ./evalouation_part/Evaluation_sklearn.ipynb
+```
+\end{comment}
