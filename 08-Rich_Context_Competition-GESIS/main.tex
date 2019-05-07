@@ -1,0 +1,55 @@
+\documentclass[fleqn]{template}
+\include{packages}
+\begin{document}
+    \input{front}
+    
+    %\input{sections/1-0-non-technical-overview}
+    %\input{sections/2-0-litereature-review}
+    %\input{sections/3-0-what-did-you}
+    %\input{sections/4-0-what-worked-what-not}
+    %\input{sections/5-0-summery-of-results-and-caveats}
+    %\input{sections/6-0-lessons-learned-and-what-would-you-do-differently}
+    %\input{sections/7-0-what-comes-next}
+    %\input{sections/appendix}
+    %\input{sections/8-0-description-of-code-and-documentation}
+    
+    \input{sections-old/1-0-intro}
+    \input{sections-old/2-0-data-and-prepro}
+    \input{sections-old/3-0-dataset-extraction}
+    \input{sections-old/4-0-research-method-extraction}
+    \input{sections-old/5-0-research-field-classification}
+    \input{sections-old/6-0-operating-instructions}
+    %\input{sections/rest-to-delete}
+    \input{back}
+\end{document}
+
+
+%% 
+%% Review of white paper
+%% o   Clear overview of tasks
+%% o   Solid presentation of approach
+%% o   Major advantage given their local dataset:  Social Science Open Access Repository %% (SSOAR) – but use what you have is a GREAT principle.
+%% o   Professional effort!!!  -- Approach, documentation, & justification.
+%% o   Problem:  quality of their results, lower than others.
+
+% all
+% ------
+%•	In both field and dataset classification, what types of errors did you get? Were these the type of errors you would expect or were there strange ones? Are your errors coming from contextual features or from noun phrase features?
+
+%% Todos:
+% research methods:
+% ----------------
+%"I would have liked to have seen a little more information on the shape features"
+
+% research fields:
+% ----------------
+% "why did you choose 44 fields"
+% More about source of classification
+% "•	If, instead of abstracts, you train on summarizations, how do you think it will affect your results?"
+
+% datasets:
+%•	You may want to consider looking into the area called ‘weak supervision’. Specifically, you mentioned that some of the things that spaCy model was returning looked good, and you could add those in as an additional training data - other terms for that could be ‘co-training’ or ‘bootstrapping’.
+% No. weak supervision
+
+% Words about matching (citation?) •	You said that the mentions problem was more interesting to confront than citations - do you have any thoughts on why you performed worse on the citation problem than on the mentions?
+

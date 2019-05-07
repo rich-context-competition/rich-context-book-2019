@@ -1,0 +1,172 @@
+\section{Unused stuff}
+
+
+
+
+
+
+
+\begin{itemize}
+    \item Problem: No ground truth
+    \item Solution: Ground truth generation based on mention list and known datasets.
+    \item Problem classes: Wrong annotatations (words are annotated as datasets, but the are not) and left out annotations (A dataset mention is not annoted with the procedure)
+    \item Used model here?
+\end{itemize}
+\subsubsection{Mention lists as source}
+\begin{itemize}
+    \item Source of Information: Given mention lists from RCC
+    \item benefits:
+    \begin{itemize}
+        \item Disambiguation Problem partly solved (Only mentions relevant for a concrete publication is mapped. Probability of Wrong annotation is low.
+        \item Even vague mentions are annotated in this lists (Example: Monthly Statistics)
+    \end{itemize}
+    \item shortcomings:
+    \begin{itemize}
+        \item Left out Annotations: Only datasets with a known connection have mention lists; There are mentions of datasets which are not in the reference list)
+        \item Definition of what is a dataset mention is not is interpreted differently by the annotator
+        \item Because of the normalization of terms in the mention list some remappings might fail.
+    \end{itemize}
+    \item Used model here?
+\end{itemize}
+
+\subsubsection{Known dataset titles as source}
+\begin{itemize}
+    \item Problem: No ground truth
+    \item Solution: Ground truth generation based on mention list and known datasets.
+    \item Used model here?
+\end{itemize}
+
+\begin{itemize}
+    \item Short Model description with Used Parameters
+    \item Generation of training data in general
+    \item What we did in phase 1 (Mapping from Mentionslist, including problems)
+    \item What we did in phase 2 (Mapping from Dataset list, including problems)
+    \begin{itemize}
+        \item Goal better generalization
+    \end{itemize}
+    \item Eval First
+    \item Eval second With qualitative results
+\end{itemize}
+
+
+We adopt a semi-supervised approach to address this task.
+As a model for the NER task we used the standard NER-implementation of the NLP software library spacy\footnote{\url{spacy.io}}. The NER model 
+The general idea to treat the lack of ground truth data is to use as much information about concrete mentions of datasets given by the RCC-team.
+
+We treated the task of detecting dataset mentions in full texts as
+For this, we trained a Named Entity Recognizer from [spacy](https://spacy.io/) a Natural Language Framework.
+
+\subsubsection{Distant Supervision}
+The challenge of missing ground truth data is the main problem to handle during this competition. Supervised learning methods to extract dataset mentions from text are not directly applicable for this reason.
+As described in \ref{subsec:rcc-corpus} the corpus, the only information given about dataset mentions in text are a list of mentions for a part of the connections given in the first phase of the competition relating publications and datasets.
+But not all connections of the training, evaluation and test set of the first phase of the competition contain this mention list.
+Five percent of the connections in the train and development has no linked mentions in the mention list.
+Unfortunately in the test set of Phase~1 which was made published for participants of Phase 2 only in 98\% of the connections an empty mention list is given.
+Because of this there is no more potential training data for Phase~2.\\
+                          (empty_share, #empty, #links)
+    phase-1-develop                      (0.05, 5, 100)
+    phase-1-test       (0.9800826756858324, 5216, 5322)
+    phase-1-train      (0.05819239861793053, 320, 5499)
+phase 2 Eval
+\begin{enumerate}
+    \item support 1983 mentions in 3018 publications from holdout set (20\%)
+    \item 
+\end{enumerate}
+{'support': 1983,
+ 'partial_precision': 0.5124499141385231,
+ 'strict_precision': 0.4968517458500286,
+ 'partial_recall': 0.9029248613212305,
+ 'strict_recall': 0.875441250630358}
+
+Examples of not in train ground truth 
+________________________________
+National Health and Nutrition Examination Surveys 17
+1958 Philadelphia Birth Cohort Study 16
+Patient’s and Physician’s Global Assessments 15
+National Survey of Adolescents 12
+Study of Women’s Health Across the Nation 10
+First Austrian Dementia Report 9
+
+\dots
+National Household Transportation Survey 1
+Iowa Transportation and Employment Survey 1
+California’s Health Interview Survey 1
+Annual Survey of Jails 1
+National Household Survey of Drug Abuse 1
+Arrestee Drug Abuse Monitoring researchers 1
+
+
+Examples in groundtruth of train
+________________________________
+National Health and Nutrition Examination Survey 137
+Third National Health and Nutrition Examination Survey 97
+National Longitudinal Study of Adolescent Health 87
+Health and Retirement Study 53
+National Crime Victimization Survey 39
+Current Population Survey 36
+\dots
+1984 National Health Interview Survey 1
+2000 Census of State and Federal Adult Correctional Facilities 1
+1976 Detroit Area Study 1
+Epidemiologic Catchment Area Program 1
+= National Social Life, Health, and Aging Project 1
+U.S. Health and Nutrition Examination Survey 1
+
+
+
+Even though our approach uses supervised machine learning, to handle the lack of a ground truth we use  training data generated with help of the aforementioned mention lists in the first phase. 
+The result is a weakly labeled training corpus. This method is inspired by \cite{lee2016bagging}. The concrete realisation is described in \ref{subsec:ground-truth-phase1}.\\
+\sd{could you state some more details here about the scale and quality of the labels (or the limitations)?}
+For the second phase we are facing the following challenges.
+\sd{start this with a more general statement about "lack generalisability of the selected ground truth" which seems to be the main point.}
+\sd{sentence below refers to your weakly labeled training data? with "publications of second phase" you mean the test/evaluation set?}
+At least half of the publication of the first phase was selected because of known relations to datasets in the ICPSR dataset list.
+However, only around 5,000 of the 10,000 dataset records were used in the training set.
+The publications of the second phase were selected randomly from a social science corpus of sage publication as described in \ref{subsec:rcc-corpus}.
+\sd{statement below: isn't it causal, i.e. "the publications containing ICPSR are expected to be low, therefore the model will not perform/generalise well"}
+So we expect not only the publication containing datasets from the ICPSR dataset records lower, but also the model trained on mentions of around 500 of them not to generalize well on the new corpus.
+How we generated a weakly annotated corpus as training corpus for Phase 2 we describe in \ref{subsec:ground-truth-phase2}.
+
+
+
+\subsubsection{Ground truth Generation Phase 1}
+\label{subsec:ground-truth-phase1}
+\sd{I'd merge this into the section above for the sake of readability and go step by step.}
+As training data we used remapped mentions from the data\_set\_citation.json files mentions\_lists.
+
+ 
+\subsubsection{Ground truth Generation Phase 2}
+\label{subsec:ground-truth-phase2}
+ 
+\subsection{Evaluation}
+%\subsubsection{Metrics}
+\subsubsection{Evaluation Phase 1}
+
+\subsubsection{Evaluation Phase 2}
+
+
+\begin{comment}
+The used software components are:
+\begin{itemize}
+    \item Preprocessing
+        \begin{itemize}
+            \item PDF extraction: \emph{Cermine\_NlmJat\_extractor}
+            \item Metadata extraction and preprocessing:\\ \emph{preprocess-rcc-data}
+        \end{itemize}
+    \item Dataset Linking
+        \begin{itemize}
+            \item Find data set mentions: \emph{dataset-mention-extraction}
+            \item Predict citations: \emph{dataset-prediction}
+        \end{itemize}
+    \item Research Field Classification
+        \begin{itemize}
+            \item Identify research fields: \emph{research-field-detector}
+        \end{itemize}
+    \item Research Methods Extraction
+        \begin{itemize}
+            \item Find research methods in a text:\\ \emph{research-method-extractor}
+        \end{itemize}
+
+\end{itemize}
+\end{comment}
+
