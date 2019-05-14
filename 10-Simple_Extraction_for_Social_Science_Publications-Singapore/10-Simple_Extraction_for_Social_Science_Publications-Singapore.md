@@ -30,6 +30,7 @@ Replicability and generalizability: None
 
 -->
 
+<!--
 ---
 author:
 - |
@@ -41,6 +42,7 @@ bibliography:
 - 'rcc-02.bib'
 title: Simple Extraction for Social Science Publications
 ---
+-->
 
 ## Chapter: Simple Extraction for Social Science Publications
 
@@ -48,7 +50,7 @@ Philips Kokoh Prasetyo, Amila Silva, Ee-Peng Lim, Palakorn Achananuparp\
 Living Analytics Research Centre, Singapore Management University\
 {pprasetyo,amilasilva,eplim,palakorna}@smu.edu.sg
 
-First draft: 11 February 2019; Second draft: 12 May 2019
+First draft: 11 February 2019; Second draft: 14 May 2019
 
 
 ### Abstract
@@ -57,13 +59,13 @@ With the vast number of datasets and literature collections available for resear
 
 ### Table of contents
 
-1. Introduction
-2. Related Work
-3. Data Analysis
-4. Methods
-5. Experiment Results
-6. Lesson Learned
-7. Appendix: Code Documentation
+1. [Introduction](#1-introduction)
+2. [Related Work](#2-related-work)
+3. [Data Analysis](#3-data-analysis)
+4. [Methods](#4-methods)
+5. [Experiment Results](#5-experiment-results)
+6. [Lesson Learned](#6-conclusion)
+7. [Appendix: Technical Documentation](#appendix-technical-documentation)
 
 
 ### 1. Introduction
@@ -84,22 +86,22 @@ conclusion and future work in section \[sec:conclusion\].
 
 ### 2. Related Work
 
-Extracting information from scientific text has been explored in the past [@Peng2004AccurateIE; @Nguyen2015ScholarlyDI; @Singh2016OCRAR]. One type of information extraction from scientific articles is extracting keyphrases and relation between them [@Augenstein2017SemEval2T]. @Luan2017ScientificIE propose semi-supervised sequence tagging approach to extract keyphrases. @Augenstein2017MultiTaskLO explore multi-task deep recurrent neural network approach with several auxiliary tasks to
-extract keyphrases.
+Extracting information from scientific text has been explored in the past [[PM04](#user-content-PM04); [NCKL15](#user-content-NCKL15); [SBP<sup>+</sup>16](#user-content-SBP+16)]. One type of information extraction from scientific articles is extracting keyphrases and relation between them [[ADR<sup>+</sup>17](#user-content-ADR+17)]. Luan et al. (2017) propose semi-supervised sequence tagging approach to extract keyphrases [[LOH17](#user-content-LOH17)]. Augenstein and Søgaard (2017) explore multi-task deep recurrent neural network approach with several auxiliary tasks to extract keyphrases [[AS17](#user-content-AS17)].
 
-Another type of extraction is citation extraction. Two citation extraction settings have been explored before: reference mining inside the full text [@Alves2018DeepRM], and citation metadata
-extraction [@Hetzner2008ASM; @Anzaroot2014LearningSL; @An2017CitationME]. @Nasar2018InformationEF write a survey on information extraction from scientific articles.
+Another type of extraction is citation extraction. Two citation extraction settings have been explored before: reference mining inside the full text [[ACK18](#user-content-ACK18)], and citation metadata extraction [[Het08](#user-content-Het08); [APBM14](#user-content-APBM14); [AGJ<sup>+</sup>17](#user-content-AGJ+17)]. Nasar er al. (2018) write a survey on information extraction from scientific articles [[NJM18](#user-content-NJM18)].
 
 Recently, there are some work to explore dataset extraction from
-scientific text [@Boland2012IdentifyingRT; @Ghavimi2016ASA; @Ghavimi2016IdentifyingAI]. @Boland2012IdentifyingRT propose weakly supervised pattern induction to identify references in social science publications. [@Ghavimi2016ASA; @Ghavimi2016IdentifyingAI] propose a semi automatic approach for detecting dataset references for social science texts. Dataset extraction is a challenging task because of the inconsistency and wide range of dataset mention styles in research publications [@Ghavimi2016IdentifyingAI].
+scientific text [[BREM12](#user-content-BREM12); [GML<sup>+</sup>16](#user-content-GML+16); [GMVL16](#user-content-GMVL16)]. Boland et al. (2012) propose weakly supervised pattern induction to identify references in social science publications [[BREM12](#user-content-BREM12)]. Ghavimi et al. (2016) propose a semi automatic approach for detecting dataset references for social science texts [[GML<sup>+</sup>16](#user-content-GML+16); [GMVL16](#user-content-GMVL16)]. Dataset extraction is a challenging task because of the inconsistency and wide range of dataset mention styles in research publications [[GMVL16](#user-content-GMVL16)].
 
 ### 3. Data Analysis
 
 The first phase of RCC dataset consists of a labeled corpus of 5,000 publications for training set, and additional 100 publications for development set. The RCC organizer keeps a separate corpus of 5,000 publications for evaluation. Each article in the dataset contains full text article and dataset citation labels. The metadata of cited datasets in the corpus are also provided. For research methods and fields, no label information is provided, only SAGE social science research method graph and research fields vocabulary are provided.
 
-**Preprocessing.** In order to reliably access important structures of paper publications, we parse all papers using AllenAI Science Parse[^1] [@Ammar2018ConstructionOT]. AllenAI Science Parse reads PDF file, and returns title, authors, abstract, sections, and bibliography (references). Since this parser utilizes machine learning models to parse PDF file, the parsing results may not be 100% accurate. Furthermore, this parser is unable to parse scan copy of old publication. In the situation where we are unable to access parsed fields, we fall back to the given text files.
+**Preprocessing.** In order to reliably access important structures of paper publications, we parse all papers using AllenAI Science Parse[<sup>1</sup>](https://github.com/allenai/science-parse) [[AGB<sup>+</sup>18](#user-content-AGB+18)]. AllenAI Science Parse reads PDF file, and returns title, authors, abstract, sections, and bibliography (references). Since this parser utilizes machine learning models to parse PDF file, the parsing results may not be 100% accurate. Furthermore, this parser is unable to parse scan copy of old publication. In the situation where we are unable to access parsed fields, we fall back to the given text files.
 
-**Mention Analysis.** There are 5,499 and 123 dataset citations in training and development set respectively. Among these citations, 320 citations in training set and 6 citations in development set do not have mentions information. We analyze the paper sections where the dataset mentions commonly occur. Table \[tab:train\_top\_sections\] and \[tab:dev\_top\_sections\] show top 12 most common sections mentioning dataset in training and development set. The tables suggest that abstract, reference titles, discussion, results, and methods are the most common sections where the dataset mentions occur. We exploit reference titles for dataset extraction.
+**Mention Analysis.** There are 5,499 and 123 dataset citations in training and development set respectively. Among these citations, 320 citations in training set and 6 citations in development set do not have mentions information. We analyze the paper sections where the dataset mentions commonly occur. Table [1](#user-content-tab_train_top_sections) and [2](#user-content-tab_dev_top_sections) show top 12 most common sections mentioning dataset in training and development set. The tables suggest that abstract, reference titles, discussion, results, and methods are the most common sections where the dataset mentions occur. We exploit reference titles for dataset extraction.
+
+<a name="tab_train_top_sections">Table 1</a>: Top 12 Sections Mentioning Datasets in Training Set
 
 Section Header | Mention Frequency
 -------------- | -----------------:
@@ -116,7 +118,8 @@ Materials and Methods | 254
 Study Population | 227
 Data | 214
 
-: \[tab:train\_top\_sections\] Top 12 Sections Mentioning Datasets in Training Set
+
+<a name="tab_dev_top_sections">Table 2</a>: Top 12 Sections Mentioning Datasets in Development Set
 
 Section Header | Mention Frequency
 -------------- | -----------------:
@@ -133,9 +136,11 @@ Population Impact | 7
 Price | 7
 2.1 Data | 5
 
-: \[tab:dev\_top\_sections\] Top 12 Sections Mentioning Datasets in Development Set
 
-**Citation Analysis.** We build citation network from training set. Each node in the network is a paper publication, and an edge between two node $A$ and $B$ is generated if a paper $A$ cites paper $B$. Table \[tab:network\_stats\] shows the statistics of the citation network.
+**Citation Analysis.** We build citation network from training set. Each node in the network is a paper publication, and an edge between two node $A$ and $B$ is generated if a paper $A$ cites paper $B$. Table [3](#user-content-tab_network_stats) shows the statistics of the citation network.
+
+
+<a name="tab_network_stats">Table 3</a>: Statistics of Citation Network
 
 | | |
 --------------- | -------:
@@ -143,7 +148,6 @@ Number of nodes | 5,000
 Number of edges | 998
 Network density | 0.008%
 
-: \[tab:network\_stats\] Statistics of Citation Network
 
 Initially, we propose an approach utilizing citation network based on an intuition that datasets, research methods, and research fields are shared by: 1) same or similar issues, 2) same or similar context, 3) same or similar authors and communities, 4) same or similar metrics used in the publication. However, based on table \[tab:network\_stats\], we learn that exploring rich context using paper-paper citation network is not viable at this stage because most papers listed in publications’ bibliography are not available in the training set, and therefore, paper-paper citation network becomes very sparse with many unknown information. Due to this reason, we drop our idea on utilizing paper-paper citation graph at this stage. Nevertheless, we believe that bibliography contains important signals and information about datasets, and research fields.
 
@@ -191,7 +195,7 @@ This approach can be extended by utilizing research method graph to expand the c
 
 Similar to research methods identification, this task does not have labeled training data. We only have access to list of SAGE research fields. SAGE research fields are organized hierarchically into three levels, namely L1, L2, and L3, for example: Soc-2-4 (*kinship*) is under Soc (*sociology*) in L1, and under Soc-2 (*anthropology*) in L2.
 
-To gain more understanding about the characteristic of each field, we crawl top search results from SAGE Knowledge[^2]. From the search result snippets, we collect information such as title and abstract on various publications including case, major work, books, handbooks, and dictionary. We exclude video and encyclopedia. Due to sparseness of the SAGE Knowledge, we exclude all research fields with less than 10 search results. In the end, we have samples of 414 L3 research fields under 101 L2 research fields and 10 L1 research fields. This numbers cover 20.87% of 1,984 L3 research fields, and 67.79% of 149 L2 research fields in the list of SAGE research fields. We use this data to train research fields classifiers.
+To gain more understanding about the characteristic of each field, we crawl top search results from SAGE Knowledge[<sup>2</sup>](http://sk.sagepub.com/browse/). From the search result snippets, we collect information such as title and abstract on various publications including case, major work, books, handbooks, and dictionary. We exclude video and encyclopedia. Due to sparseness of the SAGE Knowledge, we exclude all research fields with less than 10 search results. In the end, we have samples of 414 L3 research fields under 101 L2 research fields and 10 L1 research fields. This numbers cover 20.87% of 1,984 L3 research fields, and 67.79% of 149 L2 research fields in the list of SAGE research fields. We use this data to train research fields classifiers.
 
 We build three SVM classifiers for L1, L2, and L3 to classify a publication using paper title and abstract. Instead of taking the highest score, we take top-k research fields and perform re-ranking considering agreement among L1, L2, L3. We return a research field if its upper level are also in top ranks. Since level L1 is too general, we only output research fields from L2, and L3. We outline our heuristic to reorder the ranking below:
 
@@ -226,61 +230,63 @@ To expand to more context from paper list in bibliography section, we also build
 
 We discuss our experiment results for each task in this section. We use standard precision, recall, and F1 as evaluation metrics.
 
-**Dataset Extraction.** First, we analyze our experiment for dataset detection subtask comparing Naive Bayes and SVM classifier. Using only paper titles in bibliography and explicit research method mentions, Naive Bayes and SVM classifiers are able to reach 0.88 & 0.92 F1 score respectively. Since SVM outperforms Naive Bayes, we use SVM for our dataset detection module. Table \[tab:dd\_dev\_result\] shows detail dataset detection results on development set.
+**Dataset Extraction.** First, we analyze our experiment for dataset detection subtask comparing Naive Bayes and SVM classifier. Using only paper titles in bibliography and explicit research method mentions, Naive Bayes and SVM classifiers are able to reach 0.88 & 0.92 F1 score respectively. Since SVM outperforms Naive Bayes, we use SVM for our dataset detection module. Table [4](#user-content-tab_dd_dev_result) shows detail dataset detection results on development set.
 
+<a name="tab_dd_dev_result">Table 4</a>: Dataset Detection Results on Development Set
 
 Classifier | Prec. | Rec. | F1
 ---------- | ----: | ---: | ---:
 Naive Bayes | 0.85 | 0.92 | 0.88
 SVM | 0.96 | 0.88 | 0.92
 
-: \[tab:dd\_dev\_result\] Dataset Detection Results on Development Set
+To see the impact of performing dataset detection, we test the performance of dataset extraction with and without dataset detection on development set. Table [5](#user-content-tab_de_dev_result) summarizes the results. As shown in the table, performing dataset detection before extraction significantly improves the dataset extraction on development set.
 
-To see the impact of performing dataset detection, we test the performance of dataset extraction with and without dataset detection on development set. Table \[tab:de\_dev\_result\] summarizes the results. As shown in the table, performing dataset detection before extraction significantly improves the dataset extraction on development set.
+<a name="tab_de_dev_result">Table 5</a>: Dataset Extraction Results on Development Set
 
 Method | Prec. | Rec. | F1
 ------ | ----: | ---: | ---:
 No Dataset Detection | 0.18 | 0.33 | 0.24
 With Dataset Detection | 0.34 | 0.30 | 0.32
 
-: \[tab:de\_dev\_result\] Dataset Extraction Results on Development Set
-
+<a name="tab_de_test_result">Table 6</a>: Dataset Extraction Result on Test Set
 
 Dataset | Prec. | Rec. | F1
 ------- | ----: | ---: | ---:
 Test Set (phase1) | 0.17 | 0.10 | 0.13
 
-: \[tab:de\_test\_result\] Dataset Extraction Result on Test Set
+Table [6](#user-content-tab_de_test_result) shows dataset extraction performance on test set (phase 1). The significant drop from development set result suggests that the test set might have different distribution compare to the training and development set. It might also contain dataset citations that are never been seen in training set.
 
-Table \[tab:de\_test\_result\] shows dataset extraction performance on test set (phase 1). The significant drop from development set result suggests that the test set might have different distribution compare to the training and development set. It might also contain dataset citations that are never been seen in training set.
+**Research Methods Identification.** We only consider Naive Bayes and Logistic Regression classifiers for research method identification because they naturally outputs probability score. We perform 5-fold cross validation to evaluate classification performance, and the result can be seen in table [7](#user-content-tab_rmethods_5cv). Logistic regression classifier outperforms Naive Bayes with 0.86 F1 score in classifying 133 research methods.
 
-**Research Methods Identification.** We only consider Naive Bayes and Logistic Regression classifiers for research method identification because they naturally outputs probability score. We perform 5-fold cross validation to evaluate classification performance, and the result can be seen in table \[tab:rmethods\_5cv\]. Logistic regression classifier outperforms Naive Bayes with 0.86 F1 score in classifying 133 research methods.
+<a name="tab_rmethods_5cv">Table 7</a>: F1 Score for Research Method Classification
 
 Classifier | F1
 ---------- | ---:
 Naive Bayes | 0.55
 Logistic Regression | 0.86
 
-: \[tab:rmethods\_5cv\] F1 Score for Research Method Classification
+**Research Fields Identification.** We perform 5-fold cross validation to evaluate our classifiers to classify L1, L2, and L3 research fields. Table [8](#user-content-tab_rfields_pub_5cv) shows the results using n-gram features from paper title and abstract, whereas table [9](#user-content-tab_rfields_rt_5cv) shows the results using n-gram features from title only. Naive Bayes tends to perform slightly better on L3 research fields where we have large number of research field labels. We decide to use SVM for research field identification on publication level because SVM is generally better than Naive Bayes. On the other hand, we decide to use Naive Bayes for research field identification on bibliography level because Naive Bayes prefer to have more accurate L2 and L3 research fields.
 
-**Research Fields Identification.** We perform 5-fold cross validation to evaluate our classifiers to classify L1, L2, and L3 research fields. Table \[tab:rfields\_pub\_5cv\] shows the results using n-gram features from paper title and abstract, whereas table \[tab:rfields\_rt\_5cv\] shows the results using n-gram features from title only. Naive Bayes tends to perform slightly better on L3 research fields where we have large number of research field labels. We decide to use SVM for research field identification on publication level because SVM is generally better than Naive Bayes. On the other hand, we decide to use Naive Bayes for research field identification on bibliography level because Naive Bayes prefer to have more accurate L2 and L3 research fields.
+<a name="tab_rfields_pub_5cv">Table 8</a>: F1 Score for Research Field Classification on Publication Level using Paper Title and Abstract
 
 Classifier | L1 | L2 | L3
 ---------- | ----: | ---: | ---:
 Naive Bayes | 0.78 | 0.37 | 0.13
 SVM | 0.82 | 0.38 | 0.12
 
-: \[tab:rfields\_pub\_5cv\] F1 Score for Research Field Classification on Publication Level using Paper Title and Abstract
+<a name="tab_rfields_rt_5cv">Table 9</a>: F1 Score for Research Field Classification on Bibliography Level using Paper Title Only
 
 Classifier | L1 | L2 | L3
 ---------- | ----: | ---: | ---:
 Naive Bayes | 0.80 | 0.35 | 0.12
 SVM | 0.81 | 0.35 | 0.11
 
-: \[tab:rfields\_rt\_5cv\] F1 Score for Research Field Classification on Bibliography Level using Paper Title Only
 
+### 6. Lesson Learned
 
-### 6. Conclusion
+Extraction of research datasets, associated research methods and fields from social science publication is challenging, yet an important problem to organize social science publications. We have described our approach for the RCC challenge, and table [10](#user-content-tab_summary) summarizes our approach. Beside publication content such as paper titles, abstract, full text, our approach also leverages on the information from bibliography. Furthermore, we also collect external information from SAGE Knowledge to get more information about research fields.
+
+<a name="tab_summary">Table 10</a>: Summary of Our Approach
 
 Method | Features (n-gram)
 ------ | -----------------
@@ -293,9 +299,6 @@ Logistic regression | paper title, abstract, and full text
 SVM (on paper) | paper title and abstract
 Naive Bayes (on bibliography) | paper titles in bibliography
 
-
-Extraction of research datasets, associated research methods and fields from social science publication is challenging, yet an important problem to organize social science publications. We have described our approach for the RCC challenge, and table \[tab:summary\] summarizes our approach. Beside publication content such as paper titles, abstract, full text, our approach also leverages on the information from bibliography. Furthermore, we also collect external information from SAGE Knowledge to get more information about research fields.
-
 Apart from F1 score on 5-fold cross validation, we have no good way to evaluate research method and research field identification without ground truth label. Our methods are unable to automatically extract and recognize new datasets, research methods, and fields. An extension to automatically handle such cases using advance Natural Language Processing (NLP) approach is a promising direction.
 
 From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. Another challenge is data sparsity. Although we see many paper listed in bibliography, lacks of access to these publication make us difficult to exploit citation network.
@@ -305,23 +308,23 @@ Unfortunately, our model did not advance to the second phase. We are interested 
 
 ### References
 
-- [[@Alves2018DeepRM](#Alves2018DeepRM)] Danny Rodrigues Alves, Giovanni Colavizza, and Frédéric Kaplan (2018): Deep reference mining from scholarly literature in the arts and humanities. In Front. Res. Metr. Anal.
-- [[@Ammar2018ConstructionOT](#Ammar2018ConstructionOT)] Waleed Ammar, Dirk Groeneveld, Chandra Bhagavatula, Iz Beltagy, Miles Crawford, Doug Downey, Jason Dunkelberger, Ahmed Elgohary, Sergey Feldman, Vu Ha, Rodney Kinney, Sebastian Kohlmeier, Kyle Lo, Tyler Murray, Hsu-Han Ooi, Matthew E. Peters, Joanna Power, Sam Skjonsberg, Lucy Lu Wang, Chris Wilhelm, Zheng Yuan, Madeleine van Zuylen, and Oren Etzioni (2018): Construction of the literature graph in semantic scholar. In NAACL-HTL.
-- [[@An2017CitationME](#An2017CitationME)] Dong An, Liangcai Gao, Zhuoren Jiang, Runtao Liu, and Zhi Tang (2017): Citation metadata extraction via deep neural network-based segment sequence labeling. In CIKM.
-- [[@Anzaroot2014LearningSL](#Anzaroot2014LearningSL)] Sam Anzaroot, Alexandre Passos, David Belanger, and Andrew McCallum (2014): Learning soft linear constraints with application to citation field extraction. In ACL.
-- [[@Augenstein2017SemEval2T](#Augenstein2017SemEval2T)] Isabelle Augenstein, Mrinal Das, Sebastian Riedel, Lakshmi Vikraman, and Andrew McCallum (2017): Semeval 2017 task 10: Scienceie - extracting keyphrases and relations from scientific publications. In SemEval@ACL.
-- [[@Augenstein2017MultiTaskLO](#Augenstein2017MultiTaskLO)] Isabelle Augenstein and Anders Søgaard (2017): Multi-task learning of keyphrase boundary classification. In ACL.
-- [[@Boland2012IdentifyingRT](#Boland2012IdentifyingRT)] Katarina Boland, Dominique Ritze, Kai Eckert, and Brigitte Mathiak (2012): Identifying references to datasets in publications. In TPDL.
-- [[@Ghavimi2016ASA](#Ghavimi2016ASA)] Behnam Ghavimi, Philipp Mayr, Christoph Lange, Sahar Vahdati, and Sören Auer (2016a): A semi-automatic approach for detecting dataset references in social science texts. Inf. Services and Use, 36:171–187.
-- [[@Ghavimi2016IdentifyingAI](#Ghavimi2016IdentifyingAI)] Behnam Ghavimi, Philipp Mayr, Sahar Vahdati, and Christoph Lange (2016b): Identifying and improving dataset references in social sciences full texts. In ELPUB.
-- [[@Hetzner2008ASM](#Hetzner2008ASM)] Erik Hetzner (2008): A simple method for citation metadata extraction using hidden markov models. In JCDL 2008.
-- [[@Luan2017ScientificIE](#Luan2017ScientificIE)] Yi Luan, Mari Ostendorf, and Hannaneh Hajishirzi (2017): Scientific information extraction with semi-supervised neural tagging. In EMNLP.
-- [[@Nasar2018InformationEF](#Nasar2018InformationEF)] Zara Nasar, S. W. Jaffry, and Muhammad Kamran Malik (2018): Information extraction from scientific articles: a survey. Scientometrics, 117:1931–1990.
-- [[@Nguyen2015ScholarlyDI](#Nguyen2015ScholarlyDI)] Viet Cuong Nguyen, Muthu Kumar Chandrasekaran, Min-Yen Kan, and Wee Sun Lee (2015): Scholarly document information extraction using extensible features for efficient higher order semi-crfs. In JCDL 2015.
-- [[@Peng2004AccurateIE](#Peng2004AccurateIE)] Fuchun Peng and Andrew McCallum (2004): Accurate information extraction from research papers using conditional random fields. In HLT-NAACL.
-- [[@Singh2016OCRAR](#Singh2016OCRAR)] Mayank Singh, Barnopriyo Barua, Priyank Palod, Manvi Garg, Sidhartha Satapathy, Samuel Bushi, Kumar Ayush, Krishna Sai Rohith, Tulasi Gamidi, Pawan Goyal, and Animesh Mukherjee (2016): Ocr++: A robust framework for information extraction from scholarly articles. In COLING.
+- [<a name="PM04">PM04</a>] Fuchun Peng and Andrew McCallum (2004): Accurate information extraction from research papers using conditional random fields. In HLT-NAACL.
+- [<a name="Het08">Het08</a>] Erik Hetzner (2008): A simple method for citation metadata extraction using hidden markov models. In JCDL.
+- [<a name="BREM12">BREM12</a>] Katarina Boland, Dominique Ritze, Kai Eckert, and Brigitte Mathiak (2012): Identifying references to datasets in publications. In TPDL.
+- [<a name="APBM14">APBM14</a>] Sam Anzaroot, Alexandre Passos, David Belanger, and Andrew McCallum (2014): Learning soft linear constraints with application to citation field extraction. In ACL.
+- [<a name="NCKL15">NCKL15</a>] Viet Cuong Nguyen, Muthu Kumar Chandrasekaran, Min-Yen Kan, and Wee Sun Lee (2015): Scholarly document information extraction using extensible features for efficient higher order semi-crfs. In JCDL.
+- [<a name="GML+16">GML<sup>+</sup>16</a>] Behnam Ghavimi, Philipp Mayr, Christoph Lange, Sahar Vahdati, and Sören Auer (2016a): A semi-automatic approach for detecting dataset references in social science texts. Inf. Services and Use, 36:171–187.
+- [<a name="GMVL16">GMVL16</a>] Behnam Ghavimi, Philipp Mayr, Sahar Vahdati, and Christoph Lange (2016b): Identifying and improving dataset references in social sciences full texts. In ELPUB.
+- [<a name="SBP+16">SBP<sup>+</sup>16</a>] Mayank Singh, Barnopriyo Barua, Priyank Palod, Manvi Garg, Sidhartha Satapathy, Samuel Bushi, Kumar Ayush, Krishna Sai Rohith, Tulasi Gamidi, Pawan Goyal, and Animesh Mukherjee (2016): Ocr++: A robust framework for information extraction from scholarly articles. In COLING.
+- [<a name="ADR+17">ADR<sup>+</sup>17</a>] Isabelle Augenstein, Mrinal Das, Sebastian Riedel, Lakshmi Vikraman, and Andrew McCallum (2017): Semeval 2017 task 10: Scienceie - extracting keyphrases and relations from scientific publications. In SemEval@ACL.
+- [<a name="AGJ+17">AGJ<sup>+</sup>17</a>] Dong An, Liangcai Gao, Zhuoren Jiang, Runtao Liu, and Zhi Tang (2017): Citation metadata extraction via deep neural network-based segment sequence labeling. In CIKM.
+- [<a name="AS17">AS17</a>] Isabelle Augenstein and Anders Søgaard (2017): Multi-task learning of keyphrase boundary classification. In ACL.
+- [<a name="LOH17">LOH17</a>] Yi Luan, Mari Ostendorf, and Hannaneh Hajishirzi (2017): Scientific information extraction with semi-supervised neural tagging. In EMNLP.
+- [<a name="ACK18">ACK18</a>] Danny Rodrigues Alves, Giovanni Colavizza, and Frédéric Kaplan (2018): Deep reference mining from scholarly literature in the arts and humanities. In Front. Res. Metr. Anal.
+- [<a name="AGB+18">AGB<sup>+</sup>18</a>] Waleed Ammar, Dirk Groeneveld, Chandra Bhagavatula, Iz Beltagy, Miles Crawford, Doug Downey, Jason Dunkelberger, Ahmed Elgohary, Sergey Feldman, Vu Ha, Rodney Kinney, Sebastian Kohlmeier, Kyle Lo, Tyler Murray, Hsu-Han Ooi, Matthew E. Peters, Joanna Power, Sam Skjonsberg, Lucy Lu Wang, Chris Wilhelm, Zheng Yuan, Madeleine van Zuylen, and Oren Etzioni (2018): Construction of the literature graph in semantic scholar. In NAACL-HTL.
+- [<a name="NJM18">NJM18</a>] Zara Nasar, S. W. Jaffry, and Muhammad Kamran Malik (2018): Information extraction from scientific articles: a survey. Scientometrics, 117:1931–1990.
 
 
-[^1]: https://github.com/allenai/science-parse
+### Appendix: Technical Documentation
 
-[^2]: http://sk.sagepub.com/browse/
+Source codes to run and replicate our experiments are available at `https://github.com/LARC-CMU-SMU/rcc-02`.
