@@ -21,6 +21,9 @@ bibliography:
 title: Rich Text Competition
 ---
 
+Non technical overview
+=============
+
 Literature Review
 =============
 
@@ -36,6 +39,9 @@ by the publication year but that may only work on Social Sciences
 publications. For example, in the Computer Science datasets do not
 appear followed by the publication year so this heuristic cannot detect
 all kind of dataset mentions.
+
+What did you do
+=============
 
 Models
 ======
@@ -203,8 +209,8 @@ first token, or O if otherwise. We used this type of data to train the
 model which could detect research methods in publications.
 
 
-Results and Discussions
-=======================
+Summary of your results and caveats
+===================================
 
 Due to the difficulty of performing a quantitative analysis on a not
 extensively labeled dataset, a qualitative analysis was made. Several
@@ -321,6 +327,9 @@ result, we found that the dataset we use for training is not appropriate
 for this task. For example, *Reliability* and *Independent variables*
 are marked as research methods, but actually they are not.
 
+Lessons learned and what would you do differently
+=================================================
+
 Conclusions
 ===========
 
@@ -334,8 +343,8 @@ using entity types. We also proposed to use Wikipedia articles to
 retrieve research fields from scientific publications. Finally, we
 proposed to model the research method retrieval task as an NER problem.
 
-Future Work
-===========
+What comes next
+===============
 
 This work is the very first step of the Coleridge Initiative to build an
 "Amazon.com" for data users and data producers. The next step is to
@@ -361,3 +370,12 @@ In addition, we also need to improve the performance of the models we
 built. For example, since we used a pretrained model in Document QA we
 think we could not exploit the whole potential of this system, so we
 would like to train our own model using a training set of publications.
+
+
+
+Appendix
+========
+
+
+Description of your code and documentation
+==========================================
