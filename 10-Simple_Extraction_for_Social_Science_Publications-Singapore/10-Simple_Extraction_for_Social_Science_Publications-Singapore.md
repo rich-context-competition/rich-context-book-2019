@@ -137,7 +137,7 @@ Price | 7
 2.1 Data | 5
 
 
-**Citation Analysis.** We build citation network from training set. Each node in the network is a paper publication, and an edge between two node $A$ and $B$ is generated if a paper $A$ cites paper $B$. Table [3](#user-content-tab_network_stats) shows the statistics of the citation network.
+**Citation Analysis.** We build citation network from training set. Each node in the network is a paper publication, and an edge between two node <img src="https://latex.codecogs.com/svg.latex?A" title="A" /> and <img src="https://latex.codecogs.com/svg.latex?B" title="B" /> is generated if a paper <img src="https://latex.codecogs.com/svg.latex?A" title="A" /> cites paper <img src="https://latex.codecogs.com/svg.latex?B" title="B" />. Table [3](#user-content-tab_network_stats) shows the statistics of the citation network.
 
 
 <a name="tab_network_stats">Table 3</a>: Statistics of Citation Network
@@ -149,7 +149,7 @@ Number of edges | 998
 Network density | 0.008%
 
 
-Initially, we propose an approach utilizing citation network based on an intuition that datasets, research methods, and research fields are shared by: 1) same or similar issues, 2) same or similar context, 3) same or similar authors and communities, 4) same or similar metrics used in the publication. However, based on table \[tab:network\_stats\], we learn that exploring rich context using paper-paper citation network is not viable at this stage because most papers listed in publications’ bibliography are not available in the training set, and therefore, paper-paper citation network becomes very sparse with many unknown information. Due to this reason, we drop our idea on utilizing paper-paper citation graph at this stage. Nevertheless, we believe that bibliography contains important signals and information about datasets, and research fields.
+Initially, we propose an approach utilizing citation network based on an intuition that datasets, research methods, and research fields are shared by: 1) same or similar issues, 2) same or similar context, 3) same or similar authors and communities, 4) same or similar metrics used in the publication. However, based on table [3](#user-content-tab_network_stats), we learn that exploring rich context using paper-paper citation network is not viable at this stage because most papers listed in publications’ bibliography are not available in the training set, and therefore, paper-paper citation network becomes very sparse with many unknown information. Due to this reason, we drop our idea on utilizing paper-paper citation graph at this stage. Nevertheless, we believe that bibliography contains important signals and information about datasets, and research fields.
 
 
 ### 4. Methods
@@ -162,24 +162,27 @@ We employ a pipeline of two subtasks for dataset extraction: dataset detection, 
 
 For dataset detection, we utilize paper title in bibliography (reference list) combined with explicit research methods mentions to detect whether a publication citing a dataset or not. Explicit research methods mentions are determined based on exact match between paper title and SAGE research methods vocabulary. We train an SVM classifier using explicit research method mentions and n-gram features from paper titles in bibliography. We use the SVM classifier to classify each publication, if the classifier gives positive label, then we proceed to dataset recognition subtask, otherwise we ignore the publication.
 
-For dataset recognition, we use an implicit entity linking approach. We start with the Naive Bayes model, which can be regarded as a standard information retrieval baseline, and entity indicative weighting strategy is used to improve the model. In order to calculate the word distribution of each dataset, we represent each dataset using its title, dataset mentions (provided in the training set), and dataset relevant sentences, filtered from the relevant publications using the rule based approach proposed in @Ghavimi2016IdentifyingAI. All these text sections related to a particular dataset are considered as a single text chunk, and we calculate the word distribution as follows. Let $\textbf{w}$ be the set of words in a dataset. In our problem setting, we assume the dataset prior probability $p(d)$ to be uniform. The probability of dataset $d$ given $w \in \textbf{w}$ is:
+For dataset recognition, we use an implicit entity linking approach. We start with the Naive Bayes model, which can be regarded as a standard information retrieval baseline, and entity indicative weighting strategy is used to improve the model. In order to calculate the word distribution of each dataset, we represent each dataset using its title, dataset mentions (provided in the training set), and dataset relevant sentences, filtered from the relevant publications using the rule based approach proposed in [[GMVL16](#GMVL16)]. All these text sections related to a particular dataset are considered as a single text chunk, and we calculate the word distribution as follows. Let <img src="https://latex.codecogs.com/svg.latex?$\textbf{w}$" title="$\textbf{w}$" /> be the set of words in a dataset. In our problem setting, we assume the dataset prior probability <img src="https://latex.codecogs.com/svg.latex?p(d)" title="p(d)" /> to be uniform. The probability of dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" /> given <img src="https://latex.codecogs.com/svg.latex?$$w$&space;\in&space;\textbf{w}$" title="$$w$ \in \textbf{w}$" /> is:
 
-$$\begin{split}
+<!-- $$\begin{split}
     p(d|\textbf{w}) & \propto \prod _{w \in \textbf{w}} p(w|d) \\
     & = \prod _{w \in \textbf{w}} \frac{f(d,w) + \gamma }{ \sum_{w'} f(d,w') + |W| \gamma}
-\end{split}$$
+\end{split}$$ -->
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;p(d|\textbf{w})&space;&&space;\propto&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;p(w|d)&space;\\&space;&&space;=&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;\frac{f(d,w)&space;&plus;&space;\gamma&space;}{&space;\sum_{w'}&space;f(d,w')&space;&plus;&space;|W|&space;\gamma}&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?\begin{align*}&space;p(d|\textbf{w})&space;&&space;\propto&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;p(w|d)&space;\\&space;&&space;=&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;\frac{f(d,w)&space;&plus;&space;\gamma&space;}{&space;\sum_{w'}&space;f(d,w')&space;&plus;&space;|W|&space;\gamma}&space;\end{align*}" title="\begin{align*} p(d|\textbf{w}) & \propto \prod _{w \in \textbf{w}} p(w|d) \\ & = \prod _{w \in \textbf{w}} \frac{f(d,w) + \gamma }{ \sum_{w'} f(d,w') + |W| \gamma} \end{align*}" /></a>
 
-where $f(d, w)$ is the number of co-occurrences of word $w$ with entity $d$, $\gamma$ is the smoothing parameter, and $|W|$ is the vocabulary size. For each dataset $d$, we derive $f(d, w)$ by the count of $w$ occurrences in the text extracted for each dataset. In order to stress more priority for dataset indicative words, we improved the final objective function of our model as follows:
+where <img src="https://latex.codecogs.com/svg.latex?f(d,&space;w)" title="f(d, w)" /> is the number of co-occurrences of word <img src="https://latex.codecogs.com/svg.latex?w" title="w" /> with entity <img src="https://latex.codecogs.com/svg.latex?d" title="d" />, <img src="https://latex.codecogs.com/svg.latex?\gamma" title="\gamma" /> is the smoothing parameter, and <img src="https://latex.codecogs.com/svg.latex?|W|" title="|W|" /> is the vocabulary size. For each dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" />, we derive <img src="https://latex.codecogs.com/svg.latex?f(d,&space;w)" title="f(d, w)" /> by the count of <img src="https://latex.codecogs.com/svg.latex?w" title="w" /> occurrences in the text extracted for each dataset. In order to stress more priority for dataset indicative words, we improved the final objective function of our model as follows:
 
-$$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$
+<!-- $$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$ -->
+<a href="https://www.codecogs.com/eqnedit.php?latex=$$ln(p(d|\textbf{w}))&space;\propto&space;\sum&space;_{w&space;\in&space;\textbf{w}}&space;\beta(w)&space;*&space;ln(p(w|d))$$" target="_blank"><img src="https://latex.codecogs.com/svg.latex?$$ln(p(d|\textbf{w}))&space;\propto&space;\sum&space;_{w&space;\in&space;\textbf{w}}&space;\beta(w)&space;*&space;ln(p(w|d))$$" title="$$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$" /></a>
 
-where $\beta(w)$ is the entity-indicative weight for word $w$. This weight $\beta(w)$ is added as an exponent to the term $p(w|d)$. $\beta(w)$ is calculated as:
+where <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is the entity-indicative weight for word <img src="https://latex.codecogs.com/svg.latex?w" title="w" />. This weight <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is added as an exponent to the term <img src="https://latex.codecogs.com/svg.latex?p(w|d)" title="p(w|d)" />. <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is calculated as:
 
-$$\beta(w) = log(1 + E / df(w))$$
+<!-- $$\beta(w) = log(1 + E / df(w))$$ -->
+<a href="https://www.codecogs.com/eqnedit.php?latex=$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" target="_blank"><img src="https://latex.codecogs.com/svg.latex?$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" title="$$\beta(w) = log(1 + E / df(w))$$" /></a>
 
-where $E$ is the number of distinct datasets considered and $df(w)$ counts the number of datasets with at least one occurrence of w.
+where <img src="https://latex.codecogs.com/svg.latex?E" title="E" /> is the number of distinct datasets considered and <img src="https://latex.codecogs.com/svg.latex?df(w)" title="df(w)" /> counts the number of datasets with at least one occurrence of <img src="https://latex.codecogs.com/svg.latex?w" title="w" />.
 
-Then for a given unseen publication, we use same rule based approach [@Ghavimi2016IdentifyingAI] to filter a few relevant sentences, and datasets are ranked by $ln(p(d|w))$ to select the most suitable datasets. In order to select exact datasets related to particular publication, we select top 10 datasets ranked using above approach. And then the confidence probability related to the top 10 datasets are normalized and select the datasets with the normalized probability higher than a predefined threshold value. We return the entity indicative words as relevant dataset mentions.
+Then for a given unseen publication, we use same rule based approach [[GMVL16](#GMVL16)] to filter a few relevant sentences, and datasets are ranked by <img src="https://latex.codecogs.com/svg.latex?ln(p(d|w))" title="ln(p(d|w))" /> to select the most suitable datasets. In order to select exact datasets related to particular publication, we select top 10 datasets ranked using above approach. And then the confidence probability related to the top 10 datasets are normalized and select the datasets with the normalized probability higher than a predefined threshold value. We return the entity indicative words as relevant dataset mentions.
 
 #### Research Methods Identification
 
@@ -201,26 +204,34 @@ We build three SVM classifiers for L1, L2, and L3 to classify a publication usin
 
 1.  Get top-5 L3 research fields, top-4 L2 research fields, and top-3 L1 research fields.
 
-2.  Assign initial score $v$ for each research field based on its
-    ranking. $$v(f_i) = (K - i) / K$$ where $K$ is the length of top-k, and $i$ is the ranking of a research field $f$. For example, research fields in top-5 L3 have initial score of    $[1, 0.8, 0.6, 0.4, 0.2]$, top-4 L2 have initial score of    $[1, 0.75, 0.5, 0.25]$, and top-3 L1 have $[1, 0.666, 0.333]$
+2.  Assign initial score <img src="https://latex.codecogs.com/svg.latex?v" title="v" /> for each research field based on its
+    ranking. 
+
+    <a href="https://www.codecogs.com/eqnedit.php?latex=v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" target="_blank"><img src="https://latex.codecogs.com/svg.latex?v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" title="v(f_i) = (K - i) / K" /></a> 
+
+    where <img src="https://latex.codecogs.com/svg.latex?K" title="K" /> is the length of top-k, and <img src="https://latex.codecogs.com/svg.latex?i" title="i" /> is the ranking of a research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" />. For example, research fields in top-5 L3 have initial score of `[1, 0.8, 0.6, 0.4, 0.2]`, top-4 L2 have initial score of `[1, 0.75, 0.5, 0.25]`, and top-3 L1 have `[1, 0.666, 0.333]`
 
 3.  Update the score by multiplying each score with the score of
-    matching research fields at upper level, and $0$ otherwise.
-    $$score(f_i^l) =
+    matching research fields at upper level, and <img src="https://latex.codecogs.com/svg.latex?0" title="0" /> otherwise.
+
+    <!-- $$score(f_i^l) =
             \begin{cases}
             \prod _{l \in L} v(f^l) & \text{if field matched} \\
             0 & \text{otherwise}
-            \end{cases}$$ where L is the level of research field $f$ and
+            \end{cases}$$  -->
+    <a href="https://www.codecogs.com/eqnedit.php?latex=score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" title="score(f_i^l) = \begin{cases} \prod _{l \in L} v(f^l) & \text{if field matched} \\ 0 & \text{otherwise} \end{cases}" /></a>
+            
+    where <img src="https://latex.codecogs.com/svg.latex?L" title="L" /> is the level of research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" /> and
     its upper levels. Here are examples of score update:
     -   Soc-2-4 at rank-2 in L3, Soc-2 at rank-3 in L2, and Soc at
         rank-1 in L1. In this case, the score of Soc-2-4 is
-        $0.8 * 0.5 * 1 = 0.4$.
-    -   Soc-2-4 at rank-1 in L3, Soc-2 at rank-2 in L2, but Soc is not found in top rank in L1. In this case, the score of Soc-2-4 is $0$.
+        `0.8 * 0.5 * 1 = 0.4`.
+    -   Soc-2-4 at rank-1 in L3, Soc-2 at rank-2 in L2, but Soc is not found in top rank in L1. In this case, the score of Soc-2-4 is `0`.
 4.  Collect score from L2 and L3, and exclude L2 if we see more specific of L2 in top-5 L3.
 
 5.  Re-rank L2 and L3 research fields based on the score.
 
-6.  Return research fields having score $>= 0.4$.
+6.  Return research fields having score <img src="https://latex.codecogs.com/svg.latex?>=&space;0.4" title=">= 0.4" />.
 
 To expand to more context from paper list in bibliography section, we also build other three Naive Bayes classifiers for L1, L2, and L3 using paper title feature only. We believe that a publication from a certain field also cites other publications from same or similar fields. For each publication in the bibliography, we apply the same procedure as mentioned above, then we average the score to get top research fields from bibliography. Finally, we combine top research fields from paper titles and abstract with results from bibliography.
 
