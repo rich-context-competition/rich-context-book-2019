@@ -21,7 +21,7 @@ bibliography:
 title: Rich Text Competition
 ---
 
-Related works
+Literature Review
 =============
 
 **Datasets retrieval** Although *Information Retrieval* is a well
