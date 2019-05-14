@@ -202,20 +202,6 @@ research method, I-RS if it is inside a research method but not the
 first token, or O if otherwise. We used this type of data to train the
 model which could detect research methods in publications.
 
-Experiment
-==========
-
-The Coleridge Initiative released a labeled training set of 5000
-publications and a labeled dev set of 100 publications in the phase 1 of
-the Rich Context Competition. After the end of the phase 1, a labeled
-holdout set of 5000 publications of phase 1 and another unlabeled
-training set of 5000 publications of phase 2 was also released. For
-training, we use 5000 publications from phase 1 training set and another
-5000 publications from phase 1 holdout set.
-
-The experiment was performed using Docker[@anderson2015docker] on an
-Amazon Web Services (AWS) T2 2xlarge instance which contains 8 virtual
-CPU cores and 32GB memory without GPU.
 
 Results and Discussions
 =======================
