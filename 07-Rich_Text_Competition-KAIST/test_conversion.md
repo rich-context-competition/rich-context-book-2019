@@ -21,19 +21,6 @@ bibliography:
 title: Rich Text Competition
 ---
 
-Introduction
-============
-
-Datasets are very valuable resources when doing research. However, it is
-not easy to find who else worked with that data, on what topics and with
-what results. Therefore, there is a waste of time and resources looking
-for related works using a specific dataset and what is more, some useful
-publications are underused. This work is the first step to tackle this
-problem. We proposed a model to retrieve dataset mentions, research
-fields and research methods from scientific publications. Our main
-approach to solve them is reading comprehension, named entity
-recognition, and TF-IDF similarity.
-
 Related works
 =============
 
