@@ -327,18 +327,7 @@ are marked as research methods, but actually they are not.
 Lessons learned and what would you do differently
 =================================================
 
-Conclusions
-===========
 
-In this work we proposed three information retrieval models to mine
-information from scientific publications. One to retrieve the mentions
-of the datasets used, another one to retrieve the research field and the
-last one to retrieve the research methods. Our contributions are as
-follow. We modeled the dataset retrieval task as an QA problem. In order
-to solve this task, we proposed a query generation module and a filter
-using entity types. We also proposed to use Wikipedia articles to
-retrieve research fields from scientific publications. Finally, we
-proposed to model the research method retrieval task as an NER problem.
 
 What comes next
 ===============
