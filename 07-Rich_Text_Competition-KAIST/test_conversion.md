@@ -205,6 +205,9 @@ research method, I-RS if it is inside a research method but not the
 first token, or O if otherwise. We used this type of data to train the
 model which could detect research methods in publications.
 
+What worked and what didn’t
+===========================
+
 
 Summary of your results and caveats
 ===================================
