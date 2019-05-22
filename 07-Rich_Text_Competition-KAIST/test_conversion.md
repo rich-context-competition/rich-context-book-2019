@@ -43,10 +43,7 @@ all kind of dataset mentions.
 What did you do
 =============
 
-Models
-======
-
-In this section, we will explain about the models we use for datasets
+In this section, we will explain about the models we used for datasets
 retrieval, research fields retrieval, and research methods retrieval.
 
 Datasets Retrieval
