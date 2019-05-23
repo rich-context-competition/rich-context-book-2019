@@ -207,6 +207,7 @@ model which could detect research methods in publications.
 
 What worked and what didn’t
 ===========================
+We tried different ideas to extract dataset names. First, we tried to generate a general query with enough discriminative power to retrieve datasets names. However, datasets do not follow any pattern, so we had to create specific queries for each publication as explained in the previous section.
 
 
 Summary of your results and caveats
