@@ -59,7 +59,7 @@ reference="fig: docqaarch "} shows our overall approach for dataset
 retrieval. In following subsections RC model, query generation, and
 entity typing are explained in detail.
 
-![image]({docqaarch3}){width="16cm"}
+![image]({docqaarch3.png}){width="16cm"}
 
 ### Document QA
 
