@@ -208,7 +208,7 @@ model which could detect research methods in publications.
 What worked and what didn’t
 ===========================
 We tried different ideas to extract dataset names. First, we tried to generate a general query with enough discriminative power to retrieve datasets names. However, datasets do not follow any pattern, so we had to create specific queries for each publication as explained in the previous section.
-Our initial idea to retrieve research fields worked well as will be seen in the next section.
+Our initial idea to retrieve research fields worked well as will be seen in the next section. For retrieving research methods, at first, we collected all sentences in training set that contain research methods, then from these sentences, we built a list of frequent words appeared in research method context. We selected top 20 most frequent words from this list and use them to build a filter. Sentences from test set will go through this filter, in which sentencese that contain multiple research method context words will be chosen. Finally, the selected sentences will be used as inputs of DocumentQA to extract research methods. However, this approach failed to get good results because we cannot get good queries to retrieve research methods and the list of frequent words does not have good quality to use as a filter.
 
 
 Summary of your results and caveats
