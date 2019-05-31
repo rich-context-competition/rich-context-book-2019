@@ -208,6 +208,7 @@ model which could detect research methods in publications.
 What worked and what didn’t
 ===========================
 We tried different ideas to extract dataset names. First, we tried to generate a general query with enough discriminative power to retrieve datasets names. However, datasets do not follow any pattern, so we had to create specific queries for each publication as explained in the previous section.
+The use of entity typing worked well to remove the wrong candidate answers proposed by the reading comprehension model. Thanks to this filtering by entity types, we were able to improve the recall using the query generation module without sacrifying the precision.
 Our approach to retrieve research fields worked well as will be shown in the next section. 
 Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods.
 
