@@ -16,6 +16,11 @@ author:
     KAIST\
     Daejeon, South Korea\
     haritzpuerto94\@kaist.ac.kr\
+    Sung-Hyon Myaeng\
+    IR & NLP Lab\
+    KAIST\
+    Daejeon, South Korea\
+    myaeng@kaist.ac.kr\
 bibliography:
 - 'bibliography.bib'
 title: Rich Text Competition
@@ -23,8 +28,9 @@ title: Rich Text Competition
 
 Non technical overview
 =============
-Our approach for retrieving a dataset is to generate our own queries about dataset names and use a machine learning technique to train the model for solving question answering task. In other words, queries suitable for finding dataset names, such as "What is the dataset used in this paper?", are generated and the question answering model is trained to find the answers to those queries from the papers. Moreover, the resulting answers from the model are filtered by types of each word. For example, if an answer contains words with organization or agency types, then this answer is likely to include the actual dataset names.
-For research fields retrieval, 
+Our approach for the retrieving a dataset is to generate our own queries about dataset names and use a machine learning technique to train the model for solving question answering task. In other words, queries suitable for finding dataset names, such as "What is the dataset used in this paper?", are generated and the question answering model is trained to find the answers to those queries from the papers. Moreover, the resulting answers from the model are filtered by types of each word. For example, if an answer contains words with organization or agency types, then this answer is likely to include the actual dataset names.
+For the research fields retrieval, we first crawled the Wikipedia articles that correspond to the list of research fields. We then retrieved the research fields of the papers by measuring the similarity between the papers and the crawled Wikipedia documents. For example, we crawled the Wikipedia article "economic history" which corresponds to the research field "economic history". And if the similarity between a paper and the article "economic history" is high enough, it is determined that the paper belongs to a research field "economic history".For the similarity measurement, the TF-IDF similarity is used, which is the similarity measurement based on the term frequency and document frequency.
+For the research methods retrieval, 
 Literature Review
 =============
 
