@@ -23,7 +23,8 @@ title: Rich Text Competition
 
 Non technical overview
 =============
-
+Our approach for retrieving a dataset is to generate our own queries about dataset names and use a machine learning technique to train the model for solving question answering task. In other words, queries suitable for finding dataset names, such as "What is the dataset used in this paper?", are generated and the question answering model is trained to find the answers to those queries from the papers. Moreover, the resulting answers from the model are filtered by types of each word. For example, if an answer contains words with organization or agency types, then this answer is likely to include the actual dataset names.
+For research fields retrieval, 
 Literature Review
 =============
 
@@ -82,7 +83,7 @@ selection stage.
 In order to apply an RC model (such as Document QA) to the dataset
 retrieval task, queries that are suitable for finding the datasets are
 required. However, defining a general query for retrieving datasets is
-difficult, since the dataset mentions appear in various form like
+difficult, since the dataset mentions appear in various forms like
 surveys, datasets, or studies. Therefore, we devised a query generation
 module with some important query terms to generate multiple specific
 queries instead of one general query.
@@ -146,7 +147,7 @@ Research Fields Retrieval
 
 Our approach to get the research fields is based on TF-IDF similarity
 with Wikipedia articles. First, a set of Wikipedia articles about
-different research fields using the library MediaWikifor Python was
+different research fields using the library MediaWiki for Python was
 obtained. The list of research fields provided the Coleridge Initiative
 for the Rich Context Competition was used to crawl Wikipedia. This list
 has three levels of hierarchy as the example in the figure
@@ -178,7 +179,7 @@ Research Methods Retrieval
 
 For the research methods retrieval task, we modeled it as an
 named-entity recognition (NER) problem. Research methods are considered
-to be an named entity and because of this, they can be tagged as
+to be a named entity and because of this, they can be tagged as
 research method label (RS) instead of common NER labels such as:
 *location*, *people*, etc. Figure
 [\[fig:research\_method\]](#fig:research_method){reference-type="ref"
@@ -209,7 +210,7 @@ What worked and what didn’t
 ===========================
 We tried different ideas to extract dataset names. At first, we tried to extract the dataset name using some hand-crafted queries in the QA model. But we noticed that these manually generated queries do not have sufficient discriminative power. Therefore, we tried to generate a general query with enough discriminative power to retrieve datasets names. To this end, we converted the sentences containing the dataset into queries, and then clustered the converted queries to get some generalized queries. However, we found that each of the resulting clusters did not reflect generalized queries. Hence, we had to create specific queries for each publication as explained in the previous section.
 We also tried to use the section names as a feature of the paragraph selection part in the Document QA. However, the use of section name has rather degraded the overall performance. In our analysis, this seems to be due to the noise that occurred when extracting the section name, since we relied on some rules to extract the section names.
-The use of entity typing worked well to remove the wrong candidate answers proposed by the reading comprehension model. Thanks to this filtering by entity types, we were able to improve the recall using the query generation module without sacrifying the precision.
+The use of entity typing worked well to remove the wrong candidate answers proposed by the reading comprehension model. Thanks to this filtering by entity types, we were able to improve the recall using the query generation module without sacrificing the precision.
 Our approach to retrieve research fields worked well as will be shown in the next section. 
 Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods.
 
@@ -294,7 +295,7 @@ Figure [5](#fig:docqaqueryentity){reference-type="ref"
 reference="fig:docqaqueryentity"} shows the results from 3 publications
 of phase 1 dev set with Document QA, query generation module, and entity
 typing module. Thanks to the entity typing module, we can see that most
-of noises from query generation module have disappeared. Although a few
+of noises from the query generation module have disappeared. Although a few
 right answers such as *\"FDI data\"* was filtered out and a few wrong
 answers such as *\"4.2.1 Micro Data\"* was not, overall precision is
 adequately improved by entity typing module. In addition, our model in
@@ -321,11 +322,11 @@ Research Methods Retrieval
 --------------------------
 
 20 random publications were selected from the training set of phase 2
-and labelled. Our result is not as expected. The model is able to find
+and labeled. Our result is not as expected. The model is able to find
 proper research methods for 12 publications out of 20. For example, the
 model detects one of the research methods appeared in publication with
 id 15359 which is *Factor analysis*. However, the results contain a
-notably amount of noise. For example, the document with id 10751, the
+notable amount of noise. For example, the document with id 10751, the
 model retrieves several wrong answers like: *Reviews describe*,
 *Composite materials*, *Detailed databases*, etc. After analyzing this
 result, we found that the dataset we use for training is not appropriate
