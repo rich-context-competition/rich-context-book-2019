@@ -30,7 +30,9 @@ Non technical overview
 =============
 
 Our approach for the retrieving a dataset is to generate our own questions about dataset names and use a machine learning technique to train the model for solving question answering task. In other words, questions suitable for finding dataset names, such as "What is the dataset used in this paper?", are generated and the question answering model is trained to find the answers to those questions from the papers. Moreover, the resulting answers from the model are filtered by types of each word. For example, if an answer contains words with organization or agency types, then this answer is likely to include the actual dataset names.
+
 For the research fields retrieval, we first crawled the Wikipedia articles that correspond to the list of research fields. We then retrieved the research fields of the papers by measuring the similarity between the papers and the crawled Wikipedia documents. For example, we crawled the Wikipedia article "economic history" which corresponds to the research field "economic history". And if the similarity between a paper and the article "economic history" is high enough, it is determined that the paper belongs to a research field "economic history".For the similarity measurement, the TF-IDF similarity is used, which is the similarity measurement based on the term frequency and document frequency.
+
 For the research methods retrieval, we train a model that recognizes named entities through a machine learning technique. More specifically, we considered the research methods as named entities and train a model to retrieve the named entities. For example, for a research method called "bivariate analysis", this research method is considered as a named entity by the trained model and therefore, retrieved by the model.
 
 Literature Review
