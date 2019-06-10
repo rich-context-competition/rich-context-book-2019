@@ -50,7 +50,7 @@ Philips Kokoh Prasetyo, Amila Silva, Ee-Peng Lim, Palakorn Achananuparp\
 Living Analytics Research Centre, Singapore Management University\
 {pprasetyo,amilasilva,eplim,palakorna}@smu.edu.sg
 
-First draft: 11 February 2019; Second draft: 14 May 2019
+First draft: 11 February 2019; Second draft: 12 June 2019
 
 
 ### Abstract
@@ -65,16 +65,18 @@ With the vast number of datasets and literature collections available for resear
 4. [Methods](#4-methods)
 5. [Experiment Results](#5-experiment-results)
 6. [Lesson Learned](#6-conclusion)
-7. [Appendix: Technical Documentation](#appendix-technical-documentation)
+7. [Acknowledgement](#7-acknowledgements)
+8. [Appendix: Technical Documentation](#appendix-technical-documentation)
 
 
 ### 1. Introduction
 
-**TODO: Non-technical summary**
 
 Automated discovery from scientific research publications is an important task for analysts, researchers, and learners as they develop the scientific knowledge and use them to gain new insights. More specifically, on the tasks of discovering datasets and methods mentioned in a research publication, we have seen a lack of available tools to easily find who else worked on a particular dataset, what research methods people apply on the dataset, and what results they have found using the dataset. Furthermore, new datasets are not easy to discover, and as a result, good datasets and methods are often neglected.
 
-The Coleridge Rich Context Competition (RCC) aims to build automated datasets discovery from social science research publications, filling the gap of this problem. In this competition, given a corpus of social science research publications, we have to automatically identify datasets used, and then infer the research methods and research fields in the publications. Note that no labeled data are given for research methods and fields identification. This manuscript describes summary of our submission for the first phase of RCC.
+The Coleridge Rich Context Competition (RCC) aims to build automated datasets discovery from social science research publications, filling the gap of this problem. In this competition, given a corpus of social science research publications, we have to automatically identify datasets used, and then infer the research methods and research fields in the publications. Note that no labeled data are given for research methods and fields identification.
+
+This manuscript describes summary of our submission for the first phase of RCC. We perform dataset detection followed by implicit entity linking approach to tackle dataset extraction task. We utilize weakly supervised classification for research methods and fields identification tasks using external resource SAGE Knowledge as proxy for weak labels.
 
 <!-- This manuscript describes summary of our submission for the first phase
 of RCC. We begin with related work in section \[sec:relatedwork\]. We
@@ -205,9 +207,9 @@ We build three SVM classifiers for L1, L2, and L3 to classify a publication usin
 1.  Get top-5 L3 research fields, top-4 L2 research fields, and top-3 L1 research fields.
 
 2.  Assign initial score <img src="https://latex.codecogs.com/svg.latex?v" title="v" /> for each research field based on its
-    ranking. 
+    ranking.
 
-    <a href="https://www.codecogs.com/eqnedit.php?latex=v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" target="_blank"><img src="https://latex.codecogs.com/svg.latex?v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" title="v(f_i) = (K - i) / K" /></a> 
+    <a href="https://www.codecogs.com/eqnedit.php?latex=v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" target="_blank"><img src="https://latex.codecogs.com/svg.latex?v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" title="v(f_i) = (K - i) / K" /></a>
 
     where <img src="https://latex.codecogs.com/svg.latex?K" title="K" /> is the length of top-k, and <img src="https://latex.codecogs.com/svg.latex?i" title="i" /> is the ranking of a research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" />. For example, research fields in top-5 L3 have initial score of `[1, 0.8, 0.6, 0.4, 0.2]`, top-4 L2 have initial score of `[1, 0.75, 0.5, 0.25]`, and top-3 L1 have `[1, 0.666, 0.333]`
 
@@ -220,7 +222,7 @@ We build three SVM classifiers for L1, L2, and L3 to classify a publication usin
             0 & \text{otherwise}
             \end{cases}$$  -->
     <a href="https://www.codecogs.com/eqnedit.php?latex=score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" title="score(f_i^l) = \begin{cases} \prod _{l \in L} v(f^l) & \text{if field matched} \\ 0 & \text{otherwise} \end{cases}" /></a>
-            
+
     where <img src="https://latex.codecogs.com/svg.latex?L" title="L" /> is the level of research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" /> and
     its upper levels. Here are examples of score update:
     -   Soc-2-4 at rank-2 in L3, Soc-2 at rank-3 in L2, and Soc at
@@ -314,7 +316,11 @@ Apart from F1 score on 5-fold cross validation, we have no good way to evaluate 
 
 From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. Another challenge is data sparsity. Although we see many paper listed in bibliography, lacks of access to these publication make us difficult to exploit citation network.
 
-Unfortunately, our model did not advance to the second phase. We are interested in exploring more advanced information extraction methods on the RCC datasets, and we hope that the organizer will release the RCC datasets for future research. We thank the organizers for organizing a competition and workshop on this important, interesting, and challenging problem.
+Unfortunately, our model did not advance to the second phase. We are interested in exploring more advanced information extraction methods on the RCC datasets, and we hope that the organizer will release the RCC datasets for future research.
+
+### 7. Acknowledgments
+
+We thank the RCC organizers for organizing a competition and workshop on this important, interesting, and challenging problem.
 
 
 ### References
