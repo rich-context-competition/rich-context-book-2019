@@ -208,7 +208,7 @@ The use of entity typing worked well to remove the wrong candidate answers propo
 
 Our approach to retrieve research fields worked well as will be shown in the next section. 
 
-Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods. Then we try to model this problem to NER problem, where we consider each research method appeared in a paper as a named-entity. By modeling the problem in this way, we can use existing NER models to extract research methods from papers.
+Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods. Therefore, we tried to model it as an NER problem, where we consider each research method that appeared in a paper as a named-entity. By modeling the problem in this way, we can use existing NER models to extract research methods from papers.
 
 
 Summary of your results and caveats
