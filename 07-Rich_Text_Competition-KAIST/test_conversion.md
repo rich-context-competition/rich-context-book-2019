@@ -38,33 +38,18 @@ For the research methods retrieval, we train a model that recognizes named entit
 Literature Review
 =============
 
-**Datasets retrieval** Although *Information Retrieval* is a well
-established research field, only few attempts have focused on the task
-of dataset extraction form publications. [@ghavimi2016identifying] tried
-it using heuristics and dictionaries but their heuristics have some
-problems. Firstly, they give too much weight to acronyms. For example,
-*NYPD, (New York Police Department)* is detected as a dataset name.
-Furthermore, they also give an too much weight to the publication year
-of the datasets because they assumed dataset names are usually followed
-by the publication year but that may only work on Social Sciences
-publications. For example, in the Computer Science datasets do not
-appear followed by the publication year so this heuristic cannot detect
-all kind of dataset mentions.
+**Datasets retrieval** Although *Information Retrieval* is a well-established research field, only few attempts have focused on the task of dataset extraction form publications. [@ghavimi2016identifying] tried it using heuristics and dictionaries but their heuristics have some problems. Firstly, they give too much weight to acronyms. For example, *NYPD, (New York Police Department)* is detected as a dataset name.
+Furthermore, they also give an too much weight to the publication year of the datasets because they assumed dataset names are usually followed by the publication year but that may only work on Social Sciences publications. For example, in the Computer Science datasets do not appear followed by the publication year so this heuristic cannot detect all kind of dataset mentions.
 
 What did you do
 =============
 
-In this section, we will explain about the models we used for datasets
-retrieval, research fields retrieval, and research methods retrieval.
+In this section, we will explain about the models we used for datasets retrieval, research fields retrieval, and research methods retrieval.
 
 Datasets Retrieval
 ------------------
 
-Our approach to solve the dataset retrieval task is reading
-comprehension (RC) with query generation and entity typing. An RC model
-is applied to the given publications with our own query generation
-module. Then, the result from the RC model is filtered with an entity
-typing module. Figure
+Our approach to solve the dataset retrieval task is reading comprehension (RC) with query generation and entity typing. An RC model is applied to the given publications with our own query generation module. Then, the result from the RC model is filtered with an entity typing module. Figure
 [\[fig: docqaarch \]](#fig: docqaarch ){reference-type="ref"
 reference="fig: docqaarch "} shows our overall approach for dataset
 retrieval. In following subsections RC model, query generation, and
@@ -74,10 +59,7 @@ entity typing are explained in detail.
 
 ### Document QA
 
-Reading comprehension models are neural networks that find answers for
-given queries according to a text. Answers must appear explicitly in the
-text. Since the dataset retrieval task is about finding explicit dataset
-mentions from publications, RC models are suitable for this task.
+Reading comprehension models are neural networks that find answers for given queries according to a text. Answers must appear explicitly in the text. Since the dataset retrieval task is about finding explicit dataset mentions from publications, RC models are suitable for this task.
 
 The RC model used in this work is Document QA [@clark2017simple]. It
 uses Bi-GRU, bi-attention, and self-attention mechanism. In addition,
@@ -226,7 +208,7 @@ The use of entity typing worked well to remove the wrong candidate answers propo
 
 Our approach to retrieve research fields worked well as will be shown in the next section. 
 
-Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods.
+Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods. Then we try to model this problem to NER problem, where we consider each research method appeared in a paper as a named-entity. By modeling the problem in this way, we can use existing NER models to extract research methods from papers.
 
 
 Summary of your results and caveats
