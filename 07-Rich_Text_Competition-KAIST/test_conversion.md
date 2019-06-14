@@ -96,23 +96,22 @@ Research Fields Retrieval
 
 Our approach to obtaining the research fields is based on TF-IDF similarity with Wikipedia articles. First, a set of Wikipedia articles about different research fields using the library MediaWiki for Python was obtained. The list of research fields provided the Coleridge Initiative for the Rich Context Competition was used to crawl Wikipedia. This list has three levels of hierarchy as the example in the figure [1](#fig:researchfieldshiearchy){reference-type="ref" reference="fig:researchfieldshiearchy"}.
 
-![Research fields hierarchy[]{label="fig:researchfieldshiearchy"}]({fieldshierarchy2.png}){#fig:researchfieldshiearchy width="7cm"}
+![Research fields hierarchy[]{label="fig:researchfieldshiearchy"}](images/fieldshierarchy2.png){#fig:researchfieldshiearchy width="7cm"}
 
 The leaf nodes of that hierarchy were searched in Wikipedia to retrieve specific research fields instead of general ones. For example, we were aiming to retrieve *Neurosurgery* instead of *Medicine*.
 
 Then, using Scikit-learn [@scikit-learn], a TF-IDF matrix of all the publications and Wikipedia articles of research fields were computed and the research field and all its superior nodes in the hierarchy associated with the most similar article were returned along with the
 similarity in the range \[0,1\]. The overall architecture can be seen in figure [2](#fig:researchfields){reference-type="ref" reference="fig:researchfields"}.
 
-![Overall architecture for research fields retrieval[]{label="fig:researchfields"}]({researchfields2.png}){#fig:researchfields width="7.5cm"}
+![Overall architecture for research fields retrieval[]{label="fig:researchfields"}](images/researchfields2.png){#fig:researchfields width="7.5cm"}
 
 Research Methods Retrieval
 --------------------------
 
 For the research methods retrieval task, we modeled it as an named-entity recognition (NER) problem. Research methods are considered to be a named entity and because of this, they can be tagged as research method label (RS) instead of common NER labels such as:
-*location*, *people*, etc. Figure [\[fig:research\_method\]](#fig:research_method){reference-type="ref"
-reference="fig:research_method"} shows the main architecture of the model proposed by [@lample2016neural] and used in this task.
+*location*, *people*, etc. Figure [\[fig:research\_method\]](#fig:research_method){reference-type="ref" reference="fig:research_method"} shows the main architecture of the model proposed by [@lample2016neural] and used in this task.
 
-![BiLSTM-CRF architecture](bi-lstm.png){width="7.5cm"}
+![BiLSTM-CRF architecture](images/bi-lstm.png){width="7.5cm"}
 
 [\[fig:research\_method\]]{#fig:research_method label="fig:research_method"}
 
@@ -156,29 +155,29 @@ To analyze the effects of the query generation module and entity typing module, 
 Figure [3](#fig:docqaonly){reference-type="ref" reference="fig:docqaonly"} shows the results from 3 publications of phase 1 dev set with Document QA only. Compared to the other settings, Document QA only setting retrieves answers (dataset mentions) with high
 quality. However, the number of retrieved answers is notably small. For example, the result from *153.txt* publication was empty as in figure [3](#fig:docqaonly){reference-type="ref" reference="fig:docqaonly"}. In fact, our model using this setting can retrieve only 260 answers (predictions) from 100 publications of phase 1 dev set.
 
-![Results from Document QA only[]{label="fig:docqaonly"}](phase1.png){#fig:docqaonly width="8cm"}
+![Results from Document QA only[]{label="fig:docqaonly"}](images/phase1.png){#fig:docqaonly width="8cm"}
 
 These results with fewer answers were expected, due to the difficulty of defining general queries as explained in section
 [3.1.2](#sec:questiongen){reference-type="ref" reference="sec:questiongen"}. Without a query generation module, our query was not representative enough to retrieve various forms and types of the dataset mentions.
 
 ### Document QA + query generation module
 
-Figure [4](#fig:docqaquery){reference-type="ref" reference="fig:docqaquery"} shows the results from 3 publications of phase 1 dev set with Document QA and query generation module. Because of the latter, our dataset retrieval model could retrieve a large number of
+Figure [4] (#fig:docqaquery){reference-type="ref" reference="fig:docqaquery"} shows the results from 3 publications of phase 1 dev set with Document QA and query generation module. Because of the latter, our dataset retrieval model could retrieve a large number of
 answers. For example, the result from *153.txt* publication contains a large number of answers with correct answers such as *financial services FDI data* or *Micro Batabase Direct investment*. Therefore, we believe that the query generation module improves recall of the entire dataset retrieval model. Actually, our model using this setting can retrieve more than 2,000 answers (predictions) from 100 publications of phase 1 dev set.
 
 However, compared to the Document QA only setting, there is a considerable number of noise. For example, in figure [4](#fig:docqaquery){reference-type="ref" reference="fig:docqaquery"}, *empirical, Table 1, Section 4* and etc., are not dataset mentions.
 
-![Results from Document QA + query generation module[]{label="fig:docqaquery"}](phase1+querygen.png){#fig:docqaquery width="8cm"}
+![Results from Document QA + query generation module[]{label="fig:docqaquery"}](images/phase1+querygen.png){#fig:docqaquery width="8cm"}
 
 We believed that the reason of these noises is the several query terms potentially retrieve wrong answers. For example, we have a query term *\"study\"* to retrieve dataset mentions such as *\"ANES 1952 Time Series Study\"*. However, this term can also retrieve noises such as *\"empirical study\"*. These kinds of query terms are still needed to retrieve various forms and types of dataset mentions but clearly
 generate some noises.
 
 ### Document QA + query generation module + entity typing module
 
-Figure [5](#fig:docqaqueryentity){reference-type="ref" reference="fig:docqaqueryentity"} shows the results from 3 publications of phase 1 dev set with Document QA, query generation module, and entity typing module. Thanks to the entity typing module, we can see that most
+Figure [5] (#fig:docqaqueryentity){reference-type="ref" reference="fig:docqaqueryentity"} shows the results from 3 publications of phase 1 dev set with Document QA, query generation module, and entity typing module. Thanks to the entity typing module, we can see that most
 of the noises from the query generation module have disappeared. Although a few right answers such as *\"FDI data\"* was filtered out and a few wrong answers such as *\"4.2.1 Micro Data\"* was not, overall precision is adequately improved by entity typing module. In addition, our model in this setting could retrieve 526 answers (predictions) from 100 publications of phase 1 dev set.
 
-![Results from Document QA + query generation module + entity typing module[]{label="fig:docqaqueryentity"} (phase1+querygen+entitytyping.png){#fig:docqaqueryentity width="8cm"}
+![Results from Document QA + query generation module + entity typing module[]{label="fig:docqaqueryentity"}] (images/phase1+querygen+entitytyping.png){#fig:docqaqueryentity width="8cm"}
 
 Research Fields Retrieval
 -------------------------
