@@ -29,7 +29,7 @@ title: Rich Text Competition
 Non technical overview
 =============
 
-Our approach for the retrieving a dataset is to generate our own questions about dataset names and use a machine learning technique to train the model for solving question answering task. In other words, questions suitable for finding dataset names, such as "What is the dataset used in this paper?", are generated and the question answering model is trained to find the answers to those questions from the papers. Moreover, the resulting answers from the model are filtered by types of each word. For example, if an answer contains words with organization or agency types, then this answer is likely to include the actual dataset names.
+Our approach for retrieving datasets is to generate our own questions about dataset names and use a machine learning technique to train the model for solving question answering task. In other words, questions suitable for finding dataset names such as "What is the dataset used in this paper?", are generated and the question answering model is trained to find the answers to those questions from the papers. Furthermore, the resulting answers from the model are filtered by types of each word. For example, if an answer contains words with organization or agency types, then this answer is likely to include the actual dataset names.
 
 For the research fields retrieval, we first crawled the Wikipedia articles that correspond to the list of research fields. We then retrieved the research fields of the papers by measuring the similarity between the papers and the crawled Wikipedia documents. For example, we crawled the Wikipedia article "economic history" which corresponds to the research field "economic history". And if the similarity between a paper and the article "economic history" is high enough, it is determined that the paper belongs to a research field "economic history".For the similarity measurement, the TF-IDF similarity is used, which is the similarity measurement based on the term frequency and document frequency.
 
@@ -38,8 +38,8 @@ For the research methods retrieval, we train a model that recognizes named entit
 Literature Review
 =============
 
-**Datasets retrieval** Although *Information Retrieval* is a well-established research field, only few attempts have focused on the task of dataset extraction form publications. [@ghavimi2016identifying] tried it using heuristics and dictionaries but their heuristics have some problems. Firstly, they give too much weight to acronyms. For example, *NYPD, (New York Police Department)* is detected as a dataset name.
-Furthermore, they also give an too much weight to the publication year of the datasets because they assumed dataset names are usually followed by the publication year but that may only work on Social Sciences publications. For example, in the Computer Science datasets do not appear followed by the publication year so this heuristic cannot detect all kind of dataset mentions.
+**Datasets retrieval**  Although *Information Retrieval* is a well-established research field, only a few attempts have focused on the task of dataset extraction form publications. [@ghavimi2016identifying] tried it using heuristics and dictionaries but their heuristics have some problems. Firstly, they give too much weight to acronyms. For example, *NYPD, (New York Police Department)* is detected as a dataset name.
+Furthermore, they also give too much weight to the publication year of the datasets because they assumed dataset names are usually followed by the publication year but that may only work on Social Sciences publications. For example, in the Computer Science datasets do not appear followed by the publication year so this heuristic cannot detect all kind of dataset mentions.
 
 What did you do
 =============
@@ -49,7 +49,7 @@ In this section, we will explain about the models we used for datasets retrieval
 Datasets Retrieval
 ------------------
 
-Our approach to solve the dataset retrieval task is reading comprehension (RC) with query generation and entity typing. An RC model is applied to the given publications with our own query generation module. Then, the result from the RC model is filtered with an entity typing module. Figure
+Our approach to solving the dataset retrieval task is reading comprehension (RC) with query generation and entity typing. An RC model is applied to the given publications with our own query generation module. Then, the result from the RC model is filtered with an entity typing module. Figure
 [\[fig: docqaarch \]](#fig: docqaarch ){reference-type="ref"
 reference="fig: docqaarch "} shows our overall approach for dataset
 retrieval. In following subsections RC model, query generation, and
@@ -101,7 +101,7 @@ string matching, in order to create specific queries for each paragraph.
 Ultra-Fine Entity Typing [@Choi:2018:ACL] can predict a set of free-from
 phrases like *criminal* or *skyscraper* given a sentence with an entity
 mention. For example, in the sentence: *Bob robbed John and he was
-arrested shortly afterwards*, Bob is of type *criminal*. In our task,
+arrested shortly afterward*, Bob is of type *criminal*. In our task,
 candidate answers proposed by Document QA and their context are input to
 Ultra-Fine Entity Typing. Although this system can predict 10k different
 entity types in which *dataset* is included, after a few experiments we
@@ -118,7 +118,7 @@ answer, a neural network classifier that filters the candidate answers
 of Document QA was used. We discovered that a candidate answer with a
 high score given by Document QA and whose entity type is *organization*
 or something similar is considerably likely to be a correct dataset
-name. Due to this pattern we were able to create neural network
+name. Due to this pattern, we were able to create neural network
 classifier to filter out candidate answers.
 
 The classifier has the following architecture:
@@ -130,14 +130,14 @@ The classifier has the following architecture:
 
 3.  Output size: 2
 
-The training set consists of 25172 examples and test set of 6293
+The training set consists of 25172 examples and the test set of 6293
 examples. Adam optimizer was used and cross entropy was used as loss
 function.
 
 Research Fields Retrieval
 -------------------------
 
-Our approach to get the research fields is based on TF-IDF similarity
+Our approach to obtaining the research fields is based on TF-IDF similarity
 with Wikipedia articles. First, a set of Wikipedia articles about
 different research fields using the library MediaWiki for Python was
 obtained. The list of research fields provided the Coleridge Initiative
@@ -151,13 +151,13 @@ hierarchy[]{label="fig:researchfieldshiearchy"}]({fieldshierarchy2.png}){#fig:re
 width="7cm"}
 
 The leaf nodes of that hierarchy were searched in Wikipedia to retrieve
-specific research fields instead of general ones. For example: we were
+specific research fields instead of general ones. For example, we were
 aiming to retrieve *Neurosurgery* instead of *Medicine*.
 
 Then, using Scikit-learn [@scikit-learn], a TF-IDF matrix of all the
-publications and Wikipedia articles of research fields was computed and
+publications and Wikipedia articles of research fields were computed and
 the research field and all its superior nodes in the hierarchy
-associated to the most similar article were returned along with the
+associated with the most similar article were returned along with the
 similarity in the range \[0,1\]. The overall architecture can be seen in
 figure [2](#fig:researchfields){reference-type="ref"
 reference="fig:researchfields"}.
@@ -208,7 +208,7 @@ The use of entity typing worked well to remove the wrong candidate answers propo
 
 Our approach to retrieve research fields worked well as will be shown in the next section. 
 
-Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods. Therefore, we tried to model it as an NER problem, where we consider each research method that appeared in a paper as a named-entity. By modeling the problem in this way, we can use existing NER models to extract research methods from papers. However, this approach also performed poorly. We found that the dataset we used for training was not appropriate for this task. We will provide a in-depth analysis of this problem in the next section.
+Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods. Therefore, we tried to model it as an NER problem, where we consider each research method that appeared in a paper as a named-entity. By modeling the problem in this way, we can use existing NER models to extract research methods from papers. However, this approach also performed poorly. We found that the dataset we used for training was not appropriate for this task. We will provide an in-depth analysis of this problem in the next section.
 
 
 Summary of your results and caveats
@@ -282,7 +282,7 @@ potentially retrieve wrong answers. For example, we have a query term
 *\"study\"* to retrieve dataset mentions such as *\"ANES 1952 Time
 Series Study\"*. However, this term can also retrieve noises such as
 *\"empirical study\"*. These kinds of query terms are still needed to
-retrieve various forms and types of dataset mentions, but clearly
+retrieve various forms and types of dataset mentions but clearly
 generate some noises.
 
 ### Document QA + query generation module + entity typing module
@@ -291,7 +291,7 @@ Figure [5](#fig:docqaqueryentity){reference-type="ref"
 reference="fig:docqaqueryentity"} shows the results from 3 publications
 of phase 1 dev set with Document QA, query generation module, and entity
 typing module. Thanks to the entity typing module, we can see that most
-of noises from the query generation module have disappeared. Although a few
+of the noises from the query generation module have disappeared. Although a few
 right answers such as *\"FDI data\"* was filtered out and a few wrong
 answers such as *\"4.2.1 Micro Data\"* was not, overall precision is
 adequately improved by entity typing module. In addition, our model in
@@ -323,11 +323,11 @@ proper research methods for 12 publications out of 20. For example, the
 model detects one of the research methods appeared in publication with
 id 15359 which is *Factor analysis*. However, the results contain a
 notable amount of noise. For example, the document with id 10751, the
-model retrieves several wrong answers like: *Reviews describe*,
+model retrieves several wrong answers like *Reviews describe*,
 *Composite materials*, *Detailed databases*, etc. After analyzing this
 result, we found that the dataset we use for training is not appropriate
 for this task. For example, *Reliability* and *Independent variables*
-are marked as research methods, but actually they are not.
+are marked as research methods, but actually, they are not.
 
 Lessons learned and what would you do differently
 =================================================
@@ -364,7 +364,7 @@ would be able to recommend to data producers fields with a lack of
 datasets.
 
 In addition, we also need to improve the performance of the models we
-built. For example, since we used a pretrained model in Document QA we
+built. For example, since we used a pre-trained model in Document QA we
 think we could not exploit the whole potential of this system, so we
 would like to train our own model using a training set of publications.
 
