@@ -1,35 +1,3 @@
-
-<!--
-# Review feedback
-
-## Structure of chapter
-We have now included a description of the competition as one of the chapters, so you can eliminate your discussion of the competition and data.  For the purposes of consistency, please follow the following structure
-1. Non technical overview
-2. Literature review
-3. What did you do
-4. What worked and what didn’t
-5. Summary of your results and caveats
-6. Lessons learned and what would you do differently
-6. What comes next
-Appendix
-7. Description of your code and documentation
-
-## Review of white paper
-o   Preprocessing using Allen AI tool – AllenAI Science Parse
-o   Based on frequency analysis, choose to exploit reference title for dataset extraction.
-o   Paper to paper citation graph – that fails.
-o   Dataset detection (via SVM classifier to determine if any set detected) followed by dataset recognition (implicit entity linking)
-o   Approach presented credibly
-o   Approach seems ok but results are poor
-o   Paper is well written and well organized
-
-## Comments on Code
-Code: None
-Documentation: None
-Replicability and generalizability: None
-
--->
-
 <!--
 ---
 author:
@@ -55,7 +23,7 @@ First draft: 11 February 2019; Second draft: 12 June 2019
 
 ### Abstract
 
-With the vast number of datasets and literature collections available for research today, it is very difficult to keep track on the use of datasets and literature articles for scientific research and discovery. Many datasets and research work using them are left undiscovered and under-utilized due to the lack of available search tools to automatically find out who worked with the data, on what research topics, using what research methods and generating what results. The Coleridge Rich Context Competition (RCC) therefore aims to build automated dataset discovery tools for analysing and searching social science research publications. In this paper, we describe our approach to solving the first phase of Coleridge Rich Context Competition.
+With the vast number of datasets and literature collections available for research today, it is very difficult to keep track on the use of datasets and literature articles for scientific research and discovery. Many datasets and research work using them are left undiscovered and under-utilized due to the lack of available search tools to automatically find out who worked with the data, on what research topics, using what research methods and generating what results. The Coleridge Rich Context Competition (RCC) therefore aims to build automated dataset discovery tools for analyzing and searching social science research publications. In this chapter, we describe our approach to solving the first phase of Coleridge Rich Context Competition.
 
 ### Table of contents
 
@@ -76,7 +44,7 @@ Automated discovery from scientific research publications is an important task f
 
 The Coleridge Rich Context Competition (RCC) aims to build automated datasets discovery from social science research publications, filling the gap of this problem. In this competition, given a corpus of social science research publications, we have to automatically identify datasets used, and then infer the research methods and research fields in the publications. Note that no labeled data are given for research methods and fields identification.
 
-This manuscript describes summary of our submission for the first phase of RCC. We perform dataset detection followed by implicit entity linking approach to tackle dataset extraction task. We utilize weakly supervised classification for research methods and fields identification tasks using external resource SAGE Knowledge as proxy for weak labels.
+We describes our submission to the first phase of RCC. We perform dataset detection followed by implicit entity linking approach to tackle dataset extraction task. We adopt weakly supervised classification for research methods and fields identification tasks utilizing external resource SAGE Knowledge as proxy for weak labels.
 
 <!-- This manuscript describes summary of our submission for the first phase
 of RCC. We begin with related work in section \[sec:relatedwork\]. We
@@ -314,9 +282,7 @@ Naive Bayes (on bibliography) | paper titles in bibliography
 
 Apart from F1 score on 5-fold cross validation, we have no good way to evaluate research method and research field identification without ground truth label. Our methods are unable to automatically extract and recognize new datasets, research methods, and fields. An extension to automatically handle such cases using advance Natural Language Processing (NLP) approach is a promising direction.
 
-From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. Another challenge is data sparsity. Although we see many paper listed in bibliography, lacks of access to these publication make us difficult to exploit citation network.
-
-Unfortunately, our model did not advance to the second phase. We are interested in exploring more advanced information extraction methods on the RCC datasets, and we hope that the organizer will release the RCC datasets for future research.
+Our model did not perform well in test set, and unable to advance to the second phase. From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. We are also interested in exploring more advanced information extraction approaches on the RCC datasets. Another challenge is data sparsity. Although we see many paper listed in bibliography, lacks of access to these publication make us difficult to exploit citation network.
 
 ### 7. Acknowledgments
 
@@ -344,4 +310,4 @@ We thank the RCC organizers for organizing a competition and workshop on this im
 
 ### Appendix: Technical Documentation
 
-Source codes to run and replicate our experiments are available at `https://github.com/LARC-CMU-SMU/rcc-02`.
+Source codes to run and replicate our experiments are available at `https://github.com/LARC-CMU-SMU/coleridge-rich-context-larc`.
