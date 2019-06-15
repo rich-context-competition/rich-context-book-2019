@@ -60,7 +60,7 @@ Reading comprehension models are neural networks that find answers for given que
 The RC model used in this work is Document QA [@clark2017simple]. It uses Bi-GRU, bi-attention, and self-attention mechanism. In addition, Document QA performs a paragraph selection that pre-filters and selects the *k* most relevant paragraphs through TF-IDF similarity between the query and paragraphs. We observed that datasets are usually mentioned together in some specific paragraphs of the publications. Therefore, this model is appropriate for this task thanks to its paragraph
 selection stage.
 
-### Query generation module {#sec:questiongen}
+### Query generation module 
 
 In order to apply an RC model (such as Document QA) to the dataset retrieval task, queries that are suitable for finding the datasets are required. However, defining a general query for retrieving datasets is difficult, since the dataset mentions appear in various forms like
 surveys, datasets, or studies. Therefore, we devised a query generation module with some important query terms to generate multiple specific queries instead of one general query.
@@ -156,7 +156,7 @@ quality. However, the number of retrieved answers is notably small. For example,
 ![Results from Document QA only[]{label="fig:docqaonly"}](images/phase1.png)*Figure 5: Results from Document QA only*
 
 These results with fewer answers were expected, due to the difficulty of defining general queries as explained in section
-[3.1.2](#sec:questiongen){reference-type="ref" reference="sec:questiongen"}. Without a query generation module, our query was not representative enough to retrieve various forms and types of the dataset mentions.
+[*Question Generation Module*](#query-generation-module). Without a query generation module, our query was not representative enough to retrieve various forms and types of the dataset mentions.
 
 ### Document QA + query generation module
 
