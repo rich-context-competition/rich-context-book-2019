@@ -21,7 +21,8 @@ sed -i.bu "s/\[Insert Figure 2\]/\!\[\]\(\.\/02_images\/20190614_Figure2\.jpg\)/
 
 
 # Chapter three
-cp ../03-Use_Case-Dimensions/03_dimensions.md . 
+cp ../03-Use_Case-Dimensions/03_ds_article.docx . 
+pandoc 03_ds_article.docx -o 03_ds_article.md
 
 
 # Chapter four 
@@ -82,7 +83,7 @@ sed -i.bu "s/\](images/\](09_images/g" 09_combining_embeddings_DICE.md
 
 # Chapter 10
 #TODO fix issues with \begin{split}
-cp ../10-Simple_Extraction_for_Social_Science_Publications-Singapore/10_simple_extraction_Singapore.md .
+cp ../10-Simple_Extraction_for_Social_Science_Publications-Singapore/10-Simple_Extraction_for_Social_Science_Publications-Singapore.md 10_simple_extraction_Singapore.md 
 
 
 # Chapter 11
@@ -94,6 +95,21 @@ cp ../12-dataset-mention-extraction-using-bilstmcrf-syracuse/main.md 12_syracuse
 cp ../12-dataset-mention-extraction-using-bilstmcrf-syracuse/img/* 12_images
 sed -i.bu "s/\](img/\](12_images/g" 12_syracuse.md 
 
+
+# Create placeholder files for between chapters 
+cp ../chapter_break_placeholder.md 01.5_break.md
+cp ../chapter_break_placeholder.md 02.5_break.md
+cp ../chapter_break_placeholder.md 03.5_break.md
+cp ../chapter_break_placeholder.md 04.55_break.md
+cp ../chapter_break_placeholder.md 045_break.md
+cp ../chapter_break_placeholder.md 05.5_break.md
+cp ../chapter_break_placeholder.md 06.5_break.md
+cp ../chapter_break_placeholder.md 07.5_break.md
+cp ../chapter_break_placeholder.md 08.5_break.md
+cp ../chapter_break_placeholder.md 09.5_break.md
+cp ../chapter_break_placeholder.md 10.5_break.md
+cp ../chapter_break_placeholder.md 11.5_break.md
+cp ../chapter_break_placeholder.md 12.5_break.md
 
 
 # cleanup 
