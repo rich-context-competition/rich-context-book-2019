@@ -1,4 +1,4 @@
----
+# 7 -  KAIST  ---
 author:
 - |
     Giwon Hong\
@@ -202,3 +202,6 @@ Appendix
 Description of your code and documentation
 ==========================================
 The technical documentation of the code is provided in the GitHub repository of the project https://github.com/HaritzPuerto/RCC/tree/master/project
+ 
+---
+ 

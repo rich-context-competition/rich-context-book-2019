@@ -1,4 +1,4 @@
-By Andrew Gordon, Ekaterina Levitskaya, and Jonathan Morgan - New York
+# Chapter 5 - Compettion Design  By Andrew Gordon, Ekaterina Levitskaya, and Jonathan Morgan - New York
 University
 
 *Jonathan Morgan designed and implemented the data annotation and
@@ -1490,3 +1490,6 @@ http://www.ieee-student-conference.de/fileadmin/papers/2014/ieeegsc2014\_submiss
 Wright, B. D. (1983). The Economics of Invention Incentives: Patents,
 Prizes, and Research Contracts. The American Economic Review, 73(4),
 691--707.
+ 
+---
+ 
