@@ -1,4 +1,4 @@
-Rich Context
+Rich Context[ ]{.Apple-converted-space}
 
 The social sciences are at a crossroads. The enormous growth of the
 scientific enterprise, coupled with rapid technological progress, has
@@ -11,7 +11,7 @@ complex; and to probe the way that people think, feel, behave, and
 interact with one another in ever more naturalistic, fine-grained ways.
 Yet much of the core infrastructure is manual and ad-hoc in nature,
 threatening the legitimacy and utility of social science
-research.
+research.[ ]{.Apple-converted-space}
 
 We can and must do better. The great challenges of our time are human in
 nature - terrorism, climate change, the use of natural resources, and
@@ -25,7 +25,7 @@ technology---and particularly, in automation---can now change the way in
 which social science is done. Social scientists have eagerly adopted new
 technologies in virtually every area of social science research---from
 literature searches to data storage to statistical analysis to
-dissemination of results.
+dissemination of results.[ ]{.Apple-converted-space}
 
 A major challenge is search and discovery. The vast majority of social
 science data and outputs cannot be easily discovered by other
@@ -35,7 +35,7 @@ data are being used, in what research fields, with what methods, with
 what code and with what findings. And automation can be used to reward
 researchers who validate the results and contribute additional
 information about use, fields, methods, code, and
-findings.(*6*)
+findings.(*6*)[ ]{.Apple-converted-space}
 
 In sum, the use of data depends critically on knowing how it has been
 produced and used before: the required elements what do the data
@@ -44,7 +44,7 @@ produced and used before: the required elements what do the data
 Acquiring that knowledge has historically been manual and inadequate.
 The challenge is particularly acute in the case of confidential data on
 human subjects, since it is impossible to provide fully open access to
-the source files.
+the source files.[ ]{.Apple-converted-space}
 
 This monograph provides pathbreaking contributions of different
 approaches to automating the collection and codification of knowledge
@@ -53,7 +53,7 @@ approaches to applying text analysis techniques on a series of different
 publication corpora to identify the datasets referenced in each
 publication and draw out the required elements. The authors have been
 identified as a result of an international competition
-that
+that[ ]{.Apple-converted-space}
 
 challenged computer scientists to find ways of automating the discovery
 of research datasets, fields & methods behind social science research
@@ -64,37 +64,37 @@ Roman, Hong Giwon, Cao Minh Son 3. [Paderborn University]{.s1}: Rricha
 Jalota, Nikit Srivastava, Daniel Vollmers, René Speck, Michael Röder,Dr.
 Ricardo Usbeck, Prof. Dr. Axel-Cyrille, Ngonga Ngomo 4. [Allen AI]{.s1}:
 Waleed Ammar, Christine Betts, Daniel King, Iz
-Beltagy
+Beltagy[ ]{.Apple-converted-space}
 
 We also will have a contribution from Daniel Acuna, Syracuse
-University
+University[ ]{.Apple-converted-space}
 
 We envision additional contributions from the technical judges as well
-as the social science judges.
+as the social science judges.[ ]{.Apple-converted-space}
 
 1\. C. F. Camerer *et al.*, Evaluating the replicability of social
-science experiments in Nature
+science experiments in Nature[ ]{.Apple-converted-space}
 
 and Science between 2010 and 2015. *Nat. Hum. Behav.* **2**, 637 (2018).
 2. A. Dafoe, Science deserves better: the imperative to share complete
-replication files. *PS*
+replication files. *PS[ ]{.Apple-converted-space}*
 
 *Polit. Sci. Polit.* **47**, 60--66 (2014). 3. J. P. A. Ioannidis, Why
 Most Published Research Findings Are False. *PLoS Med*. **2**,
-e124
+e124[ ]{.Apple-converted-space}
 
 (2005). 4. N. Young, J. Ioannidis, O. Al-Ubaydli, Why Current
-Publication Practices May Distort
+Publication Practices May Distort[ ]{.Apple-converted-space}
 
 Science. *PLoS Med* (2008). 5. G. Christensen, E. Miguel, Transparency,
 reproducibility, and the credibility of
-economics
+economics[ ]{.Apple-converted-space}
 
 research. *J. Econ. Lit.* **56**, 920--980 (2018). 6. T. Yarkoni *et
 al.*, "Enhancing and accelerating social science via automation:
-Challenges
+Challenges[ ]{.Apple-converted-space}
 
-and Opportunities" (2019).
+and Opportunities" (2019).[ ]{.Apple-converted-space}
 # Placeholder between chapters
 
 
@@ -331,9 +331,442 @@ For the way forward, it is important to note the importance of the research area
 
 
 ![](00_images/chapter-break.jpg)
-Placeholder for Dimensions use case chapter.
+Enriching context and enhancing engagement around datasets
+==========================================================
 
-\pagebreak
+Christian Herzog^1,a^, Daniel W Hook^1,2,3,b^, Mark Hahnel^1,c^, Stacy
+Konkiel^1,d^, and Duane E. Williams^1,e^
+
+^1^Digital Science, London, N1 9XW, UK
+
+^2^Department of Physics, Washington University in St Louis, St Louis,
+Missouri, USA
+
+^3^Centre for Complexity Science, Imperial College London, London, SW7
+2AZ, UK
+
+(^a^[[https://orcid.org/0000-0002-9983-0033]{.underline}](https://orcid.org/0000-0002-9983-0033),
+^b^[[https://orcid.org/0000-0001-9746-1193]{.underline}](https://orcid.org/0000-0001-9746-1193),
+^c^[[https://orcid.org/0000-0003-4741-0309]{.underline}](https://orcid.org/0000-0003-4741-0309),
+^d^[<https://orcid.org/0000-0002-0546-8257>]{.underline}
+^e^[[https://orcid.org/0000-0002-2111-3413]{.underline}](https://orcid.org/0000-0002-2111-3413))
+
+Introduction
+------------
+
+The relationship between research, researchers and data is changing.
+Data has always played a critical role in scientific research, but in
+recent years it has taken centre stage not only for the sciences but
+also the social sciences, and it also now plays a significantly
+increased role in the humanities. This change is being driven by two key
+factors: First, the volume of research data that we have available is
+growing rapidly; and, second, our ability to process and analyse these
+data is growing as computers become faster and algorithms become more
+powerful. While many researchers welcome having more data to work with,
+the challenges in this new data-rich research world are not trivial.
+
+The volumes of data that researchers have had to work with have been
+steadily on the rise for many years. Big Science projects such as those
+run by CERN have led the way in creating international infrastructures
+for sharing, processing and analysing large datasets. In a very real
+sense, the Internet itself is the result of the need for a global
+infrastructure to support science. Grid computing is another piece of
+infrastructure that was developed to support large international
+collaborations. Looking at the research world from a high enough vantage
+point and focusing on these large projects, however, misses the
+challenges generated by a second wave of advances.
+
+While many researchers now have large volumes of data, the technologies
+developed to support the cutting-edge research projects of more than 20
+years ago have become commoditised and are available to many researchers
+at a fraction of their original cost: storage is cheap and data transfer
+is fast. Technological issues are not, for the most part, at the centre
+of today's challenges for our increasingly data-centric research world.
+Rather it is infrastructure of a different sort that now needs to be
+developed to support the research requirements of today.
+
+In this short article, we discuss the needs of today's research system
+for investment in two critical pieces of infrastructure that have not
+kept pace with their technological counterparts mentioned above. These
+missing pieces are information infrastructure and cultural
+infrastructure. Both of these challenges are addressed in Digital
+Science's Rich Context project. Through this project, our aim is to
+provide 'enriched' information infrastructure around datasets. This
+information includes details of the approach to data stewardship,
+context of usage, code applied to the dataset in its production, as well
+as code applied to the data to derive further results or translate it
+for practical uses. All these factors add critical elements to the
+research infrastructure. The cultural infrastructure involves creating
+the incentives, triggers and frameworks that encourage the dataset
+stewards, experts and users to contribute to these critical information
+elements.
+
+Information Infrastructure
+--------------------------
+
+It is important to understand that any successful information
+infrastructure for research data will necessarily be deeply linked with
+the culture of research. For clarity of presentation, we have decided to
+present the challenges of the current information infrastructure and
+those of our current cultural norms separately. However, at each stage
+it is clear that each influences the other.
+
+Information infrastructure can be defined as the collection of processes
+and artefacts that are foundational to today's scholarly communications.
+A simplified model of scholarly communications would have artefacts like
+journals, journal articles, article metadata and citations. The
+processes are peer review and scholarly search.
+
+The members of the Royal Society did not have today's world in mind when
+creating *Philosophical Transactions*, the first ever scientific
+journal, 350 years ago. The infrastructures that have built up around
+research publication since that time are powerful and persistent through
+their ubiquity. Until very recently, we expected articles to be grouped
+into journals, and published on a particular date. We expect there to be
+a version of record that is in some sense the definitive record of a
+piece of research.
+
+But heavy use of data in a research problem, or data shared
+collaboratively among colleagues across a research field, changes the
+dynamic around the research record. Fields that use data increasingly
+publish those data as a distinct output from a research article. Data
+has become a principal research output, but lacks the infrastructure
+that we have built up around the journal article (some experiments like
+"data journals" have had only limited success, given that a static and
+"flat" article is not a natural fit for publishing most data).
+
+A dataset can change with time for many reasons: data may be added over
+time, corrections may be issued, and so on. In these cases, it may be
+appropriate to "version" the dataset (by issuing a persistent identifier
+for a point-in-time snapshot for the dataset, allowing subsequent
+changes to receive their own "versions"). But changes to a dataset may
+have a knock-on effect on the interpretation of the data and may
+fundamentally alter the research result that was originally reported.
+Moreover, in many fields "Big Data" is so central that it not only puts
+pressure on the community to establish an acceptable model of data
+publication, but also puts significant stress on how we read, interpret,
+and review research as a whole.
+
+Many datasets are now so vast that we lack the ability as humans to
+consume them in an easy way. Visualisation technologies and other tools
+that allow us to interact with and sample data dynamically have received
+significant attention in recent years, and have helped with the
+interpretation of data in online environments. But it is simply
+impossible to reduce some types of data to a single figure or printable
+table, as would be the case for "traditional" journal publishing. By
+attempting to do so, we miss the essence of the data and risk failing to
+communicate data-driven conclusions accurately. This limitation of
+current publication formats (e.g. static PDF files for articles) is an
+issue that relates to the reproducibility crisis of modern research.
+
+Peer review is another process that must change to account for data as a
+"first class" research object. Historically, peer reviewers have ensured
+that a piece of research is well-communicated and correct. This level of
+peer review is difficult to apply in the context of research data. If
+data is being published as a primary output, then it may be possible to
+perform a kind of peer review by applying some statistical tests to a
+sample of the data, or by using some other appropriate technique.
+However, it is no longer practical in most cases to set up a parallel
+experiment to reproduce data, as had been the case in years past. Across
+all contexts there are good reasons for these challenges: the experiment
+may be too costly to repeat, or the conditions of the original data
+collection may not be replicable (for example, surveying stress levels
+of the populace during a specific political event). In addition, ethical
+considerations such as the anonymity of those being surveyed may make
+certain types of data difficult to review. Thus, we must develop robust
+and accepted approaches to peer review, not only for data itself but
+also for those publications that are heavily based on data.
+
+A number of publishing innovations have made journal articles more
+discoverable and accessible in recent years, such as preprint servers,
+DOIs, centralized search engines like Google Scholar and Dimensions,
+etc., however, these do not translate directly across to research data.
+Part of the reason for this is that there is a standard structure for an
+academic article (e.g. abstracts, keywords, etc), which is specifically
+designed around communication to humans. Solutions designed for data to
+date still have a long way to go in that regard. For example, the core
+fields required to create a valid DataCite record are identifier,
+creator, title, publisher, publication year and resource type[^1]. All
+other data fields are optional (e.g. location, funder, subject,
+contributors) due to the fundamental uncertainty in what might
+constitute research data in the future. This flexibility limits how data
+can be discovered. It has taken some years for Web of Science, Google
+and others to introduce functionality to search for datasets in their
+discovery systems.
+
+Clearly, technological infrastructure for data\--or lack thereof\--has
+huge implications for the discovery, peer review, citation practices,
+interpretation, and availability of data. These challenges are
+interconnected with challenges we face when thinking about the cultural
+infrastructure for data, as well.
+
+Cultural Infrastructure
+-----------------------
+
+There are two main aspects to cultural infrastructure: incentives and
+capability. Both of these aspects are strong drivers in how researchers
+engage with research data, and their behaviours relating to sharing it
+with others and making it available to external scrutiny.
+
+Academics do not typically take up research careers for financial gain.
+Rather, they choose to dedicate their lives to understanding a specific
+problem partially in the hopes of discovering something that will make
+them "successful" by some measure. Success, of course, can be understood
+by looking at incentives for researchers. Researchers in many fields are
+promoted by publishing in specific high-impact journals, leading to
+funding success. Once you have demonstrated capability in this respect,
+there is a virtuous cycle. More funding leads to a greater chance of
+further publications in the "right" journals, which leads to more
+funding.
+
+There are no such incentives here for sharing data. In this context,
+parting with the data that underpins your research gives rise to two
+concerns. Firstly, that someone may find an error in your work and
+discredit what you have done. Secondly, that someone else may not share
+their own data but will gladly reuse yours if you make it available,
+especially in fields where success is based on having more data to
+analyse. That may be the difference between having a career where you
+are well funded, promoted and have the ability to do research in the way
+that you want, and having to leave the field.
+
+A further level of inequity exists in which data-related jobs are valued
+by the Academy. If a researcher happens to be particularly talented in
+working with data curation, data analysis or data processing, there is
+no track for recognising these talents. They are unlikely to be a first
+author on a publication in a major journal due to their data wrangling
+talents, and hence they have less of a chance of career progression than
+researchers who take a more traditional "publish or perish" path with
+their work as described above.
+
+This set of perverse incentives means that people with the capability to
+handle data are often incentivised to leave research. Hence, not only do
+we have a problem of incentives in sharing and communicating data, but
+we also have a problem in retaining people who have the capability that
+we need to structure data so that it can be shared and built upon.
+
+Capability for sharing data is the second aspect of the cultural
+challenge that academia continues to wrestle with. Making data available
+to others is generally accepted as a key part of the research
+communication process. However, there are certain established norms
+around when the data should be shared, and to what depth it is
+shared[^2]; for example, in fields where human subjects research is
+prevalent, there is a much more conservative attitude towards open data
+than in fields like astronomy where data sharing is widely practiced,
+given that data can be collected by only a handful of observatories and
+telescopes worldwide.
+
+In fields that are more applied, ensuring that data generated as a
+result of a commercial relationship is protected is crucial. In such
+fields, academics often have a better understanding of copyright,
+intellectual property rights and licences[^3]. But outside of this
+context, there is a general lack of understanding of these issues and
+hence data are often not shared over concerns for a perceived legal
+barrier.
+
+Other concerns are ethical---for example, should these data be shared if
+it might infringe the rights of the subjects of the research?
+Researchers are beginning to become aware that, through the use of
+algorithms, some data is not as well anonymised as it may first
+appear[^4]. Anonymisation of data is a research field in and of
+itself[^5].
+
+Other concerns are simply practical---how do I make my data available in
+a way that is meaningful to others? The work associated with making a
+dataset generically machine-readable is challenging for many
+researchers, who tend not to be experts in data handling. The work
+associated with making a dataset human-understandable, reproducible and
+fully contextualised is often significant. However, governments and
+foundations have not necessarily prioritised these activities in their
+grant programs (though this is changing)[^6]^,^[^7].
+
+Enriching context
+-----------------
+
+While we at Digital Science cannot solve all the issues raised here, the
+points discussed do offer a blueprint for a generalised approach to
+handling and thinking about research data and what it means to be a
+researcher in the current research paradigm. We believe that a
+significant step in changing the perception of data and those who handle
+data is to increase the contextuality of research data.
+
+There are two important pieces of infrastructure that need to be
+introduced. Firstly, a version of CredIT for research data[^8], whereby
+all contributors to a dataset's feeding and care over time are
+recognized, valued, and encoded in machine-readable ways^.^ Such a
+system would be crucial in providing incentives towards data sharing,
+both making it possible to recognize "data wranglers" who could advance
+their career in-turn, and also by making it much easier for universities
+to track and reward those who are contributing towards the kinds of open
+access that are often discussed in university mission statements and
+faculty council decrees. The second piece of crucial infrastructure
+needed is, a set of tools that allow research data to be discovered and
+contextualised. In this section, we will focus on the latter challenge.
+
+When we built Dimensions, the ability to contextualise any piece of
+research was a strong driver for our work[^9]. The idea that all
+research happens in a particular place at a particular time, carried out
+by a set of people, some of whom may be affiliated with a research
+institution, gives a set of metadata that allows us the "weak context"
+of a piece of research. By "weak context" we mean that the context being
+provided gives no deep understanding of the context of an article to a
+non-expert and is essentially indistinguishable from standard metadata.
+But with modern data mining approaches, it is possible to add a "strong
+context".
+
+Strong contextualisation of research should provide a user with rich
+information about the research including funding, other research
+produced as part of the larger project (e.g. related publications,
+clinical trials, etc), and details of the research that was built on top
+of it. This information should also fit into, trends and graphical
+representations that offer a more complete, more rapid understanding of
+how research fits into the larger field, related fields, or the context
+of the publishing journal or supporting institution. For example, for a
+research article, we should be able to quickly understand how many
+researchers are in a related field, whether the field is growing, how
+old the field is, how much funding has been deployed in the field, which
+countries have provided that funding, whether the field has begun the
+translation to application through patents or clinical trials, or
+whether it has been used as a basis for the formulation of policy.
+
+Context can also be offered in the data that we provide to understand
+the reach and influence of research.
+
+Alternative metrics ("altmetrics") are data from the social web that run
+orthogonal to classic citation measures, which can be seen to add
+significant context to an article -- extending our understanding of how
+different cohorts of potential users of the research are engaging with
+it. For example, we can use altmetrics to understand if an article is
+being mentioned in the news, in which geographical regions it is being
+noticed, whether it is being used as part of a teaching syllabus, and
+many other kinds of public and non-traditional scholarly engagement.
+These data can then be visualized in creative ways to add instant
+additional context to engagement with a research article (see Fig. 1).
+
+![](media/image1.png){width="7.270833333333333in"
+height="2.5277777777777777in"}
+
+*Figure 1: Different types of context tracked by Altmetric.com for any
+research output.\
+(Reproduced by permission of Altmetric.com)*
+
+How datasets are used in research more broadly is another important
+piece of context that many data search engines lack. This is where the
+Rich Context project comes in. During the Rich Context project, we
+explored using Dimensions' freely available public interface as a
+destination for researchers who seek context around datasets.
+
+Such context for research data and its impacts could be offered in the
+form of in-app badges and other "signposts" that connect data with its
+larger context. Such a contextualizing badge could include not only the
+number of citations that the dataset has received, but also whether the
+data has been versioned (through Figshare's repository metadata),
+discussed online (through Altmetric data), and what kind of tools and
+insights have been built on top of the data (through rich mining of
+full-text and citation data available in the ReadCube reference
+management corpus and in Dimensions).
+
+Correctly developed and accepted by the community, this type of
+information can make a contribution to solving many of the problems
+highlighted in this article. If the correct contextual facets can be
+developed, then recognition would be easier to assign to those who have
+contributed to the process of creating and maintaining datasets. With
+greater context around them, datasets become easier to locate,
+understand and value. This in turn could lead to a broader evaluative
+environment and more engagement from academics.
+
+Engagement across academia, however, is not uniform. Mechanisms need to
+be provided to engage data science-focused researchers from whom more
+details of their tools, scripts and codebooks could be drawn, adding
+further value to research data. At the same time, engagement tools need
+to allow data scientists to leverage this information so that it is
+valuable to them when they are the consumers of search results. These
+are subtly different use cases from those of standard researchers. By
+mining ever more open research systems wherein data is being analyzed
+(e.g. Gigantum, Github, etc), we can start to integrate these other
+crucial engagement contexts as well.
+
+![https://lh5.googleusercontent.com/3OunhdD8OksXbG5n9dlxQZ4vHfq3ytZuYahLuNwnXG2oaJ7vSpCkCULgc\_8tpapwUqzFLsALR6Xcrhl2ZgyYtvxOhg2kfoXeAJ1MoibnK0liPl2w6xhvoMye-lGtyopkM0ja1xnB](media/image2.png){width="4.543310367454068in"
+height="4.776042213473316in"}
+
+*Figure 2: Mock-up of a research data badge helping to contextualise a
+set of search results.*
+
+![https://lh5.googleusercontent.com/51fefhu7zEe3Y61OD1vbe-Bl9EiBI8IUUj1FOnP7NLLexSqDO7cJrzBeuzmwUR7eC84AQKmcMwDcTKW3trd7-vnNiyelvHvEOdM\_Da5OgEoTYh5lvrz8wfxWzTH2\_5DJjfgwe9Ed](media/image3.png){width="4.163163823272091in"
+height="4.505208880139983in"}
+
+*Figure 3: Mock-up of a research data badge helping to contextualise a
+specific dataset.*
+
+In Figures 2 and 3, we have mocked up some early thinking for how a
+contextualized research data badge could look. This visualisation is
+based on insights from the Rich Context project and uses data that could
+be mined from articles that use a specific dataset. In particular, we
+have suggested four initial facets of context that both data
+science-focused researchers and others could find helpful when viewing a
+dataset:
+
+-   **Experts** **who have made use of the data**, sourced from
+    references made to the dataset in a professional context such as an
+    industry whitepaper or policy document
+
+-   **Academics** that **cite the data**, mined from citation of the
+    dataset or ancillary data in the peer reviewed literature
+
+-   **End users of the data**, sourced from code book references
+    included in public code repositories
+
+-   **Enhancements of the data**, vis-à-vis annotations and comments
+    made on the data in public forums.
+
+In summary, we believe that, if deployed across the many environments in
+which researchers discover data (including and beyond Dimensions), the
+thinking behind the Rich Context project can overcome current
+infrastructural challenges to significantly extend the contextualisation
+of datasets. The number and variety of datasets in use in academia will
+certainly expand in the future, and we can only see data becoming even
+more central to contemporary research efforts. As such, it is critical
+to invest in robust infrastructures, not only to support the production
+and sharing of these data, but also to change the culture and evaluative
+environment around research data. It is only through initiatives such as
+these that we will be able to solve the vast and complex sociotechnical
+challenges that face academia today.
+
+[^1]: Support.datacite.org. (2019). *DataCite Metadata Schema 4.0*.
+    \[online\] Available at: https://support.datacite.org/docs/schema-40
+    \[Accessed 1 Jul. 2019\].
+
+[^2]: Linek SB, Fecher B, Friesike S, Hebing M (2017) Data sharing as
+    social dilemma: Influence of the researcher's personality. PLOS ONE
+    12(8): e0183216. doi: 10.1371/journal.pone.0183216
+
+[^3]: Treadway, J., Hahnel, M., Leonelli, S., Penny, D., et al.
+    (2016) The State of Open Data Report. \[Online\]. Available from:
+    doi:10.6084/m9.figshare.4036398.v1 \[Accessed: 1 July 2019\].
+
+[^4]: Siddle, J. (2019). *I Know Where You Were Last Summer: London\'s
+    public bike data is telling everyone where you\'ve been*. \[online\]
+    Vartree.blogspot.com. Available at:
+    https://vartree.blogspot.com/2014/04/i-know-where-you-were-last-summer.html
+    \[Accessed 1 Jul. 2019\].
+
+[^5]: Li, N., Li, T. and Venkatasubramanian, S. (2007). t-Closeness:
+    Privacy Beyond k-Anonymity and l-Diversity. *2007 IEEE 23rd
+    International Conference on Data Engineering*.
+
+[^6]: Rdmtoolkit.jisc.ac.uk. (2019). *Research Data Management Toolkit
+    \| Jisc*. \[online\] Available at:
+    https://rdmtoolkit.jisc.ac.uk/plan-and-design/data-management-planning/
+    \[Accessed 1 Jul. 2019\].
+
+[^7]: Nnlm.gov. (2019). *Data Management Plan \| NNLM*. \[online\]
+    Available at: https://nnlm.gov/data/data-management-plan \[Accessed
+    1 Jul. 2019\].
+
+[^8]: Allen, L., Brand, A., Scott, J., Hlava, M., Altman, M., (2014)
+    Nature 508, 312--313. doi:10.1038/508312a.
+
+[^9]: Hook, D.W., Herzog, C. and Porter, S.j. (2018) Front. Res. Metr.
+    Anal. doi:10.3389/frma.2018.00023
 # Placeholder between chapters
 
 
@@ -508,10 +941,6 @@ can be affected by the quality of the data it is evaluated against.
 \
 
 \
-# Placeholder between chapters
-
-
-![](00_images/chapter-break.jpg)
 > Metadata for Administrative and Social Science Data
 
 Robert B Allen
@@ -1081,7 +1510,7 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 [^15]: The Australia National Data Service, <https://www.ands.org.au/>
 
 [^16]: There are additional collections at <http://data.census.gov>,
-    <http://gss.norc.org>.  ]{.underline} <http://electionstudies.org>,
+    <http://gss.norc.org>. [ ]{.underline} <http://electionstudies.org>,
     <http://psidonline.isr.umich.edu>, and <http://www.nlsinfo.org>.
 
 [^17]: <https://www.earthcube.org/>
@@ -2636,6 +3065,10 @@ Prizes, and Research Contracts. The American Economic Review, 73(4),
 
 
 ![](00_images/chapter-break.jpg)
+# Placeholder between chapters
+
+
+![](00_images/chapter-break.jpg)
 Introduction
 ============
 
@@ -4056,7 +4489,7 @@ because of the removal of frequently-occuring terms from the
 Rasa-generated output, based on the frequency distribution of dataset
 mentions as computed in the Simple Dataset Mention Search.\
 
- M[2.2cm]{} | M[2.3cm]{} | M[2.2cm]{} M[2.2cm]{} M[2.2cm]{} ]{} & &\
+[ M[2.2cm]{} | M[2.3cm]{} | M[2.2cm]{} M[2.2cm]{} M[2.2cm]{} ]{} & &\
 **Metrics**& **Rasa-based Approach** (2500) & **Rasa-based Approach**
 (7500) & **Combined Approach** (2500) & **Combined Approach** (7500)\
 **Precision** & 0.382 & 0.388 & **0.456** & **0.456**\
@@ -4160,17 +4593,17 @@ inconsistencies even after human processing. We hence propose that
 machine-aided methods for computing correct and complete structured
 representation of publications are of central importance for scientific
 research such as an Open Research Knowledge
-Graph [@DBLP:journals/corr/abs-1901-10816]. Previous works on
-never-ending learning have shown how humans and extraction algorithms
-can work together to achieve high-precision and high-recall knowledge
-extraction from unstructured sources. In our future work, we hence aim
-to populate a **scientific knowledge graphs** based on never-ending
-learning. The methodology we plan to develop will be domain-independent
-and rely on active learning to classify, extract, link and publish
-scientific research artifacts extracted from open-access papers.
-Inconsistency will be remedied by ontology-based checks learned from
-other publications such as SHACL constraints which can be manually or
-automatically added.[^13] The resulting graphs will
+Graph [@DBLP:journals/corr/abs-1901-10816][@DBLP:conf/esws/BuscaldiDMOR19].
+Previous works on never-ending learning have shown how humans and
+extraction algorithms can work together to achieve high-precision and
+high-recall knowledge extraction from unstructured sources. In our
+future work, we hence aim to populate a **scientific knowledge graphs**
+based on never-ending learning. The methodology we plan to develop will
+be domain-independent and rely on active learning to classify, extract,
+link and publish scientific research artifacts extracted from
+open-access papers. Inconsistency will be remedied by ontology-based
+checks learned from other publications such as SHACL constraints which
+can be manually or automatically added.[^13] The resulting graphs will
 
 -   rely on advanced distributed storage for RDF to scale to the large
     number of publications available;
@@ -4227,6 +4660,7 @@ The code and documentation for all our submissions can be found here:
 
 
 ![](00_images/chapter-break.jpg)
+<!--
 ---
 author:
 - |
@@ -4238,505 +4672,316 @@ bibliography:
 - 'rcc-02.bib'
 title: Simple Extraction for Social Science Publications
 ---
+-->
 
-Abstract
-========
+## Chapter: Simple Extraction for Social Science Publications
 
-With the vast number of datasets and literature collections available for research today, it is very difficult to keep track on the use of datasets and literature articles for scientific research and discovery. Many datasets and research work using them are left undiscovered and under-utilized due to the lack of available search tools to automatically find out who worked with the data, on what research topics, using what research methods and generating what results. The Coleridge Rich Context Competition (RCC) therefore aims to build automated dataset discovery tools for analysing and searching social science research publications. In this paper, we describe our approach to solving the first phase of Coleridge Rich Context Competition.
+Philips Kokoh Prasetyo, Amila Silva, Ee-Peng Lim, Palakorn Achananuparp\
+Living Analytics Research Centre, Singapore Management University\
+{pprasetyo,amilasilva,eplim,palakorna}@smu.edu.sg
+
+First draft: 11 February 2019; Second draft: 12 June 2019
 
 
-Introduction
-============
+### Abstract
 
-Automated discovery from scientific research publications is an
-important task for analysts, researchers, and learners as they develop
-the scientific knowledge and use them to gain new insights. More
-specifically, on the tasks of discovering datasets and methods mentioned
-in a research publication, we have seen a lack of available tools to
-easily find who else worked on a particular dataset, what research
-methods people apply on the dataset, and what results they have found
-using the dataset. Furthermore, new datasets are not easy to discover,
-and as a result, good datasets and methods are often neglected.
+With the vast number of datasets and literature collections available for research today, it is very difficult to keep track on the use of datasets and literature articles for scientific research and discovery. Many datasets and research work using them are left undiscovered and under-utilized due to the lack of available search tools to automatically find out who worked with the data, on what research topics, using what research methods and generating what results. The Coleridge Rich Context Competition (RCC) therefore aims to build automated dataset discovery tools for analyzing and searching social science research publications. In this chapter, we describe our approach to solving the first phase of Coleridge Rich Context Competition.
 
-The Coleridge Rich Context Competition (RCC) aims to build automated
-datasets discovery from social science research publications, filling
-the gap of this problem. In this competition, given a corpus of social
-science research publications, we have to automatically identify
-datasets used, and then infer the research methods and research fields
-in the publications. Note that no labeled data are given for research
-methods and fields identification.
+### Table of contents
 
-This manuscript describes summary of our submission for the first phase
+1. [Introduction](#1-introduction)
+2. [Related Work](#2-related-work)
+3. [Data Analysis](#3-data-analysis)
+4. [Methods](#4-methods)
+5. [Experiment Results](#5-experiment-results)
+6. [Lesson Learned](#6-conclusion)
+7. [Acknowledgement](#7-acknowledgements)
+8. [Appendix: Technical Documentation](#appendix-technical-documentation)
+
+
+### 1. Introduction
+
+
+Automated discovery from scientific research publications is an important task for analysts, researchers, and learners as they develop the scientific knowledge and use them to gain new insights. More specifically, on the tasks of discovering datasets and methods mentioned in a research publication, we have seen a lack of available tools to easily find who else worked on a particular dataset, what research methods people apply on the dataset, and what results they have found using the dataset. Furthermore, new datasets are not easy to discover, and as a result, good datasets and methods are often neglected.
+
+The Coleridge Rich Context Competition (RCC) aims to build automated datasets discovery from social science research publications, filling the gap of this problem. In this competition, given a corpus of social science research publications, we have to automatically identify datasets used, and then infer the research methods and research fields in the publications. Note that no labeled data are given for research methods and fields identification.
+
+We describes our submission to the first phase of RCC. We perform dataset detection followed by implicit entity linking approach to tackle dataset extraction task. We adopt weakly supervised classification for research methods and fields identification tasks utilizing external resource SAGE Knowledge as proxy for weak labels.
+
+<!-- This manuscript describes summary of our submission for the first phase
 of RCC. We begin with related work in section \[sec:relatedwork\]. We
 present our analysis on RCC dataset in section \[sec:data\], describe
 our approach in section \[sec:methods\], and discuss our experiment
 results in section \[sec:experiments\]. Finally, we wrap up with
 conclusion and future work in section \[sec:conclusion\].
+ -->
 
-Related Work {#sec:relatedwork}
-============
+### 2. Related Work
 
-Extracting information from scientific text has been explored in the
-past [@Peng2004AccurateIE; @Nguyen2015ScholarlyDI; @Singh2016OCRAR]. One
-type of information extraction from scientific articles is extracting
-keyphrases and relation between them [@Augenstein2017SemEval2T].
-@Luan2017ScientificIE propose semi-supervised sequence tagging approach
-to extract keyphrases. @Augenstein2017MultiTaskLO explore multi-task
-deep recurrent neural network approach with several auxiliary tasks to
-extract keyphrases.
+Extracting information from scientific text has been explored in the past [[PM04](#PM04); [NCKL15](#NCKL15); [SBP<sup>+</sup>16](#SBP+16)]. One type of information extraction from scientific articles is extracting keyphrases and relation between them [[ADR<sup>+</sup>17](#ADR+17)]. Luan et al. (2017) propose semi-supervised sequence tagging approach to extract keyphrases [[LOH17](#LOH17)]. Augenstein and Søgaard (2017) explore multi-task deep recurrent neural network approach with several auxiliary tasks to extract keyphrases [[AS17](#AS17)].
 
-Another type of extraction is citation extraction. Two citation
-extraction settings have been explored before: reference mining inside
-the full text [@Alves2018DeepRM], and citation metadata
-extraction [@Hetzner2008ASM; @Anzaroot2014LearningSL; @An2017CitationME].
-@Nasar2018InformationEF write a survey on information extraction from
-scientific articles.
+Another type of extraction is citation extraction. Two citation extraction settings have been explored before: reference mining inside the full text [[ACK18](#ACK18)], and citation metadata extraction [[Het08](#Het08); [APBM14](#APBM14); [AGJ<sup>+</sup>17](#AGJ+17)]. Nasar er al. (2018) write a survey on information extraction from scientific articles [[NJM18](#NJM18)].
 
 Recently, there are some work to explore dataset extraction from
-scientific
-text [@Boland2012IdentifyingRT; @Ghavimi2016ASA; @Ghavimi2016IdentifyingAI].
-@Boland2012IdentifyingRT propose weakly supervised pattern induction to
-identify references in social science publications. @Ghavimi2016ASA
-[@Ghavimi2016IdentifyingAI] propose a semi automatic approach for
-detecting dataset references for social science texts. Dataset
-extraction is a challenging task because of the inconsistency and wide
-range of dataset mention styles in research
-publications [@Ghavimi2016IdentifyingAI].
+scientific text [[BREM12](#BREM12); [GML<sup>+</sup>16](#GML+16); [GMVL16](#GMVL16)]. Boland et al. (2012) propose weakly supervised pattern induction to identify references in social science publications [[BREM12](#BREM12)]. Ghavimi et al. (2016) propose a semi automatic approach for detecting dataset references for social science texts [[GML<sup>+</sup>16](#GML+16); [GMVL16](#GMVL16)]. Dataset extraction is a challenging task because of the inconsistency and wide range of dataset mention styles in research publications [[GMVL16](#GMVL16)].
 
-Data Analysis {#sec:data}
-=============
+### 3. Data Analysis
 
-The first phase of RCC dataset consists of a labeled corpus of 5,000
-publications for training set, and additional 100 publications for
-development set. The RCC organizer keeps a separate corpus of 5,000
-publications for evaluation. Each article in the dataset contains full
-text article and dataset citation labels. The metadata of cited datasets
-in the corpus are also provided. For research methods and fields, no
-label information is provided, only SAGE social science research method
-graph and research fields vocabulary are provided.
+The first phase of RCC dataset consists of a labeled corpus of 5,000 publications for training set, and additional 100 publications for development set. The RCC organizer keeps a separate corpus of 5,000 publications for evaluation. Each article in the dataset contains full text article and dataset citation labels. The metadata of cited datasets in the corpus are also provided. For research methods and fields, no label information is provided, only SAGE social science research method graph and research fields vocabulary are provided.
 
-**Preprocessing.** In order to reliably access important structures of
-paper publications, we parse all papers using AllenAI Science
-Parse[^1] [@Ammar2018ConstructionOT]. AllenAI Science Parse reads PDF
-file, and returns title, authors, abstract, sections, and bibliography
-(references). Since this parser utilizes machine learning models to
-parse PDF file, the parsing results may not be 100% accurate.
-Furthermore, this parser is unable to parse scan copy of old
-publication. In the situation where we are unable to access parsed
-fields, we fall back to the given text files.
+**Preprocessing.** In order to reliably access important structures of paper publications, we parse all papers using AllenAI Science Parse[<sup>1</sup>](https://github.com/allenai/science-parse) [[AGB<sup>+</sup>18](#AGB+18)]. AllenAI Science Parse reads PDF file, and returns title, authors, abstract, sections, and bibliography (references). Since this parser utilizes machine learning models to parse PDF file, the parsing results may not be 100% accurate. Furthermore, this parser is unable to parse scan copy of old publication. In the situation where we are unable to access parsed fields, we fall back to the given text files.
 
-**Mention Analysis.** There are 5,499 and 123 dataset citations in
-training and development set respectively. Among these citations, 320
-citations in training set and 6 citations in development set do not have
-mentions information. We analyze the paper sections where the dataset
-mentions commonly occur. Table \[tab:train\_top\_sections\]
-and \[tab:dev\_top\_sections\] show top 12 most common sections
-mentioning dataset in training and development set. The tables suggest
-that abstract, reference titles, discussion, results, and methods are
-the most common sections where the dataset mentions occur. We exploit
-reference titles for dataset extraction.
+**Mention Analysis.** There are 5,499 and 123 dataset citations in training and development set respectively. Among these citations, 320 citations in training set and 6 citations in development set do not have mentions information. We analyze the paper sections where the dataset mentions commonly occur. Table [1](#user-content-tab_train_top_sections) and [2](#user-content-tab_dev_top_sections) show top 12 most common sections mentioning dataset in training and development set. The tables suggest that abstract, reference titles, discussion, results, and methods are the most common sections where the dataset mentions occur. We exploit reference titles for dataset extraction.
 
-  Section Header            Mention Frequency
-  ----------------------- -------------------
-  Abstract                              2,548
-  Reference Titles                      1,997
-  Discussion                            1,390
-  Results                                 836
-  Methods                                 804
-  Introduction                            530
-  Statistical Analysis                    285
-  Comment                                 279
-  Acknowledgements                        261
-  Materials and Methods                   254
-  Study Population                        227
-  Data                                    214
+<a name="tab_train_top_sections">Table 1</a>: Top 12 Sections Mentioning Datasets in Training Set
 
-  : \[tab:train\_top\_sections\] Top 12 Sections Mentioning Datasets in
-  Training Set
+Section Header | Mention Frequency
+-------------- | -----------------:
+Abstract | 2,548
+Reference Titles | 1,997
+Discussion | 1,390
+Results | 836
+Methods | 804
+Introduction | 530
+Statistical Analysis | 285
+Comment | 279
+Acknowledgements | 261
+Materials and Methods | 254
+Study Population | 227
+Data | 214
 
-  Section Header           Mention Frequency
-  ---------------------- -------------------
-  Abstract                                78
-  Reference Titles                        37
-  Discussion                              19
-  Introduction                            14
-  Results                                 12
-  Statistical Analyses                     9
-  Methods                                  8
-  Ethics                                   7
-  Population                               7
-  Population Impact                        7
-  Price                                    7
-  2.1 Data                                 5
 
-  : \[tab:dev\_top\_sections\] Top 12 Sections Mentioning Datasets in
-  Development Set
+<a name="tab_dev_top_sections">Table 2</a>: Top 12 Sections Mentioning Datasets in Development Set
 
-**Citation Analysis.** We build citation network from training set. Each
-node in the network is a paper publication, and an edge between two node
-$A$ and $B$ is generated if a paper $A$ cites paper $B$.
-Table \[tab:network\_stats\] shows the statistics of the citation
-network.
+Section Header | Mention Frequency
+-------------- | -----------------:
+Abstract | 78
+Reference Titles | 37
+Discussion | 19
+Introduction | 14
+Results | 12
+Statistical Analyses | 9
+Methods | 8
+Ethics | 7
+Population | 7
+Population Impact | 7
+Price | 7
+2.1 Data | 5
 
-  ----------------- --------
-  Number of nodes      5,000
-  Number of edges        998
-  Network density     0.008%
-  ----------------- --------
 
-  : \[tab:network\_stats\] Statistics of Citation Network
+**Citation Analysis.** We build citation network from training set. Each node in the network is a paper publication, and an edge between two node <img src="https://latex.codecogs.com/svg.latex?A" title="A" /> and <img src="https://latex.codecogs.com/svg.latex?B" title="B" /> is generated if a paper <img src="https://latex.codecogs.com/svg.latex?A" title="A" /> cites paper <img src="https://latex.codecogs.com/svg.latex?B" title="B" />. Table [3](#user-content-tab_network_stats) shows the statistics of the citation network.
 
-Initially, we propose an approach utilizing citation network based on an
-intuition that datasets, research methods, and research fields are
-shared by: 1) same or similar issues, 2) same or similar context, 3)
-same or similar authors and communities, 4) same or similar metrics used
-in the publication. However, based on table \[tab:network\_stats\], we
-learn that exploring rich context using paper-paper citation network is
-not viable at this stage because most papers listed in publications’
-bibliography are not available in the training set, and therefore,
-paper-paper citation network becomes very sparse with many unknown
-information. Due to this reason, we drop our idea on utilizing
-paper-paper citation graph at this stage. Nevertheless, we believe that
-bibliography contains important signals and information about datasets,
-and research fields.
 
-Methods {#sec:methods}
-=======
+<a name="tab_network_stats">Table 3</a>: Statistics of Citation Network
 
-In this section, we describe our approach for RCC tasks: dataset
-extraction, research methods identification, and research fields
-identification.
+| | |
+--------------- | -------:
+Number of nodes | 5,000
+Number of edges | 998
+Network density | 0.008%
 
-Dataset Extraction {#ssec:dataset_extraction}
-------------------
 
-We employ a pipeline of two subtasks for dataset extraction: dataset
-detection, followed by dataset recognition. The goal of dataset
-detection is to detect whether a publication cites a dataset or not.
-This first subtask helps us to quickly filter out non-dataset
-publications. After the first subtask, we mine dataset mentions for the
-remaining publications in dataset recognition subtask.
+Initially, we propose an approach utilizing citation network based on an intuition that datasets, research methods, and research fields are shared by: 1) same or similar issues, 2) same or similar context, 3) same or similar authors and communities, 4) same or similar metrics used in the publication. However, based on table [3](#user-content-tab_network_stats), we learn that exploring rich context using paper-paper citation network is not viable at this stage because most papers listed in publications’ bibliography are not available in the training set, and therefore, paper-paper citation network becomes very sparse with many unknown information. Due to this reason, we drop our idea on utilizing paper-paper citation graph at this stage. Nevertheless, we believe that bibliography contains important signals and information about datasets, and research fields.
 
-For dataset detection, we utilize paper title in bibliography (reference
-list) combined with explicit research methods mentions to detect whether
-a publication citing a dataset or not. Explicit research methods
-mentions are determined based on exact match between paper title and
-SAGE research methods vocabulary. We train an SVM classifier using
-explicit research method mentions and n-gram features from paper titles
-in bibliography. We use the SVM classifier to classify each publication,
-if the classifier gives positive label, then we proceed to dataset
-recognition subtask, otherwise we ignore the publication.
 
-For dataset recognition, we use an implicit entity linking approach. We
-start with the Naive Bayes model, which can be regarded as a standard
-information retrieval baseline, and entity indicative weighting strategy
-is used to improve the model. In order to calculate the word
-distribution of each dataset, we represent each dataset using its title,
-dataset mentions (provided in the training set), and dataset relevant
-sentences, filtered from the relevant publications using the rule based
-approach proposed in @Ghavimi2016IdentifyingAI. All these text sections
-related to a particular dataset are considered as a single text chunk,
-and we calculate the word distribution as follows. Let $\textbf{w}$ be
-the set of words in a dataset. In our problem setting, we assume the
-dataset prior probability $p(d)$ to be uniform. The probability of
-dataset $d$ given $w \in \textbf{w}$ is:
+### 4. Methods
 
-$$\begin{split}
+In this section, we describe our approach for RCC tasks: dataset extraction, research methods identification, and research fields identification.
+
+#### Dataset Extraction
+
+We employ a pipeline of two subtasks for dataset extraction: dataset detection, followed by dataset recognition. The goal of dataset detection is to detect whether a publication cites a dataset or not. This first subtask helps us to quickly filter out non-dataset publications. After the first subtask, we mine dataset mentions for the remaining publications in dataset recognition subtask.
+
+For dataset detection, we utilize paper title in bibliography (reference list) combined with explicit research methods mentions to detect whether a publication citing a dataset or not. Explicit research methods mentions are determined based on exact match between paper title and SAGE research methods vocabulary. We train an SVM classifier using explicit research method mentions and n-gram features from paper titles in bibliography. We use the SVM classifier to classify each publication, if the classifier gives positive label, then we proceed to dataset recognition subtask, otherwise we ignore the publication.
+
+For dataset recognition, we use an implicit entity linking approach. We start with the Naive Bayes model, which can be regarded as a standard information retrieval baseline, and entity indicative weighting strategy is used to improve the model. In order to calculate the word distribution of each dataset, we represent each dataset using its title, dataset mentions (provided in the training set), and dataset relevant sentences, filtered from the relevant publications using the rule based approach proposed in [[GMVL16](#GMVL16)]. All these text sections related to a particular dataset are considered as a single text chunk, and we calculate the word distribution as follows. Let <img src="https://latex.codecogs.com/svg.latex?$\textbf{w}$" title="$\textbf{w}$" /> be the set of words in a dataset. In our problem setting, we assume the dataset prior probability <img src="https://latex.codecogs.com/svg.latex?p(d)" title="p(d)" /> to be uniform. The probability of dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" /> given <img src="https://latex.codecogs.com/svg.latex?$$w$&space;\in&space;\textbf{w}$" title="$$w$ \in \textbf{w}$" /> is:
+
+<!-- $$\begin{split}
     p(d|\textbf{w}) & \propto \prod _{w \in \textbf{w}} p(w|d) \\
     & = \prod _{w \in \textbf{w}} \frac{f(d,w) + \gamma }{ \sum_{w'} f(d,w') + |W| \gamma}
-\end{split}$$
+\end{split}$$ -->
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;p(d|\textbf{w})&space;&&space;\propto&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;p(w|d)&space;\\&space;&&space;=&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;\frac{f(d,w)&space;&plus;&space;\gamma&space;}{&space;\sum_{w'}&space;f(d,w')&space;&plus;&space;|W|&space;\gamma}&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?\begin{align*}&space;p(d|\textbf{w})&space;&&space;\propto&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;p(w|d)&space;\\&space;&&space;=&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;\frac{f(d,w)&space;&plus;&space;\gamma&space;}{&space;\sum_{w'}&space;f(d,w')&space;&plus;&space;|W|&space;\gamma}&space;\end{align*}" title="\begin{align*} p(d|\textbf{w}) & \propto \prod _{w \in \textbf{w}} p(w|d) \\ & = \prod _{w \in \textbf{w}} \frac{f(d,w) + \gamma }{ \sum_{w'} f(d,w') + |W| \gamma} \end{align*}" /></a>
 
-where $f(d, w)$ is the number of co-occurrences of word $w$ with entity
-$d$, $\gamma$ is the smoothing parameter, and $|W|$ is the vocabulary
-size. For each dataset $d$, we derive $f(d, w)$ by the count of $w$
-occurrences in the text extracted for each dataset. In order to stress
-more priority for dataset indicative words, we improved the final
-objective function of our model as follows:
+where <img src="https://latex.codecogs.com/svg.latex?f(d,&space;w)" title="f(d, w)" /> is the number of co-occurrences of word <img src="https://latex.codecogs.com/svg.latex?w" title="w" /> with entity <img src="https://latex.codecogs.com/svg.latex?d" title="d" />, <img src="https://latex.codecogs.com/svg.latex?\gamma" title="\gamma" /> is the smoothing parameter, and <img src="https://latex.codecogs.com/svg.latex?|W|" title="|W|" /> is the vocabulary size. For each dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" />, we derive <img src="https://latex.codecogs.com/svg.latex?f(d,&space;w)" title="f(d, w)" /> by the count of <img src="https://latex.codecogs.com/svg.latex?w" title="w" /> occurrences in the text extracted for each dataset. In order to stress more priority for dataset indicative words, we improved the final objective function of our model as follows:
 
-$$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$
+<!-- $$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$ -->
+<a href="https://www.codecogs.com/eqnedit.php?latex=$$ln(p(d|\textbf{w}))&space;\propto&space;\sum&space;_{w&space;\in&space;\textbf{w}}&space;\beta(w)&space;*&space;ln(p(w|d))$$" target="_blank"><img src="https://latex.codecogs.com/svg.latex?$$ln(p(d|\textbf{w}))&space;\propto&space;\sum&space;_{w&space;\in&space;\textbf{w}}&space;\beta(w)&space;*&space;ln(p(w|d))$$" title="$$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$" /></a>
 
-where $\beta(w)$ is the entity-indicative weight for word $w$. This
-weight $\beta(w)$ is added as an exponent to the term $p(w|d)$.
-$\beta(w)$ is calculated as:
+where <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is the entity-indicative weight for word <img src="https://latex.codecogs.com/svg.latex?w" title="w" />. This weight <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is added as an exponent to the term <img src="https://latex.codecogs.com/svg.latex?p(w|d)" title="p(w|d)" />. <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is calculated as:
 
-$$\beta(w) = log(1 + E / df(w))$$
+<!-- $$\beta(w) = log(1 + E / df(w))$$ -->
+<a href="https://www.codecogs.com/eqnedit.php?latex=$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" target="_blank"><img src="https://latex.codecogs.com/svg.latex?$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" title="$$\beta(w) = log(1 + E / df(w))$$" /></a>
 
-where $E$ is the number of distinct datasets considered and $df(w)$
-counts the number of datasets with at least one occurrence of w.
+where <img src="https://latex.codecogs.com/svg.latex?E" title="E" /> is the number of distinct datasets considered and <img src="https://latex.codecogs.com/svg.latex?df(w)" title="df(w)" /> counts the number of datasets with at least one occurrence of <img src="https://latex.codecogs.com/svg.latex?w" title="w" />.
 
-Then for a given unseen publication, we use same rule based approach
-[@Ghavimi2016IdentifyingAI] to filter a few relevant sentences, and
-datasets are ranked by $ln(p(d|w))$ to select the most suitable
-datasets. In order to select exact datasets related to particular
-publication, we select top 10 datasets ranked using above approach. And
-then the confidence probability related to the top 10 datasets are
-normalized and select the datasets with the normalized probability
-higher than a predefined threshold value. We return the entity
-indicative words as relevant dataset mentions.
+Then for a given unseen publication, we use same rule based approach [[GMVL16](#GMVL16)] to filter a few relevant sentences, and datasets are ranked by <img src="https://latex.codecogs.com/svg.latex?ln(p(d|w))" title="ln(p(d|w))" /> to select the most suitable datasets. In order to select exact datasets related to particular publication, we select top 10 datasets ranked using above approach. And then the confidence probability related to the top 10 datasets are normalized and select the datasets with the normalized probability higher than a predefined threshold value. We return the entity indicative words as relevant dataset mentions.
 
-Research Methods Identification {#ssec:research_method_identification}
--------------------------------
+#### Research Methods Identification
 
-Since we do not have labeled training data for this task, we use
-explicit research method mentions (based on exact match with SAGE
-research methods vocabulary) in a publication as weak signals on
-research methods used in the publication. When these mentions frequently
-appear in a publication, there is a high chance that this publication is
-using these particular research methods.
+Since we do not have labeled training data for this task, we use explicit research method mentions (based on exact match with SAGE research methods vocabulary) in a publication as weak signals on research methods used in the publication. When these mentions frequently appear in a publication, there is a high chance that this publication is using these particular research methods.
 
-Based on this intuition, we generate training set for research method
-classification utilizing sentences that explicitly mention research
-method in a publication. Publication title and the sentences mentioning
-research method serve as context information of a specific research
-method. In order to reduce noisy weak signals, we apply minimum support
-of three sentences in a publication. We exclude research methods which
-only being mentioned one or two times in a publication. We also exclude
-research methods that only being mentioned in less than 10 different
-publications from the training set. Finally, we have 133 research
-methods having sufficient context information for training data. This
-number is 20.18% of 659 research methods in SAGE research method graph.
+Based on this intuition, we generate training set for research method classification utilizing sentences that explicitly mention research method in a publication. Publication title and the sentences mentioning research method serve as context information of a specific research method. In order to reduce noisy weak signals, we apply minimum support of three sentences in a publication. We exclude research methods which only being mentioned one or two times in a publication. We also exclude research methods that only being mentioned in less than 10 different publications from the training set. Finally, we have 133 research methods having sufficient context information for training data. This number is 20.18% of 659 research methods in SAGE research method graph.
 
-We use the training data to train logistic regression classifier to
-classify research methods from publication title and sentences. We
-utilize n-gram features from publication title and sentences for the
-classifier. We apply the logistic regression classifier to recommend top
-3 research methods based on logistic regression probability score.
+We use the training data to train logistic regression classifier to classify research methods from publication title and sentences. We utilize n-gram features from publication title and sentences for the classifier. We apply the logistic regression classifier to recommend top 3 research methods based on logistic regression probability score.
 
-This approach can be extended by utilizing research method graph to
-expand the context. Context information does not only comes from
-sentences in publication, but also comes from related research methods
-as well as broader concept information. By using this information, we
-can potentially expand to more than 133 research methods and perform
-more accurate prediction.
+This approach can be extended by utilizing research method graph to expand the context. Context information does not only comes from sentences in publication, but also comes from related research methods as well as broader concept information. By using this information, we can potentially expand to more than 133 research methods and perform more accurate prediction.
 
-Research Fields Identification {#ssec:research_field_identification}
-------------------------------
+#### Research Fields Identification
 
-Similar to research methods identification, this task does not have
-labeled training data. We only have access to list of SAGE research
-fields. SAGE research fields are organized hierarchically into three
-levels, namely L1, L2, and L3, for example: Soc-2-4 (*kinship*) is under
-Soc (*sociology*) in L1, and under Soc-2 (*anthropology*) in L2.
+Similar to research methods identification, this task does not have labeled training data. We only have access to list of SAGE research fields. SAGE research fields are organized hierarchically into three levels, namely L1, L2, and L3, for example: Soc-2-4 (*kinship*) is under Soc (*sociology*) in L1, and under Soc-2 (*anthropology*) in L2.
 
-To gain more understanding about the characteristic of each field, we
-crawl top search results from SAGE Knowledge[^2]. From the search result
-snippets, we collect information such as title and abstract on various
-publications including case, major work, books, handbooks, and
-dictionary. We exclude video and encyclopedia. Due to sparseness of the
-SAGE Knowledge, we exclude all research fields with less than 10 search
-results. In the end, we have samples of 414 L3 research fields under 101
-L2 research fields and 10 L1 research fields. This numbers cover 20.87%
-of 1,984 L3 research fields, and 67.79% of 149 L2 research fields in the
-list of SAGE research fields. We use this data to train research fields
-classifiers.
+To gain more understanding about the characteristic of each field, we crawl top search results from SAGE Knowledge[<sup>2</sup>](http://sk.sagepub.com/browse/). From the search result snippets, we collect information such as title and abstract on various publications including case, major work, books, handbooks, and dictionary. We exclude video and encyclopedia. Due to sparseness of the SAGE Knowledge, we exclude all research fields with less than 10 search results. In the end, we have samples of 414 L3 research fields under 101 L2 research fields and 10 L1 research fields. This numbers cover 20.87% of 1,984 L3 research fields, and 67.79% of 149 L2 research fields in the list of SAGE research fields. We use this data to train research fields classifiers.
 
-We build three SVM classifiers for L1, L2, and L3 to classify a
-publication using paper title and abstract. Instead of taking the
-highest score, we take top-k research fields and perform re-ranking
-considering agreement among L1, L2, L3. We return a research field if
-its upper level are also in top ranks. Since level L1 is too general, we
-only output research fields from L2, and L3. We outline our heuristic to
-reorder the ranking below:
+We build three SVM classifiers for L1, L2, and L3 to classify a publication using paper title and abstract. Instead of taking the highest score, we take top-k research fields and perform re-ranking considering agreement among L1, L2, L3. We return a research field if its upper level are also in top ranks. Since level L1 is too general, we only output research fields from L2, and L3. We outline our heuristic to reorder the ranking below:
 
-1.  Get top-5 L3 research fields, top-4 L2 research fields, and top-3 L1
-    research fields.
+1.  Get top-5 L3 research fields, top-4 L2 research fields, and top-3 L1 research fields.
 
-2.  Assign initial score $v$ for each research field based on its
-    ranking. $$v(f_i) = (K - i) / K$$ where $K$ is the length of top-k,
-    and $i$ is the ranking of a research field $f$. For example,
-    research fields in top-5 L3 have initial score of
-    $[1, 0.8, 0.6, 0.4, 0.2]$, top-4 L2 have initial score of
-    $[1, 0.75, 0.5, 0.25]$, and top-3 L1 have $[1, 0.666, 0.333]$
+2.  Assign initial score <img src="https://latex.codecogs.com/svg.latex?v" title="v" /> for each research field based on its
+    ranking.
+
+    <a href="https://www.codecogs.com/eqnedit.php?latex=v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" target="_blank"><img src="https://latex.codecogs.com/svg.latex?v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" title="v(f_i) = (K - i) / K" /></a>
+
+    where <img src="https://latex.codecogs.com/svg.latex?K" title="K" /> is the length of top-k, and <img src="https://latex.codecogs.com/svg.latex?i" title="i" /> is the ranking of a research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" />. For example, research fields in top-5 L3 have initial score of `[1, 0.8, 0.6, 0.4, 0.2]`, top-4 L2 have initial score of `[1, 0.75, 0.5, 0.25]`, and top-3 L1 have `[1, 0.666, 0.333]`
 
 3.  Update the score by multiplying each score with the score of
-    matching research fields at upper level, and $0$ otherwise.
-    $$score(f_i^l) =
+    matching research fields at upper level, and <img src="https://latex.codecogs.com/svg.latex?0" title="0" /> otherwise.
+
+    <!-- $$score(f_i^l) =
             \begin{cases}
             \prod _{l \in L} v(f^l) & \text{if field matched} \\
             0 & \text{otherwise}
-            \end{cases}$$ where L is the level of research field $f$ and
-    its upper levels. Here are examples of score update:
+            \end{cases}$$  -->
+    <a href="https://www.codecogs.com/eqnedit.php?latex=score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" title="score(f_i^l) = \begin{cases} \prod _{l \in L} v(f^l) & \text{if field matched} \\ 0 & \text{otherwise} \end{cases}" /></a>
 
+    where <img src="https://latex.codecogs.com/svg.latex?L" title="L" /> is the level of research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" /> and
+    its upper levels. Here are examples of score update:
     -   Soc-2-4 at rank-2 in L3, Soc-2 at rank-3 in L2, and Soc at
         rank-1 in L1. In this case, the score of Soc-2-4 is
-        $0.8 * 0.5 * 1 = 0.4$.
-
-    -   Soc-2-4 at rank-1 in L3, Soc-2 at rank-2 in L2, but Soc is not
-        found in top rank in L1. In this case, the score of Soc-2-4 is
-        $0$.
-
-4.  Collect score from L2 and L3, and exclude L2 if we see more specific
-    of L2 in top-5 L3.
+        `0.8 * 0.5 * 1 = 0.4`.
+    -   Soc-2-4 at rank-1 in L3, Soc-2 at rank-2 in L2, but Soc is not found in top rank in L1. In this case, the score of Soc-2-4 is `0`.
+4.  Collect score from L2 and L3, and exclude L2 if we see more specific of L2 in top-5 L3.
 
 5.  Re-rank L2 and L3 research fields based on the score.
 
-6.  Return research fields having score $>= 0.4$.
+6.  Return research fields having score <img src="https://latex.codecogs.com/svg.latex?>=&space;0.4" title=">= 0.4" />.
 
-To expand to more context from paper list in bibliography section, we
-also build other three Naive Bayes classifiers for L1, L2, and L3 using
-paper title feature only. We believe that a publication from a certain
-field also cites other publications from same or similar fields. For
-each publication in the bibliography, we apply the same procedure as
-mentioned above, then we average the score to get top research fields
-from bibliography. Finally, we combine top research fields from paper
-titles and abstract with results from bibliography.
+To expand to more context from paper list in bibliography section, we also build other three Naive Bayes classifiers for L1, L2, and L3 using paper title feature only. We believe that a publication from a certain field also cites other publications from same or similar fields. For each publication in the bibliography, we apply the same procedure as mentioned above, then we average the score to get top research fields from bibliography. Finally, we combine top research fields from paper titles and abstract with results from bibliography.
 
-Experiment Results {#sec:experiments}
-==================
 
-We discuss our experiment results for each task in this section. We use
-standard precision, recall, and F1 as evaluation metrics.
+### 5. Experiment Results
 
-**Dataset Extraction.** First, we analyze our experiment for dataset
-detection subtask comparing Naive Bayes and SVM classifier. Using only
-paper titles in bibliography and explicit research method mentions,
-Naive Bayes and SVM classifiers are able to reach 0.88 & 0.92 F1 score
-respectively. Since SVM outperforms Naive Bayes, we use SVM for our
-dataset detection module. Table \[tab:dd\_dev\_result\] shows detail
-dataset detection results on development set.
 
-  ----------------------------------------- -- -- --
-  **Classifier & **Prec. & **Rec. & **F1\
-  Naive Bayes & 0.85 & 0.92 & 0.88\
-  SVM & 0.96 & 0.88 & 0.92\
-  ********
-  ----------------------------------------- -- -- --
+We discuss our experiment results for each task in this section. We use standard precision, recall, and F1 as evaluation metrics.
 
-  : \[tab:dd\_dev\_result\] Dataset Detection Results on Development Set
+**Dataset Extraction.** First, we analyze our experiment for dataset detection subtask comparing Naive Bayes and SVM classifier. Using only paper titles in bibliography and explicit research method mentions, Naive Bayes and SVM classifiers are able to reach 0.88 & 0.92 F1 score respectively. Since SVM outperforms Naive Bayes, we use SVM for our dataset detection module. Table [4](#user-content-tab_dd_dev_result) shows detail dataset detection results on development set.
 
-To see the impact of performing dataset detection, we test the
-performance of dataset extraction with and without dataset detection on
-development set. Table \[tab:de\_dev\_result\] summarizes the results.
-As shown in the table, performing dataset detection before extraction
-significantly improves the dataset extraction on development set.
+<a name="tab_dd_dev_result">Table 4</a>: Dataset Detection Results on Development Set
 
-  ---------------------------------------------- -- -- --
-  **Method & **Prec. & **Rec. & **F1\
-  No Dataset Detection & 0.18 & 0.33 & 0.24\
-  With Dataset Detection & 0.34 & 0.30 & 0.32\
-  ********
-  ---------------------------------------------- -- -- --
+Classifier | Prec. | Rec. | F1
+---------- | ----: | ---: | ---:
+Naive Bayes | 0.85 | 0.92 | 0.88
+SVM | 0.96 | 0.88 | 0.92
 
-  : \[tab:de\_dev\_result\] Dataset Extraction Results on Development
-  Set
+To see the impact of performing dataset detection, we test the performance of dataset extraction with and without dataset detection on development set. Table [5](#user-content-tab_de_dev_result) summarizes the results. As shown in the table, performing dataset detection before extraction significantly improves the dataset extraction on development set.
 
-  ----------------------------------------- -- -- --
-  **Dataset & **Prec. & **Rec. & **F1\
-  Test Set (phase1) & 0.17 & 0.10 & 0.13\
-  ********
-  ----------------------------------------- -- -- --
+<a name="tab_de_dev_result">Table 5</a>: Dataset Extraction Results on Development Set
 
-  : \[tab:de\_test\_result\] Dataset Extraction Result on Test Set
+Method | Prec. | Rec. | F1
+------ | ----: | ---: | ---:
+No Dataset Detection | 0.18 | 0.33 | 0.24
+With Dataset Detection | 0.34 | 0.30 | 0.32
 
-Table \[tab:de\_test\_result\] shows dataset extraction performance on
-test set (phase 1). The significant drop from development set result
-suggests that the test set might have different distribution compare to
-the training and development set. It might also contain dataset
-citations that are never been seen in training set.
+<a name="tab_de_test_result">Table 6</a>: Dataset Extraction Result on Test Set
 
-**Research Methods Identification.** We only consider Naive Bayes and
-Logistic Regression classifiers for research method identification
-because they naturally outputs probability score. We perform 5-fold
-cross validation to evaluate classification performance, and the result
-can be seen in table \[tab:rmethods\_5cv\]. Logistic regression
-classifier outperforms Naive Bayes with 0.86 F1 score in classifying 133
-research methods.
+Dataset | Prec. | Rec. | F1
+------- | ----: | ---: | ---:
+Test Set (phase1) | 0.17 | 0.10 | 0.13
 
-  ----------------------------- -- -- -- --
-  **Classifier & **F1\
-  Naive Bayes & 0.55\
-  Logistic Regression & 0.86\
-  ****
-  ----------------------------- -- -- -- --
+Table [6](#user-content-tab_de_test_result) shows dataset extraction performance on test set (phase 1). The significant drop from development set result suggests that the test set might have different distribution compare to the training and development set. It might also contain dataset citations that are never been seen in training set.
 
-  : \[tab:rmethods\_5cv\] F1 Score for Research Method Classification
+**Research Methods Identification.** We only consider Naive Bayes and Logistic Regression classifiers for research method identification because they naturally outputs probability score. We perform 5-fold cross validation to evaluate classification performance, and the result can be seen in table [7](#user-content-tab_rmethods_5cv). Logistic regression classifier outperforms Naive Bayes with 0.86 F1 score in classifying 133 research methods.
 
-**Research Fields Identification.** We perform 5-fold cross validation
-to evaluate our classifiers to classify L1, L2, and L3 research fields.
-Table \[tab:rfields\_pub\_5cv\] shows the results using n-gram features
-from paper title and abstract, whereas table \[tab:rfields\_rt\_5cv\]
-shows the results using n-gram features from title only. Naive Bayes
-tends to perform slightly better on L3 research fields where we have
-large number of research field labels. We decide to use SVM for research
-field identification on publication level because SVM is generally
-better than Naive Bayes. On the other hand, we decide to use Naive Bayes
-for research field identification on bibliography level because Naive
-Bayes prefer to have more accurate L2 and L3 research fields.
+<a name="tab_rmethods_5cv">Table 7</a>: F1 Score for Research Method Classification
 
-  ------------------------------------ -- -- -- --
-  **Classifier & **L1 & **L2 & **L3\
-  Naive Bayes & 0.78 & 0.37 & 0.13\
-  SVM & 0.82 & 0.38 & 0.12\
-  ********
-  ------------------------------------ -- -- -- --
+Classifier | F1
+---------- | ---:
+Naive Bayes | 0.55
+Logistic Regression | 0.86
 
-  : \[tab:rfields\_pub\_5cv\] F1 Score for Research Field Classification
-  on Publication Level using Paper Title and Abstract
+**Research Fields Identification.** We perform 5-fold cross validation to evaluate our classifiers to classify L1, L2, and L3 research fields. Table [8](#user-content-tab_rfields_pub_5cv) shows the results using n-gram features from paper title and abstract, whereas table [9](#user-content-tab_rfields_rt_5cv) shows the results using n-gram features from title only. Naive Bayes tends to perform slightly better on L3 research fields where we have large number of research field labels. We decide to use SVM for research field identification on publication level because SVM is generally better than Naive Bayes. On the other hand, we decide to use Naive Bayes for research field identification on bibliography level because Naive Bayes prefer to have more accurate L2 and L3 research fields.
 
-  ------------------------------------ -- -- --
-  **Classifier & **L1 & **L2 & **L3\
-  Naive Bayes & 0.80 & 0.35 & 0.12\
-  SVM & 0.81 & 0.35 & 0.11\
-  ********
-  ------------------------------------ -- -- --
+<a name="tab_rfields_pub_5cv">Table 8</a>: F1 Score for Research Field Classification on Publication Level using Paper Title and Abstract
 
-  : \[tab:rfields\_rt\_5cv\] F1 Score for Research Field Classification
-  on Bibliography Level using Paper Title Only
+Classifier | L1 | L2 | L3
+---------- | ----: | ---: | ---:
+Naive Bayes | 0.78 | 0.37 | 0.13
+SVM | 0.82 | 0.38 | 0.12
 
-Conclusion {#sec:conclusion}
-==========
+<a name="tab_rfields_rt_5cv">Table 9</a>: F1 Score for Research Field Classification on Bibliography Level using Paper Title Only
 
-  ------------------------------------------------------------------------------------------------- --
-  **Method & **Features (n-gram)\
-  \
-  SVM for dataset detection & paper titles in bibliography and explicit research method mentions\
-  Implicit entity linking & paper title and full text\
-  \
-  Logistic regression & paper title, abstract, and full text\
-  \
-  SVM (on paper) & paper title and abstract\
-  Naive Bayes (on bibliography) & paper titles in bibliography\
-  ****
-  ------------------------------------------------------------------------------------------------- --
+Classifier | L1 | L2 | L3
+---------- | ----: | ---: | ---:
+Naive Bayes | 0.80 | 0.35 | 0.12
+SVM | 0.81 | 0.35 | 0.11
 
-Extraction of research datasets, associated research methods and fields
-from social science publication is challenging, yet an important problem
-to organize social science publications. We have described our approach
-for the RCC challenge, and table \[tab:summary\] summarizes our
-approach. Beside publication content such as paper titles, abstract,
-full text, our approach also leverages on the information from
-bibliography. Furthermore, we also collect external information from
-SAGE Knowledge to get more information about research fields.
 
-Apart from F1 score on 5-fold cross validation, we have no good way to
-evaluate research method and research field identification without
-ground truth label. Our methods are unable to automatically extract and
-recognize new datasets, research methods, and fields. An extension to
-automatically handle such cases using advance Natural Language
-Processing (NLP) approach is a promising direction.
+### 6. Lesson Learned
 
-From this competition, we have learned that lacks of labelled training
-data is a huge challenge, and it directs us to other external resources
-(i.e., SAGE Knowledge) as proxy for our label. Another challenge is data
-sparsity. Although we see many paper listed in bibliography, lacks of
-access to these publication make us difficult to exploit citation
-network.
+Extraction of research datasets, associated research methods and fields from social science publication is challenging, yet an important problem to organize social science publications. We have described our approach for the RCC challenge, and table [10](#user-content-tab_summary) summarizes our approach. Beside publication content such as paper titles, abstract, full text, our approach also leverages on the information from bibliography. Furthermore, we also collect external information from SAGE Knowledge to get more information about research fields.
 
-Unfortunately, our model did not advance to the second phase. We are
-interested in exploring more advanced information extraction methods on
-the RCC datasets, and we hope that the organizer will release the RCC
-datasets for future research. We thank the organizers for organizing a
-competition and workshop on this important, interesting, and challenging
-problem.
+<a name="tab_summary">Table 10</a>: Summary of Our Approach
 
-[^1]: https://github.com/allenai/science-parse
+Method | Features (n-gram)
+------ | -----------------
+**Dataset extraction** ||
+SVM for dataset detection | paper titles in bibliography and explicit research method mentions
+Implicit entity linking | paper title and full text
+**Research method identification** ||
+Logistic regression | paper title, abstract, and full text
+**Research field identification** ||
+SVM (on paper) | paper title and abstract
+Naive Bayes (on bibliography) | paper titles in bibliography
 
-[^2]: http://sk.sagepub.com/browse/
+Apart from F1 score on 5-fold cross validation, we have no good way to evaluate research method and research field identification without ground truth label. Our methods are unable to automatically extract and recognize new datasets, research methods, and fields. An extension to automatically handle such cases using advance Natural Language Processing (NLP) approach is a promising direction.
+
+Our model did not perform well in test set, and unable to advance to the second phase. From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. We are also interested in exploring more advanced information extraction approaches on the RCC datasets. Another challenge is data sparsity. Although we see many paper listed in bibliography, lacks of access to these publication make us difficult to exploit citation network.
+
+### 7. Acknowledgments
+
+We thank the RCC organizers for organizing a competition and workshop on this important, interesting, and challenging problem.
+
+
+### References
+
+- [<a name="PM04">PM04</a>] Fuchun Peng and Andrew McCallum (2004): Accurate information extraction from research papers using conditional random fields. In HLT-NAACL.
+- [<a name="Het08">Het08</a>] Erik Hetzner (2008): A simple method for citation metadata extraction using hidden markov models. In JCDL.
+- [<a name="BREM12">BREM12</a>] Katarina Boland, Dominique Ritze, Kai Eckert, and Brigitte Mathiak (2012): Identifying references to datasets in publications. In TPDL.
+- [<a name="APBM14">APBM14</a>] Sam Anzaroot, Alexandre Passos, David Belanger, and Andrew McCallum (2014): Learning soft linear constraints with application to citation field extraction. In ACL.
+- [<a name="NCKL15">NCKL15</a>] Viet Cuong Nguyen, Muthu Kumar Chandrasekaran, Min-Yen Kan, and Wee Sun Lee (2015): Scholarly document information extraction using extensible features for efficient higher order semi-crfs. In JCDL.
+- [<a name="GML+16">GML<sup>+</sup>16</a>] Behnam Ghavimi, Philipp Mayr, Christoph Lange, Sahar Vahdati, and Sören Auer (2016a): A semi-automatic approach for detecting dataset references in social science texts. Inf. Services and Use, 36:171–187.
+- [<a name="GMVL16">GMVL16</a>] Behnam Ghavimi, Philipp Mayr, Sahar Vahdati, and Christoph Lange (2016b): Identifying and improving dataset references in social sciences full texts. In ELPUB.
+- [<a name="SBP+16">SBP<sup>+</sup>16</a>] Mayank Singh, Barnopriyo Barua, Priyank Palod, Manvi Garg, Sidhartha Satapathy, Samuel Bushi, Kumar Ayush, Krishna Sai Rohith, Tulasi Gamidi, Pawan Goyal, and Animesh Mukherjee (2016): Ocr++: A robust framework for information extraction from scholarly articles. In COLING.
+- [<a name="ADR+17">ADR<sup>+</sup>17</a>] Isabelle Augenstein, Mrinal Das, Sebastian Riedel, Lakshmi Vikraman, and Andrew McCallum (2017): Semeval 2017 task 10: Scienceie - extracting keyphrases and relations from scientific publications. In SemEval@ACL.
+- [<a name="AGJ+17">AGJ<sup>+</sup>17</a>] Dong An, Liangcai Gao, Zhuoren Jiang, Runtao Liu, and Zhi Tang (2017): Citation metadata extraction via deep neural network-based segment sequence labeling. In CIKM.
+- [<a name="AS17">AS17</a>] Isabelle Augenstein and Anders Søgaard (2017): Multi-task learning of keyphrase boundary classification. In ACL.
+- [<a name="LOH17">LOH17</a>] Yi Luan, Mari Ostendorf, and Hannaneh Hajishirzi (2017): Scientific information extraction with semi-supervised neural tagging. In EMNLP.
+- [<a name="ACK18">ACK18</a>] Danny Rodrigues Alves, Giovanni Colavizza, and Frédéric Kaplan (2018): Deep reference mining from scholarly literature in the arts and humanities. In Front. Res. Metr. Anal.
+- [<a name="AGB+18">AGB<sup>+</sup>18</a>] Waleed Ammar, Dirk Groeneveld, Chandra Bhagavatula, Iz Beltagy, Miles Crawford, Doug Downey, Jason Dunkelberger, Ahmed Elgohary, Sergey Feldman, Vu Ha, Rodney Kinney, Sebastian Kohlmeier, Kyle Lo, Tyler Murray, Hsu-Han Ooi, Matthew E. Peters, Joanna Power, Sam Skjonsberg, Lucy Lu Wang, Chris Wilhelm, Zheng Yuan, Madeleine van Zuylen, and Oren Etzioni (2018): Construction of the literature graph in semantic scholar. In NAACL-HTL.
+- [<a name="NJM18">NJM18</a>] Zara Nasar, S. W. Jaffry, and Muhammad Kamran Malik (2018): Information extraction from scientific articles: a survey. Scientometrics, 117:1931–1990.
+
+
+### Appendix: Technical Documentation
+
+Source codes to run and replicate our experiments are available at [https://github.com/LARC-CMU-SMU/coleridge-rich-context-larc](https://github.com/LARC-CMU-SMU/coleridge-rich-context-larc).
 # Placeholder between chapters
 
 
 ![](00_images/chapter-break.jpg)
-Placeholder for Reseach Agenda and Next Steps chapter.---
+Placeholder for Reseach Agenda and Next Steps chapter.# Placeholder between chapters
+
+
+![](00_images/chapter-break.jpg)
+---
 abstract: |
     Datasets are critical for scientific research, playing a role in
     replication, reproducibility, and efficiency. Researchers have recently
