@@ -100,6 +100,7 @@ echo " " >> 04.75MD_datasets.md
 #TODO fix images in this document 
 echo "trying chapter 5"
 cp ../05-Rich_Context_Competition_Design/05-Rich_Context_Competition_Design.docx . 
+cp ../05-Rich_Context_Competition_Design/*.png 05_images
 pandoc 05-Rich_Context_Competition_Design.docx -o 05-Rich_Context_Competition_Design.md 
 #
 sed -i.bu '1s;^;# Chapter 5 - Compettion Design  ;' 05-Rich_Context_Competition_Design.md 
