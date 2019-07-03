@@ -1,4 +1,4 @@
-# Chapter 3 - Digital Science Use Cases  Enriching context and enhancing engagement around datasets
+# Chapter 3 - Digital Science Use Cases  nEnriching context and enhancing engagement around datasets
 ==========================================================
 
 Christian Herzog^1,a^, Daniel W Hook^1,2,3,b^, Mark Hahnel^1,c^, Stacy
@@ -309,7 +309,7 @@ many other kinds of public and non-traditional scholarly engagement.
 These data can then be visualized in creative ways to add instant
 additional context to engagement with a research article (see Fig. 1).
 
-![](media/image1.png){width="7.270833333333333in"
+![](combined_images/chap03_image1.png){width="7.270833333333333in"
 height="2.5277777777777777in"}
 
 *Figure 1: Different types of context tracked by Altmetric.com for any
@@ -352,13 +352,13 @@ mining ever more open research systems wherein data is being analyzed
 (e.g. Gigantum, Github, etc), we can start to integrate these other
 crucial engagement contexts as well.
 
-![https://lh5.googleusercontent.com/3OunhdD8OksXbG5n9dlxQZ4vHfq3ytZuYahLuNwnXG2oaJ7vSpCkCULgc\_8tpapwUqzFLsALR6Xcrhl2ZgyYtvxOhg2kfoXeAJ1MoibnK0liPl2w6xhvoMye-lGtyopkM0ja1xnB](media/image2.png){width="4.543310367454068in"
+![https://lh5.googleusercontent.com/3OunhdD8OksXbG5n9dlxQZ4vHfq3ytZuYahLuNwnXG2oaJ7vSpCkCULgc\_8tpapwUqzFLsALR6Xcrhl2ZgyYtvxOhg2kfoXeAJ1MoibnK0liPl2w6xhvoMye-lGtyopkM0ja1xnB](combined_images/chap03_image2.png){width="4.543310367454068in"
 height="4.776042213473316in"}
 
 *Figure 2: Mock-up of a research data badge helping to contextualise a
 set of search results.*
 
-![https://lh5.googleusercontent.com/51fefhu7zEe3Y61OD1vbe-Bl9EiBI8IUUj1FOnP7NLLexSqDO7cJrzBeuzmwUR7eC84AQKmcMwDcTKW3trd7-vnNiyelvHvEOdM\_Da5OgEoTYh5lvrz8wfxWzTH2\_5DJjfgwe9Ed](media/image3.png){width="4.163163823272091in"
+![https://lh5.googleusercontent.com/51fefhu7zEe3Y61OD1vbe-Bl9EiBI8IUUj1FOnP7NLLexSqDO7cJrzBeuzmwUR7eC84AQKmcMwDcTKW3trd7-vnNiyelvHvEOdM\_Da5OgEoTYh5lvrz8wfxWzTH2\_5DJjfgwe9Ed](combined_images/chap03_image3.png){width="4.163163823272091in"
 height="4.505208880139983in"}
 
 *Figure 3: Mock-up of a research data badge helping to contextualise a

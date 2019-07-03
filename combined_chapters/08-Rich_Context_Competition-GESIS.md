@@ -133,7 +133,7 @@ We envision the task of finding entities in scientific publications as a sequenc
 
 Our research experiments are based on the repository for the Social Sciences SSOAR as well as the train and test data of the Rich Context Competition corpus[15]. Our work extends previous work on this topic (cf. (Eckle-Kohler et al., 2013)) in various ways: First, we do not limit our study to abstracts, but use the entire fulltext. Second, we focus on a broader range of semantic classes, i.e. *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement*, tackling also the problem of identifying novel entities.
 
-\[pipeline\] <img src="08_images/research-methods/pipeline.png" title="fig:" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
+\[pipeline\] <img src="combined_images/pipeline.png" title="fig:" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
 
 #### Distributed Semantic Models
 
@@ -226,7 +226,7 @@ Evaluation
 
 Figure \[fig:results\_fasttext\] shows the performance of the model regarding various evaluation metrics for different thresholds. A label is assigned to a publication if the model outputs a probability for the label above the defined threshold. In multi-label classification, this allows us to evaluate our model from different perspectives.
 
-<img src="08_images/research-fields/fast-text-evaluation.png" alt="Precision-Recall vs. Threshold" style="width:49.0%" />
+<img src="combined_images/fast-text-evaluation.png" alt="Precision-Recall vs. Threshold" style="width:49.0%" />
 
 Technical Documentation
 =======================

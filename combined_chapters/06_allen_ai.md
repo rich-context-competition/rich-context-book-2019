@@ -71,7 +71,7 @@ dataset usage in a paper. Approximately 10% of the datasets in the
 knowledge base were linked one or more times in the provided corpus of
 5K papers.
 
-![image](06_images/datasets.png){width="13cm"}
+![image](combined_images/datasets.png){width="13cm"}
 
 We provide a high-level overview of our approach in Figure
 [\[fig:datasets\]](#fig:datasets){reference-type="ref"

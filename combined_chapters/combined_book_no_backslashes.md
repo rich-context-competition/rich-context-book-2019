@@ -1,5 +1,5 @@
 combined_book.md
-4975
+5234
 # Chapter 1 - Introduction  Rich Context
 
 The social sciences are at a crossroads. The enormous growth of the
@@ -156,7 +156,7 @@ A main principle of the RDSC is to give free access to Bundesbank micro data for
 
 The knowledge generating process of empirical research in the RDSC can be organised along the four key dimensions (i) data services, (ii) research, (iii) publication, and (iv) (structured) user specific knowledge.
 
- ![](./02_images/20190614_Figure1.jpg)
+ ![](./combined_images/20190614_Figure1.jpg)
 
 Figure 1: The four dimensions of the knowledge generating process of empirical research in the RDSC
 
@@ -178,7 +178,7 @@ Being able to access structured user-specific knowledge through e.g. a competiti
 
 The challenge is to establish such a feedback loop. If effective feedback is given and used, the microda-ta-based knowledge-generating process restarts with data services, but on a higher level. Better data services in turn allow better research, because available microdata is better described and more effec-tively used. By automatizing the feedback-loop between research, publications, knowledge, and data services, the knowledge generating process can loop faster and augment quicker. We expect this to lead to improvements in the four key dimensions of this process of empirical research in the RDSC.
 
-  ![](./02_images/20190614_Figure2.jpg)
+  ![](./combined_images/20190614_Figure2.jpg)
 
 Figure 2: Elevating the knowledge generating process of empirical research in the RDSC to a higher level by enabling a feedback loop to data services.
 
@@ -327,7 +327,7 @@ For the way forward, it is important to note the importance of the research area
 
 ---
 
-# Chapter 3 - Digital Science Use Cases  Enriching context and enhancing engagement around datasets
+# Chapter 3 - Digital Science Use Cases  nEnriching context and enhancing engagement around datasets
 ==========================================================
 
 Christian Herzog^1,a^, Daniel W Hook^1,2,3,b^, Mark Hahnel^1,c^, Stacy
@@ -638,7 +638,7 @@ many other kinds of public and non-traditional scholarly engagement.
 These data can then be visualized in creative ways to add instant
 additional context to engagement with a research article (see Fig. 1).
 
-![](media/image1.png){width="7.270833333333333in"
+![](combined_images/chap03_image1.png){width="7.270833333333333in"
 height="2.5277777777777777in"}
 
 *Figure 1: Different types of context tracked by Altmetric.com for any
@@ -681,13 +681,13 @@ mining ever more open research systems wherein data is being analyzed
 (e.g. Gigantum, Github, etc), we can start to integrate these other
 crucial engagement contexts as well.
 
-![https://lh5.googleusercontent.com/3OunhdD8OksXbG5n9dlxQZ4vHfq3ytZuYahLuNwnXG2oaJ7vSpCkCULgc\_8tpapwUqzFLsALR6Xcrhl2ZgyYtvxOhg2kfoXeAJ1MoibnK0liPl2w6xhvoMye-lGtyopkM0ja1xnB](media/image2.png){width="4.543310367454068in"
+![https://lh5.googleusercontent.com/3OunhdD8OksXbG5n9dlxQZ4vHfq3ytZuYahLuNwnXG2oaJ7vSpCkCULgc\_8tpapwUqzFLsALR6Xcrhl2ZgyYtvxOhg2kfoXeAJ1MoibnK0liPl2w6xhvoMye-lGtyopkM0ja1xnB](combined_images/chap03_image2.png){width="4.543310367454068in"
 height="4.776042213473316in"}
 
 *Figure 2: Mock-up of a research data badge helping to contextualise a
 set of search results.*
 
-![https://lh5.googleusercontent.com/51fefhu7zEe3Y61OD1vbe-Bl9EiBI8IUUj1FOnP7NLLexSqDO7cJrzBeuzmwUR7eC84AQKmcMwDcTKW3trd7-vnNiyelvHvEOdM\_Da5OgEoTYh5lvrz8wfxWzTH2\_5DJjfgwe9Ed](media/image3.png){width="4.163163823272091in"
+![https://lh5.googleusercontent.com/51fefhu7zEe3Y61OD1vbe-Bl9EiBI8IUUj1FOnP7NLLexSqDO7cJrzBeuzmwUR7eC84AQKmcMwDcTKW3trd7-vnNiyelvHvEOdM\_Da5OgEoTYh5lvrz8wfxWzTH2\_5DJjfgwe9Ed](combined_images/chap03_image3.png){width="4.163163823272091in"
 height="4.505208880139983in"}
 
 *Figure 3: Mock-up of a research data badge helping to contextualise a
@@ -939,7 +939,7 @@ can be affected by the quality of the data it is evaluated against.
 
 ---
 
-# Chapter 4.75 - Metadata for social science data sets  > Metadata for Administrative and Social Science Data
+# Chapter 4 - Context  > Metadata for Administrative and Social Science Data
 
 Robert B Allen
 
@@ -1560,12 +1560,6 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 [^38]: <https://duraspace.org/vivo/>
 
 [^39]: <https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/>
-
----
-
-# Chapter 4 - Context  Placeholder for Bob Allen chapter on broader information context.
-
-\pagebreak
 
 ---
 
@@ -2214,7 +2208,7 @@ The general process:
     annotation tool
     ([[https://docs.google.com/document/d/1xuZL\_-z1re6TO3Sv8\_9tdFk7z6ovyqTwDVgc1bYO3Ag/edit]{.underline}](https://docs.google.com/document/d/1xuZL_-z1re6TO3Sv8_9tdFk7z6ovyqTwDVgc1bYO3Ag/edit)):
 
-> ![](media/image1.png){width="6.5in" height="3.486111111111111in"}
+> ![](combined_images/chap05_figure1.png){width="6.5in" height="3.486111111111111in"}
 >
 > *Figure 1. The interface of a given publication and a mention
 > capturing process in the coding tool. The left pane contains a full
@@ -2663,7 +2657,7 @@ output for a given publication from among "-1", "0", and "1". Once
 judges scored all output, we then created rankings based on the sum of
 each team's scores.
 
-![](media/image2.png){width="6.5in" height="5.013888888888889in"}
+![](combined_images/chap05_figure2.png){width="6.5in" height="5.013888888888889in"}
 
 *Figure 2: The interface given to judges to evaluate data set mentions,
 research fields, and research methods.*
@@ -2813,7 +2807,7 @@ coding tasks and pulled together all of the information so they just had
 to scan the page, open the associated PDF if they had questions, and
 then mark related items and Submit to save their coding:
 
-![](media/image3.png){width="6.5in" height="5.013888888888889in"}
+![](combined_images/chap05_figure3.png){width="6.5in" height="5.013888888888889in"}
 
 *Figure 3: The interface given to judges to evaluate whether a given
 team's data set mentions and citations were related to a given data
@@ -3137,7 +3131,7 @@ dataset usage in a paper. Approximately 10% of the datasets in the
 knowledge base were linked one or more times in the provided corpus of
 5K papers.
 
-![image](06_images/datasets.png){width="13cm"}
+![image](combined_images/datasets.png){width="13cm"}
 
 We provide a high-level overview of our approach in Figure
 [\[fig:datasets\]](#fig:datasets){reference-type="ref"
@@ -3466,7 +3460,7 @@ Datasets Retrieval
 
 Our approach to solving the dataset retrieval task is reading comprehension (RC) with query generation and entity typing. An RC model is applied to the given publications with our own query generation module. Then, the result from the RC model is filtered with an entity typing module. Figure 1 shows our overall approach for dataset retrieval. In following subsections RC model, query generation, and entity typing are explained in detail.
 
-![image](07_images/docqaarch3.png)
+![image](combined_images/docqaarch3.png)
 
 *Figure 1: Overall architecture for dataset retrieval*
 
@@ -3508,20 +3502,20 @@ Research Fields Retrieval
 
 Our approach to obtaining the research fields is based on TF-IDF similarity with Wikipedia articles. First, a set of Wikipedia articles about different research fields using the library MediaWiki for Python was obtained. The list of research fields provided the Coleridge Initiative for the Rich Context Competition was used to crawl Wikipedia. This list has three levels of hierarchy as the example in Figure 2.
 
-![Research fields hierarchy[]{label="fig:researchfieldshiearchy"}](07_images/fieldshierarchy2.png)*Figure 2: Research fields hierarchy*
+![Research fields hierarchy[]{label="fig:researchfieldshiearchy"}](combined_images/fieldshierarchy2.png)*Figure 2: Research fields hierarchy*
 
 The leaf nodes of that hierarchy were searched in Wikipedia to retrieve specific research fields instead of general ones. For example, we were aiming to retrieve *Neurosurgery* instead of *Medicine*.
 
 Then, using Scikit-learn [@scikit-learn], a TF-IDF matrix of all the publications and Wikipedia articles of research fields were computed and the research field and all its superior nodes in the hierarchy associated with the most similar article were returned along with the similarity in the range \[0,1\]. The overall architecture can be seen in Figure 3.
 
-![Overall architecture for research fields retrieval[]{label="fig:researchfields"}](07_images/researchfields2.png)*Figure 3:  Overall architecture for research fields retrieval*
+![Overall architecture for research fields retrieval[]{label="fig:researchfields"}](combined_images/researchfields2.png)*Figure 3:  Overall architecture for research fields retrieval*
 
 Research Methods Retrieval
 --------------------------
 
 For the research methods retrieval task, we modeled it as an named-entity recognition (NER) problem. Research methods are considered to be a named entities and because of this, they can be tagged as research method label (RS) instead of common NER labels such as: *location*, *people*, etc. Figure 4 shows the main architecture of the model proposed by [@lample2016neural] and used in this task.
 
-![BiLSTM-CRF architecture](07_images/bi-lstm.png)*Figure 4: Paragraph selection for DocQA in research method retrieval*
+![BiLSTM-CRF architecture](combined_images/bi-lstm.png)*Figure 4: Paragraph selection for DocQA in research method retrieval*
 
 The representation of a word using the model is obtained considering its context. We have the assumption that research methods have dependencies and constraints with words that appear in their surrounding context. Therefore, the conditional random field [@lafferty2001conditional] layer in this model is suitable for detecting research methods by jointly tagging the whole sentence, instead of independently tagging each word.
 
@@ -3560,7 +3554,7 @@ To analyze the effects of the query generation module and entity typing module, 
 
 Figure 5 shows the results from 3 publications of phase 1 dev set with Document QA only. Compared to the other settings, Document QA only setting retrieves answers (dataset mentions) with high quality. However, the number of retrieved answers is notably small. For example, the result from *153.txt* publication was empty as in Figure 5. In fact, our model using this setting can retrieve only 260 answers (predictions) from 100 publications of phase 1 dev set.
 
-![Results from Document QA only[]{label="fig:docqaonly"}](07_images/phase1.png)*Figure 5: Results from Document QA only*
+![Results from Document QA only[]{label="fig:docqaonly"}](combined_images/phase1.png)*Figure 5: Results from Document QA only*
 
 These results with fewer answers were expected, due to the difficulty of defining general queries as explained in section [*Question Generation Module*](#query-generation-module). Without a query generation module, our query was not representative enough to retrieve various forms and types of the dataset mentions.
 
@@ -3570,7 +3564,7 @@ Figure 6 shows the results from 3 publications of phase 1 dev set with Document 
 
 However, compared to the Document QA only setting, there is a considerable number of noise. For example, in Figure 6, *empirical, Table 1, Section 4* and etc., are not dataset mentions.
 
-![Results from Document QA + query generation module[]{label="fig:docqaquery"}](07_images/phase1+querygen.png)*Figure 6: Results from Document QA + query generation module*
+![Results from Document QA + query generation module[]{label="fig:docqaquery"}](combined_images/phase1+querygen.png)*Figure 6: Results from Document QA + query generation module*
 
 We believed that the reason of these noises is the several query terms potentially retrieve wrong answers. For example, we have a query term *\"study\"* to retrieve dataset mentions such as *\"ANES 1952 Time Series Study\"*. However, this term can also retrieve noises such as *\"empirical study\"*. These kinds of query terms are still needed to retrieve various forms and types of dataset mentions but clearly generate some noises.
 
@@ -3578,7 +3572,7 @@ We believed that the reason of these noises is the several query terms potential
 
 Figure 7 shows the results from 3 publications of phase 1 dev set with Document QA, query generation module, and entity typing module. Thanks to the entity typing module, we can see that most of the noises from the query generation module have disappeared. Although a few right answers such as *\"FDI data\"* was filtered out and a few wrong answers such as *\"4.2.1 Micro Data\"* was not, overall precision is adequately improved by entity typing module. In addition, our model in this setting could retrieve 526 answers (predictions) from 100 publications of phase 1 dev set.
 
-![Results from Document QA + query generation module + entity typing module[]{label="fig:docqaqueryentity"}](07_images/phase1+querygen+entitytyping.png)*Figure 7: Results from Document QA + query generation module + entity typing module*
+![Results from Document QA + query generation module + entity typing module[]{label="fig:docqaqueryentity"}](combined_images/phase1+querygen+entitytyping.png)*Figure 7: Results from Document QA + query generation module + entity typing module*
 
 Research Fields Retrieval
 -------------------------
@@ -3755,7 +3749,7 @@ We envision the task of finding entities in scientific publications as a sequenc
 
 Our research experiments are based on the repository for the Social Sciences SSOAR as well as the train and test data of the Rich Context Competition corpus[15]. Our work extends previous work on this topic (cf. (Eckle-Kohler et al., 2013)) in various ways: First, we do not limit our study to abstracts, but use the entire fulltext. Second, we focus on a broader range of semantic classes, i.e. *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement*, tackling also the problem of identifying novel entities.
 
-\[pipeline\] <img src="08_images/research-methods/pipeline.png" title="fig:" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
+\[pipeline\] <img src="combined_images/pipeline.png" title="fig:" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
 
 #### Distributed Semantic Models
 
@@ -3848,7 +3842,7 @@ Evaluation
 
 Figure \[fig:results\_fasttext\] shows the performance of the model regarding various evaluation metrics for different thresholds. A label is assigned to a publication if the model outputs a probability for the label above the defined threshold. In multi-label classification, this allows us to evaluate our model from different perspectives.
 
-<img src="08_images/research-fields/fast-text-evaluation.png" alt="Precision-Recall vs. Threshold" style="width:49.0%" />
+<img src="combined_images/fast-text-evaluation.png" alt="Precision-Recall vs. Threshold" style="width:49.0%" />
 
 Technical Documentation
 =======================
@@ -4189,7 +4183,7 @@ Project Architecture
 ![Data Flow Pipeline: Red lines depict the flow of given and generated
 files between components whereas black lines represent the generation of
 final output
-files[]{data-label="fig:flowchart"}](09_images/flowchart_paper.pdf){width="\textwidth"}
+files[]{data-label="fig:flowchart"}](combined_images/flowchart_paper.pdf){width="\textwidth"}
 
 Our pipeline (shown in Figure \[fig:flowchart\]) consisted of three main
 components: 1) Preprocessing, 2) Fields and Methods Identification and
@@ -4420,7 +4414,7 @@ have been described below.
     F1-score & 0.14 & **0.20** & 0.14  
 
     ![Frequency Distribution of Dataset
-    Citations[]{data-label="fig:graph"}](09_images/freq.pdf)
+    Citations[]{data-label="fig:graph"}](combined_images/freq.pdf)
 
 2.  **Rasa-based Dataset Detection:** In our second approach, we trained
     an entity extraction model based on conditional random fields using
@@ -4971,7 +4965,272 @@ Source codes to run and replicate our experiments are available at [https://gith
 
 ---
 
-# Chapter 12 -  Syracuse
+# 12 - Syracuse  ---
+abstract: |
+    Datasets are critical for scientific research, playing a role in
+    replication, reproducibility, and efficiency. Researchers have recently
+    shown that datasets are becoming more important for science to function
+    properly, even serving as artifacts of study themselves. However, citing
+    datasets is not a common or standard practice in spite of recent efforts
+    by data repositories and funding agencies. This greatly affects our
+    ability to track their usage and importance. A potential solution to
+    this problem is to automatically extract dataset mentions from
+    scientific articles. In this work, we propose to achieve such extraction
+    by using a neural network based on a BiLSTM-CRF architecture. Our method
+    achieves $F_{1}=0.883$ in social science articles released as part of
+    the Rich Context Dataset. We discuss limitations of the current datasets
+    and propose modifications to the model to be done in the future.
+author:
+- 'Tong Zeng$^{1,2}$ and Daniel Acuna$^{1}$[^1]'
+bibliography:
+- 'rcc-06.bib'
+title: |
+    Dataset mention extraction in scientific articles using a BiLSTM-CRF
+    model
+---
+
+Introduction
+============
+
+Science is fundamentally an incremental discipline that depends on
+previous scientist’ work. Datasets form an integral part of this process
+and therefore should be shared and cited as any other scientific output.
+This ideal is far from reality; the credit that datasets currently
+receive does not correspond to their actual usage. One of the issues is
+that there is no standard approach for citing them. Interestingly, while
+datasets are still used and mentioned in articles, we lack methods to
+extract such mentions and properly reconstruct dataset citations. The
+Rich Context Competition challenge aims at closing this gap by inviting
+scientists to produce automated dataset mention and linkage detection
+algorithms. In this article, we detail our proposal to solve the dataset
+mention step. Our approach attempts to provide a first approximation to
+better give credit and keep track of datasets and their usage.
+
+The problem of dataset extraction has been explored before.
+@ghavimiIdentifyingImprovingDataset2016 and
+@ghavimiSemiautomaticApproachDetecting2017 use a relatively simple
+tf-idf representation with cosine similarity for matching dataset
+identification in social science articles. Their method consists of four
+major steps: preparing a curated dictionary of typical mention phrases,
+detecting dataset references, and ranking matching datasets based on
+cosine similarity of tf-idf representations. This approach achieved an
+impressive $F_{1}=0.84$ for mention detection and $F_{1}=0.83$, for
+matching. @singhalDataExtractMining2013 proposed a method using
+normalized Google distance to screen whether a term is in a dataset.
+However, this method relies on external services and is not
+computational efficient. They achieve a good $F_{1}=0.85$ using Google
+search and $F_{1}=0.75$ using Bing. A somewhat similar project was
+proposed by @luDatasetSearchEngine2012. They built a dataset search
+engine by solving the two challenges: identification of the dataset and
+association to a URL. They build a dataset of 1000 documents with their
+URLs, containing 8922 words or abbreviations representing datasets. They
+also build a web-based interface. This shows the importance of dataset
+mention extraction and how several groups have tried to tackle the
+problem.
+
+In this article, we describe a method for extracting dataset mentions
+based on a deep recurrent neural network. In particular, we used a
+Bidirectional Long short-term Memory (BiLSTM) sequence to sequence model
+paired with a Conditional Random Field (CRF) inference mechanism. We
+tested our model on a novel dataset produced for the Rich Context
+Competition challenge. We achieve a relatively good performance of
+$F_{1}=0.883$. We discuss the current noise and duplication present in
+the dataset and limitations of our model.
+
+The dataset
+===========
+
+The Rich Context Dataset challenge was proposed by the New York
+University’s Coleridge Initiative [@richtextcompetition]. The challenge
+comprised several phases, and participants moved through the phases
+depending on their performance. We only analyze data of the first phase.
+This phase contained a list of datasets and a labeled corpus of around
+5K publications. Each publication was labeled indicating whether a
+dataset was mentioned within it and which part of the text mentioned it.
+The challenge used the accuracy for measuring the performance of the
+competitors and also the quality of the code, documentation, and
+efficiency.
+
+We adopt the CoNLL 2003 format [@tjong2003introduction] to annotate
+whether a token is a part of dataset mention. Concretely, we use we use
+B-DS denotes a token is the first token of a dataset mention, I-DS
+denote a token is inside of dataset mention, and O means a token is not
+a part of dataset mention. We then put each token and its corresponding
+labels in one line and use a empty line as separator between sentences.
+All the sentences was split by 70%, 15%, 15% as training set, validation
+set and testing set.
+
+The Proposed Method
+===================
+
+Overall view of the architecture
+--------------------------------
+
+In this section, we propose a model for detecting mentions based on a
+BiLSTM-CRF architecture. At a high level, the model uses a
+sequence-to-sequence recurrent neural network that produces the
+probability of whether a token belongs to a dataset mention. The CRF
+layer takes those probabilities and estimates the most likely sequence
+based on constrains between label transitions (i.e.,
+mention–to–no-mention–to-mention has low probability). While this is a
+standard architecture for modeling sequence labeling, the application to
+our particular dataset and problem is new.
+
+We now describe in more detail the choices of word representation,
+hyper-parameters, and training parameters. A schematic view of the model
+is in Fig \[fig:NetworkArchitecture\] and the components are as follows:
+
+1.  Input Layer: input the sequence of tokens to the network;
+
+2.  Embedding layer: mapping each token into fixed sized vector
+    representation based on fasttext (200-dimensional vectors,
+    @pennington2014glove)
+
+3.  One BiLSTM layer: make use of Bidirectional LSTM network to capture
+    the high level representation of the whole token sequence input (200
+    dimensions per direction, totally 400 output units)
+
+4.  Dense layer: project the output of the previous layer to a low
+    dimensional vector representation of the the distribution of labels.
+
+5.  CRF layer: find the most likely sequence of labels.
+
+![\[fig:NetworkArchitecture\]Network Architecture of BiLSTM-CRF
+model](combined_images/bilstm-crf-model.pdf){width="5cm"}
+
+Word Embedding
+--------------
+
+The embedding is the first layer of our network and it is responsible
+for mapping the word from string into vectors of numbers as the input
+for other layers on top. For a given sentence $S$, we first convert it
+into a sequence consisting of $n$ tokens,
+$S=\{c_{1},c_{2},\cdots,c_{n},\}$ . For each token $c_{i}$we lookup the
+embedding vector $x_{i}$ from a word embedding matrix
+$M^{tkn}\in\mathbb{R}^{d|V|}$, where the $d$ is the dimension of the
+embedding vector and the $V$ is the Vocabulary of the tokens. In this
+paper, the matrix $M^{tkn}$ is initialized by a pre-trained embedding,
+but will be updated by learning from our corpus.
+
+LSTM
+----
+
+Recurrent neural network (RNN) is a powerful tool to capture features
+from sequential data, such as temporal series, and text. RNN could
+capture long-distance dependency in theory but it suffers from the
+gradient exploding/vanishing problems [@pascanu2013difficulty]. The Long
+short-term memory (LSTM) architecture was proposed by
+@hochreiter1997long and it is a variant of RNN which copes with the
+gradient problem. LSTM introduces several gates to control the
+proportion of information to forget from previous time steps and to pass
+to the next time step. Formally, LSTM could be described by the
+following equations:
+
+$$i_{t}=\sigma(W_{i}x_{t}+W_{i}h_{t-1}+b_{i})$$
+
+$$f_{t}=\sigma(W_{f}x_{t}+W_{f}h_{t-1}+b_{f})$$
+
+$$g_{t}=tanh(W_{g}x_{t}+W_{g}h_{t-1}+b_{g})$$
+
+$$o_{t}=\sigma(W_{o}x_{t}+W_{o}h_{t-1}+b_{o})$$
+
+$$c_{t}=f_{t}\bigotimes c_{t-1}+i_{t}\bigotimes g_{t}$$
+
+$$h_{t}=o_{t}\bigotimes tanh(c_{t})$$
+
+where the $\sigma$ is the sigmoid function, $\bigotimes$ denotes the dot
+product, $b$ is the bias, $W$ is the parameters, $x_{t}$ is the input at
+time $t$, $c_{t}$ is the LSTM cell state at time $t$ and $h_{t}$ is
+hidden state at time $t$. The $i_{t}$, $f_{t}$, $o_{t}$ and $g_{t}$ are
+named as input, forget, output and cell gates respectively, they control
+the informations to keep in its state and pass to next step.
+
+LSTM get information from the previous steps, that is left context in
+our task. However, it is important to consider the information in the
+right context. A solution of this information need is bidirectional LSTM
+[@graves2013speech]. The idea of Bi-LSTM is using two LSTM layers and
+feed in each layer with sequence forwards and backwards separately, and
+then concatenate the hidden states of the two LSTM to modeling both the
+left and right contexts
+
+$$h_{t}=[\overrightarrow{h_{t}}\varoplus\overleftarrow{h_{t}}]$$
+
+Finally, the outcomes of the states are taken by a Conditional Random
+Field (CRF) layer that takes into account the transition nature of the
+beginning, intermediate, and ends of mentions. For a reference of CRF,
+refer to [@lafferty2001conditional]
+
+Results
+=======
+
+In this work, we wanted to propose a model for the Rich Context
+Competition challenge. We propose a relatively standard architecture
+based on a BiLSTM-CRF recurrent neural network. We now describe the
+results of this network on the dataset provided by the competition.
+
+For all of our results, we use $F_{1}$ as the measure of choice. This
+measure is the harmonic average of the precision and recall and it is
+the standard measure used in sequence labeling tasks. This metric varies
+from 0 to 1, and the unit is the highest possible value. Our method
+achieved a relatively high $F_{1}$ of 0.883 for detecting mentions, in
+line with previous studies.
+
+We found significant limitations to the dataset, and we expect these
+limitations to affect the linkage step (not done in this article). While
+we are proposing a model for such step, we found that it would be
+challenging to do so given the quality of the annotations. Specifically,
+we found significant duplication of labels. The first issue is that
+mentions are nested (e.g. HRS, RAND HRS, HRS DATA, RAND HRS DATA are
+nested and linked to the same dataset). The second issue is that for the
+same mention text, several, different datasets were linked (e.g. the
+term CPS is linked to 57 datasets, the term NHANES is linked to 32
+datasets). This adds noise to the linkage process. In fact, most of the
+mentions have ambiguous relationships to datasets. In particular, only
+17,267 (16.99%) mentions are linked to one dataset, 15,292 (15.04%)
+mentions are listed to two datasets, and 12,624 (12.42%) are linked to
+three datasets. We found that there were some extreme cases, where for
+example there are several mentions linked to more than one hundred
+datasets. If these difficulties are not overcome, then the predictions
+from the linkage process will be noisy and therefore impossible to tell
+apart.
+
+Conclusion
+==========
+
+In this work, we report a high accuracy model for the problem of
+detecting dataset mentions. Because our method is based on a standard
+BiLSTM-CRF architecture, we expect that updating our model with recent
+developments in neural networks would only benefit our results. We also
+provide some evidence of how difficult we believe the linkage step of
+the challenge could be if the dataset noise are not lowered.
+
+One of the shortcomings of our approach is that the architecture is
+lacking some modern features of RNN networks. In particular, recent work
+has shown that attention mechanisms are important especially when the
+task requires spatially distant information, such as this one. These
+benefits could also translate to better linkage. We are exploring new
+architectures using self-attention and multiple-head attention. We hope
+to explore these approaches in the near future.
+
+Our proposal, however, is surprisingly effective. Because we have barely
+modified a general RNN architecture, we expect that our results will
+generalize relatively well either to the second phase of the challenge
+or even to other disciplines. We would emphasize, however, that the
+quality of the dataset has a great deal of room for improvement. Given
+how important this task is for the whole of science, we should try to
+strive to improve on the quality of these datasets so that techniques
+like this one can be more broadly applied. The importance of dataset
+mention and linkage therefore could be fully appreciated by the
+community.
+
+Acknowledgements {#acknowledgements .unnumbered}
+================
+
+Tong Zeng was funded by the China Scholarship Council \#201706190067.
+Daniel E. Acuna was funded by the National Science Foundation awards
+\#1646763 and \#1800956.
+
+[^1]: Corresponding author: deacuna@syr.edu
 
 ---
 

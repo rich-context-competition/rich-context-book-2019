@@ -80,7 +80,7 @@ Project Architecture
 ![Data Flow Pipeline: Red lines depict the flow of given and generated
 files between components whereas black lines represent the generation of
 final output
-files[]{data-label="fig:flowchart"}](09_images/flowchart_paper.pdf){width="\textwidth"}
+files[]{data-label="fig:flowchart"}](combined_images/flowchart_paper.pdf){width="\textwidth"}
 
 Our pipeline (shown in Figure \[fig:flowchart\]) consisted of three main
 components: 1) Preprocessing, 2) Fields and Methods Identification and
@@ -311,7 +311,7 @@ have been described below.
     F1-score & 0.14 & **0.20** & 0.14\
 
     ![Frequency Distribution of Dataset
-    Citations[]{data-label="fig:graph"}](09_images/freq.pdf)
+    Citations[]{data-label="fig:graph"}](combined_images/freq.pdf)
 
 2.  **Rasa-based Dataset Detection:** In our second approach, we trained
     an entity extraction model based on conditional random fields using
