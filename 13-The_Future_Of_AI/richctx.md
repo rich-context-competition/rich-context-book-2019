@@ -1,4 +1,4 @@
-# Rich Context in the Administrative Data Research Facility
+# The Future of AI in Rich Context
 
 **Paco Nathan**
 
