@@ -1,4 +1,4 @@
-By Andrew Gordon, Ekaterina Levitskaya, and Jonathan Morgan - New York
+# Chapter 5 - Compettion Design  By Andrew Gordon, Ekaterina Levitskaya, and Jonathan Morgan - New York
 University
 
 *Jonathan Morgan designed and implemented the data annotation and
@@ -643,7 +643,7 @@ The general process:
     annotation tool
     ([[https://docs.google.com/document/d/1xuZL\_-z1re6TO3Sv8\_9tdFk7z6ovyqTwDVgc1bYO3Ag/edit]{.underline}](https://docs.google.com/document/d/1xuZL_-z1re6TO3Sv8_9tdFk7z6ovyqTwDVgc1bYO3Ag/edit)):
 
-> ![](media/image1.png){width="6.5in" height="3.486111111111111in"}
+> ![](combined_images/chap05_figure1.png){width="6.5in" height="3.486111111111111in"}
 >
 > *Figure 1. The interface of a given publication and a mention
 > capturing process in the coding tool. The left pane contains a full
@@ -1092,7 +1092,7 @@ output for a given publication from among "-1", "0", and "1". Once
 judges scored all output, we then created rankings based on the sum of
 each team's scores.
 
-![](media/image2.png){width="6.5in" height="5.013888888888889in"}
+![](combined_images/chap05_figure2.png){width="6.5in" height="5.013888888888889in"}
 
 *Figure 2: The interface given to judges to evaluate data set mentions,
 research fields, and research methods.*
@@ -1242,7 +1242,7 @@ coding tasks and pulled together all of the information so they just had
 to scan the page, open the associated PDF if they had questions, and
 then mark related items and Submit to save their coding:
 
-![](media/image3.png){width="6.5in" height="5.013888888888889in"}
+![](combined_images/chap05_figure3.png){width="6.5in" height="5.013888888888889in"}
 
 *Figure 3: The interface given to judges to evaluate whether a given
 team's data set mentions and citations were related to a given data
@@ -1490,3 +1490,6 @@ http://www.ieee-student-conference.de/fileadmin/papers/2014/ieeegsc2014\_submiss
 Wright, B. D. (1983). The Economics of Invention Incentives: Patents,
 Prizes, and Research Contracts. The American Economic Review, 73(4),
 691--707.
+ 
+---
+ 

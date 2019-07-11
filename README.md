@@ -1,4 +1,4 @@
-# Rich Context Compettion Book Project
+# Rich Context Competition Book Project
 
 ## About 
 
