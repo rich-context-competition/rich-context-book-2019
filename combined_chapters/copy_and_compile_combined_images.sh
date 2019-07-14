@@ -202,6 +202,18 @@ echo " " >> 12_syracuse.md
 echo "---" >> 12_syracuse.md 
 echo " " >> 12_syracuse.md 
 
+# Chapter 13 
+echo "trying chapter 13"
+cp ../13-The_Future_Of_AI/richctx.md 13_future_ai.md 
+cp ../13-The_Future_Of_AI/*.png 13_images
+cp 13_images/* combined_images 
+sed -i.bu "s/illo/combined_images\/illo/g" 13_future_ai.md 
+#
+sed -i.bu '1s;^;# 13 - Future AI   ;' 13_future_ai.md 
+echo " " >> 13_future_ai.md 
+echo "---" >> 13_future_ai.md 
+echo " " >> 13_future_ai.md 
+
 
 
 # cleanup artifacts created in conversion 
