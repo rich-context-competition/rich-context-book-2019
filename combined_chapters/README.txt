@@ -2,13 +2,24 @@
 To compile the book to markdown:
 
 `
-$ ./copy_and_compile.sh
+$ ./copy_and_compile_combined_images.sh
+
 `
 
 This currently generates `combined_book_no_backslashes.md` which is the current 
 working version of the compiled book. 
 
+This creates a version with all images in one image directory. 
+
+The reason for this is to allow us to use Marked2 to generate a PDF version of the book. 
+Marked2 cannot read images from more than one directory. 
+
 HTML and PDF versions are genertaed via export from marked2. 
+
+
+## Log 2019-07-14 
+
+
 
 
 ## Log 2019-07-03 
