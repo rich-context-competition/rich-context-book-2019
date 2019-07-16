@@ -55,27 +55,18 @@ echo " " >> 03_ds_article.md
 
 
 
-
-# Chapter four and a half 
-#DONE - work on possesive apostrophe - marked2 has no problem with this 
-#DONE - work on removing errant backspaaces 
-#DONE - work on cleaning up apple inserted spaces
-echo "trying chapter 4.5"
-cp ../04.5-standardised-metadata/04.5_RC_standard_metadata.rtf . 
-textutil -convert html 04.5_RC_standard_metadata.rtf
-pandoc 04.5_RC_standard_metadata.html -o 04.5_RC_standard_metadata.md
-sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" 04.5_RC_standard_metadata.md
-sed -i.bu "s/\[  \]{\.Apple-converted-space}//g" 04.5_RC_standard_metadata.md
-sed -i.bu "s/\]{\.Apple-converted-space}//g" 04.5_RC_standard_metadata.md
-sed -i.bu -E "s/\[[[:space:]]/ /g" 04.5_RC_standard_metadata.md
-#sed -i.bu "s/'/\'/g" 04.5_RC_standard_metadata.md
-# https://apple.stackexchange.com/questions/204296/what-character-is-this-possessive-apostrophe 
-sed -i.bu -E "s/'/\’/g" 04.5_RC_standard_metadata.md
+# Chapter 04.75  
+echo "trying chapter 4.75"
+cp ../04.75-metadata-datasets/MetadataForSocialScienceDatasetsV59.docx 04_context.docx 
+pandoc 04_context.docx  -o 04_context.md
 #
-sed -i.bu '1s;^;# Chapter 4.5 - Standardised Metadata  ;' 04.5_RC_standard_metadata.md 
-echo " " >> 04.5_RC_standard_metadata.md 
-echo "---" >> 04.5_RC_standard_metadata.md 
-echo " " >> 04.5_RC_standard_metadata.md 
+sed -i.bu '1s;^;# Chapter 4 - Context  ;' 04_context.md 
+echo " " >> 04_context.md 
+echo "---" >> 04_context.md 
+echo " " >> 04_context.md 
+
+
+
 
 
  
@@ -183,17 +174,41 @@ echo " " >> 11_syracuse.md
 echo "---" >> 11_syracuse.md 
 echo " " >> 11_syracuse.md 
 
-# Chapter 12
+
+# Chapter four and a half 
+#DONE - work on possesive apostrophe - marked2 has no problem with this 
+#DONE - work on removing errant backspaaces 
+#DONE - work on cleaning up apple inserted spaces
 echo "trying chapter 12"
-cp ../13-The_Future_Of_AI/richctx.md 12_future_ai.md 
-cp ../13-The_Future_Of_AI/*.png 12_images
-cp 12_images/* combined_images 
-sed -i.bu "s/illo/combined_images\/illo/g" 12_future_ai.md 
+cp ../04.5-standardised-metadata/04.5_RC_standard_metadata.rtf . 
+textutil -convert html 04.5_RC_standard_metadata.rtf
+pandoc 04.5_RC_standard_metadata.html -o 12_RC_standard_metadata.md
+sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" 12_RC_standard_metadata.md
+sed -i.bu "s/\[  \]{\.Apple-converted-space}//g" 12_RC_standard_metadata.md
+sed -i.bu "s/\]{\.Apple-converted-space}//g" 12_RC_standard_metadata.md
+sed -i.bu -E "s/\[[[:space:]]/ /g" 12_RC_standard_metadata.md
+#sed -i.bu "s/'/\'/g" 04.5_RC_standard_metadata.md
+# https://apple.stackexchange.com/questions/204296/what-character-is-this-possessive-apostrophe 
+sed -i.bu -E "s/'/\’/g" 12_RC_standard_metadata.md
 #
-sed -i.bu '1s;^;# 12 - Future AI   ;' 12_future_ai.md 
-echo " " >> 12_future_ai.md 
-echo "---" >> 12_future_ai.md 
-echo " " >> 12_future_ai.md 
+sed -i.bu '1s;^;# Chapter 12 - Standardised Metadata  ;' 12_RC_standard_metadata.md 
+echo " " >> 12_RC_standard_metadata.md 
+echo "---" >> 12_RC_standard_metadata.md 
+echo " " >> 12_RC_standard_metadata.md 
+
+
+
+# Chapter 13
+echo "trying chapter 13"
+cp ../13-The_Future_Of_AI/richctx.md 13_future_ai.md 
+cp ../13-The_Future_Of_AI/*.png 13_images
+cp 13_images/* combined_images 
+sed -i.bu "s/illo/combined_images\/illo/g" 13_future_ai.md 
+#
+sed -i.bu '1s;^;# 13 - Future AI   ;' 13_future_ai.md 
+echo " " >> 13_future_ai.md 
+echo "---" >> 13_future_ai.md 
+echo " " >> 13_future_ai.md 
 
 
 
