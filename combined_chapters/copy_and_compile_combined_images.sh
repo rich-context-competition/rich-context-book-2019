@@ -180,39 +180,33 @@ echo "---" >> 10_simple_extraction_Singapore.md
 echo " " >> 10_simple_extraction_Singapore.md 
 
 
+
+
 # Chapter 11
 echo "trying chapter 11"
-cp ../11-Research_Agenda_and_Next_Steps/README.md 11_placeholder.md 
+cp ../12-dataset-mention-extraction-using-bilstmcrf-syracuse/main.md 11_syracuse.md 
+cp ../12-dataset-mention-extraction-using-bilstmcrf-syracuse/img/* 11_images
+cp 11_images/* combined_images 
+sed -i.bu "s/\](img/\](combined_images/g" 11_syracuse.md 
 #
-sed -i.bu '1s;^;# 11 - Research Agenda and Next Steps  ;' 11_placeholder.md 
-echo " " >> 11_placeholder.md 
-echo "---" >> 11_placeholder.md 
-echo " " >> 11_placeholder.md 
-
+sed -i.bu '1s;^;# 11 - Syracuse  ;' 11_syracuse.md 
+echo " " >> 11_syracuse.md 
+echo "---" >> 11_syracuse.md 
+echo " " >> 11_syracuse.md 
 
 # Chapter 12
 echo "trying chapter 12"
-cp ../12-dataset-mention-extraction-using-bilstmcrf-syracuse/main.md 12_syracuse.md 
-cp ../12-dataset-mention-extraction-using-bilstmcrf-syracuse/img/* 12_images
+cp ../13-The_Future_Of_AI/richctx.md 12_future_ai.md 
+cp ../13-The_Future_Of_AI/*.png 12_images
 cp 12_images/* combined_images 
-sed -i.bu "s/\](img/\](combined_images/g" 12_syracuse.md 
+sed -i.bu "s/illo/combined_images\/illo/g" 12_future_ai.md 
 #
-sed -i.bu '1s;^;# 12 - Syracuse  ;' 12_syracuse.md 
-echo " " >> 12_syracuse.md 
-echo "---" >> 12_syracuse.md 
-echo " " >> 12_syracuse.md 
+sed -i.bu '1s;^;# 12 - Future AI   ;' 12_future_ai.md 
+echo " " >> 12_future_ai.md 
+echo "---" >> 12_future_ai.md 
+echo " " >> 12_future_ai.md 
 
-# Chapter 13 
-echo "trying chapter 13"
-cp ../13-The_Future_Of_AI/richctx.md 13_future_ai.md 
-cp ../13-The_Future_Of_AI/*.png 13_images
-cp 13_images/* combined_images 
-sed -i.bu "s/illo/combined_images\/illo/g" 13_future_ai.md 
-#
-sed -i.bu '1s;^;# 13 - Future AI   ;' 13_future_ai.md 
-echo " " >> 13_future_ai.md 
-echo "---" >> 13_future_ai.md 
-echo " " >> 13_future_ai.md 
+
 
 
 
