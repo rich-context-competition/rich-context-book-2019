@@ -42,8 +42,8 @@ echo " " >> 02_bundesbank.md
 
 # Chapter three
 echo "trying chapter 3"
-cp ../03-Use_Case-Dimensions/03_ds_article.docx . 
-pandoc 03_ds_article.docx -o 03_ds_article.md
+cp ../03-Use_Case-Dimensions/DS\ article.docx . 
+pandoc DS\ article.docx -o 03_ds_article.md
 cp ../03-Use_Case-Dimensions/*.png 03_images 
 python3 rename_files.py "03_images/" png chap03
 cp 03_images/*.png combined_images
