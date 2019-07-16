@@ -12,16 +12,18 @@ rm *.html
 ## hoist placeholder title for chapter 1 
 
 
+
+
 echo "trying chapter 1"
-cp ../01-Introduction/01-Introduction-Rich\ Context.rtf . 
-textutil -convert html 01-Introduction-Rich\ Context.rtf
-pandoc 01-Introduction-Rich\ Context.html -o 01-Introduction.md
-sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" 01-Introduction.md
+cp ../01-Introduction/Rich\ Context_monograph.docx . 
+pandoc Rich\ Context_monograph.docx  -o 01_Introduction.md
+# sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" 01-Introduction.md
 # 
-sed -i.bu '1s;^;# Chapter 1 - Introduction  ;' 01-Introduction.md
+# sed -i.bu '1s;^;# Chapter 1 - Introduction  ;' 01-Introduction.md
 echo " " >> 01-Introduction.md
 echo "---" >> 01-Introduction.md
 echo " " >> 01-Introduction.md
+
 
 
 # Chapter two
