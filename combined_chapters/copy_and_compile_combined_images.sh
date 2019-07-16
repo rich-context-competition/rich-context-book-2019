@@ -57,7 +57,7 @@ echo " " >> 03_ds_article.md
 
 # Chapter 04.75  
 echo "trying chapter 4"
-cp ../04.75-metadata-datasets/MetadataForSocialScienceDatasetsV59.docx 04_context.docx 
+cp ../04.75-metadata-datasets/Allen_MetadataForSocialScienceDatasetsV63.docx 04_context.docx 
 pandoc 04_context.docx  -o 04_context.md
 #
 sed -i.bu '1s;^;# Chapter 4 - Context  ;' 04_context.md 
