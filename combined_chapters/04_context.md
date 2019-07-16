@@ -7,62 +7,61 @@ Robert B Allen
 rba\@boballen.info
 
 Data are valuable but finding the right data is often difficult. This
-chapter reviews current approaches and issues for metadata about data
-and data sets that may facilitate the identification of relevant data.
-In addition, the chapter reviews how metadata support repositories,
-portals, and services. There are emerging metadata standards but they
-are applied unevenly so that there is no comprehensive approach. There
-has been greater emphasis on structural issues than on semantic
-descriptions.
+chapter reviews current approaches and issues for metadata about numeric
+data and data sets that may facilitate the identification of relevant
+data. In addition, the chapter reviews how metadata support
+repositories, portals, and services. There are emerging metadata
+standards but they are applied unevenly so that there is no
+comprehensive approach. There has been greater emphasis on structural
+issues than on semantic descriptions.
 
 INTRODUCTION
 ============
 
 Evidence-based policy needs relevant data (Commission on Evidence-Based
 Policy, 2018; Lane, 2016). Such data is valuable, but often difficult to
-find and/or replicate. Therefore, data stewardship is needed. The FAIR
-Open Access guidelines suggest that, ideally, data should be Findable,
-Accessible, Interoperable, and Reusable.[^1]
+find and/or replicate. The FAIR Open Access guidelines suggest that,
+ideally, data should be Findable, Accessible, Interoperable, and
+Reusable.[^1] Therefore, data curation and stewardship is needed.
 
-Data may be a text, an image, or a video but this chapter focuses on
-numeric observations recorded and maintained in machine-readable form.
-There are many data sets available online; the DataCite[^2] repository
-alone contains over five million. There are many different types of data
-sets. Data sets differ in their structure, their source, and their use.
-In some cases, they are single vectors of data; in other cases, they
-comprise all the data associated with one study or across a group of
-related data sets. Following the approach of W3C-DCAT (World Wide Web
-Consortium-Data Catalog Vocabulary)[^3], a data set may be a collection
-of related observations which is developed and managed by a single
-entity such as a statistical agency. When stored as a unit online, the
-data set is a digital object.
+While data may include text, image, or video, here we focus on numeric
+observations recorded and maintained in machine-readable form. There are
+many data sets of such observations available online; the DataCite[^2]
+repository alone contains over five million. There are many different
+types of data sets. Data sets differ in their structure, their source,
+and their use. In some cases, they are single vectors of data; in other
+cases, they comprise all the data associated with one study or across a
+group of related data sets. Following the approach of W3C-DCAT (World
+Wide Web Consortium-Data Catalog Vocabulary)[^3], a data set may be a
+collection of related observations which is developed and managed by a
+single entity such as a statistical agency. When stored as a unit
+online, the data set is a digital object.
 
 Metadata consists of short descriptors which refer to a digital object.
 Metadata can support users in finding data sets, and enable users to
-know what is them. However, there is tremendous variability in the types
-of metadata and how they are applied. One categorization of metadata
-identifies structural (or technical), administrative, and descriptive
-metadata. Structural metadata includes the organization of the files.
-Administrative metadata describes the permissions, rights, and usage.
-Descriptive metadata covers the contents.
+know what is in them. However, there is tremendous variability in the
+types of metadata and how they are applied. One categorization of
+metadata identifies structural (or technical), administrative, and
+descriptive metadata. Structural metadata includes the organization of
+the files. Administrative metadata describes the permissions, rights,
+and usage. Descriptive metadata covers the contents.
 
-This chapter surveys the state of the art of metadata for data sets,
-focusing on metadata for administrative and social science records.
-Administrative records describe details about the state of the world.
-They could include governmental records, hospital records, educational
-records, or business records. By comparison, social science data often
-involves a theory. In some cases, the theory is applied to interpreting
-the data or the data are used to develop theory.
+This chapter surveys the state of the art of metadata for numeric data
+sets, focusing on metadata for administrative and social science
+records. Administrative records describe details about the state of the
+world as collected by organizations or agencies. They include
+governmental records, hospital records, educational records, and
+business records. By comparison, social science data generally is
+collected for the purpose of developing or applying theory.
 
 Section 2 describes data, metadata, and digital objects. Section 3
 discusses semantics. Section 4 considers repositories. Section 5
 describes services. Section 6 describes the techniques for documenting
 the internal structure of data sets. Section 7 discusses
-cyberinfrastructure. Section 8 closes with recommendations and
-conclusions.
+cyberinfrastructure.
 
-DATA, METADATA, AND DIGITAL OBJECTS
-===================================
+DATA, METADATA, AND DIGITAL DATA OBJECTS
+========================================
 
 A metadata element describes some attribute of a digital object. The
 simplest metadata identifies the digital object.[^4] Individual metadata
@@ -75,13 +74,13 @@ metadata elements in that fragment.
 
 Figure 1: Fragment of schema.org dataset schema[^6].
 
-The W3C DCAT[^7] is a schema for data sets that is used by many
-repositories such as data.gov. There are still other descriptive
-frameworks for data sets such as the DataCite[^8] metadata schema and
-the Inter-university Consortium for Political and Social Research Data
-Documentation Initiative (ICPSR DDI) discussed below (Section 4.1). The
-catalog specifications provide a flexible framework. For instance, DCAT
-allows the inclusion of metadata elements drawn from domain schema and
+The W3C DCAT[^7] is a schema standard for data sets that is used by many
+repositories such as data.gov. Other structured frameworks for data sets
+include the DataCite[^8] metadata schema and the Inter-university
+Consortium for Political and Social Research Data Documentation
+Initiative (ICPSR DDI) discussed below (Section 4.1). The catalog
+specifications provide a flexible framework. For instance, DCAT allows
+the inclusion of metadata elements drawn from domain schema and
 ontologies. Some of these domain schemas are widely used resources which
 DCAT refers to as assets. For instance, spatial relationships are often
 modeled by the Federal Geographic Data Committee (FGDC) standard.[^9]
@@ -90,37 +89,38 @@ Many of the implementations for indexing collections of metadata schemas
 use relational databases. Thus, they use SQL and support tools such as
 data dictionaries. Moreover, they are often characterized by Unified
 Modeling Language (UML) Class Diagrams which are common for data
-modeling. Other implementations use triplestores which have comparable
-tools.
+modeling.
 
 SEMANTIC DESCRIPTIONS
 =====================
 
-Semantic data models have become widely explored. In the Semantic Web,
-nodes are implemented with XML. RDF (Resource Description Framework)
-asserts a relationship between two identifiers by defining a group of
-three nodes (triples) as "identifier"-"property"-"identifier". By
-connecting triples, RDF can define or graph a network of the
-relationships among a set of controlled vocabulary terms. This is the
-essence of linked data. RDFS (RDF Schema) extends RDF by supporting
-class/subclass relationships. The types of classes for identifiers in
-triples are controlled by domain and range parameters. Basic thesauri
-have a simple hierarchical structure. The Simple Knowledge Organization
-System (SKOS) is an RDFS standard for representing thesauri. Many
-administrative and social-science-related thesauri such as EDGAR, the
-World Bank, and the OECD have now been implemented with SKOS. A
-knowledge graph, a model of a domain, sometimes including instances,
-which is implemented in SKOS. Thus, DBpedia[^10] is a knowledge graph
-based on Wikipedia.
+Semantic data models have become widely explored. In particular, the
+Semantic Web utilizes nodes which are implemented with XML. RDF
+(Resource Description Framework) extends XML by requiring triples which
+assert a relationship (property) between two identifiers:
+"identifier"-"property"-"identifier". By connecting triples, RDF can
+define a graph network of the relationships among a set of controlled
+vocabulary terms; this is the essence of linked data.
 
-Some frameworks for structural descriptions of data sets may include
-aspects of ontologies. Less formal ontologies simply provide definitions
-and employ RDFS. For example, Schema.org schemas can be used with
-micro-formats which match schema elements with passages in an online
-text. Schema.org has a classification of topics and may incorporate
-other systems such as FOAF (Friend of a Friend) which includes
-attributes associated with people. Formal ontologies use OWL (Web
-Ontology Language) to add features to RDFS. These features lend
+RDFS (RDF Schema) extends RDF by supporting class/subclass
+relationships. The classes allowed for identifiers in RDFS triples are
+controlled by domain and range parameters. Traditional thesauri have a
+simple hierarchical structure, the Simple Knowledge Organization System
+(SKOS) is an RDFS standard for a machine-processable representation of
+thesauri. Many administrative and social-science-related thesauri such
+as EDGAR, and those of the World Bank, and the OECD have now been
+implemented with SKOS. In addition, a knowledge graph is a model of a
+domain, sometimes including instances, which may be implemented in SKOS.
+For example, DBpedia[^10] is a knowledge graph based on Wikipedia.
+
+Some frameworks for structural descriptions of data sets include aspects
+of ontologies. For example, less formal ontologies simply provide
+definitions and employ RDFS. Similarly, Schema.org schemas can be used
+with micro-formats which match schema elements with passages in an
+online text. Schema.org has a classification of topics and may
+incorporate other systems such as FOAF (Friend of a Friend) which
+includes attributes associated with people. Formal ontologies use OWL
+(Web Ontology Language) to add features to RDFS. These features lend
 themselves to logical inference provided that the entities and
 relationships are rigorously defined.
 
@@ -134,14 +134,14 @@ Occurrents (perdurants) and also between Universals and Particulars
 and are collected in the Open Biomedical Ontology (OBO) Foundry.
 
 There are fewer rich ontologies dealing with social science content than
-there are for natural science. One challenge is "social ontology" that
-is in developing definitions for social terms. It is difficult to define
+there are for natural science. One challenge is "social ontology", that
+is, developing definitions for social terms. It is difficult to define
 exactly what is a family, a crime, or money. In most cases, an
 operational definition or an approximate definition may suffice where
 structured documentation of the definitions are unavailable. Moreover,
-while social terms are especially difficult to define for casual speech,
-it seems possible to make clear, though perhaps cumbersome, definitions
-for scholarly applications.
+while social terms are especially difficult to define for vernacular
+speech, it seems possible to make clear, though perhaps cumbersome,
+definitions for scholarly applications.
 
 DATA REPOSITORIES
 =================
@@ -188,44 +188,39 @@ Many data sets are produced, curated, and used in the natural sciences
 such as astronomy and geosciences. Some of these data sets have highly
 automated data collection, elaborate archives and established curation
 methods. Many of these repositories include multiple data sets for which
-access is supported with portals or data cubes (see Section 6.1).
-
-For instance, massive amounts of geophysical data and related text
-documents are collected in the EarthCube[^17] portal. The Science.gov
-portal is established by the U.S. Office of Science Technology and
-Policy. NASA supports approximately 25 different data portals. Each
-satellite in the Earth Observation System (EOS) may provide hundreds of
-streams of data,[^18] with much common metadata. This provides a context
-analogous to study-level metadata.
-
-Likewise, there are massive genomics and proteomics data sets which are
-accessible via portals such as UniProt[^19] and the Protein Data
-Bank[^20] along with suites of tools for exploring them. Similarly,
-there are very large data sets from medical research such as from
-clinical trials and from clinical practice including Electronic Health
-Records (EHRs).
+access is supported with portals or data cubes (see Section 6.1). For
+instance, massive amounts of geophysical data and related text documents
+are collected in the EarthCube[^17] portal. The Science.gov portal is
+established by the U.S. Office of Science Technology and Policy. NASA
+supports approximately 25 different data portals. Each satellite in the
+Earth Observation System (EOS) may provide hundreds of streams of
+data,[^18] with much common metadata. This provides a context analogous
+to study-level metadata. Likewise, there are massive genomics and
+proteomics data sets which are accessible via portals such as
+UniProt[^19] and the Protein Data Bank[^20] along with suites of tools
+for exploring them. Similarly, there are very large data sets from
+medical research such as from clinical trials and from clinical practice
+including Electronic Health Records (EHRs).
 
 Ecosystem of Texts and Data Sets
 --------------------------------
 
 Data sets are often associated with text reports. For example, the Dryad
 Digital Repository[^21] hosts data sets from scholarly publications
-which require that when a scholarly paper is accepted for publication
-that data associated with the paper is deposited.
-
-Data sets may be cited in much the same way that research reports are
-cited. Formal citation facilitates tracing the origins of data used in
-analyses and helps to acknowledge the work of the creators of the data
-sets. Standards have been developed for such citations (Martone, 2014;
-Silvello, 2017).
+which require the deposit of data associated with scholarly papers
+accepted for publication. In addition, data sets may be cited in much
+the same way that research reports are cited. Formal citation
+facilitates tracing the origins of data used in analyses and helps to
+acknowledge the work of the creators of the data sets. Standards have
+been developed for such citations (Martone, 2014; Silvello, 2017).
 
 SERVICES
 ========
 
-The purpose of metadata and other aspects of information management is
-to provide services to users. Indeed, "service science" is an approach
-in information technology which focuses on the design and delivery of
-services rather than on underlying technologies.
+The purpose of metadata and other aspects of information organization
+and management is to provide services to users. Indeed, "service
+science" is an approach in information technology which focuses on the
+design and delivery of services rather than on underlying technologies.
 
 Search
 ------
@@ -238,8 +233,8 @@ of federated search is supported by the Open Archives Initiative
 Protocol for Metadata Harvesting (OAI-PMH);[^22] both data.gov and ICPSR
 use OAI-PMH.
 
-From Statistical Packages to Observatories
-------------------------------------------
+From Statistical Packages to Virtual Research Environments
+----------------------------------------------------------
 
 There is an increasingly rich set of analytic tools. Some of the
 earliest tools were statistical packages such as SPSS, R, SAS, and
@@ -249,13 +244,12 @@ RSpace, and eLab notebooks (ELN) integrate annotations, workflows, raw
 data, and data analysis into one platform. In addition, some
 repositories have developed their own powerful data exploration tools
 such as ICPSR Colectica[^23] for DDI and the GSS Data Explorer[^24].
-
-Virtual research environments (VREs) are organized by research
+Virtual research environments (VREs) are typically organized by research
 communities to coordinate data sets with search and analytic tools. For
 instance, the Virtual Astronomy Observation (VAO) uses Jupyter to
 provide users with a robust research environment. WissKI[^25] is a
-platform for coordinating digital humanities data sets which is based on
-Drupal.
+platform for coordinating digital humanities data sets which are based
+on Drupal.
 
 Preservation
 ------------
@@ -266,9 +260,9 @@ compromised. Moreover, although data storage prices are declining
 dramatically, we cannot save everything and the cost of maintaining a
 trusted repository remains substantial. Many of these challenges are
 familiar from traditional archives. For instance, selection policies
-could help in controlling the many poorly documented data sets in some
-repositories. Yet, prioritization is difficult[^26] (Whyte & Wilson,
-2010).
+typical in archives could help in controlling the many poorly documented
+data sets in some repositories. Yet, prioritization is difficult[^26]
+(Whyte & Wilson, 2010).
 
 The Open Archival Information System (OAIS) provides a reference model
 for the management of archives (Lee, 2010). The OAIS framework has been
@@ -295,17 +289,17 @@ A metadata editor supports the assignment of quality metadata (e.g.,
 Gonclaves, O'Conner, et al., 2019). When collections or metadata
 standards change, the repository librarian must revise metadata (Tonkin,
 2009). This might be particularly needed when updating metadata from
-data streams[^28] such as those from satellite downlinks or from
-smart-city sensors.
+data streams[^28] such as those from satellite downlinks or smart-city
+sensors.
 
-Some repositories of survey data include micro-data, data for the
-responses that individuals gave to survey questions.[^29] Although
-survey results are generally aggregated across individuals,
-individual-level data can sometimes very useful. Currently, there are no
-distinct metadata tags for such data; they are embedded into repository
-data. Moreover, the individual level of analysis raises privacy concerns
-and needs to be carefully managed. At the least, access should be
-limited to qualified researchers.
+Although survey results are generally aggregated across individuals,
+individual-level data is sometimes very useful. Some repositories of
+survey data include micro-data, data for the responses that individuals
+gave to survey questions.[^29] Currently, there are no distinct metadata
+tags for such data; they are embedded into repository data. Moreover,
+the individual level of analysis raises privacy concerns and needs to be
+carefully managed; at the least, access should be limited to qualified
+researchers.
 
 Metadata registries, such as the Marine Metadata Interoperability
 Ontology Registry and Repository,[^30] record usage. The Registry of
@@ -328,15 +322,15 @@ Data Cubes
 ----------
 
 Many notable data management techniques were originally developed for
-managing and processing business data.[^33] Data cubes support access to
-multidimensional data. They present data as if it filled cells of a
-high-dimensional cube, even if the data will probably not fill all of
-the cells. Users can generate different views of the data by
-drilling-down, rolling-up, and slicing-and-dicing across cells. For
-complex data sets, there will be many dimensions. To facilitate
-retrieval, there can be a rich pre-coordinated index for common queries;
-other queries can be implemented with slower methods such as hashing or
-B-trees.
+managing and processing business data.[^33] One such technique is data
+cubes, which support access to multidimensional data. They present data
+as if it filled cells of a high-dimensional cube, even if the data will
+probably not fill all of the cells. Users can generate different views
+of the data by drilling-down, rolling-up, and slicing-and-dicing across
+cells. For complex data sets, there will be many dimensions. To
+facilitate retrieval, there can be a rich pre-coordinated index for
+common queries; other queries can be implemented with slower methods
+such as hashing or B-trees.
 
 Data cubes have been extended beyond business information processing to
 cubes such as the Statistical Data and Metadata eXchange (*SDMX) used in
@@ -347,11 +341,11 @@ Sequential Activities and Modeling Research
 -------------------------------------------
 
 Entities change over time, yet knowledge representation frameworks
-rarely model change. In order to represent these changes, models need to
-represent transitions, processes, and other sequential activities.
-However, modeling change is routine for state machines, Petri nets, and
-other transition models. Such modeling is closer to the Unified Modeling
-Language (UML) or even programming languages than to ontologies. A
+rarely model change. In order to represent changes, models need to
+represent transitions, processes, and other sequential activities. Such
+modeling is closer to the Unified Modeling Language (UML) or even
+programming languages than to ontologies. In fact, modeling change is
+routine for state machines, Petri nets, and other transition models. A
 "model-layer" that allows general statements to be made about sequential
 activities could incorporate both ontology and transitionals (Allen &
 Kim, 2018).
@@ -362,17 +356,17 @@ activities and is a natural fit for describing research methods and
 analyses (Austin, Bloom, et al., 2017). The Taverna workflow tool has
 been widely used in the MyExperiment[^35] project, which provides a
 framework for capturing and posting research methods and incorporates
-simple ontologies such as FOAF.
+ontologies such as FOAF.
 
 Allen (2015, 2018) has proposed direct representation of entire research
 reports. This approach uses a programming language that blends upper
 ontologies with object-oriented programming to do semantic modeling.
+Beyond modeling events, it is also possible to use structured
+argumentation and assertions in scientific research reports.
 Potentially, social mechanisms (e.g., Hedstrom & Ylikoski, 2010) and
-community models could be implemented. In addition to modeling events,
-it is also possible to use structured argumentation and assertions made
-in scientific research reports. Further, highly-structured evidence and
-claims might be applied to the evaluation of evidence-based social
-policy.
+community models could be implemented. Further, highly-structured
+evidence and claims might be applied to the evaluation of evidence-based
+social policy.
 
 CYBERINFRASTRUCTURE
 ===================
@@ -391,10 +385,10 @@ downloads were made from data sets, and procedures for updates and
 formatting standards.
 
 In addition to traditional information institutions, there are now many
-additional players. These new players have slightly different mandates.
-For example, Schema.org's primary mission is to provide a structure that
-can improve indexing by search engine companies. Nonetheless, they often
-adopt the best practices similar to those of more traditional
+other players. These new players have slightly different mandates. For
+example, Schema.org's primary mission is to provide a structure that
+improves indexing by search engine companies. Nonetheless, these
+organizations often adopt best practices similar to those of traditional
 information organizations.
 
 CrossRef[^36] and DataCite are DOI registration agencies. CrossRef is a
@@ -407,31 +401,30 @@ as VIVO[^38] and the Microsoft Academic Graph (MAG)[^39] which allow
 authors to be tracked across research reports and projects, and across
 publishers.
 
-Cloud Technologies, the Internet of Things, and Software as a Service
+Cloud Technologies, Software as a Service, and the Internet of Things
 ---------------------------------------------------------------------
 
 We are now well into the era of cloud computing (Foster & Gannon, 2017),
 allowing flexible allocation of computing, networking and storage
-resources. Networked data centers needed for cloud computing facilitate
-the Internet of Things (IoT). Cloud computing also facilitates Software
-as a Service (SaaS).
-
-The compatibility of the versions of software packages needed for data
+resources, which facilitates Software as a Service (SaaS). The
+compatibility of the versions of software packages needed for data
 management is often a challenge. Containers, such as those from Docker,
 allow compatible versions of software to be assembled and run on a
-virtual computer. A container could hold datasets, and workflows, as
-well as the programs used to analyze the data, making the analyses
-readily replicable.
+virtual computer. A container could hold datasets, workflows, and the
+programs used to analyze the data, making the analyses readily
+replicable. Highly-networked data centers also facilitate the Internet
+of Things (IoT) which will generate massive data sets such as for "smart
+cities".
 
-RECOMMENDATIONS AND CONCLUSIONS
-===============================
+CONCLUSION
+==========
 
-Some of the biggest issues for the retrieval of information from data
-sets concern information organization. Metadata supports the discovery
-of and access to data sets. While there is already a lot of attention to
-metadata, even more attention would further support evidence-based
-policy. We need richer, more systematic, and more interoperable metadata
-standards.
+Data may not be useful when stand-alone without context. Some of the
+biggest issues for the retrieval of information from data sets concern
+information organization, which help provide context. Metadata supports
+the discovery of and access to data sets. We need richer, more
+systematic, and more interoperable metadata standards. Even more
+attention to metadata would further support evidence-based policy.
 
 ACKNOWLEDGMENTS {#acknowledgments .ListParagraph}
 ===============
@@ -532,19 +525,20 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 
 [^3]: <https://www.w3.org/TR/vocab-dcat/>
 
-[^4]: Such operators need to be unambiguous. Digital Object Identifiers
-    (DOIs) were developed for scholarly journals and are assigned by
-    publishers. Part of the DOI code includes a publisher ID. However,
-    the DOIs may identify more than one data set. For instance, the
-    entire GSS (General Social Survey) has only one DOI; nonetheless,
-    within GSS, it is possible to drill down through the different data
-    sets by specifying version numbers. <http://doi.org>
+[^4]: Such operators need to be unambiguous. For example, Digital Object
+    Identifiers (DOIs, <http://doi.org>) were developed for scholarly
+    journals and are assigned by publishers, with a part of the DOI code
+    being a unique publisher ID. While the DOIs may identify more than
+    one data set, version numbers distinguish the data sets. For
+    instance, the entire GSS (General Social Survey) has only one DOI,
+    but it is possible to drill down through the different data sets by
+    specifying version numbers.
 
-[^5]: <https://schema.org/Dataset>, Schema.org is a project of a
-    consortium of search-engine companies. Schema.org dataset schema is
-    used by the Google Data Search.
+[^5]: Schema.org is a project of a consortium of search-engine
+    companies. The Schema.org dataset schema
+    (<https://schema.org/Dataset>) is used by the Google Data Search.
 
-[^6]: <https://github.com/datasets/gdp>
+[^6]: 
 
 [^7]: https://www.w3.org/TR/vocab-dcat/
 
@@ -556,8 +550,8 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 
 [^11]: <https://www.icpsr.umich.edu/icpsrweb/>
 
-[^12]: <https://www.ddialliance.org/>, Note that the Data Documentation
-    Initative (DDI) is different from the Data Discovery Index (DDI)
+[^12]: <https://www.ddialliance.org/>. Note that the Data Documentation
+    Initiative (DDI) is different from the Data Discovery Index (DDI)
     associated with DataMed.
 
 [^13]: [https://www.cessda.eu/]{.underline}
@@ -594,10 +588,10 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 
 [^28]: <http://schema.org/dataset/datastreams>
 
-[^29]: There are two distinct ways the term micro-data is used. In the
-    context of HTML, it is associated with embedding Schema.org codes
-    into web pages similar to micro-formats. In the context of survey
-    data, it refers to individual-level data.
+[^29]: The term micro-data is used in two distinct ways. In the context
+    of HTML, it is associated with embedding Schema.org codes into web
+    pages similar to micro-formats. In the context of survey data, it
+    refers to individual-level data.
 
 [^30]: <https://mmisw.org/>
 
