@@ -1,4 +1,4 @@
-Title: Who’s Waldo: Conceptual issues when characterizing data in empirical research
+# Chapter 2 - Bundesbank -- View from the users  nTitle: Who’s Waldo: Conceptual issues when characterizing data in empirical research
 Author:Stefan Bender, Hendrik Doll, Christian Hirsch [^footnote0]
 Affiliation: Research Data and Service Centre , Deutsche Bundesbank
 Date: June 14, 2019
@@ -54,7 +54,7 @@ A main principle of the RDSC is to give free access to Bundesbank micro data for
 
 The knowledge generating process of empirical research in the RDSC can be organised along the four key dimensions (i) data services, (ii) research, (iii) publication, and (iv) (structured) user specific knowledge.
  
- ![](./02_images/20190614_Figure1.jpg)
+ ![](./combined_images/20190614_Figure1.jpg)
  
 Figure 1: The four dimensions of the knowledge generating process of empirical research in the RDSC
  
@@ -76,7 +76,7 @@ Being able to access structured user-specific knowledge through e.g. a competiti
 
 The challenge is to establish such a feedback loop. If effective feedback is given and used, the microda-ta-based knowledge-generating process restarts with data services, but on a higher level. Better data services in turn allow better research, because available microdata is better described and more effec-tively used. By automatizing the feedback-loop between research, publications, knowledge, and data services, the knowledge generating process can loop faster and augment quicker. We expect this to lead to improvements in the four key dimensions of this process of empirical research in the RDSC.
 
-  ![](./02_images/20190614_Figure2.jpg)
+  ![](./combined_images/20190614_Figure2.jpg)
  
 Figure 2: Elevating the knowledge generating process of empirical research in the RDSC to a higher level by enabling a feedback loop to data services.
  
@@ -222,3 +222,6 @@ For the way forward, it is important to note the importance of the research area
 -	Zhang, Q., Cheng, Q., Huang, Y., & W. Lu (2016). A bootstrapping-based method to automatically identify data-usage statements in publications. Journal of Data and Information Science, 1(1), 69-85.
 
 
+ 
+---
+ 

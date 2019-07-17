@@ -476,17 +476,17 @@ inconsistencies even after human processing. We hence propose that
 machine-aided methods for computing correct and complete structured
 representation of publications are of central importance for scientific
 research such as an Open Research Knowledge
-Graph [@DBLP:journals/corr/abs-1901-10816]. Previous works on
-never-ending learning have shown how humans and extraction algorithms
-can work together to achieve high-precision and high-recall knowledge
-extraction from unstructured sources. In our future work, we hence aim
-to populate a **scientific knowledge graphs** based on never-ending
-learning. The methodology we plan to develop will be domain-independent
-and rely on active learning to classify, extract, link and publish
-scientific research artifacts extracted from open-access papers.
-Inconsistency will be remedied by ontology-based checks learned from
-other publications such as SHACL constraints which can be manually or
-automatically added.[^13] The resulting graphs will
+Graph [@DBLP:journals/corr/abs-1901-10816][@DBLP:conf/esws/BuscaldiDMOR19].
+Previous works on never-ending learning have shown how humans and
+extraction algorithms can work together to achieve high-precision and
+high-recall knowledge extraction from unstructured sources. In our
+future work, we hence aim to populate a **scientific knowledge graphs**
+based on never-ending learning. The methodology we plan to develop will
+be domain-independent and rely on active learning to classify, extract,
+link and publish scientific research artifacts extracted from
+open-access papers. Inconsistency will be remedied by ontology-based
+checks learned from other publications such as SHACL constraints which
+can be manually or automatically added.[^13] The resulting graphs will
 
 -   rely on advanced distributed storage for RDF to scale to the large
     number of publications available;

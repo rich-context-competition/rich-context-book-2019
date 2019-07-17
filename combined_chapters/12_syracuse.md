@@ -1,4 +1,4 @@
----
+# 12 - Syracuse  ---
 abstract: |
     Datasets are critical for scientific research, playing a role in
     replication, reproducibility, and efficiency. Researchers have recently
@@ -129,7 +129,7 @@ is in Fig \[fig:NetworkArchitecture\] and the components are as follows:
 5.  CRF layer: find the most likely sequence of labels.
 
 ![\[fig:NetworkArchitecture\]Network Architecture of BiLSTM-CRF
-model](12_images/bilstm-crf-model.pdf){width="5cm"}
+model](combined_images/bilstm-crf-model.pdf){width="5cm"}
 
 Word Embedding
 --------------
@@ -264,3 +264,6 @@ Daniel E. Acuna was funded by the National Science Foundation awards
 \#1646763 and \#1800956.
 
 [^1]: Corresponding author: deacuna@syr.edu
+ 
+---
+ 

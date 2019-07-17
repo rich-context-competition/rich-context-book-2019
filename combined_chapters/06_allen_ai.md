@@ -1,4 +1,4 @@
-Introduction
+# Chapter 6 - Allen AI  Introduction
 ============
 
 The Allen Institute for Artificial Intelligence (AI2) is a non-profit
@@ -71,7 +71,7 @@ dataset usage in a paper. Approximately 10% of the datasets in the
 knowledge base were linked one or more times in the provided corpus of
 5K papers.
 
-![image](06_images/datasets.png){width="13cm"}
+![image](combined_images/datasets.png){width="13cm"}
 
 We provide a high-level overview of our approach in Figure
 [\[fig:datasets\]](#fig:datasets){reference-type="ref"
@@ -344,3 +344,6 @@ evaluations, and providing feedback. We also would like to thank Zhihong
 [^2]: <https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py>
 
 [^3]: <https://xgboost.readthedocs.io/en/latest/>
+ 
+---
+ 
