@@ -1,7 +1,7 @@
 
-\section{Research Field Classification}
+\subsection{Research Field Classification}
 \label{section:field_classification}
-\subsection{Task Description}
+\subsubsection{Task Description}
 The goal of this task is to identify the research fields covered in social science publications.
 %In general, two approaches can be applied in this task. One is the extraction of relevant terms of the publications.
 %Here, relevant means best describing the research method \dd{why method?} of a publication.\dd{the "HOW" first approach is not clear at all}
@@ -14,7 +14,8 @@ In this way, our interpretation of the task is to select one or more labels from
 %Let $E$ denote a set of entities. The Named Entity Recognition and Linking task consists of (i) identifying entity mentions  $m$ in a sentence and, (ii) linking them, when possible, to a  reference knowledge base  $K$ (i.e, the SAGE Thesaurus\footnote{http://methods.sagepub.com}) 
 %and (iii) assigning a type to the entity, e.g., \textit{research method}, selected from a set of given types. 
 %Given a textual named entity mention $m$ along with the unstructured text in which it appears, the goal is to produce a mapping from the mention  $m$ to its referent real world entity  $e$ in  $K$.
-\subsection{Our approach - Overview }
+
+\subsubsection{Our approach - Overview }
 Due to the unequal distribution of labels in the dataset, we need to guaranty enough training data for each label.
 We selected only labels with frequency over 300 for training the model which results in a total of 44 labels representing research fields.
 We decided to train a classification model based on the fasttext framework~\cite{joulin2017bag}. To train our model we resort to the abstracts of the publication, as this approach worked better than using the full-texts.  
@@ -31,7 +32,7 @@ We decided to train a classification model based on the fasttext framework~\cite
 
 
 
-\subsection{Evaluation}
+\subsubsection{Evaluation}
 Figure~\ref{fig:results_fasttext} shows the performance of the model regarding various evaluation metrics for different thresholds. A label is assigned to a publication if the model outputs a probability for the label above the defined threshold. In multi-label classification, this allows us to evaluate our model from different perspectives.
 
 

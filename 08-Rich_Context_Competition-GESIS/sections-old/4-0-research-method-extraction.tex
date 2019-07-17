@@ -1,7 +1,9 @@
-\section{Research Method Extraction}
+\subsection{Research Method Extraction}
 \label{section:research_method_extraction}
 %\wo{Andrea ask for a structure. I suggest: Task (What to do), Challenges (Concrete Problem), Our Approach (Solution), Development of the controlled Vocabulary, Development of Training Corpus, Evaluation (if possible from Andreas introspection of SSOAR results, how good we solved the problem)}
-\subsection{Task Description}
+
+
+\subsubsection{Task Description}
 Inspired by a recent work of Nasar et al.
 \cite{nasar2018information}, we define a list of basic entity types that give key-insights into scholarly publications. 
 We adapted the list of semantic entity types to the domain of the social sciences with a focus on \textit{research methods},
@@ -18,7 +20,7 @@ Let $E$ denote a set of entities. The Named Entity Recognition and Linking task 
 and (iii) assigning a type to the entity, e.g., \textit{research method}, selected from a set of given types. 
 Given a textual named entity mention $m$ along with the unstructured text in which it appears, the goal is to produce a mapping from the mention  $m$ to its referent real world entity  $e$ in  $K$.
 
-\subsection{Challenges}
+\subsubsection{Challenges}
 There are some major challenges that any named entity recognition, classification and linking system needs to handle.
 First, regarding NER, identifying the entities boundary is important, thus detecting the exact sequence span. 
 Second, ambiguity errors might arise in classification. For instance,`range' might be a domain-specific term from the knowledge base or belong to the general domain vocabulary. This is a challenging task for which context information is required. 
@@ -32,7 +34,7 @@ knowledge bases are often not exhaustive enough and do not cover specific terms 
 Last but not least, the combination of different semantic types gives a more coherent picture of a research article. We hypothesize that such information would be helpful and results in an insightful co-occurrence statistics, and provides additional detail directly related to entity resolution, and finally helps to assess the \textbf{relevance of terms} by means of a score.
 
  
-\subsection{Our Approach - Overview} 
+\subsubsection{Our Approach - Overview} 
 Our context-aware framework builds on Stanford’s CoreNLP and Named Entity Recognition System\footnote{\url{https://nlp.stanford.edu/projects/project-ner.shtml}}. 
 The information extraction process follows the workflow depicted in Figure~\ref{figure:pipeline}, using separate modules for pre-processing, classification, linking and term filtering.
 
@@ -187,7 +189,7 @@ In our experiments on SSOAR Social Science publications, we compared results to 
 The main finding was that while most entities from the SAGE thesaurus could be extracted and linked reliably (e.g., 'Paired t-test'), they could not be easily mapped to the SSOAR metadata terms, which consist of only a few abstract classes (e.g., 'quantitative analysis'). Furthermore, our tool was tested by the RCC organizer, were the judges reviewed 10 random publications and generated qualitative scores for each document.  %COMMENT (AZ) Yes. We were the winning team on this task. But what results to put here?
 
 %COMMENT (AZ) Please double check 
-\subsection{Conclusion and Future Work}
+\subsubsection{Conclusion and Future Work}
 \label{subsec:ner-conclusion}
 %A white paper describing our methods and approach will be published in a refereed special issue of the competition. 
 We plan to carry out a more detailed evaluation on fulltext scholarly publications and assess the impact of different features used in the ML model, including  background resources such as embeddings and dictionaries. 
