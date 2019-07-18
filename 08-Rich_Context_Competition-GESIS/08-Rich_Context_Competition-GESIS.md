@@ -18,6 +18,14 @@ Scientists and analysts often face the problem of finding interesting research d
 
 This chapter describe our approaches, techniques and used additional data used for our partitipation to the Rich Context Competition (RCC).
 
+### Non-technical overview
+
+-   Usage of external data
+
+-   Supervised machine learning Approaches
+
+-   Problem of Training data: weak supervision
+
 ### General Approach and Software Components
 
 The central tasks in the RCC is the extraction of dataset mentions from text. Nevertheless, we considered the discovery of research methods and research fields equally important. To this end, we decided to follow a module-based approach and developed tools that can be used separately but also as parts of a data processing pipeline. Figure \[figure:pipeline\] shows an overview of the software modules developed for the RCC competition, including their dependencies. Here, the upper three modules (gray) describe the pre-processing steps (cf. Section \[sec:prepro\]). The lower four modules (blue) are used to generate the output in a pre-specified format. The pre-processing step consists of extracting metadata and pure text from PDF documents. The extraction itself is done using the Cermine Tool[1] which returns a Journal Article Tag Suite[2](Jats) XML document. Then, in a second step, text, metadata and references are extracted. The output of the pre-processing is then used by the software modules responsible for tackling the individual sub-tasks, i.e., discovering research datasets (cf. Section \[sec:dataset-extraction\]), methods (cf. Section \[section:research\_method\_extraction\]) and fields (cf. Section \[section:field\_classification\]).
@@ -220,6 +228,17 @@ Due to the unequal distribution of labels in the dataset, we need to guaranty en
 Figure \[fig:results\_fasttext\] shows the performance of the model regarding various evaluation metrics for different thresholds. A label is assigned to a publication if the model outputs a probability for the label above the defined threshold. In multi-label classification, this allows us to evaluate our model from different perspectives.
 
 <img src="figures/research-fields/fast-text-evaluation.png" alt="Precision-Recall vs. Threshold" style="width:49.0%" />
+
+Discussion
+----------
+
+### what-worked-what-not
+
+### summary-of-results-and-caveats
+
+### lessons-learned-and-what-would-you-do-differently
+
+### what-comes-next
 
 Acknowledgments
 ---------------
