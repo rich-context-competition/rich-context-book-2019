@@ -1,12 +1,21 @@
 \subsection {Introduction}
 %\addcontentsline{toc}{section}{Introduction}
 Scientists and analysts often face the problem of finding interesting research datasets and identifying who else used the data, in which research fields, and how the data has been analyzed from a methodological perspective.
-To address these problems, the Coleridge Initiative organized the Rich Context Competition\footnote{\url{https://coleridgeinitiative.org/richcontextcompetition}}(RCC).
-The competition invited international research teams to develop text analysis and machine learning tools that can discover relationships between research datasets, methods, and fields in scientific literature.
-The competition took place between October 2018 and February 2019 and included two phases\footnote{\url{https://coleridgeinitiative.org/richcontextcompetition\#competitionschedule}}. The first phase was open for all teams which have submitted a letter of intent.
-Teams are then provided with a corpus of social science publications to develop and train machine learning algorithms for automatic research dataset, methods and field detection and linking. 
-More concretely, one major subtask consisted of linking dataset mentions to a given set of around 10,000 dataset descriptions from the ICPSR’s research data index.\footnote{\url{https://www.icpsr.umich.edu/index.html}}
-Only the best four teams from the first phase are invited to the second phase of the competition and asked to discover research datasets, methods, and fields in a larger corpus of social science publications. All submitted algorithms have to be made publicly available as open source tools. With this document, we (team RCC-5) aim to fulfill another requirement, i.e., the documentation and summary of the developed approach including data pre-processing, algorithms, and software. 
+\begin{itemize}
+    \item GESIS description
+    \item Why the competition is interesting for us?
+    \item One of gesis missions: Support Social Scientists in all steps of the research cycle.
+    \item Allready work in this area (\cite{boland2012identifying})
+\end{itemize}
+This chapter describe our approaches, techniques and used additional data used for our partitipation to the Rich Context Competition (RCC).
+
+% Old intro for CompetitionTo address these problems, the Coleridge Initiative organized the Rich Context Competition\footnote{\url{https://coleridgeinitiative.org/richcontextcompetition}}(RCC).
+%The competition invited international research teams to develop text analysis and machine learning tools that can discover relationships between research datasets, methods, and fields in scientific literature.
+%The competition took place between October 2018 and February 2019 and included two phases\footnote{\url{https://coleridgeinitiative.org/richcontextcompetition\#competitionschedule}}.
+%The first phase was open for all teams which have submitted a letter of intent.
+%Teams are then provided with a corpus of social science publications to develop and train machine learning algorithms for automatic research dataset, methods and field detection and linking. 
+%More concretely, one major subtask consisted of linking dataset mentions to a given set of around 10,000 dataset descriptions from the ICPSR’s research data index.\footnote{\url{https://www.icpsr.umich.edu/index.html}}
+%Only the best four teams from the first phase are invited to the second phase of the competition and asked to discover research datasets, methods, and fields in a larger corpus of social science publications. 
 %More about the type of scientific publications can be found in Section~\ref{subsec:rcc-corpus}.
 
 %The Rich Context Competition\footnote{\url{https://coleridgeinitiative.org/richcontextcompetition}}(RCC) is organized by the Coleridge Initiative and targets both US and international researchers. The main goal of the competition is to automate the discovery of research datasets and the associated research methods and fields in social science publications. 
@@ -19,8 +28,8 @@ Only the best four teams from the first phase are invited to the second phase of
 
 \subsubsection{General Approach and Software Components}
 %\subsection{Our Approach on a technical perspective}
-One of the central tasks in the RCC is the extraction of dataset mentions from text. 
-Nevertheless, we considered the methods and fields discovery equally important.
+The central tasks in the RCC is the extraction of dataset mentions from text. 
+Nevertheless, we considered the discovery of research methods and research fields equally important.
 To this end, we decided to follow a module-based approach and developed tools that can be used separately but also as parts of a data processing pipeline.
 Figure~\ref{figure:pipeline} shows an overview of the software modules developed for the RCC competition, including their dependencies. Here, the upper three modules (gray) describe the pre-processing steps (cf. Section~\ref{sec:prepro}).
 The lower four modules (blue) are used to generate the output in a pre-specified format. 
