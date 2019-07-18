@@ -1,11 +1,11 @@
 \subsection{Data and Pre-processing}
-This section describes the data provided by the organizers of the RCC, the external data sources we used as well as our pre-processing steps.
+This section describes the external data sources we used as well as our pre-processing steps.
 
-\subsubsection{The RCC Corpus}
-\label{subsec:rcc-corpus}
-For the first phase, the data provided by the organizers consisted of 5,000 publications. Additionally, a development fold of 100 plain text publications, their metadata, a list of datasets of interest (including all datasets that were explicitly referenced in the curated corpus) were given. The list of datasets should not be considered complete as  there could be additional datasets mentioned in these publications. 
-The organizers also provided examples of social science research methods and fields vocabularies in term of SAGE Publications research field and method vocabularies. 
-In the second phase of the competition, an additional set of 5,000 publications from the social sciences has been provided.
+%\subsubsection{The RCC Corpus}
+%\label{subsec:rcc-corpus}
+%For the first phase, the data provided by the organizers consisted of 5,000 publications. Additionally, a development fold of 100 plain text publications, their metadata, a list of datasets of interest (including all datasets that were explicitly referenced in the curated corpus) were given. The list of datasets should not be considered complete as  there could be additional datasets mentioned in these publications. 
+%The organizers also provided examples of social science research methods and fields vocabularies in term of SAGE Publications research field and method vocabularies. 
+%In the second phase of the competition, an additional set of 5,000 publications from the social sciences has been provided.
 
 \subsubsection{External Data Sources}
 For developing our algorithms, we also utilized two external data sources. For the discovery of research methods and fields, we resort to data from Social Science Open Access Repository\footnote{\url{https://www.gesis.org/ssoar/home}} (SSOAR). 
@@ -40,22 +40,18 @@ As a last step of the pre-processing, we remove all linebreaks from the publicat
      \caption{An Example output of our pre-processing for a paragraph in a given publication.}
     \begin{tabular}{ll}
         \toprule
-        {} &                            Example Text Field Data\\
+        {}                  &                            Example Text Field Data \\
         \midrule
         publication\_id     &                                              12744 \\
-        
-        label              &              paragraph\_text \\
-        text               &  A careful reading of text, word\\
-                    & for word, was ... \\
-        section\_title      &               Data Analysis \\
-        annotations        &  [\{'start': 270, 'end': 295,\\
-                           &        'type': 'bibref', ... \\
-        
+        label               &                                    paragraph\_text \\
+        text                &                     A careful reading of text, word\\
+                            &                                  for word, was ... \\
+        section\_title      &                                      Data Analysis \\
+        annotations         &                        [\{'start': 270, 'end': 295,\\
+                            &                              'type': 'bibref', ... \\
         section\_nr         &                                             [3, 2] \\
-
-        text\_field\_nr      &                                                 31 \\
-        para\_in\_section    &                                                  1 \\
-        
+        text\_field\_nr     &                                                 31 \\
+        para\_in\_section   &                                                  1 \\
         \bottomrule
     \end{tabular}
     \label{tab:example-paragraph}

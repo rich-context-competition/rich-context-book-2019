@@ -31,11 +31,7 @@ After the first phase, each team received feedback from the organizers of the RC
 Data and Pre-processing
 -----------------------
 
-This section describes the data provided by the organizers of the RCC, the external data sources we used as well as our pre-processing steps.
-
-### The RCC Corpus
-
-For the first phase, the data provided by the organizers consisted of 5,000 publications. Additionally, a development fold of 100 plain text publications, their metadata, a list of datasets of interest (including all datasets that were explicitly referenced in the curated corpus) were given. The list of datasets should not be considered complete as there could be additional datasets mentioned in these publications. The organizers also provided examples of social science research methods and fields vocabularies in term of SAGE Publications research field and method vocabularies. In the second phase of the competition, an additional set of 5,000 publications from the social sciences has been provided.
+This section describes the external data sources we used as well as our pre-processing steps.
 
 ### External Data Sources
 
