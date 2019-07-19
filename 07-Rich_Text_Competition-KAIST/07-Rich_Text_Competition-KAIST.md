@@ -51,7 +51,9 @@ Datasets Retrieval
 
 Our approach to solving the dataset retrieval task is reading comprehension (RC) with query generation and entity typing. An RC model is applied to the given publications with our own query generation module. Then, the result from the RC model is filtered with an entity typing module. Figure 1 shows our overall approach for dataset retrieval. In following subsections RC model, query generation, and entity typing are explained in detail.
 
-![image](images/docqaarch3.png)*Figure 1: Overall architecture for dataset retrieval*
+![image](images/docqaarch3.png) 
+
+*Figure 1: Overall architecture for dataset retrieval*
 
 ### Document QA
 

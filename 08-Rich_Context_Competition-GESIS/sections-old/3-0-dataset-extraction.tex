@@ -1,6 +1,6 @@
-\section{Dataset Extraction}
+\subsection{Dataset Extraction}
 \label{sec:dataset-extraction}
-\subsection{Task Description}
+\subsubsection{Task Description}
 In scientific literature, datasets are specified to indicate, e.g., the data on which a analysis is performed, a certain finding or a claim is based on. In this competition, we focus on (i) extracting and (ii) linking datasets mention from social science publications to a list of given dataset references.
 Identifying dataset mention in literature is a challenging problem due to the lack of an established style of citing datasets.
 Furthermore, in many research publication, a correct citation of datasets is entirely missing~\cite{boland2012identifying}. 
@@ -15,14 +15,15 @@ We treat the problem of detecting dataset mentions in full-text as a Named Entit
 Let $D$ denote a set of existing datasets $d$ and the knowledgebase $K$ as a set of known dataset references $k$. Furthermore, each element of $K$ is referencing an existing dataset $d$. The Named Entity Recognition and linking task is defined as (i) the identification of dataset mentions $m$ in a sentence, where $m$ references a dataset $d$ and (ii) linking them, when possible, to one element in $K$ (i.e., the reference dataset list given by the RCC). 
 
 
-\subsection{Challenges}
+\subsubsection{Challenges}
 With our method, we focus on the extraction of dataset mentions in the body of the full-text of scientific publications. We recognize three types a dataset can be mentioned: (i) The full name of a dataset like ''National Health and Nutrition Examination Survey``, (ii) an abbreviation (''NHaNES``) or (iii) a vague reference, e.g., ''the monthly statistic``. 
 By each of these varieties, the NER task faces particular challenges. For the first type, the used dataset name can vary in different publications. Where one publication cites the dataset with ''National Health and Nutrition Examination Survey`` the other could use the words  ''Health and Nutrition Survey``.
 In a case where abbreviations are used a disambiguation problem occurs, e.g., in ''WHO data``. WHO may describe the World Health Organization or the White House Office.
 The biggest challenge is again the lack of a precise gold standard that can be used to train a classifier.
 %The major challenge of using a NER approach to detect dataset mentions in text is the necessity of an annotated training corpus which is not given by the RCC.
 In the following we describe how we have dealt with this lack of ground truth data.  
-\subsection{Phase one approach}
+
+\subsubsection{Phase one approach}
 The challenge of missing ground truth data is the main problem to handle during this competition. To this end, supervised learning methods for dataset mentions extraction from text are not directly applicable. To overcome this limitation, we resort to the provided list of dataset mentions and publication pairs and re-annotate the particular sentences in the publication text. This re-annotation is then used to train Spacy's neural network based NER model\footnote{\url{spacy.io}}. We created a holdout set of 1000 publications and a training set of size 4000. We train our model using publication paragraphs as training samples. In the training set, 0.45 percent of the paragraphs contained mentions.  For each positive training example, we added a negative example that does not contain dataset mentions and is sampled at random.  
 %(paragraphs without mentions: 265029; paragraphs with mentions: 12566)
 %We extracted all paragraphs with mentions and merged them with a randomly chosen subset of paragraphs without mentions with the same the size resulting in 25132 paragraphs.
@@ -55,7 +56,7 @@ Consider the following example of a partial match: "National Health and Nutritio
 Table~\ref{table:dataset-mention-eval} show the results of the dataset mention extraction on the holdout set. The model is able to achieve high strict precision and recall values. As expected, the results are even better for the partial version of the metrics. But, this version indicates that even if we are not able to exactly match the dataset mention in text, we can find the right context with very high precision at least.
 %Notably  The results show, that in 10\% of the found matches we have not found the strict correct dataset mention, but the correct position and there is a partial match.
 
-\subsection{Phase two approach}
+\subsubsection{Phase two approach}
 In the second phase of the competition additional 5,000 publications have been provided. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15.000 publication in the same manner as in phase one to obtain training data. This time we split the data in 80\% for training and 20\% for test.   
 
 \paragraph{Evaluation}
