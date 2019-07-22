@@ -10,7 +10,7 @@ abstract: |
     this problem is to automatically extract dataset mentions from
     scientific articles. In this work, we propose to achieve such extraction
     by using a neural network based on a BiLSTM-CRF architecture. Our method
-    achieves $F_{1}=0.883$ in social science articles released as part of
+    achieves $F_{1}=0.885$ in social science articles released as part of
     the Rich Context Dataset. We discuss limitations of the current datasets
     and propose modifications to the model to be done in the future.
 author:
@@ -26,18 +26,19 @@ Introduction
 ============
 
 Science is fundamentally an incremental discipline that depends on
-previous scientist’ work. Datasets form an integral part of this process
-and therefore should be shared and cited as any other scientific output.
-This ideal is far from reality; the credit that datasets currently
-receive does not correspond to their actual usage. One of the issues is
-that there is no standard approach for citing them. Interestingly, while
-datasets are still used and mentioned in articles, we lack methods to
-extract such mentions and properly reconstruct dataset citations. The
-Rich Context Competition challenge aims at closing this gap by inviting
-scientists to produce automated dataset mention and linkage detection
-algorithms. In this article, we detail our proposal to solve the dataset
-mention step. Our approach attempts to provide a first approximation to
-better give credit and keep track of datasets and their usage.
+previous scientist’s work. Datasets form an integral part of this
+process and therefore should be shared and cited as any other scientific
+output. This ideal is far from reality; the credit that datasets
+currently receive does not correspond to their actual usage. One of the
+issues is that there is no standard approach for citing them.
+Interestingly, while datasets are still used and mentioned in articles,
+we lack methods to extract such mentions and properly reconstruct
+dataset citations. The Rich Context Competition challenge aims at
+closing this gap by inviting scientists to produce automated dataset
+mention and linkage detection algorithms. In this article, we detail our
+proposal to solve the dataset mention step. Our approach attempts to
+provide a first approximation to better give credit and keep track of
+datasets and their usage.
 
 The problem of dataset extraction has been explored before.
 @ghavimiIdentifyingImprovingDataset2016 and
@@ -67,7 +68,7 @@ Bidirectional Long short-term Memory (BiLSTM) sequence to sequence model
 paired with a Conditional Random Field (CRF) inference mechanism. We
 tested our model on a novel dataset produced for the Rich Context
 Competition challenge. We achieve a relatively good performance of
-$F_{1}=0.883$. We discuss the current noise and duplication present in
+$F_{1}=0.885$. We discuss the current noise and duplication present in
 the dataset and limitations of our model.
 
 The dataset
@@ -113,15 +114,15 @@ We now describe in more detail the choices of word representation,
 hyper-parameters, and training parameters. A schematic view of the model
 is in Fig \[fig:NetworkArchitecture\] and the components are as follows:
 
-1.  Input Layer: input the sequence of tokens to the network;
+1.  Character embedding layer: treat a token as a sequence of characters
+    and encode the characters by using a bidirectional LSTM to get a
+    vector representation.
 
-2.  Embedding layer: mapping each token into fixed sized vector
-    representation based on fasttext (200-dimensional vectors,
-    @pennington2014glove)
+2.  Word embedding layer: mapping each token into fixed sized vector
+    representation by using a pre-trained word vector.
 
 3.  One BiLSTM layer: make use of Bidirectional LSTM network to capture
-    the high level representation of the whole token sequence input (200
-    dimensions per direction, totally 400 output units)
+    the high level representation of the whole token sequence input.
 
 4.  Dense layer: project the output of the previous layer to a low
     dimensional vector representation of the the distribution of labels.
@@ -129,7 +130,17 @@ is in Fig \[fig:NetworkArchitecture\] and the components are as follows:
 5.  CRF layer: find the most likely sequence of labels.
 
 ![\[fig:NetworkArchitecture\]Network Architecture of BiLSTM-CRF
-model](img/bilstm-crf-model.pdf){width="5cm"}
+network](img/bilistm_crf_network_structure_pic){width="80.00000%"}
+
+Character Embedding
+-------------------
+
+Similar to the bag of words assumption, we can consider a token is
+composed by a bag of characters. In this layer, we convert each token as
+a sequence of characters, then feed the sequence into a bidirectional
+LSTM network to get a fixed length representation of the token. After
+learning the bidirectional LSTM network, we can solve the
+out-of-vocabulary problem for pre-trained word embeddings.
 
 Word Embedding
 --------------
@@ -142,8 +153,9 @@ $S=\{c_{1},c_{2},\cdots,c_{n},\}$ . For each token $c_{i}$we lookup the
 embedding vector $x_{i}$ from a word embedding matrix
 $M^{tkn}\in\mathbb{R}^{d|V|}$, where the $d$ is the dimension of the
 embedding vector and the $V$ is the Vocabulary of the tokens. In this
-paper, the matrix $M^{tkn}$ is initialized by a pre-trained embedding,
-but will be updated by learning from our corpus.
+paper, the matrix $M^{tkn}$ is initialized by a pre-trained GloVe
+vectors[@pennington2014glove], but will be updated by learning from our
+corpus.
 
 LSTM
 ----
@@ -176,7 +188,7 @@ product, $b$ is the bias, $W$ is the parameters, $x_{t}$ is the input at
 time $t$, $c_{t}$ is the LSTM cell state at time $t$ and $h_{t}$ is
 hidden state at time $t$. The $i_{t}$, $f_{t}$, $o_{t}$ and $g_{t}$ are
 named as input, forget, output and cell gates respectively, they control
-the informations to keep in its state and pass to next step.
+the information to keep in its state and pass to next step.
 
 LSTM get information from the previous steps, that is left context in
 our task. However, it is important to consider the information in the
@@ -205,27 +217,44 @@ For all of our results, we use $F_{1}$ as the measure of choice. This
 measure is the harmonic average of the precision and recall and it is
 the standard measure used in sequence labeling tasks. This metric varies
 from 0 to 1, and the unit is the highest possible value. Our method
-achieved a relatively high $F_{1}$ of 0.883 for detecting mentions, in
+achieved a relatively high $F_{1}$ of 0.885 for detecting mentions, in
 line with previous studies.
 
-We found significant limitations to the dataset, and we expect these
-limitations to affect the linkage step (not done in this article). While
-we are proposing a model for such step, we found that it would be
-challenging to do so given the quality of the annotations. Specifically,
-we found significant duplication of labels. The first issue is that
-mentions are nested (e.g. HRS, RAND HRS, HRS DATA, RAND HRS DATA are
-nested and linked to the same dataset). The second issue is that for the
-same mention text, several, different datasets were linked (e.g. the
-term CPS is linked to 57 datasets, the term NHANES is linked to 32
-datasets). This adds noise to the linkage process. In fact, most of the
-mentions have ambiguous relationships to datasets. In particular, only
-17,267 (16.99%) mentions are linked to one dataset, 15,292 (15.04%)
-mentions are listed to two datasets, and 12,624 (12.42%) are linked to
-three datasets. We found that there were some extreme cases, where for
-example there are several mentions linked to more than one hundred
-datasets. If these difficulties are not overcome, then the predictions
-from the linkage process will be noisy and therefore impossible to tell
-apart.
+   Models   GloVe size   Dropout rate   Precision   Recall    $F_{1}$
+  -------- ------------ -------------- ----------- -------- -----------
+     m1         50           0.0          0.884     0.873      0.878
+     m2         50           0.5          0.877     0.888      0.882
+     m3        100           0.0          0.882     0.871      0.876
+     m4        100           0.5          0.885     0.885    **0.885**
+     m5        200           0.0          0.882     0.884      0.883
+     m6        200           0.5          0.885     0.880      0.882
+     m7        300           0.0          0.868     0.886      0.877
+     m8        300           0.5          0.876     0.878      0.877
+
+  : \[tab:Performance-of-proposed\]Performance of proposed network
+
+We train models using the training data, monitor the performance using
+the validation data (we stop training if the performance doesn’t improve
+for the last 10 epochs). We’re using the Adam optimizer with learning
+rate of 0.001 and the batch size equal to 64. The hidden size of LSTM
+for character and word embedding is 80 and 300, respectively. For the
+regularization methods to avoid over-fitting, we use L2 regularization
+with alpha set to 0.01, we also use dropout rate equal to 0.5, and early
+stop strategy with the patience set to 10. We trained 8 models with the
+combination of different GloVe vector size (50, 100, 300 and 300) and
+dropout rate (0.0, 0.5). The performances are reported on the test
+dataset in Table \[tab:Performance-of-proposed\]. The best model is
+trained by word vector size 100 and dropout rate 0.5 with $F_{1}$ score
+0.885.
+
+We also found some limitations to the dataset. Firstly, we found that
+mentions are nested (e.g. HRS, RAND HRS, RAND HRS DATA are linked to the
+same dataset). The second issue most of the mentions have ambiguous
+relationships to datasets. In particular, only 17,267 (16.99%) mentions
+are linked to one dataset, 15,292 (15.04%) mentions are listed to two
+datasets, and 12,624 (12.42%) are linked to three datasets. If these
+difficulties are not overcome, then the predictions from the linkage
+process will be noisy and therefore impossible to tell apart.
 
 Conclusion
 ==========
