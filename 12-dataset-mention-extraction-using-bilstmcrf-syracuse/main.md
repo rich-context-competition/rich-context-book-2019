@@ -11,8 +11,8 @@ abstract: |
     scientific articles. In this work, we propose to achieve such extraction
     by using a neural network based on a BiLSTM-CRF architecture. Our method
     achieves $F_{1}=0.885$ in social science articles released as part of
-    the Rich Context Dataset. We discuss limitations of the current datasets
-    and propose modifications to the model to be done in the future.
+    the Rich Context Dataset. We discuss future improvements to the model
+    and applications beyond social sciences.
 author:
 - 'Tong Zeng$^{1,2}$ and Daniel Acuna$^{1}$[^1]'
 bibliography:
@@ -28,17 +28,18 @@ Introduction
 Science is fundamentally an incremental discipline that depends on
 previous scientist’s work. Datasets form an integral part of this
 process and therefore should be shared and cited as any other scientific
-output. This ideal is far from reality; the credit that datasets
+output. This ideal is far from reality: the credit that datasets
 currently receive does not correspond to their actual usage. One of the
-issues is that there is no standard approach for citing them.
-Interestingly, while datasets are still used and mentioned in articles,
-we lack methods to extract such mentions and properly reconstruct
-dataset citations. The Rich Context Competition challenge aims at
-closing this gap by inviting scientists to produce automated dataset
-mention and linkage detection algorithms. In this article, we detail our
-proposal to solve the dataset mention step. Our approach attempts to
-provide a first approximation to better give credit and keep track of
-datasets and their usage.
+issues is that there is no standard for citing datasets, and even if
+they are cited, they are not properly tracked by major scientific
+indices. Interestingly, while datasets are still used and mentioned in
+articles, we lack methods to extract such mentions and properly
+reconstruct dataset citations. The Rich Context Competition challenge
+aims at closing this gap by inviting scientists to produce automated
+dataset mention and linkage detection algorithms. In this article, we
+detail our proposal to solve the dataset mention step. Our approach
+attempts to provide a first approximation to better give credit and keep
+track of datasets and their usage.
 
 The problem of dataset extraction has been explored before.
 @ghavimiIdentifyingImprovingDataset2016 and
@@ -47,11 +48,11 @@ tf-idf representation with cosine similarity for matching dataset
 identification in social science articles. Their method consists of four
 major steps: preparing a curated dictionary of typical mention phrases,
 detecting dataset references, and ranking matching datasets based on
-cosine similarity of tf-idf representations. This approach achieved an
-impressive $F_{1}=0.84$ for mention detection and $F_{1}=0.83$, for
-matching. @singhalDataExtractMining2013 proposed a method using
-normalized Google distance to screen whether a term is in a dataset.
-However, this method relies on external services and is not
+cosine similarity of tf-idf representations. This approach achieved a
+relatively high performance, with $F_{1}=0.84$ for mention detection and
+$F_{1}=0.83$, for matching. @singhalDataExtractMining2013 proposed a
+method using normalized Google distance to screen whether a term is in a
+dataset. However, this method relies on external services and is not
 computational efficient. They achieve a good $F_{1}=0.85$ using Google
 search and $F_{1}=0.75$ using Bing. A somewhat similar project was
 proposed by @luDatasetSearchEngine2012. They built a dataset search
@@ -68,8 +69,7 @@ Bidirectional Long short-term Memory (BiLSTM) sequence to sequence model
 paired with a Conditional Random Field (CRF) inference mechanism. We
 tested our model on a novel dataset produced for the Rich Context
 Competition challenge. We achieve a relatively good performance of
-$F_{1}=0.885$. We discuss the current noise and duplication present in
-the dataset and limitations of our model.
+$F_{1}=0.885$. We discuss the limitations of our model.
 
 The dataset
 ===========
@@ -86,13 +86,13 @@ competitors and also the quality of the code, documentation, and
 efficiency.
 
 We adopt the CoNLL 2003 format [@tjong2003introduction] to annotate
-whether a token is a part of dataset mention. Concretely, we use we use
-B-DS denotes a token is the first token of a dataset mention, I-DS
-denote a token is inside of dataset mention, and O means a token is not
-a part of dataset mention. We then put each token and its corresponding
-labels in one line and use a empty line as separator between sentences.
-All the sentences was split by 70%, 15%, 15% as training set, validation
-set and testing set.
+whether a token is a part of dataset mention. Concretely, B-DS denotes a
+token that is the first token of a dataset mention, I-DS denotes a token
+that is inside of dataset mention, and O denotes a token that is not a
+part of dataset mention. We then put each token and its corresponding
+labels in one line and use a empty line as a separator between
+sentences. Sentences were randomly split by 70%, 15%, 15% for training
+set, validation set and testing set, respectively.
 
 The Proposed Method
 ===================
@@ -105,7 +105,7 @@ BiLSTM-CRF architecture. At a high level, the model uses a
 sequence-to-sequence recurrent neural network that produces the
 probability of whether a token belongs to a dataset mention. The CRF
 layer takes those probabilities and estimates the most likely sequence
-based on constrains between label transitions (i.e.,
+based on constrains between label transitions (e.g.,
 mention–to–no-mention–to-mention has low probability). While this is a
 standard architecture for modeling sequence labeling, the application to
 our particular dataset and problem is new.
@@ -136,7 +136,7 @@ Character Embedding
 -------------------
 
 Similar to the bag of words assumption, we can consider a token is
-composed by a bag of characters. In this layer, we convert each token as
+composed by a bag of characters. In this layer, we convert each token to
 a sequence of characters, then feed the sequence into a bidirectional
 LSTM network to get a fixed length representation of the token. After
 learning the bidirectional LSTM network, we can solve the
@@ -153,9 +153,8 @@ $S=\{c_{1},c_{2},\cdots,c_{n},\}$ . For each token $c_{i}$we lookup the
 embedding vector $x_{i}$ from a word embedding matrix
 $M^{tkn}\in\mathbb{R}^{d|V|}$, where the $d$ is the dimension of the
 embedding vector and the $V$ is the Vocabulary of the tokens. In this
-paper, the matrix $M^{tkn}$ is initialized by a pre-trained GloVe
-vectors[@pennington2014glove], but will be updated by learning from our
-corpus.
+paper, the matrix $M^{tkn}$ is initialized by pre-trained GloVe vectors
+[@pennington2014glove], but will be updated by learning from our corpus.
 
 LSTM
 ----
@@ -190,13 +189,13 @@ hidden state at time $t$. The $i_{t}$, $f_{t}$, $o_{t}$ and $g_{t}$ are
 named as input, forget, output and cell gates respectively, they control
 the information to keep in its state and pass to next step.
 
-LSTM get information from the previous steps, that is left context in
+LSTM gets information from the previous steps, which is left context in
 our task. However, it is important to consider the information in the
 right context. A solution of this information need is bidirectional LSTM
-[@graves2013speech]. The idea of Bi-LSTM is using two LSTM layers and
-feed in each layer with sequence forwards and backwards separately, and
-then concatenate the hidden states of the two LSTM to modeling both the
-left and right contexts
+[@graves2013speech]. The idea of Bi-LSTM is to use LSTM layers and feed
+the forward and backward flows separately, and then concatenate the
+hidden states of the two LSTM to modeling both the left and right
+contexts
 
 $$h_{t}=[\overrightarrow{h_{t}}\varoplus\overleftarrow{h_{t}}]$$
 
@@ -235,12 +234,12 @@ line with previous studies.
 
 We train models using the training data, monitor the performance using
 the validation data (we stop training if the performance doesn’t improve
-for the last 10 epochs). We’re using the Adam optimizer with learning
-rate of 0.001 and the batch size equal to 64. The hidden size of LSTM
-for character and word embedding is 80 and 300, respectively. For the
+for the last 10 epochs). We are using the Adam optimizer with learning
+rate of 0.001 and batch size equal to 64. The hidden size of LSTM for
+character and word embedding is 80 and 300, respectively. For the
 regularization methods to avoid over-fitting, we use L2 regularization
 with alpha set to 0.01, we also use dropout rate equal to 0.5, and early
-stop strategy with the patience set to 10. We trained 8 models with the
+stop strategy with patience set to 10. We trained 8 models with a
 combination of different GloVe vector size (50, 100, 300 and 300) and
 dropout rate (0.0, 0.5). The performances are reported on the test
 dataset in Table \[tab:Performance-of-proposed\]. The best model is
@@ -280,10 +279,9 @@ generalize relatively well either to the second phase of the challenge
 or even to other disciplines. We would emphasize, however, that the
 quality of the dataset has a great deal of room for improvement. Given
 how important this task is for the whole of science, we should try to
-strive to improve on the quality of these datasets so that techniques
-like this one can be more broadly applied. The importance of dataset
-mention and linkage therefore could be fully appreciated by the
-community.
+strive to improve the quality of these datasets so that techniques like
+this one can be more broadly applied. The importance of dataset mention
+and linkage therefore could be fully appreciated by the community.
 
 Acknowledgements {#acknowledgements .unnumbered}
 ================
