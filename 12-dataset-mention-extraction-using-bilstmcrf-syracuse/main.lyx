@@ -135,8 +135,8 @@ Datasets are critical for scientific research, playing a role in replication,
 \end_inset
 
  in social science articles released as part of the Rich Context Dataset.
- We discuss limitations of the current datasets and propose modifications
- to the model to be done in the future.
+ We discuss future improvements to the model and applications beyond social
+ sciences.
 \end_layout
 
 \begin_layout Section
@@ -148,9 +148,11 @@ Science is fundamentally an incremental discipline that depends on previous
  scientist's work.
  Datasets form an integral part of this process and therefore should be
  shared and cited as any other scientific output.
- This ideal is far from reality; the credit that datasets currently receive
+ This ideal is far from reality: the credit that datasets currently receive
  does not correspond to their actual usage.
- One of the issues is that there is no standard approach for citing them.
+ One of the issues is that there is no standard for citing datasets, and
+ even if they are cited, they are not properly tracked by major scientific
+ indices.
  Interestingly, while datasets are still used and mentioned in articles,
  we lack methods to extract such mentions and properly reconstruct dataset
  citations.
@@ -185,7 +187,7 @@ literal "false"
  Their method consists of four major steps: preparing a curated dictionary
  of typical mention phrases, detecting dataset references, and ranking matching
  datasets based on cosine similarity of tf-idf representations.
- This approach achieved an impressive 
+ This approach achieved a relatively high performance, with 
 \begin_inset Formula $F_{1}=0.84$
 \end_inset
 
@@ -246,8 +248,7 @@ n challenge.
 \end_inset
 
 .
- We discuss the current noise and duplication present in the dataset and
- limitations of our model.
+ We discuss the limitations of our model.
 \end_layout
 
 \begin_layout Section
@@ -286,13 +287,13 @@ literal "false"
 \end_inset
 
  to annotate whether a token is a part of dataset mention.
- Concretely, we use we use B-DS denotes a token is the first token of a
- dataset mention, I-DS denote a token is inside of dataset mention, and
- O means a token is not a part of dataset mention.
+ Concretely, B-DS denotes a token that is the first token of a dataset mention,
+ I-DS denotes a token that is inside of dataset mention, and O denotes a
+ token that is not a part of dataset mention.
  We then put each token and its corresponding labels in one line and use
- a empty line as separator between sentences.
- All the sentences was split by 70%, 15%, 15% as training set, validation
- set and testing set.
+ a empty line as a separator between sentences.
+ Sentences were randomly split by 70%, 15%, 15% for training set, validation
+ set and testing set, respectively.
 \end_layout
 
 \begin_layout Section
@@ -310,11 +311,10 @@ In this section, we propose a model for detecting mentions based on a BiLSTM-CRF
  network that produces the probability of whether a token belongs to a dataset
  mention.
  The CRF layer takes those probabilities and estimates the most likely sequence
- based on constrains between label transitions (i.e., mention–to–no-mention–to-men
+ based on constrains between label transitions (e.g., mention–to–no-mention–to-men
 tion has low probability).
  While this is a standard architecture for modeling sequence labeling, the
  application to our particular dataset and problem is new.
- 
 \end_layout
 
 \begin_layout Standard
@@ -405,7 +405,7 @@ Character Embedding
 \begin_layout Standard
 Similar to the bag of words assumption, we can consider a token is composed
  by a bag of characters.
- In this layer, we convert each token as a sequence of characters, then
+ In this layer, we convert each token to a sequence of characters, then
  feed the sequence into a bidirectional LSTM network to get a fixed length
  representation of the token.
  After learning the bidirectional LSTM network, we can solve the out-of-vocabula
@@ -458,7 +458,7 @@ we lookup the embedding vector
 \begin_inset Formula $M^{tkn}$
 \end_inset
 
- is initialized by a pre-trained GloVe vectors
+ is initialized by pre-trained GloVe vectors 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "pennington2014glove"
@@ -610,8 +610,8 @@ where the
 \end_layout
 
 \begin_layout Standard
-LSTM get information from the previous steps, that is left context in our
- task.
+LSTM gets information from the previous steps, which is left context in
+ our task.
  However, it is important to consider the information in the right context.
  A solution of this information need is bidirectional LSTM 
 \begin_inset CommandInset citation
@@ -622,9 +622,9 @@ literal "false"
 \end_inset
 
 .
- The idea of Bi-LSTM is using two LSTM layers and feed in each layer with
- sequence forwards and backwards separately, and then concatenate the hidden
- states of the two LSTM to modeling both the left and right contexts
+ The idea of Bi-LSTM is to use LSTM layers and feed the forward and backward
+ flows separately, and then concatenate the hidden states of the two LSTM
+ to modeling both the left and right contexts
 \end_layout
 
 \begin_layout Standard
@@ -710,10 +710,6 @@ For all of our results, we use
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -1269,15 +1265,15 @@ m8
 We train models using the training data, monitor the performance using the
  validation data (we stop training if the performance doesn't improve for
  the last 10 epochs).
- We're using the Adam optimizer with learning rate of 0.001 and the batch
- size equal to 64.
+ We are using the Adam optimizer with learning rate of 0.001 and batch size
+ equal to 64.
  The hidden size of LSTM for character and word embedding is 80 and 300,
  respectively.
  For the regularization methods to avoid over-fitting, we use L2 regularization
  with alpha set to 0.01, we also use dropout rate equal to 0.5, and early
- stop strategy with the patience set to 10.
- We trained 8 models with the combination of different GloVe vector size
- (50, 100, 300 and 300) and dropout rate (0.0, 0.5).
+ stop strategy with patience set to 10.
+ We trained 8 models with a combination of different GloVe vector size (50,
+ 100, 300 and 300) and dropout rate (0.0, 0.5).
  The performances are reported on the test dataset in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1344,8 +1340,8 @@ Our proposal, however, is surprisingly effective.
  We would emphasize, however, that the quality of the dataset has a great
  deal of room for improvement.
  Given how important this task is for the whole of science, we should try
- to strive to improve on the quality of these datasets so that techniques
- like this one can be more broadly applied.
+ to strive to improve the quality of these datasets so that techniques like
+ this one can be more broadly applied.
  The importance of dataset mention and linkage therefore could be fully
  appreciated by the community.
  
