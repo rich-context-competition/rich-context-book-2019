@@ -1270,8 +1270,7 @@ We train models using the training data, monitor the performance using the
  The hidden size of LSTM for character and word embedding is 80 and 300,
  respectively.
  For the regularization methods to avoid over-fitting, we use L2 regularization
- with alpha set to 0.01, we also use dropout rate equal to 0.5, and early
- stop strategy with patience set to 10.
+ with alpha set to 0.01, we also use dropout rate equal to 0.5.
  We trained 8 models with a combination of different GloVe vector size (50,
  100, 300 and 300) and dropout rate (0.0, 0.5).
  The performances are reported on the test dataset in Table 

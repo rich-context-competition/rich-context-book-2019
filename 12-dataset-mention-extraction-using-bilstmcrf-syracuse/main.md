@@ -238,13 +238,12 @@ for the last 10 epochs). We are using the Adam optimizer with learning
 rate of 0.001 and batch size equal to 64. The hidden size of LSTM for
 character and word embedding is 80 and 300, respectively. For the
 regularization methods to avoid over-fitting, we use L2 regularization
-with alpha set to 0.01, we also use dropout rate equal to 0.5, and early
-stop strategy with patience set to 10. We trained 8 models with a
-combination of different GloVe vector size (50, 100, 300 and 300) and
-dropout rate (0.0, 0.5). The performances are reported on the test
-dataset in Table \[tab:Performance-of-proposed\]. The best model is
-trained by word vector size 100 and dropout rate 0.5 with $F_{1}$ score
-0.885.
+with alpha set to 0.01, we also use dropout rate equal to 0.5. We
+trained 8 models with a combination of different GloVe vector size (50,
+100, 300 and 300) and dropout rate (0.0, 0.5). The performances are
+reported on the test dataset in Table \[tab:Performance-of-proposed\].
+The best model is trained by word vector size 100 and dropout rate 0.5
+with $F_{1}$ score 0.885.
 
 We also found some limitations to the dataset. Firstly, we found that
 mentions are nested (e.g. HRS, RAND HRS, RAND HRS DATA are linked to the
