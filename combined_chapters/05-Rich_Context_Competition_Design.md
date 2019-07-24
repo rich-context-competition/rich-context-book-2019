@@ -1,4 +1,9 @@
-# Chapter 5 - Compettion Design  **Andrew Gordon, Ekaterina Levitskaya, Jonathan Morgan, Paco Nathan and
+ 
+---
+ 
+# Chapter 5 - Compettion Design
+ 
+**Andrew Gordon, Ekaterina Levitskaya, Jonathan Morgan, Paco Nathan and
 Sophie Rand - New York University**
 
 We hosted a competition to address the problem of automating information
@@ -635,6 +640,3 @@ for the judges.*
 
 [^6]: The protocol is described in
     [[https://docs.google.com/document/d/1Hi13N6gfiRz9nfwCoUQrey8v\_ozY7fKHMtHV4GgX2ys/edit]{.underline}](https://docs.google.com/document/d/1Hi13N6gfiRz9nfwCoUQrey8v_ozY7fKHMtHV4GgX2ys/edit)
- 
----
- 

@@ -1,4 +1,9 @@
-# Chapter 6 - Allen AI  Introduction
+ 
+---
+ 
+# Chapter 6 - Allen AI
+ 
+Introduction
 ============
 
 The Allen Institute for Artificial Intelligence (AI2) is a non-profit
@@ -228,7 +233,7 @@ with a positive net effect on F1 score ($\Delta = 0.7$ F1).
 
 [\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"}
 
-Research Area Prediction {#sec:areas}
+Research Area Prediction 
 ========================
 
 #### Data.
@@ -344,6 +349,3 @@ evaluations, and providing feedback. We also would like to thank Zhihong
 [^2]: <https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py>
 
 [^3]: <https://xgboost.readthedocs.io/en/latest/>
- 
----
- 

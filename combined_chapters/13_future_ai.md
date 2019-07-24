@@ -1,4 +1,9 @@
-# 13 - Future AI   # The Future of AI in Rich Context
+ 
+---
+ 
+# Chapter 13 - The future of context
+ 
+# The Future of AI in Rich Context
 
 **Paco Nathan**
 
@@ -303,6 +308,3 @@ With this latter step, in the broader sense Rich Context helps establish a commu
 
 [^7]:
      For an overview of graph embedding, see [“Graph Embedding for Deep Learning”](https://towardsdatascience.com/overview-of-deep-learning-on-graph-embeddings-4305c10ad4a4), Flawson Tong (2019-05-06).
- 
----
- 

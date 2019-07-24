@@ -1,4 +1,9 @@
-# Chapter 3 - Digital Science Use Cases  nEnriching context and enhancing engagement around datasets
+ 
+---
+ 
+# Chapter 3 - Digital Science Use Cases
+ 
+Enriching context and enhancing engagement around datasets
 ==========================================================
 
 Christian Herzog^1,a^, Daniel W Hook^1,2,3,b^, Mark Hahnel^1,c^, Stacy
@@ -434,6 +439,3 @@ challenges that face academia today.
 
 [^9]: Hook, D.W., Herzog, C. and Porter, S.j. (2018) Front. Res. Metr.
     Anal. doi:10.3389/frma.2018.00023
- 
----
- 

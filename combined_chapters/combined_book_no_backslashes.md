@@ -1,7 +1,7 @@
 combined_book.md
-4925
+4778
 
----
+# Chapter 1 - Introduction
 
 Rich Context Introductory Chapter
 
@@ -348,7 +348,12 @@ Opportunities" (2019), , doi:10.31235/osf.io/vncwe.8. V. Bush, *Science,
 the endless frontier: A report to the President* (US Govt. print. off.,
 1945).9. L. Wissler, M. Almashraee, D. M. Díaz, A. Paschke, in *IEEE
 GSC* (2014).
-# Chapter 2 - Bundesbank -- View from the users  nTitle: Who’s Waldo: Conceptual issues when characterizing data in empirical research
+
+---
+
+# Chapter 2 - Bundesbank
+
+Title: Who’s Waldo: Conceptual issues when characterizing data in empirical research
 Author:Stefan Bender, Hendrik Doll, Christian Hirsch [^footnote0]
 Affiliation: Research Data and Service Centre , Deutsche Bundesbank
 Date: June 14, 2019
@@ -575,7 +580,9 @@ For the way forward, it is important to note the importance of the research area
 
 ---
 
-# Chapter 3 - Digital Science Use Cases  nEnriching context and enhancing engagement around datasets
+# Chapter 3 - Digital Science Use Cases
+
+Enriching context and enhancing engagement around datasets
 ==========================================================
 
 Christian Herzog^1,a^, Daniel W Hook^1,2,3,b^, Mark Hahnel^1,c^, Stacy
@@ -1012,9 +1019,12 @@ challenges that face academia today.
 [^9]: Hook, D.W., Herzog, C. and Porter, S.j. (2018) Front. Res. Metr.
     Anal. doi:10.3389/frma.2018.00023
 
+
 ---
 
-# Chapter 4 - Context  > Metadata for Administrative and Social Science Data
+# Chapter 4 - Metadata for Social Science Datasets
+
+> Metadata for Administrative and Social Science Data
 
 Robert B Allen
 
@@ -1632,7 +1642,9 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 
 ---
 
-# Chapter 5 - Compettion Design  **Andrew Gordon, Ekaterina Levitskaya, Jonathan Morgan, Paco Nathan and
+# Chapter 5 - Compettion Design
+
+**Andrew Gordon, Ekaterina Levitskaya, Jonathan Morgan, Paco Nathan and
 Sophie Rand - New York University**
 
 We hosted a competition to address the problem of automating information
@@ -2272,7 +2284,9 @@ for the judges.*
 
 ---
 
-# Chapter 6 - Allen AI  Introduction
+# Chapter 6 - Allen AI
+
+Introduction
 ============
 
 The Allen Institute for Artificial Intelligence (AI2) is a non-profit
@@ -2502,7 +2516,7 @@ with a positive net effect on F1 score ($\Delta = 0.7$ F1).
 
 [\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"}
 
-Research Area Prediction {#sec:areas}
+Research Area Prediction
 ========================
 
 #### Data.
@@ -2621,7 +2635,9 @@ evaluations, and providing feedback. We also would like to thank Zhihong
 
 ---
 
-# 7 -  KAIST  ---
+# Chapter 7 - KAIST
+
+---
 author:
 - |
     Giwon Hong  
@@ -2682,8 +2698,7 @@ Our approach to solving the dataset retrieval task is reading comprehension (RC)
 
 Reading comprehension models are neural networks that find answers for given queries according to a text. Answers must appear explicitly in the text. Since the dataset retrieval task is about finding explicit dataset mentions from publications, RC models are suitable for this task.
 
-The RC model used in this work is Document QA [@clark2017simple]. It uses Bi-GRU, bi-attention, and self-attention mechanism. In addition, Document QA performs a paragraph selection that pre-filters and selects the *k* most relevant paragraphs through TF-IDF similarity between the query and paragraphs. We observed that datasets are usually mentioned together in some specific paragraphs of the publications. Therefore, this model is appropriate for this task thanks to its paragraph
-selection stage.
+The RC model used in this work is Document QA [@clark2017simple]. It uses Bi-GRU, bi-attention, and self-attention mechanism. In addition, Document QA performs a paragraph selection that pre-filters and selects the *k* most relevant paragraphs through TF-IDF similarity between the query and paragraphs. We observed that datasets are usually mentioned together in some specific paragraphs of the publications. Therefore, this model is appropriate for this task thanks to its paragraph selection stage.
 
 ### Query generation module
 
@@ -2739,13 +2754,13 @@ What worked and what didn’t
 ===========================
 We tried different ideas to extract dataset names. Firstly, we tried to extract the dataset name using some hand-crafted queries in the QA model. But we noticed that these manually generated queries do not have sufficient discriminative power. Therefore, we tried to generate a general query with enough discriminative power to retrieve datasets names. To this end, we converted the sentences containing the dataset into queries, and then clustered the converted queries to get some generalized queries. However, we found that each of the resulting clusters did not reflect generalized queries. Hence, we had to create specific queries for each publication as explained in the previous section.
 
-We also tried to use the section names as a feature of the paragraph selection part in the Document QA. However, the use of section name has rather degraded the overall performance. In our analysis, this seems to be due to the noise that occurred when extracting the section name, since we relied on some heuristics to extract the section names.
+We also tried to use the section names as a feature of the paragraph selection part in the Document QA. However, the use of section name has rather degraded the overall performance. In our analysis, this seems to be due to the noise that occurred when extracting the section name, since we relied on some heuristics to extract them.
 
 The use of entity typing worked well to remove the wrong candidate answers proposed by the reading comprehension model. Thanks to this filtering by entity types, we were able to improve the recall using the query generation module without sacrificing the precision.
 
 Our approach to retrieve research fields worked well as will be shown in the next section.
 
-Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods. Therefore, we tried to model it as an NER problem, where we consider each research method that appeared in a paper as a named-entity. By modeling the problem in this way, we can use existing NER models to extract research methods from papers. However, this approach also performed poorly. We found that the dataset we used for training was not appropriate for this task. We will provide an in-depth analysis of this problem in the next section.
+Finally, our first idea to retrieve research methods was based on identifying their context words by using the frequency of those words. However, this approach did not achieve good results due to the lack of discriminative power of the most common words that co-occur with the research methods. Therefore, we tried to model it as an NER problem, where we consider each research method that appeared in a paper as a named-entity. By modeling the problem in this way, we can use existing NER models to extract research methods from papers. However, this approach also performed poorly.
 
 
 Summary of your results and caveats
@@ -2774,7 +2789,7 @@ These results with fewer answers were expected, due to the difficulty of definin
 
 ### Document QA + query generation module
 
-Figure 6 shows the results from 3 publications of phase 1 dev set with Document QA and query generation module. Because of the latter, our dataset retrieval model could retrieve a large number of answers. For example, the result from *153.txt* publication contains a large number of answers with correct answers such as *financial services FDI data* or *Micro Batabase Direct investment*. Therefore, we believe that the query generation module improves recall of the entire dataset retrieval model. Actually, our model using this setting can retrieve more than 2,000 answers (predictions) from 100 publications of phase 1 dev set.
+Figure 6 shows the results from 3 publications of phase 1 dev set with Document QA and query generation module. Because of the latter, our dataset retrieval model could retrieve a large number of answers. For example, the result from *153.txt* publication contains a large number of answers with correct answers such as *financial services FDI data* or *Micro Database Direct investment*. Therefore, we believe that the query generation module improves recall of the entire dataset retrieval model. Actually, our model using this setting can retrieve more than 2,000 answers (predictions) from 100 publications of phase 1 dev set.
 
 However, compared to the Document QA only setting, there is a considerable number of noise. For example, in Figure 6, *empirical, Table 1, Section 4* and etc., are not dataset mentions.
 
@@ -2796,7 +2811,7 @@ We randomly selected 20 publications from the training set of phase 1, since our
 Research Methods Retrieval
 --------------------------
 
-20 random publications were selected from the training set of phase 2 and labeled. Our result is not as expected. The model is able to find proper research methods for 12 publications out of 20. For example, the model detects one of the research methods appeared in publication with id 15359 which is *Factor analysis*. However, the results contain a notable amount of noise. For example, the document with id 10751, the model retrieves several wrong answers like *Reviews describe*, *Composite materials*, *Detailed databases*, etc. After analyzing this result, we found that the dataset we use for training is not appropriate for this task. For example, *Reliability* and *Independent variables* are marked as research methods, but actually, they are not.
+20 random publications were selected from the training set of phase 2 and labeled and our results are not as expected. The model is able to find proper research methods for 12 publications out of 20. For example, the model detects one of the research methods appeared in publication with id 15359 which is *Factor analysis*. However, the results contain a notable amount of noise. For example, the document with id 10751, the model retrieves several wrong answers like *Reviews describe*, *Composite materials*, *Detailed databases*, etc.
 
 Lessons learned and what would you do differently
 =================================================
@@ -2806,8 +2821,7 @@ In addition, since Document QA is good for prototyping, it was a good idea to us
 
 Also, in the QA model, we are currently using symbolic queries. But since we are generating our own queries, we could define and generate queries with a distributed representation. It would be more generic and model-matching queries. Furthermore, for research fields, we should have tried other ranking methods like BM25, a ranking function used by search engines whose performance is better than TF-IDF.
 
-Finally, for research methods, because of the noise in the dataset, supervised NER could not achieve the desired performance, so we should have used unsupervised NER to avoid that noise.
-
+Finally, for research methods, we should have analyzed more the dataset to use more suitable techniques like unsupervised NER instead of supervised NER.
 
 What comes next
 ===============
@@ -2828,40 +2842,50 @@ The technical documentation of the code is provided in the GitHub repository of 
 
 ---
 
-# 8 -  GESIS  Introduction
-============
+# Chapter 8 - GESIS
 
-Scientists and analysts often face the problem of finding interesting research datasets and identifying who else used the data, in which research fields, and how the data has been analyzed from a methodological perspective. To address these problems, the Coleridge Initiative organized the Rich Context Competition[1](RCC). The competition invited international research teams to develop text analysis and machine learning tools that can discover relationships between research datasets, methods, and fields in scientific literature. The competition took place between October 2018 and February 2019 and included two phases[2]. The first phase was open for all teams which have submitted a letter of intent. Teams are then provided with a corpus of social science publications to develop and train machine learning algorithms for automatic research dataset, methods and field detection and linking. More concretely, one major subtask consisted of linking dataset mentions to a given set of around 10,000 dataset descriptions from the ICPSR’s research data index.[3] Only the best four teams from the first phase are invited to the second phase of the competition and asked to discover research datasets, methods, and fields in a larger corpus of social science publications. All submitted algorithms have to be made publicly available as open source tools. With this document, we (team RCC-5) aim to fulfill another requirement, i.e., the documentation and summary of the developed approach including data pre-processing, algorithms, and software.
+GESIS
+=====
 
-General Approach and Software Components
-----------------------------------------
+Authors: Wolfgang Otto, Andrea Zielinski, Behnam Ghavimim, Dimitar Dimitrov, Narges Tavakolpoursaleh
 
-One of the central tasks in the RCC is the extraction of dataset mentions from text. Nevertheless, we considered the methods and fields discovery equally important. To this end, we decided to follow a module-based approach and developed tools that can be used separately but also as parts of a data processing pipeline. Figure \[figure:pipeline\] shows an overview of the software modules developed for the RCC competition, including their dependencies. Here, the upper three modules (gray) describe the pre-processing steps (cf. Section \[sec:prepro\]). The lower four modules (blue) are used to generate the output in a pre-specified format. The pre-processing step consists of extracting metadata and pure text from PDF documents. The extraction itself is done using the Cermine Tool[4] which returns a Journal Article Tag Suite[5](Jats) XML document. Then, in a second step, text, metadata and references are extracted. The output of the pre-processing is then used by the software modules responsible for tackling the individual sub-tasks, i.e., discovering research datasets (cf. Section \[sec:dataset-extraction\]), methods (cf. Section \[section:research\_method\_extraction\]) and fields (cf. Section \[section:field\_classification\]). Section \[sec:techdoc\] provides the technical details of the modules, i.e., input, output, and how to run the modules.
+Introduction
+------------
 
-First Phase Feedback
---------------------
+Scientists and analysts often face the problem of finding interesting research datasets and identifying who else used the data, in which research fields, and how the data has been analyzed from a methodological perspective.
+
+-   GESIS description
+
+-   Why the competition is interesting for us?
+
+-   One of gesis missions: Support Social Scientists in all steps of the research cycle.
+
+-   Allready work in this area ((Boland et al., 2012))
+
+This chapter describe our approaches, techniques and used additional data used for our partitipation to the Rich Context Competition (RCC).
+
+### General Approach and Software Components
+
+The central tasks in the RCC is the extraction of dataset mentions from text. Nevertheless, we considered the discovery of research methods and research fields equally important. To this end, we decided to follow a module-based approach and developed tools that can be used separately but also as parts of a data processing pipeline. Figure \[figure:pipeline\] shows an overview of the software modules developed for the RCC competition, including their dependencies. Here, the upper three modules (gray) describe the pre-processing steps (cf. Section \[sec:prepro\]). The lower four modules (blue) are used to generate the output in a pre-specified format. The pre-processing step consists of extracting metadata and pure text from PDF documents. The extraction itself is done using the Cermine Tool[1] which returns a Journal Article Tag Suite[2](Jats) XML document. Then, in a second step, text, metadata and references are extracted. The output of the pre-processing is then used by the software modules responsible for tackling the individual sub-tasks, i.e., discovering research datasets (cf. Section \[sec:dataset-extraction\]), methods (cf. Section \[section:research\_method\_extraction\]) and fields (cf. Section \[section:field\_classification\]).
+
+<img src="figures/information-flow.png" alt="Software modules. The figure shows an overview of the individual software modules described in this document and their dependencies. Modules colored in gray represent our pre-processing pipeline, whereas blue-colored modules represent the three main tasks of the RCC." style="width:47.0%" />
+
+### First Phase Feedback
 
 After the first phase, each team received feedback from the organizers of the RCC. The feedback is twofold and consists of a quantitative and qualitative evaluation. Unfortunately, our team did not perform very well regarding precision and recall. In contrast to this, our approach has been found convincing regarding the quality of results. The qualitative feedback result from a random sample of ten documents that are given to four judges. Judges are then asked to manually extract dataset mentions and calculate the overlap between their dataset extractions and the output of our algorithm. Other factors that judges took into consideration are specificity, uniqueness and multiple occurrences of dataset mentions. As for the extraction of research methods and fields no ground truth has been provided, these tasks were evaluated against the judges’ expert knowledge. Similarly to the extraction of dataset mentions, specificity and uniqueness have been considered for these two tasks. The feedback our team received acknowledged the fact that no ground truth has been provided and our efforts regarding the extraction of research methods and fields.
 
 Data and Pre-processing
-=======================
+-----------------------
 
-This section describes the data provided by the organizers of the RCC, the external data sources we used as well as our pre-processing steps.
+This section describes the external data sources we used as well as our pre-processing steps.
 
-The RCC Corpus
---------------
+### External Data Sources
 
-For the first phase, the data provided by the organizers consisted of 5,000 publications. Additionally, a development fold of 100 plain text publications, their metadata, a list of datasets of interest (including all datasets that were explicitly referenced in the curated corpus) were given. The list of datasets should not be considered complete as there could be additional datasets mentioned in these publications. The organizers also provided examples of social science research methods and fields vocabularies in term of SAGE Publications research field and method vocabularies. In the second phase of the competition, an additional set of 5,000 publications from the social sciences has been provided.
+For developing our algorithms, we also utilized two external data sources. For the discovery of research methods and fields, we resort to data from Social Science Open Access Repository[3] (SSOAR). SSOAR is maintained at GESIS – Leibniz Institute for the Social Sciences collects and archives literature of relevance to the social sciences. In SSOAR, full texts are indexed using controlled social science vocabulary (Thesaurus[4], Classification[5]) and are assigned rich metadata. SSOAR offers documents in various languages. The corpus of English language publications that can be used for purposes of the competition consists of a total of 13,175 documents. All SSOAR documents can be accessed through the OAI-PMH[6] interface. Another external source that we used for discovery of research methods is the ACL Anthology Reference Corpus (Bird et al., 2008). ACL ARC is a corpus of scholarly publications about computational linguistics. The corpus consists of a total of 22,878 articles.
 
-External Data Sources
----------------------
+### Pre-processing
 
-For developing our algorithms, we also utilized two external data sources. For the discovery of research methods and fields, we resort to data from Social Science Open Access Repository[6] (SSOAR). SSOAR is maintained at GESIS – Leibniz Institute for the Social Sciences collects and archives literature of relevance to the social sciences. In SSOAR, full texts are indexed using controlled social science vocabulary (Thesaurus[7], Classification[8]) and are assigned rich metadata. SSOAR offers documents in various languages. The corpus of English language publications that can be used for purposes of the competition consists of a total of 13,175 documents. All SSOAR documents can be accessed through the OAI-PMH[9] interface. Another external source that we used for discovery of research methods is the ACL Anthology Reference Corpus (Bird et al., 2008). ACL ARC is a corpus of scholarly publications about computational linguistics. The corpus consists of a total of 22,878 articles.
-
-Pre-processing
---------------
-
-Although the organizers of the RCC, offered plain texts for the publication, we decided to build our own pre-process pipeline. The pipeline uses the Cermine Tool to extract information from PDF documents. The main benefit of using this tool is the structured metadata output including better disambiguation of sections and paragraphs in the publications. The output XML file uses the Journal Article Tag Suite[10]. For the competition, there are only two interesting elements of the Jats XML format, i.e., &lt;front&gt; and &lt;body&gt;. The &lt;front&gt; element contains the metadata of the publication, whereas the &lt;body&gt; contains the publication text. Another advantage of Cermine is that the hyphenation and segmentation of paragraphs are carried out automatically. As a last step of the pre-processing, we remove all linebreaks from the publication text and output a list of metadata fields and values as shown in Table \[tab:example-paragraph\] for each publication paragraph.
+Although the organizers of the RCC, offered plain texts for the publication, we decided to build our own pre-process pipeline. The pipeline uses the Cermine Tool to extract information from PDF documents. The main benefit of using this tool is the structured metadata output including better disambiguation of sections and paragraphs in the publications. The output XML file uses the Journal Article Tag Suite[7]. For the competition, there are only two interesting elements of the Jats XML format, i.e., &lt;front&gt; and &lt;body&gt;. The &lt;front&gt; element contains the metadata of the publication, whereas the &lt;body&gt; contains the publication text. Another advantage of Cermine is that the hyphenation and segmentation of paragraphs are carried out automatically. As a last step of the pre-processing, we remove all linebreaks from the publication text and output a list of metadata fields and values as shown in Table \[tab:example-paragraph\] for each publication paragraph.
 
 |                   | Example Text Field Data         |
 |:------------------|:--------------------------------|
@@ -2879,10 +2903,9 @@ Although the organizers of the RCC, offered plain texts for the publication, we 
 \[tab:example-paragraph\]
 
 Dataset Extraction
-==================
+------------------
 
-Task Description
-----------------
+### Task Description
 
 In scientific literature, datasets are specified to indicate, e.g., the data on which a analysis is performed, a certain finding or a claim is based on. In this competition, we focus on (i) extracting and (ii) linking datasets mention from social science publications to a list of given dataset references. Identifying dataset mention in literature is a challenging problem due to the lack of an established style of citing datasets. Furthermore, in many research publication, a correct citation of datasets is entirely missing (Boland et al., 2012). The following two sentences exemplify the problem.
 **Example 1**: *P-values are reported for the one-tail paired t-test on *Allbus* (dataset mention) and *ISSP* (dataset mention).*
@@ -2893,15 +2916,13 @@ We treat the problem of detecting dataset mentions in full-text as a Named Entit
 
 Let *D* denote a set of existing datasets *d* and the knowledgebase *K* as a set of known dataset references *k*. Furthermore, each element of *K* is referencing an existing dataset *d*. The Named Entity Recognition and linking task is defined as (i) the identification of dataset mentions *m* in a sentence, where *m* references a dataset *d* and (ii) linking them, when possible, to one element in *K* (i.e., the reference dataset list given by the RCC).
 
-Challenges
-----------
+### Challenges
 
 With our method, we focus on the extraction of dataset mentions in the body of the full-text of scientific publications. We recognize three types a dataset can be mentioned: (i) The full name of a dataset like ”National Health and Nutrition Examination Survey“, (ii) an abbreviation (”NHaNES“) or (iii) a vague reference, e.g., ”the monthly statistic“. By each of these varieties, the NER task faces particular challenges. For the first type, the used dataset name can vary in different publications. Where one publication cites the dataset with ”National Health and Nutrition Examination Survey“ the other could use the words ”Health and Nutrition Survey“. In a case where abbreviations are used a disambiguation problem occurs, e.g., in ”WHO data“. WHO may describe the World Health Organization or the White House Office. The biggest challenge is again the lack of a precise gold standard that can be used to train a classifier. In the following we describe how we have dealt with this lack of ground truth data.
 
-Phase one approach
-------------------
+### Phase one approach
 
-The challenge of missing ground truth data is the main problem to handle during this competition. To this end, supervised learning methods for dataset mentions extraction from text are not directly applicable. To overcome this limitation, we resort to the provided list of dataset mentions and publication pairs and re-annotate the particular sentences in the publication text. This re-annotation is then used to train Spacy’s neural network based NER model[11]. We created a holdout set of 1000 publications and a training set of size 4000. We train our model using publication paragraphs as training samples. In the training set, 0.45 percent of the paragraphs contained mentions. For each positive training example, we added a negative example that does not contain dataset mentions and is sampled at random. We used a batch size of 25 and a dropout rate of 0.4. The model was trained for 300 iterations.
+The challenge of missing ground truth data is the main problem to handle during this competition. To this end, supervised learning methods for dataset mentions extraction from text are not directly applicable. To overcome this limitation, we resort to the provided list of dataset mentions and publication pairs and re-annotate the particular sentences in the publication text. This re-annotation is then used to train Spacy’s neural network based NER model[8]. We created a holdout set of 1000 publications and a training set of size 4000. We train our model using publication paragraphs as training samples. In the training set, 0.45 percent of the paragraphs contained mentions. For each positive training example, we added a negative example that does not contain dataset mentions and is sampled at random. We used a batch size of 25 and a dropout rate of 0.4. The model was trained for 300 iterations.
 
 #### Evaluation
 
@@ -2918,8 +2939,7 @@ We evaluated our model with respect to four metrics: strict precision and recall
 
 Table \[table:dataset-mention-eval\] show the results of the dataset mention extraction on the holdout set. The model is able to achieve high strict precision and recall values. As expected, the results are even better for the partial version of the metrics. But, this version indicates that even if we are not able to exactly match the dataset mention in text, we can find the right context with very high precision at least.
 
-Phase two approach
-------------------
+### Phase two approach
 
 In the second phase of the competition additional 5,000 publications have been provided. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15.000 publication in the same manner as in phase one to obtain training data. This time we split the data in 80% for training and 20% for test.
 
@@ -2937,31 +2957,28 @@ We resort to the same evaluation metrics as in phase one. However, we calculate 
 \[table:dataset-mention-eval-phase-two\]
 
 Research Method Extraction
-==========================
+--------------------------
 
-Task Description
-----------------
+### Task Description
 
 Inspired by a recent work of Nasar et al. (Nasar et al., 2018), we define a list of basic entity types that give key-insights into scholarly publications. We adapted the list of semantic entity types to the domain of the social sciences with a focus on *research methods*, but also including related entity types such as *Theory, Model, Measurement, Tool, Performance*. We suspect that the division into semantic types might be helpful to find *research methods*, because related semantic entities types might provide clues or might be directly related to the research method itself. For instance, in order to realize a certain research objective, an experiment is instrumented where a specific combination of *methods* is applied to a *data set* that might be intellectual or *software*, thus achieving a specific *performance* and result in that context.
 **Example**: *P-values* (measurement) are reported for the *one-tail paired t-test* (method) on *Allbus* (dataset) and *ISSP* (dataset).
 
 #### Formal problem definition
 
-Let *E* denote a set of entities. The Named Entity Recognition and Linking task consists of (i) identifying entity mentions *m* in a sentence and, (ii) linking them, when possible, to a reference knowledge base *K* (i.e, the SAGE Thesaurus[12]) and (iii) assigning a type to the entity, e.g., *research method*, selected from a set of given types. Given a textual named entity mention *m* along with the unstructured text in which it appears, the goal is to produce a mapping from the mention *m* to its referent real world entity *e* in *K*.
+Let *E* denote a set of entities. The Named Entity Recognition and Linking task consists of (i) identifying entity mentions *m* in a sentence and, (ii) linking them, when possible, to a reference knowledge base *K* (i.e, the SAGE Thesaurus[9]) and (iii) assigning a type to the entity, e.g., *research method*, selected from a set of given types. Given a textual named entity mention *m* along with the unstructured text in which it appears, the goal is to produce a mapping from the mention *m* to its referent real world entity *e* in *K*.
 
-Challenges
-----------
+### Challenges
 
-There are some major challenges that any named entity recognition, classification and linking system needs to handle. First, regarding NER, identifying the entities boundary is important, thus detecting the exact sequence span. Second, ambiguity errors might arise in classification. For instance,‘range’ might be a domain-specific term from the knowledge base or belong to the general domain vocabulary. This is a challenging task for which context information is required. In the literature, this relates to the problem of **domain adaptation** which includes fine-tuning to specific named entity classes[13]. With respect to entity linking, another challenge is detecting name variations, since entities can be referred to in many different ways. Semantically similar words, synonyms or related words, which might be lexically or syntactically different, are often not listed in the knowledge base (e.g., the lack of certain terms like ‘questioning’ but not ‘questionnaire’). This problem of automatically detecting these relationships is generally known as **linking problem**. Note that part of this problem also results from PDF-to-text conversion which is error-prone. Dealing with incomplete knowledge bases, i.e. **handling of out of vocabulary (OOV) items**, is also a major issue, since knowledge bases are often not exhaustive enough and do not cover specific terms or novel concepts from recent research. Last but not least, the combination of different semantic types gives a more coherent picture of a research article. We hypothesize that such information would be helpful and results in an insightful co-occurrence statistics, and provides additional detail directly related to entity resolution, and finally helps to assess the **relevance of terms** by means of a score.
+There are some major challenges that any named entity recognition, classification and linking system needs to handle. First, regarding NER, identifying the entities boundary is important, thus detecting the exact sequence span. Second, ambiguity errors might arise in classification. For instance,‘range’ might be a domain-specific term from the knowledge base or belong to the general domain vocabulary. This is a challenging task for which context information is required. In the literature, this relates to the problem of **domain adaptation** which includes fine-tuning to specific named entity classes[10]. With respect to entity linking, another challenge is detecting name variations, since entities can be referred to in many different ways. Semantically similar words, synonyms or related words, which might be lexically or syntactically different, are often not listed in the knowledge base (e.g., the lack of certain terms like ‘questioning’ but not ‘questionnaire’). This problem of automatically detecting these relationships is generally known as **linking problem**. Note that part of this problem also results from PDF-to-text conversion which is error-prone. Dealing with incomplete knowledge bases, i.e. **handling of out of vocabulary (OOV) items**, is also a major issue, since knowledge bases are often not exhaustive enough and do not cover specific terms or novel concepts from recent research. Last but not least, the combination of different semantic types gives a more coherent picture of a research article. We hypothesize that such information would be helpful and results in an insightful co-occurrence statistics, and provides additional detail directly related to entity resolution, and finally helps to assess the **relevance of terms** by means of a score.
 
-Our Approach - Overview
------------------------
+### Our Approach - Overview
 
-Our context-aware framework builds on Stanford’s CoreNLP and Named Entity Recognition System[14]. The information extraction process follows the workflow depicted in Figure \[figure:pipeline\], using separate modules for pre-processing, classification, linking and term filtering.
+Our context-aware framework builds on Stanford’s CoreNLP and Named Entity Recognition System[11]. The information extraction process follows the workflow depicted in Figure \[figure:pipeline\], using separate modules for pre-processing, classification, linking and term filtering.
 
 We envision the task of finding entities in scientific publications as a sequence labeling problem, where each input word is classified as being of a dedicated semantic type or not. In order to handle entities related to our domain, we train a novel machine learning classifier with major semantic classes, using training material from the ACL RD-TEC 2.0 dataset (QasemiZadeh and Schumann, 2016). Apart from this, we follow a domain adaptation approach inspired by (Agerri and Rigau, 2016) and ingest semantic background knowledge extracted from external scientific corpora, in particular the ACL Anthology (Bird et al., 2008; Gildea et al., 2018). We perform entity linking by means of a new gazetteer-based SAGE dictionary of Social Research Methods (Lewis-Beck et al., 2003), thus putting a special emphasis on the social sciences. The linking component addresses the synonymy problem and matches an entity despite name variations such as spelling variations. Finally, term filtering is carried out based on a termhood and unithood, while scoring is achieved by calculating a relevance score based on TF-IDF (cf. Section \[para:relscore\]).
 
-Our research experiments are based on the repository for the Social Sciences SSOAR as well as the train and test data of the Rich Context Competition corpus[15]. Our work extends previous work on this topic (cf. (Eckle-Kohler et al., 2013)) in various ways: First, we do not limit our study to abstracts, but use the entire fulltext. Second, we focus on a broader range of semantic classes, i.e. *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement*, tackling also the problem of identifying novel entities.
+Our research experiments are based on the repository for the Social Sciences SSOAR as well as the train and test data of the Rich Context Competition corpus[12]. Our work extends previous work on this topic (cf. (Eckle-Kohler et al., 2013)) in various ways: First, we do not limit our study to abstracts, but use the entire fulltext. Second, we focus on a broader range of semantic classes, i.e. *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement*, tackling also the problem of identifying novel entities.
 
 \[pipeline\] <img src="combined_images/pipeline.png" title="fig:" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
 
@@ -2969,7 +2986,7 @@ Our research experiments are based on the repository for the Social Sciences SSO
 
 For domain adaptation, we integrate further background knowledge. We use vector embeddings of words trained on additional corpora and which serve as input features to the CRF model. Semantic representations of words are a successful extension of common features, resulting in higher NER performance (Turian et al., 2010) and can be trained offline.
 
-In this work, the word vectors were learned from the scientific ACL ARC[16] using Gensim with the skip gram model (cf. (Mikolov et al., 2013)) and a pre-clustering algorithm[17]. A summary of the size of the unlabeled English data used for training word embeddings can be found in Table \[tab:UnlabeledData\].
+In this work, the word vectors were learned from the scientific ACL ARC[13] using Gensim with the skip gram model (cf. (Mikolov et al., 2013)) and a pre-clustering algorithm[14]. A summary of the size of the unlabeled English data used for training word embeddings can be found in Table \[tab:UnlabeledData\].
 
 | Corpus     | Articles | Documents/Tokens |
 |:-----------|:---------|:-----------------|
@@ -2992,7 +3009,7 @@ The features incorporated into the linear chain CRF are shown in the Table \[ta
 
 #### Knowledge Resources
 
-We use the SAGE thesaurus which includes well-defined concepts, an explicit taxonomic hierarchy between concepts as well as labels that specify synonyms of the same concept. A portion of terms is unique to the social science domain (e.g., ‘dependent interviewing’), while others are drawn from related disciplines such as statistics (e.g., ‘conditional likelihood ratio test’)[18]. However, since the thesaurus is not exhaustive and covers only the top-level concepts related to social science methods, our aim was to extend it by automatically extracting further terms from domain-specific texts, in particular from the Social Science Open Access Repository. More concretely, we carried out the following steps to extend SAGE as an off-line step. For step 2 and 3, candidate terms have been extracted by our pipeline for the entire SSOAR corpus.
+We use the SAGE thesaurus which includes well-defined concepts, an explicit taxonomic hierarchy between concepts as well as labels that specify synonyms of the same concept. A portion of terms is unique to the social science domain (e.g., ‘dependent interviewing’), while others are drawn from related disciplines such as statistics (e.g., ‘conditional likelihood ratio test’)[15]. However, since the thesaurus is not exhaustive and covers only the top-level concepts related to social science methods, our aim was to extend it by automatically extracting further terms from domain-specific texts, in particular from the Social Science Open Access Repository. More concretely, we carried out the following steps to extend SAGE as an off-line step. For step 2 and 3, candidate terms have been extracted by our pipeline for the entire SSOAR corpus.
 
 1.  Assignment of semantic types to concepts (manual)
 
@@ -3033,221 +3050,30 @@ In order to find out if the candidate term also fulfills the *termhood* requirem
 
 Our method has been tested on 100 fulltext papers from SSOAR and 10 documents from the Rich Context Competition (RCC), all randomly selected from hold out corpora. In our experiments on SSOAR Social Science publications, we compared results to the given metadata information. The main finding was that while most entities from the SAGE thesaurus could be extracted and linked reliably (e.g., ’Paired t-test’), they could not be easily mapped to the SSOAR metadata terms, which consist of only a few abstract classes (e.g., ’quantitative analysis’). Furthermore, our tool was tested by the RCC organizer, were the judges reviewed 10 random publications and generated qualitative scores for each document.
 
-Conclusion and Future Work
---------------------------
-
-We plan to carry out a more detailed evaluation on fulltext scholarly publications and assess the impact of different features used in the ML model, including background resources such as embeddings and dictionaries.
-
 Research Field Classification
-=============================
+-----------------------------
 
-Task Description
-----------------
+### Task Description
 
 The goal of this task is to identify the research fields covered in social science publications. The RCC data does not provide a gold standard —annotated training data— for that task. To this end, we decided to train a classifier using annotated data from SSOAR. In this way, our interpretation of the task is to select one or more labels from a given set of labels for each publication. This approach is known as a mulit-label classification. In our case, a label represents a research field.
 
-Our approach - Overview
-------------------------
+### Our approach - Overview
 
 Due to the unequal distribution of labels in the dataset, we need to guaranty enough training data for each label. We selected only labels with frequency over 300 for training the model which results in a total of 44 labels representing research fields. We decided to train a classification model based on the fasttext framework (Joulin et al., 2017). To train our model we resort to the abstracts of the publication, as this approach worked better than using the full-texts.
 
-Evaluation
-----------
+### Evaluation
 
 Figure \[fig:results\_fasttext\] shows the performance of the model regarding various evaluation metrics for different thresholds. A label is assigned to a publication if the model outputs a probability for the label above the defined threshold. In multi-label classification, this allows us to evaluate our model from different perspectives.
 
 <img src="combined_images/fast-text-evaluation.png" alt="Precision-Recall vs. Threshold" style="width:49.0%" />
 
-Technical Documentation
-=======================
-
-The project contains the following modules listed in the order in which they are excecuted.
-
-Pre-processing
---------------
-
-### PDF Text Extraction
-
-**Module name :**
-
-Cermine\_NlmJat\_extractor
-**Function:**
-
-Converts each PDF files of a given folder to JATS XML Format. Each input PDF File is transformed to one XML File.
-**Bash function call:**
-
-    java -jar target/cermineXMLextraction-1.0.0-jar-with-dependencies.jar
-
-**Parameter (2):**
-
-    -s <source folder>  
-    -t <target folder>
-
-**Returns:**
-
-XML Files in JATS XML Format.
-**Build:**
-
-This is a Java program using Maven build tool.
-**build call:**
-
-mvn install
-
-### Extraction of text from JATS XML
-
-**Module name :**
-
-preprocess-rcc-data
-**Function:**
-
-Transform text from JATX XML Format into a JSON File containing a list of textfields with essential metadata for each JATS XML file of a given folder.
-**Bash function call:**
-
-    `python3  ./jats_text_extractor.py `
-
-**Parameter (4):**
-
-    <source folder>
-    <target folder>
-    <limiting number of files to transform (-1: all)>
-    <number of cores to use for multiprocessing (-1: all)>
-
-**Returns:**
-
-A JSON File for each given XML File in the source folder
-
-### Metadata Extraction
-
-**Module name :**
-
-preprocess-rcc-data
-**Function:**
-
-Extracts structured metadata and references from all JATS XML files in a given folder into two Files. One containing the metadata from all Publications in JATS XML files and one containing all references from the JATS XML Files. The target file format is JSON.
-**Bash function call:**
-
-    python3  ./jats_metadata_extractor.py
-
-**Parameter (3):**
-
-    <source folder>
-    <target filename for metadata>
-    <target filename for references>
-
-**Returns:**
-
-Two JSON files containing metadata and references from all XML Files
-
-Dataset Mentions
-----------------
-
-### Dataset Mention Extraction
-
-**Module:**
-
-dataset-mention-extraction
-**Function:**
-
-Extract dataset mentions from all JSON Files from a given folder with a given spacy model.
-**Bash function call:**
-
-    python3  ./predict_mentions.py
-
-**Parameter (4):**
-
-    <source folder>
-    <name of spacy model folder>
-    <target filename rcc-output>
-    <target filename internal format>
-
-**Returns:**
-
-Two JSON files containing the found dataset mentions in all given JSON Files. One in RCC defined output. One in Internal format including the senctence the dataset mention occures.
-**Train:**
-
-For training we submit a jupyter notebook with all needed code. *Train\_spacy\_ner\_prod.ipynb*
-**Build (For training only):**
-
-Install english spacy language model. This can be done with ‘python -m spacy download en‘.
-
-### Dataset Linking (only Phase 1)
-
-**Module:**
-
-dataset-prediction
-**Function:**
-
-Links dataset mentions given a JSON file in internal format to datasets listed in a given JSON File.
-**Bash function call:**
-
-    python3  ./retrieve.py
-
-**Parameter (3):**
-
-    <JSON filename of extracted mentions>
-    <JSON filename of dataset list to match>
-    <output filename for dataset citations>
-
-**Returns:**
-
-JSON file in the format defined by the competition containing information about links between publications and datasets.
-
-Research Method Extraction
---------------------------
-
-**Module name :**
-
-research-method-extractor
-**Function:**
-
-Extracts research method terms from JSON files with text information from publications.
-**Bash function call:**
-
-    java -jar target/gesisents-0.1-jar-with-dependencies.jar
-
-**Parameter (3):**
-
-    <source folder>
-    <target file name>
-    <Limit to reduce the number of processed files (-1:all)>
-
-**Returns:**
-
-A JSON file in the format defined by the competition containing information about publications and research methods. **Build:**
-
-This is a Java program using Maven build tool.
-**build call:**
-
-mvn install
-
-Research Field Classifier
--------------------------
-
-**Module name :**
-
-research-field-detector
-**Function:**
-
-Classifies given abstracts with classoz Labels
-**Bash function call:**
-
-    python3  ./fasttext_predictor.py
-
-**Parameter (4):**
-
-    <filename of JSON file with abstracts>
-    <filename of fasttext model>
-    <filename of label dictionary in JSON>
-    <target filename labels in >
-
-**Returns:**
-
-A JSON file in the format defined by the competition containing information about publications and research fields.
-
 Acknowledgments
-===============
+---------------
 
 We would like to thank GESIS for giving us the time and resources to participate in the competition.
+
+References
+----------
 
 Agerri R and Rigau G (2016) Robust multilingual named entity recognition with shallow semi-supervised features. *Artificial Intelligence* 238. Elsevier: 63–82.
 
@@ -3277,45 +3103,41 @@ Schwartz AS and Hearst MA (2003) A simple algorithm for identifying abbreviation
 
 Turian J, Ratinov L and Bengio Y (2010) Word representations: A simple and general method for semi-supervised learning. In: *Proceedings of the 48th annual meeting of the association for computational linguistics*, Stroudsburg, PA, USA, 2010, pp. 384–394. ACL ’10. Association for Computational Linguistics. Available at: <http://dl.acm.org/citation.cfm?id=1858681.1858721>.
 
-[1] <https://coleridgeinitiative.org/richcontextcompetition>
+[1] <https://github.com/CeON/CERMINE>
 
-[2] <https://coleridgeinitiative.org/richcontextcompetition#competitionschedule>
+[2] <https://jats.nlm.nih.gov>
 
-[3] <https://www.icpsr.umich.edu/index.html>
+[3] <https://www.gesis.org/ssoar/home>
 
-[4] <https://github.com/CeON/CERMINE>
+[4] <https://www.gesis.org/en/services/research/tools/thesaurus-for-the-social-sciences>
 
-[5] <https://jats.nlm.nih.gov>
+[5] <https://www.gesis.org/angebot/recherchieren/tools-zur-recherche/klassifikation-sozialwissenschaften> (in German)
 
-[6] <https://www.gesis.org/ssoar/home>
+[6] <span><http://www.openarchives.org></span>
 
-[7] <https://www.gesis.org/en/services/research/tools/thesaurus-for-the-social-sciences>
+[7] <https://jats.nlm.nih.gov>
 
-[8] <https://www.gesis.org/angebot/recherchieren/tools-zur-recherche/klassifikation-sozialwissenschaften> (in German)
+[8] [spacy.io](spacy.io)
 
-[9] <span><http://www.openarchives.org></span>
+[9] http://methods.sagepub.com
 
-[10] <https://jats.nlm.nih.gov>
+[10] apart from those used in traditional NER systems like *Person*, *Location*, or *Organization* with abundant training data, as covered in the Stanford NER system(Finkel et al., 2005)
 
-[11] [spacy.io](spacy.io)
+[11] <https://nlp.stanford.edu/projects/project-ner.shtml>
 
-[12] http://methods.sagepub.com
+[12] <https://coleridgeinitiative.org/richcontextcompetition> with a total of 5,000 English documents
 
-[13] apart from those used in traditional NER systems like *Person*, *Location*, or *Organization* with abundant training data, as covered in the Stanford NER system(Finkel et al., 2005)
+[13] <https://acl-arc.comp.nus.edu.sg/>
 
-[14] <https://nlp.stanford.edu/projects/project-ner.shtml>
+[14] Word embeddings are trained with a skip gram model using embedding size equal to 100, word window equal to 5, minimal occurrences of a word to be considered 10. Word embeddings are clustered using agglomerative clustering with a number of clusters set to <span>500,600,700</span> Ward linkage with euclidean distance is used to minimize the variance within the clusters.
 
-[15] <https://coleridgeinitiative.org/richcontextcompetition> with a total of 5,000 English documents
-
-[16] <https://acl-arc.comp.nus.edu.sg/>
-
-[17] Word embeddings are trained with a skip gram model using embedding size equal to 100, word window equal to 5, minimal occurrences of a word to be considered 10. Word embeddings are clustered using agglomerative clustering with a number of clusters set to <span>500,600,700</span> Ward linkage with euclidean distance is used to minimize the variance within the clusters.
-
-[18] A glossary of statistical terms as provided in <https://www.statistics.com/resources/glossary/> has been added as well.
+[15] A glossary of statistical terms as provided in <https://www.statistics.com/resources/glossary/> has been added as well.
 
 ---
 
-# 9 -  DICE  ---
+# Chapter 9 - DICE
+
+---
 abstract: |
     The steadily increasing number of publications available to researchers
     makes it difficult to keep track of the state of the art. In particular,
@@ -3410,7 +3232,7 @@ was passed onto the Dataset Detection module and using the Dataset
 Vocabulary, it identified Dataset Citations and Mentions. The following
 sections provide a detailed overview of each of these components.
 
-Preprocessing {#preprocess}
+Preprocessing
 =============
 
 The publications were provided in two formats: PDF and text. For
@@ -3859,7 +3681,9 @@ The code and documentation for all our submissions can be found here:
 
 ---
 
-# 10 -  Singapore  <!--
+# Chapter 10 - Singapore
+
+<!--
 ---
 author:
 - |
@@ -4175,7 +3999,9 @@ Source codes to run and replicate our experiments are available at [https://gith
 
 ---
 
-# 11 - Syracuse  ---
+# Chapter 11 - Syracuse
+
+---
 abstract: |
     Datasets are critical for scientific research, playing a role in
     replication, reproducibility, and efficiency. Researchers have recently
@@ -4187,9 +4013,9 @@ abstract: |
     this problem is to automatically extract dataset mentions from
     scientific articles. In this work, we propose to achieve such extraction
     by using a neural network based on a BiLSTM-CRF architecture. Our method
-    achieves $F_{1}=0.883$ in social science articles released as part of
-    the Rich Context Dataset. We discuss limitations of the current datasets
-    and propose modifications to the model to be done in the future.
+    achieves $F_{1}=0.885$ in social science articles released as part of
+    the Rich Context Dataset. We discuss future improvements to the model
+    and applications beyond social sciences.
 author:
 - 'Tong Zeng$^{1,2}$ and Daniel Acuna$^{1}$[^1]'
 bibliography:
@@ -4203,18 +4029,20 @@ Introduction
 ============
 
 Science is fundamentally an incremental discipline that depends on
-previous scientist’ work. Datasets form an integral part of this process
-and therefore should be shared and cited as any other scientific output.
-This ideal is far from reality; the credit that datasets currently
-receive does not correspond to their actual usage. One of the issues is
-that there is no standard approach for citing them. Interestingly, while
-datasets are still used and mentioned in articles, we lack methods to
-extract such mentions and properly reconstruct dataset citations. The
-Rich Context Competition challenge aims at closing this gap by inviting
-scientists to produce automated dataset mention and linkage detection
-algorithms. In this article, we detail our proposal to solve the dataset
-mention step. Our approach attempts to provide a first approximation to
-better give credit and keep track of datasets and their usage.
+previous scientist’s work. Datasets form an integral part of this
+process and therefore should be shared and cited as any other scientific
+output. This ideal is far from reality: the credit that datasets
+currently receive does not correspond to their actual usage. One of the
+issues is that there is no standard for citing datasets, and even if
+they are cited, they are not properly tracked by major scientific
+indices. Interestingly, while datasets are still used and mentioned in
+articles, we lack methods to extract such mentions and properly
+reconstruct dataset citations. The Rich Context Competition challenge
+aims at closing this gap by inviting scientists to produce automated
+dataset mention and linkage detection algorithms. In this article, we
+detail our proposal to solve the dataset mention step. Our approach
+attempts to provide a first approximation to better give credit and keep
+track of datasets and their usage.
 
 The problem of dataset extraction has been explored before.
 @ghavimiIdentifyingImprovingDataset2016 and
@@ -4223,11 +4051,11 @@ tf-idf representation with cosine similarity for matching dataset
 identification in social science articles. Their method consists of four
 major steps: preparing a curated dictionary of typical mention phrases,
 detecting dataset references, and ranking matching datasets based on
-cosine similarity of tf-idf representations. This approach achieved an
-impressive $F_{1}=0.84$ for mention detection and $F_{1}=0.83$, for
-matching. @singhalDataExtractMining2013 proposed a method using
-normalized Google distance to screen whether a term is in a dataset.
-However, this method relies on external services and is not
+cosine similarity of tf-idf representations. This approach achieved a
+relatively high performance, with $F_{1}=0.84$ for mention detection and
+$F_{1}=0.83$, for matching. @singhalDataExtractMining2013 proposed a
+method using normalized Google distance to screen whether a term is in a
+dataset. However, this method relies on external services and is not
 computational efficient. They achieve a good $F_{1}=0.85$ using Google
 search and $F_{1}=0.75$ using Bing. A somewhat similar project was
 proposed by @luDatasetSearchEngine2012. They built a dataset search
@@ -4244,8 +4072,7 @@ Bidirectional Long short-term Memory (BiLSTM) sequence to sequence model
 paired with a Conditional Random Field (CRF) inference mechanism. We
 tested our model on a novel dataset produced for the Rich Context
 Competition challenge. We achieve a relatively good performance of
-$F_{1}=0.883$. We discuss the current noise and duplication present in
-the dataset and limitations of our model.
+$F_{1}=0.885$. We discuss the limitations of our model.
 
 The dataset
 ===========
@@ -4262,13 +4089,13 @@ competitors and also the quality of the code, documentation, and
 efficiency.
 
 We adopt the CoNLL 2003 format [@tjong2003introduction] to annotate
-whether a token is a part of dataset mention. Concretely, we use we use
-B-DS denotes a token is the first token of a dataset mention, I-DS
-denote a token is inside of dataset mention, and O means a token is not
-a part of dataset mention. We then put each token and its corresponding
-labels in one line and use a empty line as separator between sentences.
-All the sentences was split by 70%, 15%, 15% as training set, validation
-set and testing set.
+whether a token is a part of dataset mention. Concretely, B-DS denotes a
+token that is the first token of a dataset mention, I-DS denotes a token
+that is inside of dataset mention, and O denotes a token that is not a
+part of dataset mention. We then put each token and its corresponding
+labels in one line and use a empty line as a separator between
+sentences. Sentences were randomly split by 70%, 15%, 15% for training
+set, validation set and testing set, respectively.
 
 The Proposed Method
 ===================
@@ -4281,7 +4108,7 @@ BiLSTM-CRF architecture. At a high level, the model uses a
 sequence-to-sequence recurrent neural network that produces the
 probability of whether a token belongs to a dataset mention. The CRF
 layer takes those probabilities and estimates the most likely sequence
-based on constrains between label transitions (i.e.,
+based on constrains between label transitions (e.g.,
 mention–to–no-mention–to-mention has low probability). While this is a
 standard architecture for modeling sequence labeling, the application to
 our particular dataset and problem is new.
@@ -4290,15 +4117,15 @@ We now describe in more detail the choices of word representation,
 hyper-parameters, and training parameters. A schematic view of the model
 is in Fig \[fig:NetworkArchitecture\] and the components are as follows:
 
-1.  Input Layer: input the sequence of tokens to the network;
+1.  Character embedding layer: treat a token as a sequence of characters
+    and encode the characters by using a bidirectional LSTM to get a
+    vector representation.
 
-2.  Embedding layer: mapping each token into fixed sized vector
-    representation based on fasttext (200-dimensional vectors,
-    @pennington2014glove)
+2.  Word embedding layer: mapping each token into fixed sized vector
+    representation by using a pre-trained word vector.
 
 3.  One BiLSTM layer: make use of Bidirectional LSTM network to capture
-    the high level representation of the whole token sequence input (200
-    dimensions per direction, totally 400 output units)
+    the high level representation of the whole token sequence input.
 
 4.  Dense layer: project the output of the previous layer to a low
     dimensional vector representation of the the distribution of labels.
@@ -4306,7 +4133,17 @@ is in Fig \[fig:NetworkArchitecture\] and the components are as follows:
 5.  CRF layer: find the most likely sequence of labels.
 
 ![\[fig:NetworkArchitecture\]Network Architecture of BiLSTM-CRF
-model](combined_images/bilstm-crf-model.pdf){width="5cm"}
+network](combined_images/bilistm_crf_network_structure_pic){width="80.00000%"}
+
+Character Embedding
+-------------------
+
+Similar to the bag of words assumption, we can consider a token is
+composed by a bag of characters. In this layer, we convert each token to
+a sequence of characters, then feed the sequence into a bidirectional
+LSTM network to get a fixed length representation of the token. After
+learning the bidirectional LSTM network, we can solve the
+out-of-vocabulary problem for pre-trained word embeddings.
 
 Word Embedding
 --------------
@@ -4319,8 +4156,8 @@ $S=\{c_{1},c_{2},\cdots,c_{n},\}$ . For each token $c_{i}$we lookup the
 embedding vector $x_{i}$ from a word embedding matrix
 $M^{tkn}\in\mathbb{R}^{d|V|}$, where the $d$ is the dimension of the
 embedding vector and the $V$ is the Vocabulary of the tokens. In this
-paper, the matrix $M^{tkn}$ is initialized by a pre-trained embedding,
-but will be updated by learning from our corpus.
+paper, the matrix $M^{tkn}$ is initialized by pre-trained GloVe vectors
+[@pennington2014glove], but will be updated by learning from our corpus.
 
 LSTM
 ----
@@ -4353,15 +4190,15 @@ product, $b$ is the bias, $W$ is the parameters, $x_{t}$ is the input at
 time $t$, $c_{t}$ is the LSTM cell state at time $t$ and $h_{t}$ is
 hidden state at time $t$. The $i_{t}$, $f_{t}$, $o_{t}$ and $g_{t}$ are
 named as input, forget, output and cell gates respectively, they control
-the informations to keep in its state and pass to next step.
+the information to keep in its state and pass to next step.
 
-LSTM get information from the previous steps, that is left context in
+LSTM gets information from the previous steps, which is left context in
 our task. However, it is important to consider the information in the
 right context. A solution of this information need is bidirectional LSTM
-[@graves2013speech]. The idea of Bi-LSTM is using two LSTM layers and
-feed in each layer with sequence forwards and backwards separately, and
-then concatenate the hidden states of the two LSTM to modeling both the
-left and right contexts
+[@graves2013speech]. The idea of Bi-LSTM is to use LSTM layers and feed
+the forward and backward flows separately, and then concatenate the
+hidden states of the two LSTM to modeling both the left and right
+contexts
 
 $$h_{t}=[\overrightarrow{h_{t}}\varoplus\overleftarrow{h_{t}}]$$
 
@@ -4382,27 +4219,43 @@ For all of our results, we use $F_{1}$ as the measure of choice. This
 measure is the harmonic average of the precision and recall and it is
 the standard measure used in sequence labeling tasks. This metric varies
 from 0 to 1, and the unit is the highest possible value. Our method
-achieved a relatively high $F_{1}$ of 0.883 for detecting mentions, in
+achieved a relatively high $F_{1}$ of 0.885 for detecting mentions, in
 line with previous studies.
 
-We found significant limitations to the dataset, and we expect these
-limitations to affect the linkage step (not done in this article). While
-we are proposing a model for such step, we found that it would be
-challenging to do so given the quality of the annotations. Specifically,
-we found significant duplication of labels. The first issue is that
-mentions are nested (e.g. HRS, RAND HRS, HRS DATA, RAND HRS DATA are
-nested and linked to the same dataset). The second issue is that for the
-same mention text, several, different datasets were linked (e.g. the
-term CPS is linked to 57 datasets, the term NHANES is linked to 32
-datasets). This adds noise to the linkage process. In fact, most of the
-mentions have ambiguous relationships to datasets. In particular, only
-17,267 (16.99%) mentions are linked to one dataset, 15,292 (15.04%)
-mentions are listed to two datasets, and 12,624 (12.42%) are linked to
-three datasets. We found that there were some extreme cases, where for
-example there are several mentions linked to more than one hundred
-datasets. If these difficulties are not overcome, then the predictions
-from the linkage process will be noisy and therefore impossible to tell
-apart.
+   Models   GloVe size   Dropout rate   Precision   Recall    $F_{1}$
+  -------- ------------ -------------- ----------- -------- -----------
+     m1         50           0.0          0.884     0.873      0.878
+     m2         50           0.5          0.877     0.888      0.882
+     m3        100           0.0          0.882     0.871      0.876
+     m4        100           0.5          0.885     0.885    **0.885**
+     m5        200           0.0          0.882     0.884      0.883
+     m6        200           0.5          0.885     0.880      0.882
+     m7        300           0.0          0.868     0.886      0.877
+     m8        300           0.5          0.876     0.878      0.877
+
+  : \[tab:Performance-of-proposed\]Performance of proposed network
+
+We train models using the training data, monitor the performance using
+the validation data (we stop training if the performance doesn’t improve
+for the last 10 epochs). We are using the Adam optimizer with learning
+rate of 0.001 and batch size equal to 64. The hidden size of LSTM for
+character and word embedding is 80 and 300, respectively. For the
+regularization methods to avoid over-fitting, we use L2 regularization
+with alpha set to 0.01, we also use dropout rate equal to 0.5. We
+trained 8 models with a combination of different GloVe vector size (50,
+100, 300 and 300) and dropout rate (0.0, 0.5). The performances are
+reported on the test dataset in Table \[tab:Performance-of-proposed\].
+The best model is trained by word vector size 100 and dropout rate 0.5
+with $F_{1}$ score 0.885.
+
+We also found some limitations to the dataset. Firstly, we found that
+mentions are nested (e.g. HRS, RAND HRS, RAND HRS DATA are linked to the
+same dataset). The second issue most of the mentions have ambiguous
+relationships to datasets. In particular, only 17,267 (16.99%) mentions
+are linked to one dataset, 15,292 (15.04%) mentions are listed to two
+datasets, and 12,624 (12.42%) are linked to three datasets. If these
+difficulties are not overcome, then the predictions from the linkage
+process will be noisy and therefore impossible to tell apart.
 
 Conclusion
 ==========
@@ -4428,10 +4281,9 @@ generalize relatively well either to the second phase of the challenge
 or even to other disciplines. We would emphasize, however, that the
 quality of the dataset has a great deal of room for improvement. Given
 how important this task is for the whole of science, we should try to
-strive to improve on the quality of these datasets so that techniques
-like this one can be more broadly applied. The importance of dataset
-mention and linkage therefore could be fully appreciated by the
-community.
+strive to improve the quality of these datasets so that techniques like
+this one can be more broadly applied. The importance of dataset mention
+and linkage therefore could be fully appreciated by the community.
 
 Acknowledgements {#acknowledgements .unnumbered}
 ================
@@ -4444,7 +4296,9 @@ Daniel E. Acuna was funded by the National Science Foundation awards
 
 ---
 
-# Chapter 12 - Standardised Metadata  Rich Context Book Chapter - Standardized Metadata, Full Text and
+# Chapter 12 - Standard Test Corpora
+
+Rich Context Book Chapter - Standardized Metadata, Full Text and
 Training/Evaluation for Extraction Models
 
 \
@@ -4617,7 +4471,9 @@ can be affected by the quality of the data it is evaluated against.
 
 ---
 
-# 13 - Future AI   # The Future of AI in Rich Context
+# Chapter 13 - The future of context
+
+# The Future of AI in Rich Context
 
 **Paco Nathan**
 
@@ -4922,6 +4778,3 @@ With this latter step, in the broader sense Rich Context helps establish a commu
 
 [^7]:
      For an overview of graph embedding, see [“Graph Embedding for Deep Learning”](https://towardsdatascience.com/overview-of-deep-learning-on-graph-embeddings-4305c10ad4a4), Flawson Tong (2019-05-06).
-
----
-

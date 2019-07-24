@@ -1,4 +1,10 @@
-# Chapter 4 - Context  > Metadata for Administrative and Social Science Data
+ 
+ 
+---
+ 
+# Chapter 4 - Metadata for Social Science Datasets
+ 
+> Metadata for Administrative and Social Science Data
 
 Robert B Allen
 
@@ -613,6 +619,3 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 [^38]: <https://duraspace.org/vivo/>
 
 [^39]: <https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/>
- 
----
- 
