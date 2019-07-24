@@ -146,6 +146,7 @@ cp 09_images/* combined_images
 sed -i.bu "s/\](images/\](combined_images/g" 09_combining_embeddings_DICE.md
 #
 sed -i.bu '1s;^;# 9 -  DICE  ;' 09_combining_embeddings_DICE.md
+sed -i.bu "s/{#preprocess}//g" 09_combining_embeddings_DICE.md
 echo " " >> 09_combining_embeddings_DICE.md
 echo "---" >> 09_combining_embeddings_DICE.md
 echo " " >> 09_combining_embeddings_DICE.md
