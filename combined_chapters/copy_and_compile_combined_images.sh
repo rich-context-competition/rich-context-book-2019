@@ -49,7 +49,10 @@ python3 rename_files.py "03_images/" png chap03
 cp 03_images/*.png combined_images
 rm 03_images/chap03* # stop build up of multiple renamed files in this directory 
 #
-sed -i.bu '1s;^;# Chapter 3 - Digital Science Use Cases  \n;' 03_ds_article.md
+echo '# Chapter 3 - Digital Science Use Cases' > /tmp/newfile
+echo ' ' >> /tmp/newfile
+cat 03_ds_article.md >> /tmp/newfile 
+cp /tmp/newfile 03_ds_article.md
 sed -i.bu "s/media\/image/combined_images\/chap03_image/g" 03_ds_article.md
 echo " " >> 03_ds_article.md
 echo "---" >> 03_ds_article.md
