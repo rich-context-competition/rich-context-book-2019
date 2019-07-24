@@ -101,6 +101,7 @@ sed -i.bu '1,38d' acl2015.tex
 # now re-write the reference to the imaage 
 sed -i.bu "s/datasets\.png/combined_images\/datasets\.png/g" acl2015.tex
 pandoc acl2015.tex -o 06_allen_ai.md 
+sed -i.bu "s/{#sec:areas}//g" 06_allen_ai.md 
 #
 sed -i.bu '1s;^;# Chapter 6 - Allen AI  ;' 06_allen_ai.md 
 echo " " >> 06_allen_ai.md 
