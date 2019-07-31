@@ -1,30 +1,31 @@
 \subsection{Dataset Extraction}
 \label{sec:dataset-extraction}
 \subsubsection{Task Description}
-In scientific literature, datasets are specified to indicate, e.g., the data on which a analysis is performed, a certain finding or a claim is based on. In this competition, we focus on (i) extracting and (ii) linking datasets mention from social science publications to a list of given dataset references.
-Identifying dataset mention in literature is a challenging problem due to the lack of an established style of citing datasets.
+In scientific literature, datasets are cited to refer, e.g., the data which an analysis is performed on, a specific finding or a claim is based on. In this competition, we focus on (i) extracting and (ii) linking datasets mention from social science publications to a list of given dataset references.
+Identifying dataset mention in literature is a challenging problem due to the huge number of various styles of citing datasets. Although there are proposed standards for dataset citation in full-texts, researchers still ignore or neglect such standards (see, e.g., \cite{altman2007proposed}).
 Furthermore, in many research publication, a correct citation of datasets is entirely missing~\cite{boland2012identifying}. 
 The following two sentences exemplify the problem.\\ 
 \textbf{Example 1}: \emph{P-values are reported for the one-tail paired t-test on \emph{Allbus} (dataset mention) and \emph{ISSP} (dataset mention).}\\
 \textbf{Example 2}: \emph{We used \emph{WHO data from 2001} (dataset mention) to estimate the spreading degree of AIDS in Uganda.}\\
 We treat the problem of detecting dataset mentions in full-text as a Named Entity Recognition (NER) task. 
-
+%BG: pranthesis in the text are confusing since reader may think that (dataset mention) is part of the the real text 
     %COMMENT (AZ): The following paragraph might be skipped
 \paragraph{Formal problem definition}%\ \\[1pt]
 %Let $D$ denote a set of existing datasets $d$. The Named Entity Recognition task is defined as the identification of dataset mentions $m$ in a sentence where $m$ references a dataset $d$. 
 Let $D$ denote a set of existing datasets $d$ and the knowledgebase $K$ as a set of known dataset references $k$. Furthermore, each element of $K$ is referencing an existing dataset $d$. The Named Entity Recognition and linking task is defined as (i) the identification of dataset mentions $m$ in a sentence, where $m$ references a dataset $d$ and (ii) linking them, when possible, to one element in $K$ (i.e., the reference dataset list given by the RCC). 
+%BG: this part could be improved. Could be confusing for user.
 
 
 \subsubsection{Challenges}
 With our method, we focus on the extraction of dataset mentions in the body of the full-text of scientific publications. We recognize three types a dataset can be mentioned: (i) The full name of a dataset like ''National Health and Nutrition Examination Survey``, (ii) an abbreviation (''NHaNES``) or (iii) a vague reference, e.g., ''the monthly statistic``. 
 By each of these varieties, the NER task faces particular challenges. For the first type, the used dataset name can vary in different publications. Where one publication cites the dataset with ''National Health and Nutrition Examination Survey`` the other could use the words  ''Health and Nutrition Survey``.
-In a case where abbreviations are used a disambiguation problem occurs, e.g., in ''WHO data``. WHO may describe the World Health Organization or the White House Office.
+In a case where abbreviations are used, a disambiguation problem occurs, e.g., in ''WHO data``. WHO may describe the World Health Organization or the White House Office.
 The biggest challenge is again the lack of a precise gold standard that can be used to train a classifier.
 %The major challenge of using a NER approach to detect dataset mentions in text is the necessity of an annotated training corpus which is not given by the RCC.
-In the following we describe how we have dealt with this lack of ground truth data.  
+In the following we describe how we have dealt with this lack of ground truth data.
 
 \subsubsection{Phase one approach}
-The challenge of missing ground truth data is the main problem to handle during this competition. To this end, supervised learning methods for dataset mentions extraction from text are not directly applicable. To overcome this limitation, we resort to the provided list of dataset mentions and publication pairs and re-annotate the particular sentences in the publication text. This re-annotation is then used to train Spacy's neural network based NER model\footnote{\url{spacy.io}}. We created a holdout set of 1000 publications and a training set of size 4000. We train our model using publication paragraphs as training samples. In the training set, 0.45 percent of the paragraphs contained mentions.  For each positive training example, we added a negative example that does not contain dataset mentions and is sampled at random.  
+The challenge of missing ground truth data is the main problem to handle during this competition. To this end, supervised learning methods for datasets' mentions extraction from texts are not directly applicable. To overcome this limitation, we resort to the provided list of dataset mentions and publication pairs and re-annotate the particular sentences in the publication text. This re-annotation is then used to train Spacy's neural network-based NER model\footnote{\url{spacy.io}}. We created a holdout set of 1000 publications and a training set of size 4000. Afterward, We train our model using publication paragraphs as training samples. In the training set, 0.45 percent of the paragraphs contained mentions.  For each positive training example, we added a negative sample that does not contain dataset mentions and is picked randomly.   
 %(paragraphs without mentions: 265029; paragraphs with mentions: 12566)
 %We extracted all paragraphs with mentions and merged them with a randomly chosen subset of paragraphs without mentions with the same the size resulting in 25132 paragraphs.
 We used a batch size of 25 and a dropout rate of 0.4. The model was trained for 300 iterations.
@@ -53,11 +54,11 @@ Consider the following example of a partial match: "National Health and Nutritio
 \end{table}
 %Evaluation results of dataset mention extraction on holdout set
 
-Table~\ref{table:dataset-mention-eval} show the results of the dataset mention extraction on the holdout set. The model is able to achieve high strict precision and recall values. As expected, the results are even better for the partial version of the metrics. But, this version indicates that even if we are not able to exactly match the dataset mention in text, we can find the right context with very high precision at least.
+Table~\ref{table:dataset-mention-eval} show the results of the dataset mention extraction on the holdout set. The model can achieve high strict precision and recall values. As expected, the results are even better for the partial version of the metrics. It means that even if we couldn't match the dataset mention in a text exactly, we can find the right context with very high precision at least.
 %Notably  The results show, that in 10\% of the found matches we have not found the strict correct dataset mention, but the correct position and there is a partial match.
 
 \subsubsection{Phase two approach}
-In the second phase of the competition additional 5,000 publications have been provided. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15.000 publication in the same manner as in phase one to obtain training data. This time we split the data in 80\% for training and 20\% for test.   
+In the second phase of the competition, additional 5,000 publications were provided. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15.000 publications) in the same manner as in phase one to obtain training data. This time we split the data in 80\% for training and 20\% for test. 
 
 \paragraph{Evaluation}
 We resort to the same evaluation metrics as in phase one. However, we calculate precision and recall on the full-text of the publication and not on the paragraphs as in the first phase. Table~\ref{table:dataset-mention-eval-phase-two} show the results achieved by our model. We observe a lower precision and recall values. Compared to phase one, there is also a smaller difference between the precision an recall values for the strict and partial version of the metrics. 

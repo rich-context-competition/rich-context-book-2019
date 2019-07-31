@@ -8,9 +8,12 @@ This section describes the external data sources we used as well as our pre-proc
 %In the second phase of the competition, an additional set of 5,000 publications from the social sciences has been provided.
 
 \subsubsection{External Data Sources}
-For developing our algorithms, we also utilized two external data sources. For the discovery of research methods and fields, we resort to data from Social Science Open Access Repository\footnote{\url{https://www.gesis.org/ssoar/home}} (SSOAR). 
-SSOAR is maintained at GESIS – Leibniz Institute for the Social Sciences collects and archives literature of relevance to the social sciences. In SSOAR, full texts are indexed using controlled social science vocabulary (Thesaurus\footnote{\url{https://www.gesis.org/en/services/research/tools/thesaurus-for-the-social-sciences}}, Classification\footnote{\url{https://www.gesis.org/angebot/recherchieren/tools-zur-recherche/klassifikation-sozialwissenschaften} (in German)}) and are assigned rich metadata. SSOAR offers documents in various languages. The corpus of English language publications that can be used for purposes of the competition consists of a total of 13,175 documents. All SSOAR documents can be accessed through the OAI-PMH\footnote{{\url{http://www.openarchives.org}}} interface. 
-Another external source that we used for discovery of research methods is the ACL Anthology Reference Corpus~\cite{bird2008acl}. ACL ARC is a corpus of scholarly publications about computational linguistics.  
+For developing our algorithms, we utilized two external data sources. For the discovery of research methods and fields, we resort to data from Social Science Open Access Repository\footnote{\url{https://www.gesis.org/ssoar/home}} (SSOAR). 
+GESIS – Leibniz Institute for the Social Sciences maintains  SSOAR by collecting and archiving literature of relevance to the social sciences. 
+
+In SSOAR, full texts are indexed using controlled social science vocabulary (Thesaurus\footnote{\url{https://www.gesis.org/en/services/research/tools/thesaurus-for-the-social-sciences}}, Classification\footnote{\url{https://www.gesis.org/angebot/recherchieren/tools-zur-recherche/klassifikation-sozialwissenschaften} (in German)}) and are assigned rich metadata. SSOAR offers documents in various languages. The corpus of English language publications that can be used for purposes of the competition consists of a total of 13,175 documents. All SSOAR documents can be accessed through the OAI-PMH\footnote{{\url{http://www.openarchives.org}}} interface. 
+
+Another external source that we used for the discovery of research methods is the ACL Anthology Reference Corpus~\cite{bird2008acl}. ACL ARC is a corpus of scholarly publications about computational linguistics.  
 The corpus consists of a total of 22,878 articles.
 
 %SSOAR contains 
@@ -32,8 +35,9 @@ The corpus consists of a total of 22,878 articles.
 
 \subsubsection{Pre-processing}
 \label{sec:prepro}
-Although the organizers of the RCC, offered plain texts for the publication, we decided to build our own pre-process pipeline. The pipeline uses the Cermine Tool to extract information from PDF documents. The main benefit of using this tool is the structured metadata output including better disambiguation of sections and paragraphs in the publications. The output XML file uses the Journal Article Tag Suite\footnote{\url{https://jats.nlm.nih.gov}}. For the competition, there are only two interesting elements of the Jats XML format, i.e., $<$front$>$ and $<$body$>$. The $<$front$>$ element contains the metadata of the publication, whereas the $<$body$>$ contains the publication text. Another advantage of Cermine is that the hyphenation and segmentation of paragraphs are carried out automatically. 
-As a last step of the pre-processing, we remove all linebreaks from the publication text and output a list of metadata fields and values as shown in Table~\ref{tab:example-paragraph} for each publication paragraph.
+Although the organizers of the RCC, offered plain texts for the publication, we decided to build our own pre-process pipeline. The pipeline uses the Cermine Tool to extract information from PDF documents. The main benefit of using this tool is the structured metadata output, including better disambiguation of sections and paragraphs in the publications. The output XML file uses the Journal Article Tag Suite\footnote{\url{https://jats.nlm.nih.gov}}. For the competition, there are only two interesting elements of the Jats XML format, i.e., $<$front$>$ and $<$body$>$. The $<$front$>$ element contains the metadata of the publication, whereas the $<$body$>$ contains the main textual and graphic content of the publication.
+Another advantage of Cermine is that the hyphenation and segmentation of paragraphs are carried out automatically. 
+As a last step of the pre-processing, we remove all linebreaks from the publication. The output of this step is a list of metadata fields and values, as shown in Table~\ref{tab:example-paragraph} for each publication paragraph.
 
 \begin{table}[h]
     \centering
