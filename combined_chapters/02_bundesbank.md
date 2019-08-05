@@ -1,4 +1,9 @@
-# Chapter 2 - Bundesbank -- View from the users  nTitle: Who’s Waldo: Conceptual issues when characterizing data in empirical research
+ 
+---
+ 
+# Chapter 2 - Bundesbank
+ 
+Title: Who’s Waldo: Conceptual issues when characterizing data in empirical research
 Author:Stefan Bender, Hendrik Doll, Christian Hirsch [^footnote0]
 Affiliation: Research Data and Service Centre , Deutsche Bundesbank
 Date: June 14, 2019
@@ -222,6 +227,3 @@ For the way forward, it is important to note the importance of the research area
 -	Zhang, Q., Cheng, Q., Huang, Y., & W. Lu (2016). A bootstrapping-based method to automatically identify data-usage statements in publications. Journal of Data and Information Science, 1(1), 69-85.
 
 
- 
----
- 

@@ -1,4 +1,9 @@
-# Chapter 12 - Standardised Metadata  Rich Context Book Chapter - Standardized Metadata, Full Text and
+ 
+---
+ 
+# Chapter 12 - Standard Test Corpora
+ 
+Rich Context Book Chapter - Standardized Metadata, Full Text and
 Training/Evaluation for Extraction Models
 
 \
@@ -168,6 +173,3 @@ can be affected by the quality of the data it is evaluated against.
 \
 
 \
- 
----
- 
