@@ -313,14 +313,17 @@ rm -r 11_images
 rm -r 12_images
 rm -r 13_images
 
+# replace hanging backslashes with double spaces to creatae new lines in markdown
+python clean_backslashes.py "chap??.md"
 
 # create a combined markdown file 
-cat *.md > combined_chapters.md 
-
-# replace hanging backslashes with double spaces to creatae new lines in markdown
-python clean_backslashes.py combined_chapters.md > rich_context_book.md
+cat *.md > rich_context_book.md
 
 # attempt a compile to html with pandoc do the compile
 pandoc rich_context_book.md -o rich_context_book.html
+
+# create a resource for sphinx 
+cp -r -f combined_images sphinx_version/
+cp chap*.md sphinx_version/
 
 
