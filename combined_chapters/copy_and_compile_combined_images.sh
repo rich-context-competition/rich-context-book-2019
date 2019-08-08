@@ -7,6 +7,21 @@ rm *.md
 rm *.pdf 
 rm *.html 
 
+# make placeholder directories for images
+mkdir 01_images
+mkdir 02_images
+mkdir 03_images
+mkdir 04_images
+mkdir 05_images
+mkdir 06_images
+mkdir 07_images
+mkdir 08_images
+mkdir 09_images
+mkdir 10_images
+mkdir 11_images
+mkdir 12_images
+mkdir 13_images
+
 # Chaapter one
 
 ## hoist placeholder title for chapter 1 
@@ -118,15 +133,11 @@ cp /tmp/newfile chap05.md
 
 # chapter 06
 echo "trying chapter 6"
-cp ../06-The_AI2_Submission_at_the_Rich_Context_Competition/acl2015.tex . 
-cp ../06-The_AI2_Submission_at_the_Rich_Context_Competition/acl2015.bib .
+cp ../06-The_AI2_Submission_at_the_Rich_Context_Competition/06-The_AI2_Submission_at_the_Rich_Context_Competition.md chap06.md
 cp ../06-The_AI2_Submission_at_the_Rich_Context_Competition/datasets.png 06_images/
 cp 06_images/*.png combined_images
-# now chop off the top bit of the tex file 
-sed -i.bu '1,38d' acl2015.tex
 # now re-write the reference to the imaage 
-sed -i.bu "s/datasets\.png/combined_images\/datasets\.png/g" acl2015.tex
-pandoc acl2015.tex -o chap06.md
+sed -i.bu "s/datasets\.png/combined_images\/datasets\.png/g" chap06.md
 sed -i.bu "s/{#sec:areas}//g" chap06.md
 #
 # add a placeholder chapter heading 
@@ -287,14 +298,29 @@ rm *.rtf
 rm *.html 
 rm *.tex 
 
+# remove placeholder directories for images
+rm -r 01_images
+rm -r 02_images
+rm -r 03_images
+rm -r 04_images
+rm -r 05_images
+rm -r 06_images
+rm -r 07_images
+rm -r 08_images
+rm -r 09_images
+rm -r 10_images
+rm -r 11_images
+rm -r 12_images
+rm -r 13_images
+
 
 # create a combined markdown file 
-cat *.md > combined_book.md 
+cat *.md > combined_chapters.md 
 
 # replace hanging backslashes with double spaces to creatae new lines in markdown
-python clean_backslashes.py combined_book.md > combined_book_no_backslashes.md
+python clean_backslashes.py combined_chapters.md > rich_context_book.md
 
 # attempt a compile to html with pandoc do the compile
-pandoc combined_book_no_backslashes.md -o combined_book_no_backslashes.html
+pandoc rich_context_book.md -o rich_context_book.html
 
 
