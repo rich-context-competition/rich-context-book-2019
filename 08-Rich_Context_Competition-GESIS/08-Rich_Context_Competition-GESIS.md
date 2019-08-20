@@ -120,13 +120,13 @@ There are some major challenges that any named entity recognition, classificatio
 
 ### Our Approach - Overview
 
-Our context-aware framework builds on Stanford’s CoreNLP and Named Entity Recognition System[16]. The information extraction process follows the workflow depicted in Figure \[figure:pipeline\], using separate modules for pre-processing, classification, linking and term filtering.
+Our context-aware framework builds on Stanford’s CoreNLP and Named Entity Recognition System[16]. The information extraction process follows the workflow depicted in Figure \[fig:pipeline\], using separate modules for pre-processing, classification, linking and term filtering.
 
 We envision the task of finding entities in scientific publications as a sequence labeling problem, where each input word is classified as being of a dedicated semantic type or not. In order to handle entities related to our domain, we train a novel machine learning classifier with major semantic classes, using training material from the ACL RD-TEC 2.0 dataset (QasemiZadeh and Schumann, 2016). Apart from this, we follow a domain adaptation approach inspired by (Agerri and Rigau, 2016) and ingest semantic background knowledge extracted from external scientific corpora, in particular the ACL Anthology (Bird et al., 2008; Gildea et al., 2018). We perform entity linking by means of a new gazetteer-based SAGE dictionary of Social Research Methods (Lewis-Beck et al., 2003), thus putting a special emphasis on the social sciences. The linking component addresses the synonymy problem and matches an entity despite name variations such as spelling variations. Finally, term filtering is carried out based on a termhood and unithood, while scoring is achieved by calculating a relevance score based on TF-IDF (cf. Section \[para:relscore\]).
 
 Our research experiments are based on the repository for the Social Sciences SSOAR as well as the train and test data of the Rich Context Competition corpus[17]. Our work extends previous work on this topic (cf. (Eckle-Kohler et al., 2013)) in various ways: First, we do not limit our study to abstracts, but use the entire fulltext. Second, we focus on a broader range of semantic classes, i.e. *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement*, tackling also the problem of identifying novel entities.
 
-\[pipeline\] <img src="figures/research-methods/pipeline.png" title="fig:" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
+<img src="figures/research-methods/pipeline.png" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
 
 #### Distributed Semantic Models
 
@@ -241,6 +241,9 @@ Discussion
 ### lessons-learned-and-what-would-you-do-differently
 
 ### what-comes-next
+
+Conclusion
+----------
 
 Acknowledgments
 ---------------
