@@ -1,5 +1,5 @@
 \subsection{Research Method Extraction}
-\label{section:research_method_extraction}
+\label{sec:research_method_extraction}
 %\wo{Andrea ask for a structure. I suggest: Task (What to do), Challenges (Concrete Problem), Our Approach (Solution), Development of the controlled Vocabulary, Development of Training Corpus, Evaluation (if possible from Andreas introspection of SSOAR results, how good we solved the problem)}
 
 
@@ -35,7 +35,7 @@ Last but not least, the combination of different semantic types gives a more coh
  
 \subsubsection{Our Approach - Overview} 
 Our context-aware framework builds on Stanford’s CoreNLP and Named Entity Recognition System\footnote{\url{https://nlp.stanford.edu/projects/project-ner.shtml}}. 
-The information extraction process follows the workflow depicted in Figure~\ref{figure:pipeline}, using separate modules for pre-processing, classification, linking and term filtering.
+The information extraction process follows the workflow depicted in Figure~\ref{fig:pipeline}, using separate modules for pre-processing, classification, linking and term filtering.
 
 We envision the task of finding entities in scientific publications as a sequence labeling problem, 
 where each input word is classified as being of a dedicated semantic type or not.
@@ -53,12 +53,14 @@ Our work extends previous work on this topic (cf. \cite{eckle2013automatically})
 i.e. \textit{Research Method}, \textit{Research Theory}, \textit{Research Tool} and \textit{Research Measurement}, tackling also the problem of identifying novel entities.
  
 
-\begin{figure}
-\label{pipeline}
-  \centering
+
+\begin{figure}[t]
+\centering
     \includegraphics[width=0.47\textwidth]{figures/research-methods/pipeline.png}
     \caption{Overview of the entity extraction pipeline}
+\label{fig:pipeline}
 \end{figure}
+
 
 \paragraph{Distributed Semantic Models}%\ \\[1pt]
 \label{subsec:dist-model}
