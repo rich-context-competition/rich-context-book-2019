@@ -2,16 +2,79 @@
 \label{sec:overview}
 This section describes the external data sources we used as well as our pre-processing steps.
 
-%TODO include subsubsection on "Approach overview and initial evaluation feedback" where we can include the overview of the modules and more details on the first stage evaluation (I've been cutting these parts a lot in the introduction to keep it more general)
-
 %\subsubsection{The RCC Corpus}
 %\label{subsec:rcc-corpus}
 %For the first phase, the data provided by the organizers consisted of 5,000 publications. Additionally, a development fold of 100 plain text publications, their metadata, a list of datasets of interest (including all datasets that were explicitly referenced in the curated corpus) were given. The list of datasets should not be considered complete as  there could be additional datasets mentioned in these publications. 
 %The organizers also provided examples of social science research methods and fields vocabularies in term of SAGE Publications research field and method vocabularies. 
 %In the second phase of the competition, an additional set of 5,000 publications from the social sciences has been provided.
 
+%TODO include subsubsection on "Approach overview and initial evaluation feedback" where we can include the overview of the modules and more details on the first stage evaluation (I've been cutting these parts a lot in the introduction to keep it more general)
+
+\subsubsection{Approach overview and initial evaluation feedback}
+\label{sec:approach_feedback}
+
+
+
+
+%\subsection{Task Definition of the RCC}
+%In both competition phases the task was to submit a software package which is able to process PDF (respectively extracted raw text) on the Servers of the organizers.
+%The software have to be able to extract dataset mentions, research methods and research fields from the given publication. More about the type of scientific publications can be found in Section~\ref{subsec:rcc-corpus}.
+%In the first phase additional the software has to be able to link dataset mentions to a given set of around 10,000 dataset descriptions originate from ICPSR\footnote{\url{https://www.icpsr.umich.edu/icpsrweb/ICPSR/}} research data index.
+
+
+%\subsubsection{Non-technical overview}
+
+%\begin{itemize}
+%    \item Usage of external data
+%    \item Supervised machine learning Approaches
+%    \item Problem of Training data: weak supervision
+%\end{itemize}
+
+
+% Literature Review
+
+
+The central tasks in the RCC are the extraction of dataset mentions from text. 
+Even so, we considered the discovery of research methods and research fields important.
+To this end, we decided to follow a module-based approach. Users could choose to use each specific module solely or as parts of a data processing pipeline.
+Figure~\ref{figure:pipeline} shows an overview of modules developed and their dependencies.
+Here, the upper three modules (which are in gray) describe the pre-processing steps (cf. Section~\ref{sec:prepro}).
+The lower four modules (blue) are used to generate the output in a competition dependend, pre-specified format. 
+
+\begin{figure}[t]
+    \includegraphics[width=0.47\textwidth]{figures/information-flow.png}
+    \caption{An overview of the individual software modules described in this document and their dependencies. 1- Gray: Our pre-processing pipeline. 2- Blue: three main tasks of the RCC.}
+    \label{figure:pipeline}
+\end{figure}
+
+The pre-processing step consists of extracting metadata and raw text from PDF documents.
+The output of this step is then used by the software modules responsible for tackling the individual sub-tasks.
+These sub-tasks are discovering research datasets (cf. Section~\ref{sec:dataset-extraction}), methods (cf. Section~\ref{sec:research_method_extraction}) and fields (cf. Section~\ref{sec:field_classification}).
+First a Named Enity Recognition module is used to find dataset mentions.
+This module used a supervised approach trained on a weekly labled corpus.
+%The creation of the used training corpus and the model are described in Section~\ref{sec:dataset-extraction}.
+In the next step, we combine all recognized mentions for each publication and compare these mentions to the metadata from the list of datasets given by the competition. %`data_sets.json`.
+For this linking step the mentions itself and year information located in the same sentence are used.
+The corresponding sentence and extracted information is persistet for debugging and potetial usage in future pipeline components.
+%After retrieving the best matching results, theses are returned in the target format specified by the RCC-competition.
+For identifying research fields, we trained a classifier on openly available abstracts and metadata from the domain of social sciences crawled from the Social Science Open Access Repository\footnote{\url{https://www.ssoar.info}} (SSOAR).
+%We used the OAI-API for this and the crawler is delivered in the module.
+We tried different classifiers and selected the best performing one, a classifier based on fasttext\footnote{\url{https://fasttext.cc/}}, i.e. a neural net based approach with a high performance\cite{joulin2017bag}.
+
+
+
+After the first phase, each team received feedback from the organizers of the RCC.
+The feedback is two folds and consists of a quantitative and qualitative evaluation. Unfortunately, the quantitative assessment showed our algorithms did not perform well regarding precision and recall metrics. In contrast to this, our approach has been found convincing regarding the quality of results. The qualitative feedback was from a random sample of ten documents given to four judges.
+Judges are then asked to manually extract dataset mentions and calculate the overlap between their dataset extractions and the output of our algorithm.
+Other factors that judges took into consideration are specificity, uniqueness, and multiple occurrences of dataset mentions.
+As for the extraction of research methods and fields, no ground truth has been provided; these tasks were evaluated against the judges' expert knowledge.
+Similarly to the extraction of dataset mentions, specificity and uniqueness have been considered for these two tasks.
+The feedback our team received acknowledged the fact that no ground truth has been provided and our efforts regarding the extraction of research methods and fields.
+%Feedback by RCC
+%Section~\ref{} gives detailed overview of data provided by the RCC and additional data sources used in our approach. :o .
+
 \subsubsection{External Data Sources}
-\label{section:external_data_sources}
+\label{sec:external_data_sources}
 For developing our algorithms, we utilized two external data sources. For the discovery of research methods and fields, we resort to data from Social Science Open Access Repository\footnote{\url{https://www.gesis.org/ssoar/home}} (SSOAR). 
 GESIS – Leibniz Institute for the Social Sciences maintains  SSOAR by collecting and archiving literature of relevance to the social sciences. 
 
@@ -39,9 +102,14 @@ The corpus consists of a total of 22,878 articles.
 
 \subsubsection{Pre-processing}
 \label{sec:prepro}
-Although the organizers of the RCC, offered plain texts for the publication, we decided to build our own pre-process pipeline. The pipeline uses the Cermine Tool to extract information from PDF documents. The main benefit of using this tool is the structured metadata output, including better disambiguation of sections and paragraphs in the publications. The output XML file uses the Journal Article Tag Suite\footnote{\url{https://jats.nlm.nih.gov}}. For the competition, there are only two interesting elements of the Jats XML format, i.e., $<$front$>$ and $<$body$>$. The $<$front$>$ element contains the metadata of the publication, whereas the $<$body$>$ contains the main textual and graphic content of the publication.
-Another advantage of Cermine is that the hyphenation and segmentation of paragraphs are carried out automatically. 
-As a last step of the pre-processing, we remove all linebreaks from the publication. The output of this step is a list of metadata fields and values, as shown in Table~\ref{tab:example-paragraph} for each publication paragraph.
+Although the organizers of the RCC, offered plain texts for the publication, we decided to build our own pre-process pipeline.
+The extraction of text from PDF files is still an error prone process. To handle de-hyphenation and paragraph segmentation during extraction time and benefit from automatic metadata extraction (i.e. title, author, abstracts and references) we decided to use an third party extraction tool.
+The Cermine Extraction Tool\footnote{\url{https://github.com/CeON/CERMINE}}\cite{tkaczyk2015cermine} transforms the files into a XML document using the Journal Article Tag Suite\footnote{\url{https://jats.nlm.nih.gov}}(Jats).
+%The main benefit of using this tool is the structured metadata output, including better disambiguation of sections and paragraphs in the publications.
+For the competition, we identified two interesting elements of the Jats XML format, i.e., $<$front$>$ and $<$body$>$. The $<$front$>$ element contains the metadata of the publication, whereas the $<$body$>$ contains the main textual and graphic content of the publication.
+%A benefit of Cermine is that the de-hyphenation and segmentation of paragraphs are carried out out of the box.
+As a last step of the pre-processing, we remove all linebreaks from the publication.
+The output of this step is a list of metadata fields and values, as shown in Table~\ref{tab:example-paragraph} for each publication paragraph.
 
 \begin{table}[h]
     \centering
