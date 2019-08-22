@@ -196,7 +196,7 @@ justification=raggedright]{caption}
 % ---------------------------------------------------------------------
 
 \renewcommand{\@maketitle}{%
-    \twocolumn[{%
+    \onecolumn[{%
     \thispagestyle{empty}%
     \vskip-36pt%
     {\raggedleft\small\sffamily\bfseries\@JournalInfo\\\@Archive\par}%
