@@ -39,7 +39,7 @@ Even so, we considered the discovery of research methods and research fields imp
 To this end, we decided to follow a module-based approach. Users could choose to use each specific module solely or as parts of a data processing pipeline.
 Figure~\ref{figure:pipeline} shows an overview of modules developed and their dependencies.
 Here, the upper three modules (which are in gray) describe the pre-processing steps (cf. Section~\ref{sec:prepro}).
-The lower four modules (blue) are used to generate the output in a competition dependend, pre-specified format. 
+The lower four modules (blue) are used to generate the output in a predefined format as specified by the competition.
 
 \begin{figure}[t]
     \includegraphics[width=0.47\textwidth]{figures/information-flow.png}
@@ -49,14 +49,15 @@ The lower four modules (blue) are used to generate the output in a competition d
 
 The pre-processing step consists of extracting metadata and raw text from PDF documents.
 The output of this step is then used by the software modules responsible for tackling the individual sub-tasks.
-These sub-tasks are discovering research datasets (cf. Section~\ref{sec:dataset-extraction}), methods (cf. Section~\ref{sec:research_method_extraction}) and fields (cf. Section~\ref{sec:field_classification}).
-First a Named Enity Recognition module is used to find dataset mentions.
-This module used a supervised approach trained on a weekly labled corpus.
+These sub-tasks are to discover research datasets (cf. Section~\ref{sec:dataset-extraction}), methods (cf. Section~\ref{sec:research_method_extraction}) and fields (cf. Section~\ref{sec:field_classification}).
+First, a Named Enity Recognition module is used to find dataset mentions.
+This module used a supervised approach trained on a weakly labled corpus.
 %The creation of the used training corpus and the model are described in Section~\ref{sec:dataset-extraction}.
 In the next step, we combine all recognized mentions for each publication and compare these mentions to the metadata from the list of datasets given by the competition. %`data_sets.json`.
-For this linking step the mentions itself and year information located in the same sentence are used.
-The corresponding sentence and extracted information is persistet for debugging and potetial usage in future pipeline components.
+For this linking step the mentions and year information located in the same sentence are used.
+The corresponding sentence and extracted information are saved for debugging and potential usage in future pipeline components.
 %After retrieving the best matching results, theses are returned in the target format specified by the RCC-competition.
+The task of identifying research methods is done by an adjusted NER module trained on a corpus of scientific publications. 
 For identifying research fields, we trained a classifier on openly available abstracts and metadata from the domain of social sciences crawled from the Social Science Open Access Repository\footnote{\url{https://www.ssoar.info}} (SSOAR).
 %We used the OAI-API for this and the crawler is delivered in the module.
 We tried different classifiers and selected the best performing one, a classifier based on fasttext\footnote{\url{https://fasttext.cc/}}, i.e. a neural net based approach with a high performance\cite{joulin2017bag}.
@@ -64,7 +65,7 @@ We tried different classifiers and selected the best performing one, a classifie
 
 
 After the first phase, each team received feedback from the organizers of the RCC.
-The feedback is two folds and consists of a quantitative and qualitative evaluation. Unfortunately, the quantitative assessment showed our algorithms did not perform well regarding precision and recall metrics. In contrast to this, our approach has been found convincing regarding the quality of results. The qualitative feedback was from a random sample of ten documents given to four judges.
+The feedback is two folds, a quantitative and qualitative evaluation. Unfortunately, the quantitative assessment showed our algorithms did not perform well regarding precision and recall metrics. In contrast to this, our approach has been found convincing regarding the quality of results. The qualitative feedback was from a random sample of ten documents given to four judges.
 Judges are then asked to manually extract dataset mentions and calculate the overlap between their dataset extractions and the output of our algorithm.
 Other factors that judges took into consideration are specificity, uniqueness, and multiple occurrences of dataset mentions.
 As for the extraction of research methods and fields, no ground truth has been provided; these tasks were evaluated against the judges' expert knowledge.
@@ -75,12 +76,13 @@ The feedback our team received acknowledged the fact that no ground truth has be
 
 \subsubsection{External Data Sources}
 \label{sec:external_data_sources}
-For developing our algorithms, we utilized two external data sources. For the discovery of research methods and fields, we resort to data from Social Science Open Access Repository\footnote{\url{https://www.gesis.org/ssoar/home}} (SSOAR). 
+For developing our algorithms, we utilized two external data sources.
+For the discovery of research methods and fields, we resort to data from the Social Science Open Access Repository\footnote{\url{https://www.gesis.org/ssoar/home}} (SSOAR). 
 GESIS – Leibniz Institute for the Social Sciences maintains  SSOAR by collecting and archiving literature of relevance to the social sciences. 
 
 In SSOAR, full texts are indexed using controlled social science vocabulary (Thesaurus\footnote{\url{https://www.gesis.org/en/services/research/tools/thesaurus-for-the-social-sciences}}, Classification\footnote{\url{https://www.gesis.org/angebot/recherchieren/tools-zur-recherche/klassifikation-sozialwissenschaften} (in German)}) and are assigned rich metadata. SSOAR offers documents in various languages. The corpus of English language publications that can be used for purposes of the competition consists of a total of 13,175 documents. All SSOAR documents can be accessed through the OAI-PMH\footnote{{\url{http://www.openarchives.org}}} interface. 
 
-Another external source that we used for the discovery of research methods is the ACL Anthology Reference Corpus~\cite{bird2008acl}. ACL ARC is a corpus of scholarly publications about computational linguistics.  
+Another external sourcei, that we used for the discovery of research methods is the ACL Anthology Reference Corpus~\cite{bird2008acl}. ACL ARC is a corpus of scholarly publications about computational linguistics.  
 The corpus consists of a total of 22,878 articles.
 
 %SSOAR contains 
@@ -102,18 +104,18 @@ The corpus consists of a total of 22,878 articles.
 
 \subsubsection{Pre-processing}
 \label{sec:prepro}
-Although the organizers of the RCC, offered plain texts for the publication, we decided to build our own pre-process pipeline.
-The extraction of text from PDF files is still an error prone process. To handle de-hyphenation and paragraph segmentation during extraction time and benefit from automatic metadata extraction (i.e. title, author, abstracts and references) we decided to use an third party extraction tool.
-The Cermine Extraction Tool\footnote{\url{https://github.com/CeON/CERMINE}}\cite{tkaczyk2015cermine} transforms the files into a XML document using the Journal Article Tag Suite\footnote{\url{https://jats.nlm.nih.gov}}(Jats).
+Although the organizers of the RCC offered plain texts for the publication, we decided to build our own pre-processing pipeline.
+The extraction of text from PDF files is still an error prone process. To handle de-hyphenation and paragraph segmentation during extraction time and benefit from automatic metadata extraction (i.e. title, author, abstracts and references) we decided to use a third party extraction tool.
+The Cermine Extraction Tool\footnote{\url{https://github.com/CeON/CERMINE}}\cite{tkaczyk2015cermine} transforms the files into XML documents using the Journal Article Tag Suite\footnote{\url{https://jats.nlm.nih.gov}}(Jats).
 %The main benefit of using this tool is the structured metadata output, including better disambiguation of sections and paragraphs in the publications.
-For the competition, we identified two interesting elements of the Jats XML format, i.e., $<$front$>$ and $<$body$>$. The $<$front$>$ element contains the metadata of the publication, whereas the $<$body$>$ contains the main textual and graphic content of the publication.
+For the competition we identified two interesting elements of the Jats XML format, i.e., $<$front$>$ and $<$body$>$. The $<$front$>$ element contains the metadata of the publication, whereas the $<$body$>$ contains the main textual and graphic content of the publication.
 %A benefit of Cermine is that the de-hyphenation and segmentation of paragraphs are carried out out of the box.
-As a last step of the pre-processing, we remove all linebreaks from the publication.
+As a last step of the pre-processing, we removed all linebreaks from the publication.
 The output of this step is a list of metadata fields and values, as shown in Table~\ref{tab:example-paragraph} for each publication paragraph.
 
 \begin{table}[h]
     \centering
-     \caption{An Example output of our pre-processing for a paragraph in a given publication.}
+     \caption{An Eexample output of our pre-processing for a paragraph in a given publication.}
     \begin{tabular}{ll}
         \toprule
         {}                  &                            Example Text Field Data \\
