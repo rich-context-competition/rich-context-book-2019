@@ -16,7 +16,7 @@ The central tasks in the RCC are concerned with the extraction and disambiguatio
 
 Having been among the four shortlisted submissions for the second phase of the RCC, this chapter describes our approaches, techniques, and additional data used to address all three tasks. As described in the following subsections, we decided to follow a module-based approach where either individual modules or the entire pipeline can be reused. The remaining chapter is organised as follows. The following Section \[sec:overview\] provides an overview of our approach, used background data and preprocessing steps, whereas Sections  \[sec:dataset-extraction\],  \[sec:research\_method\_extraction\] and  \[sec:field\_classification\] describe our approaches and results towards each of the tasks. Finally, we discuss our results in Section \[sec:discussion\] and provide an overview of future work in Section \[sec:conclusion\].
 
-Approach, Data and Pre-processing
+Approach, data and pre-processing
 ---------------------------------
 
 This section describes the external data sources we used as well as our pre-processing steps.
@@ -31,7 +31,7 @@ The pre-processing step consists of extracting metadata and raw text from PDF do
 
 After the first phase, each team received feedback from the organizers of the RCC. The feedback is two folds, a quantitative and qualitative evaluation. Unfortunately, the quantitative assessment showed our algorithms did not perform well regarding precision and recall metrics. In contrast to this, our approach has been found convincing regarding the quality of results. The qualitative feedback was from a random sample of ten documents given to four judges. Judges are then asked to manually extract dataset mentions and calculate the overlap between their dataset extractions and the output of our algorithm. Other factors that judges took into consideration are specificity, uniqueness, and multiple occurrences of dataset mentions. As for the extraction of research methods and fields, no ground truth has been provided; these tasks were evaluated against the judges’ expert knowledge. Similarly to the extraction of dataset mentions, specificity and uniqueness have been considered for these two tasks. The feedback our team received acknowledged the fact that no ground truth has been provided and our efforts regarding the extraction of research methods and fields.
 
-### External Data Sources
+### External data sources
 
 For developing our algorithms, we utilized two external data sources. For the discovery of research methods and fields, we resort to data from the Social Science Open Access Repository[10] (SSOAR). GESIS – Leibniz Institute for the Social Sciences maintains SSOAR by collecting and archiving literature of relevance to the social sciences.
 
@@ -58,10 +58,10 @@ Although the organizers of the RCC offered plain texts for the publication, we d
 
 \[tab:example-paragraph\]
 
-Dataset Extraction
+Dataset extraction
 ------------------
 
-### Task Description
+### Task description
 
 In the scientific literature, datasets are cited to reference, for example, the data on which an analysis is performed or on which a particular result or claim is based. In this competition, we focus on (i) extracting and (ii) disambiguating dataset mentions from social science publications to a list of given dataset references. Identifying dataset mention in literature is a challenging problem due to the huge number of styles of citing datasets. Although there are proposed standards for dataset citation in full-texts, researchers still ignore or neglect such standards (see, e.g., (Altman and King, 2007)). Furthermore, in many research publication, a correct citation of datasets is often missing (Boland et al., 2012). The following two sentences exemplify the problem of the usage of an abbreviation to make a reference to an existing dataset. The first example illustrates the use of abbreviations that are known mainly in the author’s research domain. The latter illustrates the ambiguity of abvreviations. In this case, *WHO* identifies a dataset published by the World Health Organization and does not refer to the institution itself.
 **Example 1**: *P-values are reported for the one-tail paired t-test on *Allbus* (dataset mention) and *ISSP* (dataset mention).*
@@ -112,10 +112,10 @@ We resort to the same evaluation metrics as in phase one. However, we calculate 
 
 \[table:dataset-mention-eval-phase-two\]
 
-Research Method Extraction
+Research method extraction
 --------------------------
 
-### Task Description
+### Task description
 
 Inspired by a recent work of Nasar et al. (Nasar et al., 2018), we define a list of basic entity types that give key-insights into scholarly publications. We adapted the list of semantic entity types to the domain of the social sciences with a focus on *research methods*, but also including related entity types such as *Theory, Model, Measurement, Tool, Performance*. We suspect that the division into semantic types might be helpful to find *research methods*. The reason is that the related semantic entities types might provide clues or might be directly related to the research method itself.
 
@@ -139,7 +139,7 @@ The task of Named Entity Recognition and Linking is to (i) identify the mentions
 
 There are some major challenges that any named entity recognition, classification and linking system needs to handle. First, regarding NER, identifying the entities boundary is important, thus detecting the exact sequence span. Second, ambiguity errors might arise in classification. For instance,‘range’ might be a domain-specific term from the knowledge base or belong to the general domain vocabulary. This is a challenging task for which context information is required. In the literature, this relates to the problem of **domain adaptation** which includes fine-tuning to specific named entity classes[19]. With respect to entity linking, another challenge is detecting name variations, since entities can be referred to in many different ways. Semantically similar words, synonyms or related words, which might be lexically or syntactically different, are often not listed in the knowledge base (e.g., the lack of certain terms like ‘questioning’ but not ‘questionnaire’). This problem of automatically detecting these relationships is generally known as **linking problem**. Note that part of this problem also results from PDF-to-text conversion which is error-prone. Dealing with incomplete knowledge bases, i.e. **handling of out of vocabulary (OOV) items**, is also a major issue, since knowledge bases are often not exhaustive enough and do not cover specific terms or novel concepts from recent research. Last but not least, the combination of different semantic types gives a more coherent picture of a research article. We hypothesize that such information would be helpful and results in an insightful co-occurrence statistics, and provides additional detail directly related to entity resolution, and finally helps to assess the **relevance of terms** by means of a score.
 
-### Our Approach - Overview
+### Our approach
 
 Our research method extraction tool builds on Stanford’s CoreNLP and Named Entity Recognition System[20]. The information extraction process follows the workflow depicted in Figure \[fig:pipeline\], using separate modules for pre-processing, classification, linking and term filtering.
 
@@ -149,7 +149,7 @@ Our research experiments are based on publications from the Social Science Open 
 
 <img src="figures/research-methods/pipeline.png" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
 
-#### Distributed Semantic Models
+#### Distributed semantic models
 
 For domain adaptation, we integrate further background knowledge. We use topical information from word embeddings trained on an scientific corpus as an additional features to our NER model. For this, we use agglomerative clustering of the word embeddings to identify topical groups of words. The cluster number of each word is used as additional sequential input feature for our CRF model. Semantic representations of words are a successful extension of common features, resulting in higher NER performance (Turian et al., 2010) and can be trained offline. In this work, the word vectors were learned based on 22,878 documents of the scientific ACL Anthology Reference Corpus[23] using Gensim[24] with the skip gram model (cf. (Mikolov et al., 2013)) and a pre-clustering algorithm[25].
 
@@ -168,7 +168,7 @@ The features incorporated into the linear chain CRF are shown in the Table \[ta
 | **Gazetteer**            |                                                   SAGE Gazetteer                                                   |
 | **Distributional Model** |                                                 ACL Anthology model                                                |
 
-#### Knowledge Resources
+#### Knowledge resources
 
 We use the SAGE thesaurus which includes well-defined concepts, an explicit taxonomic hierarchy between concepts as well as labels that specify synonyms of the same concept. A portion of terms is unique to the social science domain (e.g., ‘dependent interviewing’), while others are drawn from related disciplines such as statistics (e.g., ‘conditional likelihood ratio test’)[26]. However, since the thesaurus is not exhaustive and covers only the top-level concepts related to social science methods, our aim was to extend it by automatically extracting further terms from domain-specific texts, in particular from the Social Science Open Access Repository. More concretely, we carried out the following steps to extend SAGE as an off-line step. For step 2 and 3, candidate terms have been extracted by our pipeline for the entire SSOAR corpus.
 
@@ -176,13 +176,13 @@ We use the SAGE thesaurus which includes well-defined concepts, an explicit taxo
 
 2.  Extracting terms variants such as abbreviations, synonyms, related terms from SSOAR (semi-automatic)
 
-3.  Computation of Term and Document Frequency Scores for SSOAR (automatic)
+3.  Computation of term and document frequency scores for SSOAR (automatic)
 
 #### Extracting term variants such as abbreviations, synonyms, and related terms
 
 26.082 candidate terms have been recognized and classified by our pipeline and manually inspected to a) find synonyms and related words that could be linked to SAGE, and b) build a post-filter for incorrectly classified terms. Moreover, abbreviations have been extracted using the algorithm of Schwartz and Hearst (Schwartz and Hearst, 2003). This way, a Named Entity gazetteer could be built and is used at run-time. It comprises 1,111 terms from SAGE and 447 terms from the Statistics glossary as well as 54 previously unseen terms detected by the model-based classifier.
 
-#### Computation of Term and Document Frequency Scores
+#### Computation of term and document frequency scores
 
 Term frequency statistics have been calculated off-line for the entire SSOAR corpus. The term frequency at corpus level will be used at run time to determine the term relevance at the document level by calculating the TF-IDF scores. The most relevant terms from SAGE are listed in Table \[tab:SAGET\].
 
@@ -201,20 +201,20 @@ Term frequency statistics have been calculated off-line for the entire SSOAR cor
 | GIS                         | 486,01           | Research Tool      |
 | SPSS                        | 136,52           | Research Tool      |
 
-#### Definition of a Relevance Score
+#### Definition of a relevance score
 
 Relevance of terminology is often assessed using the notion of *unithood*, i.e. ‘the degree of strength or stability of syntagmatic combinations of collections’, and *termhood*, i.e. ‘the degree that a linguistic unit is related to domain-specific concepts’ (Kageura and Umino, 1996). Regarding *unithood*, the NER model implicitly contains heuristics about legal POS tag sequences for candidate terms, consisting of at least one noun (NN), preceeded or followed by modifiers such as adjectives (JJ), participles (VB\*) or cardinal numbers (CD), complemented by wordshape features.
 
 In order to find out if the candidate term also fulfills the *termhood* requirement, domain-specific term frequency statistics have been computed on the SSOAR repository, and set in contrast to general domain vocabulary terms. It has to be noted that only a small portion of the social science terms is actually unique to the domain (e.g., ‘dependent interviewing’), while others might be drawn from related disciplines such as statistics (e.g., ‘conditional likelihood ratio test’).
 
-#### Preliminary Results
+#### Preliminary results
 
 Our method has been tested on 100 fulltext papers from SSOAR and ten documents from the Rich Context Competition (RCC), all randomly selected from a hold out corpus. In our experiments on SSOAR Social Science publications, we compared results to the given metadata information. The main finding was that while most entities from the SAGE thesaurus could be extracted and linked reliably (e.g., ’Paired t-test’), they could not be easily mapped to the SSOAR metadata terms, which consist of only a few abstract classes (e.g., ’quantitative analysis’). Furthermore, our tool was tested by the RCC organizer, were the judges reviewed ten random publications and generated qualitative scores for each document.
 
-Research Field Classification
+Research field classification
 -----------------------------
 
-### Task Description
+### Task description
 
 The goal of this task is to identify the research fields covered in the social science publications. In general, two approaches could be applied to this task. One is the extraction of relevant terms of the publications. It means that this task could be seen as a keyword extraction task and the detected terms considered as descriptive terms regarding the research field. The second approach is to learn to classify publications research fields with the use of annotated data in a superviesed manner. The benifit of the second approach is that the classification scheme to describe the research field can be defined experts of the domain. The disadvantage of supervised trained classifiers for this task is the lack of applicable training data. Furthermore, it must be ensured that the training data is comparable to the texts the research field classifier should be applied on.
 
@@ -222,7 +222,7 @@ The goal of this task is to identify the research fields covered in the social s
 
 Let *P* denote a set of Publications of size *n*, *A* a set of corresponding abstracts of the same size and *L* a set of *k* defined class labels describing research fields. The task of research field classification is to select for each publication *p*<sub>*i*</sub> ∈ *P* based on the information contained in the corresponding abstract *a*<sub>*i*</sub> ∈ *A* a set of labels *C*<sub>*i*</sub> = ⌀ ∩ {*c*<sub>1</sub>…*c*<sub>*n*</sub>|*c*<sub>*n*</sub> ∈ *L*} of *n* labels. The number of *n* denotes the number of labels from *L* describing the research field of *a*<sub>*i*</sub> and can vary for each publication *p*<sub>*i*</sub>. If there is no label *l*<sub>*k*</sub> representing the information given by the abstract *a*<sub>*i*</sub> the set of class labels is the empty set ⌀.
 
-### Our approach - Overview
+### Our approach
 
 Since we didn’t receive any gold standard for this task during the competition we decided to make use of external resources. We decided to use an external labeled dataset to train a text classifier which is able to predict for a given abstract of a publication one or more research field label.
 
@@ -236,7 +236,7 @@ SSOAR is a multilingual repository. Also the available abstracts can vary in lan
 
 ### Evaluation
 
-In this experiment, only the top 3 labels with the highest probabilities were considered for the evaluations. Figure \[fig:fields\_precision\_recall\] shows the performance of the model regarding various evaluation metrics for different thresholds. A label is assigned to a publication if the model outputs a probability for the label above the defined threshold. In multi-label classification, this allows us to evaluate our model from different perspectives. As it is illustrated in figure \[fig:fields\_precision\_recall\], the point that the micro-precision curve and micro recall meet is at the threshold of 0.1. We can see the point as the highest point of micro f1-measure. By increasing the threshold from this point, the micro-precision score is increasing, but the micro recall is falling. By Decreasing threshold, these trends are opposite. Also, the default threshold doesn’t look promising. In spite of micro-precision about 0.7, we have a problem with the very high number of items without any prediction.
+Figure \[fig:fields\_precision\_recall\] shows the performance of the model regarding various evaluation metrics for different thresholds. A label is assigned to a publication if the model outputs a probability for the label above the defined threshold. In multi-label classification, this allows us to evaluate our model from different perspectives. As illustrated in figure \[fig:fields\_precision\_recall\], the intersection of the micro precision and the micro recall curves is at the threshold of 0.1, where the highest micro f1 score is achieved. By increasing the threshold from this point, the micro-precision score is increasing, but the micro recall is falling. By decreasing threshold, these trends are inverted. Also, the default threshold of 0.5 doesn’t look promising. In spite of micro-precision about 0.75, we have a problem with the very high number of items without any prediction. In respect to this observation it is advantageous to select a lower threshold in a productive environment. The curve named *without prediction* shows for a given threshold the share of publications in the test set without any prediction. If the selected threshold value is high, the number of publications for which the model cannot predict a research field increases. For example, a selected threshold value of 0.55 leads to 40% unclassified publications in the test set. The *one correct* named curve indicates the quality of the publication wise prediction. It shows the share of all publications in the test set where at least one of the predicted research field labels can be found in the ground truth data. For instance, if a threshold of 0.1 is selected for 75% of the publications in the test set, at least one of the model predictions are correct. This value decreases with increasing threshold simmilar to the recall metric.
 
 <img src="figures/research-fields/fields-precision-recall.png" alt="Metrics for different selected probability thresholds (validation set)" />
 
@@ -248,6 +248,14 @@ In this experiment, only the top 3 labels with the highest probabilities were co
 
 Discussion
 ----------
+
+For each method, brief summary of:
+
+-   results / performance
+
+-   applicability / generalisability
+
+-   limitations and challenges (eg lack of large-scale GT, corpus-specific training etc etc)
 
 Conclusion
 ----------

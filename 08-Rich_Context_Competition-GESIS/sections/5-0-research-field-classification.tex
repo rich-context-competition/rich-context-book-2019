@@ -1,7 +1,7 @@
 
-\subsection{Research Field Classification}
+\subsection{Research field classification}
 \label{sec:field_classification}
-\subsubsection{Task Description}
+\subsubsection{Task description}
 The goal of this task is to identify the research fields covered in the social science publications.
 In general, two approaches could be applied to this task.
 One is the extraction of relevant terms of the publications.
@@ -74,14 +74,23 @@ Also, the negative sampling parameter is set to 25.
 %% Parameter Selection
 %%  k and threshold
 %%  * reduced number of labels?
-In this experiment, only the top 3 labels with the highest probabilities were considered for the evaluation.
-Figure~\ref{fig:fields_precision_recall} shows the performance of the model regarding various evaluation metrics for different thresholds. 
+Figure~\ref{fig:fields_precision_recall} shows the performance of the model regarding various evaluation metrics for different thresholds.
 A label is assigned to a publication if the model outputs a probability for the label above the defined threshold.
 In multi-label classification, this allows us to evaluate our model from different perspectives. 
-As it is illustrated in figure~\ref{fig:fields_precision_recall}, the point where the micro-precision and the micro recall curves meet is at the threshold of 0.1 where the highest microc f1 score is achieved.
+As illustrated in figure~\ref{fig:fields_precision_recall}, the intersection of the micro precision and the micro recall curves is at the threshold of 0.1, where the highest micro f1 score is achieved.
 %% final results
-By increasing the threshold from this point, the micro-precision score is increasing, but the micro recall is falling. By decreasing threshold, these trends are inverted.  Also, the default threshold doesn't look promising. In spite of micro-precision about 0.7, we have a problem with the very high number of items without any prediction. 
-
+By increasing the threshold from this point, the micro-precision score is increasing, but the micro recall is falling.
+By decreasing threshold, these trends are inverted.
+Also, the default threshold of 0.5 doesn't look promising.
+In spite of micro-precision about 0.75, we have a problem with the very high number of items without any prediction. 
+In respect to this observation it is advantageous to select a lower threshold in a productive environment.
+The curve named \emph{without prediction} shows for a given threshold the share of publications in the test set without any prediction.
+If the selected threshold value is high, the number of publications for which the model cannot predict a research field increases.
+For example, a selected threshold value of 0.55 leads to 40\% unclassified publications in the test set.
+The \emph{one correct} named curve indicates the quality of the publication wise prediction.
+It shows the share of all publications in the test set where at least one of the predicted research field labels can be found in the ground truth data.
+For instance, if a threshold of 0.1 is selected for 75\% of the publications in the test set, at least one of the model predictions are correct.
+This value decreases with increasing threshold simmilar to the recall metric.
 %TODO what is the "default threshold" and why does it matter? what is the line "without prediction" and what is "share allwrong prediction"? 
 
 %%  comparison to baseline (SVM?)

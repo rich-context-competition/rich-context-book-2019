@@ -1,9 +1,9 @@
-\subsection{Research Method Extraction}
+\subsection{Research method extraction}
 \label{sec:research_method_extraction}
 %\wo{Andrea ask for a structure. I suggest: Task (What to do), Challenges (Concrete Problem), Our Approach (Solution), Development of the controlled Vocabulary, Development of Training Corpus, Evaluation (if possible from Andreas introspection of SSOAR results, how good we solved the problem)}
 
 
-\subsubsection{Task Description}
+\subsubsection{Task description}
 Inspired by a recent work of Nasar et al. \cite{nasar2018information}, we define a list of basic entity types that give key-insights into scholarly publications. 
 We adapted the list of semantic entity types to the domain of the social sciences with a focus on \textit{research methods},
 but also including related entity types such as \textit{Theory, Model, Measurement, Tool, Performance}. We suspect that the division into semantic types might be helpful to find \textit{research methods}.
@@ -66,7 +66,7 @@ knowledge bases are often not exhaustive enough and do not cover specific terms 
 Last but not least, the combination of different semantic types gives a more coherent picture of a research article. We hypothesize that such information would be helpful and results in an insightful co-occurrence statistics, and provides additional detail directly related to entity resolution, and finally helps to assess the \textbf{relevance of terms} by means of a score.
 
  
-\subsubsection{Our Approach} 
+\subsubsection{Our approach} 
 Our research method extraction tool builds on Stanford’s CoreNLP and Named Entity Recognition System\footnote{\url{https://nlp.stanford.edu/projects/project-ner.shtml}}. 
 The information extraction process follows the workflow depicted in Figure~\ref{fig:pipeline}, using separate modules for pre-processing, classification, linking and term filtering.
 
@@ -97,7 +97,7 @@ i.e. \textit{Research Method}, \textit{Research Theory}, \textit{Research Tool} 
 
 
 
-\paragraph{Distributed Semantic Models}%\ \\[1pt]
+\paragraph{Distributed semantic models}%\ \\[1pt]
 \label{subsec:dist-model}
 For domain adaptation, we integrate further background knowledge.
 We use topical information from word embeddings trained on an scientific corpus as an additional features to our NER model.
@@ -159,7 +159,7 @@ The features incorporated into the linear chain CRF are shown in the Table~\ref{
    \end{tabular}
 \end{table}
 
-\paragraph{Knowledge Resources}%\ 
+\paragraph{Knowledge resources}%\ 
 We use the SAGE thesaurus which includes well-defined concepts, an explicit taxonomic hierarchy between concepts as well as labels that specify synonyms of the same concept.
 A portion of terms is unique to the social science domain (e.\,g.,  `dependent interviewing'), while others are drawn from related disciplines such as statistics (e.\,g., `conditional likelihood ratio test')\footnote{A glossary of statistical terms as provided in \url{https://www.statistics.com/resources/glossary/} has been added as well.}.
 However, since the thesaurus is not exhaustive and covers only the top-level concepts related to social science methods, our aim was to extend it by automatically extracting further terms from domain-specific texts, in particular from the Social Science Open Access Repository.
@@ -167,7 +167,7 @@ More concretely, we carried out the following steps to extend SAGE as an off-lin
 \begin{enumerate}
 \item Assignment of semantic types to concepts (manual) 
 \item Extracting terms variants such as abbreviations, synonyms, related terms from SSOAR (semi-automatic)
-\item Computation of Term and Document Frequency Scores for SSOAR (automatic)
+\item Computation of term and document frequency scores for SSOAR (automatic)
 \end{enumerate}
 
 \paragraph{Extracting term variants such as abbreviations, synonyms, and related terms}%\ \\[1pt]
@@ -181,7 +181,7 @@ This way, a Named Entity gazetteer could be built and is used at run-time. It co
 
 
 
-\paragraph{Computation of Term and Document Frequency Scores}%\ \\[1pt]
+\paragraph{Computation of term and document frequency scores}%\ \\[1pt]
 Term frequency statistics have been calculated off-line for the entire SSOAR corpus.
 The term frequency at corpus level will be used at run time to determine the term relevance at the document level by calculating the TF-IDF scores. The most relevant terms from SAGE are listed in Table~\ref{tab:SAGET}.
 \begin{table}
@@ -209,7 +209,7 @@ SPSS	  &	136,52  &		Research Tool \\ \hline
 
 %TODO Why do we have arbitrary numbers in this document (3 tools, 5 methods, 2 fields etc)? Is it the top-k per type? If so, then we different k? Is it the most popular/frequent (plus their types) but then I wonder about the order). 
 
-\paragraph{Definition of a Relevance Score}%\ \\[1pt]
+\paragraph{Definition of a relevance score}%\ \\[1pt]
 \label{para:relscore}
 Relevance of terminology is often assessed using the notion of 
 \textit{unithood}, i.e. `the degree of strength or stability of syntagmatic combinations of collections', and 
@@ -223,7 +223,7 @@ It has to be noted that only a small portion of the social science terms is actu
 
 
 %COMMENT (AZ) Since there is no gold standard it is difficult to report any reliable results! 
-\paragraph{Preliminary Results}%\ \\[1pt]
+\paragraph{Preliminary results}%\ \\[1pt]
 Our method has been tested on 100 fulltext papers from SSOAR and ten documents from the Rich Context Competition (RCC), all randomly selected from a hold out corpus.
 In our experiments on SSOAR Social Science publications, we compared results to the given metadata information.
 The main finding was that while most entities from the SAGE thesaurus could be extracted and linked reliably (e.g., 'Paired t-test'), they could not be easily mapped to the SSOAR metadata terms, which consist of only a few abstract classes (e.g., 'quantitative analysis'). Furthermore, our tool was tested by the RCC organizer, were the judges reviewed ten random publications and generated qualitative scores for each document. %COMMENT (AZ) Yes. We were the winning team on this task. But what results to put here?
