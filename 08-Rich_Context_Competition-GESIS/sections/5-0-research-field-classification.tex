@@ -27,7 +27,7 @@ If there is no label $l_k$ representing the information given by the abstract $a
 %%  * Why is it good
 %%  * Because of courpus we decided to go for a supervied method
 
-\subsubsection{Our approach - Overview}
+\subsubsection{Our approach}
 %% External data (SSOAR
 %% * Supervised
 %% * Multi label classification
@@ -74,13 +74,16 @@ Also, the negative sampling parameter is set to 25.
 %% Parameter Selection
 %%  k and threshold
 %%  * reduced number of labels?
-In this experiment, only the top 3 labels with the highest probabilities were considered for the evaluations.
-Figure~\ref{fig:fields_precision_recall} shows the performance of the model regarding various evaluation metrics for different thresholds.
+In this experiment, only the top 3 labels with the highest probabilities were considered for the evaluation.
+Figure~\ref{fig:fields_precision_recall} shows the performance of the model regarding various evaluation metrics for different thresholds. 
 A label is assigned to a publication if the model outputs a probability for the label above the defined threshold.
 In multi-label classification, this allows us to evaluate our model from different perspectives. 
-As it is illustrated in figure~\ref{fig:fields_precision_recall}, the point that the micro-precision curve and micro recall meet is at the threshold of 0.1.
+As it is illustrated in figure~\ref{fig:fields_precision_recall}, the point where the micro-precision and the micro recall curves meet is at the threshold of 0.1 where the highest microc f1 score is achieved.
 %% final results
-We can see the point as the highest point of micro f1-measure. By increasing the threshold from this point, the micro-precision score is increasing, but the micro recall is falling. By Decreasing threshold, these trends are opposite.  Also, the default threshold doesn't look promising. In spite of micro-precision about 0.7, we have a problem with the very high number of items without any prediction. 
+By increasing the threshold from this point, the micro-precision score is increasing, but the micro recall is falling. By decreasing threshold, these trends are inverted.  Also, the default threshold doesn't look promising. In spite of micro-precision about 0.7, we have a problem with the very high number of items without any prediction. 
+
+%TODO what is the "default threshold" and why does it matter? what is the line "without prediction" and what is "share allwrong prediction"? 
+
 %%  comparison to baseline (SVM?)
 
 %%\subsubsection{Discussion}
