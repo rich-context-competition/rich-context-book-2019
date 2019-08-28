@@ -249,6 +249,21 @@ Figure \[fig:fields\_precision\_recall\] shows the performance of the model reg
 Discussion
 ----------
 
+Dataset Extraction
+------------------
+
+For the Dataset Extraction task the prposed method are only tested on Social Science related data. The performance measures we have introduced a based on a hold out data set of our automatically created dataset. Especially the recall could be biased. This is because we only label known data set. The results of the second phase presented during the RCC workshop are showing good performance of our approach in comparison to the other finalist teams with the highest precision 52.2% (second: 47.0%) and second in recall (ours: 20.5, best: 34.8%). This lead to the second best performing system for this task in respect of f1 measure (29.5%, 40.0% first place). The results on the manually created hold out set pointing out, that our system performs better in respect to precision. The Social Science focused corpus of research publications and dataset metadata lead us to suppose, that our trained model is working bad on different domians of science. Especially the focus on survey data and the reflection in dataset names (e.g. Current Population Survey) could have biased the model to the survey as a specific type of research datasets. In general our apporach to use a weakly labled corpus created using a list of datast names could be applied in other research domains. The needed roussources are a set of full text publications and a convition, that pplicability corpus dependent (mainly Social Science) try to neutralize skew on common datasets generalisability Method can be applied on other research fields only publication fulltexts and list of dataset names out of the domain is needed limitations Performance is difficult to measure Ground truth needed to have a good measure During development a ground truth holdout set would have prevented the feeling to fish in troubled waters.
+
+Research Method Extraction
+--------------------------
+
+results not easy to measure qualitative imporessions are good applicability Tfidf based measure filters method related terms produced meaningfull terms working for social sciences and related research fields generalisability domain dependency on social science and statistics Here missing ground truth missing definition of what to understand as a research method or as good terms to describe the used research methods of a paper (method related keyterm extraction)
+
+Research field classification
+-----------------------------
+
+results Mulitlabel classification works well with a micro f1 measure of above 50% with a mean number of keywords of 3 terms per publication. applicability domain of social sciences and related In used training corpus Social Sciences are predominating generelisability only with good training data related to other domains limitations Given sample terms by the competition not enough to develop a comparable system Performance could be low on a not social science related corpus.
+
 For each method, brief summary of:
 
 -   results / performance
