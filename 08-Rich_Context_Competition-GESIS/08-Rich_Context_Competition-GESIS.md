@@ -1,7 +1,9 @@
 GESIS
 =====
 
-*Wolfgang Otto, Andrea Zielinski, Behnam Ghavimi, Dimitar Dimitrov, Narges Tavakolpoursaleh*
+**Authors:** *Wolfgang Otto, Andrea Zielinski, Behnam Ghavimi, Dimitar Dimitrov, Narges Tavakolpoursaleh, Karam Abdulahhad, Katarina Boland, Stafan Dietze*
+**Affiliation:** *Knowledge Technologies in the Social Sciences, GESIS – Leibniz Institute for the Social Sciences, Cologne, Germany*
+**Corresponding author:** *wolfgang.otto@gesis.org*
 
 Introduction
 ------------
@@ -249,40 +251,18 @@ Figure \[fig:fields\_precision\_recall\] shows the performance of the model reg
 Discussion
 ----------
 
-Dataset Extraction
-------------------
+### Dataset Extraction
 
-For the Dataset Extraction task the prposed method are only tested on Social Science related data. The performance measures we have introduced a based on a hold out data set of our automatically created dataset. Especially the recall could be biased. This is because we only label known data set. The results of the second phase presented during the RCC workshop are showing good performance of our approach in comparison to the other finalist teams with the highest precision 52.2% (second: 47.0%) and second in recall (ours: 20.5, best: 34.8%). This lead to the second best performing system for this task in respect of f1 measure (29.5%, 40.0% first place). The results on the manually created hold out set pointing out, that our system performs better in respect to precision. The Social Science focused corpus of research publications and dataset metadata lead us to suppose, that our trained model is working bad on different domians of science. Especially the focus on survey data and the reflection in dataset names (e.g. Current Population Survey) could have biased the model to the survey as a specific type of research datasets. In general our apporach to use a weakly labled corpus created using a list of datast names could be applied in other research domains. The needed roussources are a set of full text publications and a sufficiently large list of dataset names for this domain.
-\* limitations\* Performance is difficult to measure
-\*\* Ground truth needed to have a good measure
-\*\* During development a ground truth holdout set would have prevented the feeling to fish in troubled waters.
+For the dataset extraction task the proposed method are only tested on social science related data. The performance measures we have introduced are based on a hold out data set of our automatically created dataset. Especially the recall could be biased. This is because we only label known data set. The results of the second phase presented during the RCC workshop[28] are showing good performance of our approach in comparison to the other finalist teams with the highest precision 52.2% (second: 47.0%) and second in recall (ours: 20.5, best: 34.8%). This lead to the second best performing system for this task in respect of f1 measure (29.5%, 40.0% first place). The results on the manually created hold out set pointing out, that our system performs better in respect to precision in comparison to the other finalist teams. The social science focused corpus of research publications and dataset metadata lead us to suppose, that our trained model is working bad on different domains of science. Especially the focus on survey data and the reflection in dataset names (e.g. Current Population Survey) could have biased the model to detect the survey as a specific type of research datasets better than other subtypes like e.g. text corpora in the NLP community. In general our apporach to use a weakly labled corpus created using a list of datast names could be applied in other research domains. The needed roussources are a set of full text publications and a sufficiently large list of dataset names for this domain.
 
-Research Method Extraction
---------------------------
+### Research method extraction
 
-\* results
-\*\* not easy to measure qualitative imporessions are good
-\* applicability
-\*\* Tfidf based measure filters method related terms produced meaningfull terms
-\*\* working for social sciences and related research fields
-\* generalisability
-\*\* domain dependency on social science and statistics
-\*\* Here missing ground truth
-\*\* missing definition of what to understand as a research method or as good terms to describe the used research methods of a paper (method related keyterm extraction)
+The extraction of research methods from full text publications we consider as the most challenging task. This is because, the sample vocabulary given by the competition covers a large thematic area, from dataset, over mathematical models to qualitative methods. The task itself was defined as the identification of research methods associated to the publication. On the one hand we were confronted with a lack of training data in the competition. On the other hand, in contrast to the task of research field classification, we were not able to identify external corpora which could be applied on this task. We combined models from another research domain with a manually currated extension of known research method terms. The qualitative reviews during the two phases of the competiton attested that this approach works. A valid quantitative evaluation is prevented by the lack of ground truth data.
 
-Research field classification
------------------------------
+### Research field classification
 
-\* results
-\*\* Mulitlabel classification works well with a micro f1 measure of above 50% with a mean number of keywords of 3 terms per publication.
-\* applicability
-\*\* domain of social sciences and related
-\*\* In used training corpus Social Sciences are predominating
-\* generelisability
-\*\* only with good training data related to other domains
-\* limitations
-\*\* Given sample terms by the competition not enough to develop a comparable system
-\*\* Performance could be low on a not social science related corpus.
+Our supervised machine learning approach to handle the research field classification task performs well on the dataset created from social science publication metadata. A micro f1 measure of above 55% seems to be a good result for a dataset with 44 labels and a mean number of keywords of three terms per publication. As one example of multilabel classification with a comparable size of labels we would like to mention the classification of texts in the domain of medicine presented in (Wang et al., 2018). The models tested by the authors on the task of multilabel prediction from 50 different labels leads to micro f1 values between 53% and 62%.
+The analysis of the performance of our model does not enable us to determine the performance on other research domains than the social sciences. Even if the used classification scheme covers neighbour disciplines like medicine, the numbers of samples of the training data covering other research fields than the social science is less. If one considers this fact, it can be assumed that the performance for corpora of other disciplines is lower. A benefit of our approach is the usage of abstracts as input to classify the research publications. This make the approach usefull even if there are no full text of publications are available. On the other hand, the use of Cermine to extract information from publications available as PDF files enables us to automatically extract abstracts. With the help of this we are able to classify publications, even if abstracts not present in the publications metadata.
 
 Conclusion
 ----------
@@ -290,7 +270,7 @@ Conclusion
 Acknowledgments
 ---------------
 
-We would like to thank GESIS for giving us the time and resources to participate in the competition.
+We would like to thank GESIS for giving us the time and resources to participate in the competition. The work share of the first author was funded by Deutsche Forschungsgemeinschaft (DFG) under grant number MA 3964/7-1.
 
 References
 ----------
@@ -398,3 +378,5 @@ Yu R, Gadiraju U, Fetahu B, et al. (2019) KnowMore - knowledge base augmentation
 [26] A glossary of statistical terms as provided in <https://www.statistics.com/resources/glossary/> has been added as well.
 
 [27] A script to download the metadata of SSOAR can be found in github/research-field-classifier
+
+[28] Agenda of the Workshop: <https://coleridgeinitiative.org/richcontextcompetition/workshopagenda>. The results of the finalists are presented here: <https://youtu.be/PE3nFrEkwoU?t=9865>.
