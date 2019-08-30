@@ -1,5 +1,5 @@
-GESIS
-=====
+The contribution of GESIS to the Rich Context Competition
+=========================================================
 
 **Authors:** *Wolfgang Otto, Andrea Zielinski, Behnam Ghavimi, Dimitar Dimitrov, Narges Tavakolpoursaleh, Karam Abdulahhad, Katarina Boland, Stafan Dietze*
 **Affiliation:** *Knowledge Technologies in the Social Sciences, GESIS – Leibniz Institute for the Social Sciences, Cologne, Germany*
