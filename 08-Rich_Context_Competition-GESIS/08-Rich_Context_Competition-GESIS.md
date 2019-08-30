@@ -10,13 +10,13 @@ Introduction
 
 GESIS - the Leibniz Institute for the Social Sciences (GESIS)[1] is the largest European research and infrastructure provider for the social sciences and offers research, data, services and infrastructures supporting all stages of the scientific process. The GESIS department *Knowledge Technologies for the Social Sciences (WTS)*[2] is responsible for developing all digital services and research data infrastructures at GESIS and aims at providing integrated access to social sciences data and services. Next to traditional social sciences research data, such as surveys and census data, an emerging focus is to build data infrastructures able to exploit novel forms of social sciences research data, such as large Web crawls and archives.
 
-Research at WTS[3] addresses areas such as information retrieval, information extraction <span>&</span> NLP, semantic technologies and human computer interaction and aims at ensuring access and use of social sciences research data along the FAIR principles, for instance, through interlinking of research data, established vocabularies and knowledge graphs and by facilitating semantic search across distinct platforms and datasets. Due to the increasing importance of Web- and W3C standards as well as Web-based research data platforms, in addition to traditional research data portals, findability and interoperability of research data across the Web constitutes one current challenge. In the context of Web-scale reuse of social sciences resources, the extraction of structured data about scholarly entities such as datasets and methods from unstructured and semi-structured text, as found in scientific publications or resource metadata, is crucial in order to be able to uniquely identify social sciences resources and to understand their inherent relations.
+Research at WTS[3] addresses areas such as information retrieval, information extraction <span>&</span> Natural Language Processing (NLP), semantic technologies and human computer interaction and aims at ensuring access and use of social sciences research data along the FAIR principles, for instance, through interlinking of research data, established vocabularies and knowledge graphs and by facilitating semantic search across distinct platforms and datasets. Due to the increasing importance of Web- and W3C standards as well as Web-based research data platforms, in addition to traditional research data portals, findability and interoperability of research data across the Web constitutes one current challenge. In the context of Web-scale reuse of social sciences resources, the extraction of structured data about scholarly entities such as datasets and methods from unstructured and semi-structured text, as found in scientific publications or resource metadata, is crucial in order to be able to uniquely identify social sciences resources and to understand their inherent relations.
 
 Prior works at WTS/GESIS addressing such challenges apply NLP and machine learning techniques to, for instance, extract and disambiguate mentions of datasets[4] (Boland et al., 2012; Ghavimi et al., 2016)), authors (Backes, 2018a, 2018b) or software tools (Boland and Krüger, 2019) from scientific publications or to extract and fuse of scholarly data from large-scale Web crawls (Sahoo et al., 2017; Yu et al., 2019). Resulting pipelines and data are used to empower scholarly search engines such as the *GESIS-wide search*[5] (Hienert et al., 2019) which provides federated search for scholarly resources (datasets, publications etc) across a range of GESIS information systems or the *GESIS DataSearch* platform[6] (Krämer et al., 2018), which enables search across a vast number of social sciences research datasets mined from the Web. Given the strong overlap of our research and development profile with the recent initiatives of the Coleridge Initiative to evolve this research field through the Rich Context Competition (RCC)[7], we are enthusiastic about having participated in the RCC2018 and are looking forward to continuing this collaboration towards providing sound frameworks and tools which automate the process of interlinking and retrieving scientific resources.
 
-The central tasks in the RCC are concerned with the extraction and disambiguation of mentions of datasets and research methods as well as the classification of scholarly articles into a discrete set of research fields. After the first phase, each team received feedback from the organizers of the RCC consisting of a quantitative and qualitative evaluation. Whereas quantitative results of our inital contribution throughout phase one have shown significant room for improvement, the qualitative assessement, conducted by four judges on a sample of ten documents, underlined the potential of our approach.
+The central tasks in the RCC are the extraction and disambiguation of mentions of datasets and research methods as well as the classification of scholarly articles into a discrete set of research fields. After the first phase, each team received feedback from the organizers of the RCC consisting of a quantitative and qualitative evaluation. Whereas quantitative results of our inital contribution throughout phase one have shown significant room for improvement, the qualitative assessement, conducted by four judges on a sample of ten documents, underlined the potential of our approach.
 
-Having been among the four shortlisted submissions for the second phase of the RCC, this chapter describes our approaches, techniques, and additional data used to address all three tasks. As described in the following subsections, we decided to follow a module-based approach where either individual modules or the entire pipeline can be reused. The remaining chapter is organised as follows. The following Section \[sec:overview\] provides an overview of our approach, used background data and preprocessing steps, whereas Sections  \[sec:dataset-extraction\],  \[sec:research\_method\_extraction\] and  \[sec:field\_classification\] describe our approaches and results towards each of the tasks. Finally, we discuss our results in Section \[sec:discussion\] and provide an overview of future work in Section \[sec:conclusion\].
+Having been among the four shortlisted submissions for the second phase of the RCC, this chapter describes our approaches, techniques, and additional data used to address all three tasks. As described in the following subsections, we decided to follow a module-based approach where either individual modules or the entire pipeline can be reused. The remaining chapter is organised as follows. The following Section \[sec:overview\] provides an overview of our approach, used background data and preprocessing steps, whereas Sections  \[sec:dataset-extraction\],  \[sec:research\_method\_extraction\] and  \[sec:field\_classification\] describe our approaches in more detail, including results towards each of the tasks. Finally, we discuss our results in Section \[sec:discussion\] and provide an overview of future work in Section \[sec:conclusion\].
 
 Approach, data and pre-processing
 ---------------------------------
@@ -84,14 +84,14 @@ Missing ground truth data is the main problem to handle during this competition.
 
 #### Evaluation
 
-We evaluated our model with respect to four metrics: strict precision and recall, and partial precision and recall. While the former are standard evaluation metrics, the latter are their relaxed variants in which the degree to which dataset mentions have to match can vary. Consider the following partial match example: “National Health and Nutrition Examination Survey” is the extracted dataset mention, while “National Health and Nutrition Examination Survey (NHANES)” is the true dataset mention. In contrast to the strict version of the metrics, this overlapping match is considered a match for the partial version. The scores describe whether a model is able to find the correct positions of dataset mentions in the texts, even if the start and end positions of the characters are not the same, but the ranges overlap.
+We evaluated our model with respect to four metrics: precision and recall, each for strict and for partial match. While the strict match metrics are standard evaluation metrics, the partial match metrics are their relaxed variants in which the degree to which dataset mentions have to match can vary. Consider the following partial match example: “National Health and Nutrition Examination Survey” is the extracted dataset mention, while “National Health and Nutrition Examination Survey (NHANES)” is the true dataset mention. In contrast to the strict version of the metrics, this overlapping match is considered a match for the partial version. The scores describe whether a model is able to find the correct positions of dataset mentions in the texts, even if the start and end positions of the characters are not the same, but the ranges overlap.
 
-| Metric            | Value |
-|:------------------|:-----:|
-| Partial Precision |  0.93 |
-| Partial Recall    |  0.95 |
-| Strict Precision  |  0.80 |
-| Strict Recall     |  0.81 |
+| Metric                    | Value |
+|:--------------------------|:-----:|
+| Precision (partial match) |  0.93 |
+| Recall (strict match)     |  0.95 |
+| Precision (strict match)  |  0.80 |
+| Recall (strict match)     |  0.81 |
 
 \[table:dataset-mention-eval\]
 
@@ -99,18 +99,18 @@ Table \[table:dataset-mention-eval\] show the results of the dataset mention ex
 
 ### Phase two approach
 
-In the second phase of the competition, additional 5,000 publications were provided by RCC. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15.000 publications) in the same manner as in phase one to obtain training data. This time we split the data in 80% for training and 20% for test.
+In the second phase of the competition, additional 5,000 publications were provided by RCC. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15,000 publications) in the same manner as in phase one to obtain training data. This time we split the data in 80% for training and 20% for test.
 
 #### Evaluation
 
-We resort to the same evaluation metrics as in phase one. However, we calculate precision and recall on the full-text of the publication and not on the paragraphs as in the first phase. Table \[table:dataset-mention-eval-phase-two\] show the results achieved by our model. We observe lower precision and recall values. Compared to phase one, there is also a smaller difference between the precision and recall values for the strict and partial version of the metrics.
+We resort to the same evaluation metrics as in phase one. However, we calculate precision and recall on the full-text of the publication and not on the paragraphs as in the first phase. Table \[table:dataset-mention-eval-phase-two\] shows the results achieved by our model. We observe lower precision and recall values. Compared to phase one, there is also a smaller difference between the precision and recall values for the strict and partial version of the metrics.
 
-| Metric            | Value |
-|:------------------|:-----:|
-| Partial Precision |  0.51 |
-| Partial Recall    |  0.90 |
-| Strict Precision  |  0.49 |
-| Strict Recall     |  0.87 |
+| Metric                    | Value |
+|:--------------------------|:-----:|
+| Precision (partial match) |  0.51 |
+| Recall (partial match)    |  0.90 |
+| Precision (strict match)  |  0.49 |
+| Recall (strict match)     |  0.87 |
 
 \[table:dataset-mention-eval-phase-two\]
 
@@ -122,38 +122,38 @@ Research method extraction
 Inspired by a recent work of Nasar et al. (Nasar et al., 2018), we define a list of basic entity types that give key-insights into scholarly publications. We adapted the list of semantic entity types to the domain of the social sciences with a focus on *research methods*, but also including related entity types such as *Theory, Model, Measurement, Tool, Performance*. We suspect that the division into semantic types might be helpful to find *research methods*. The reason is that the related semantic entities types might provide clues or might be directly related to the research method itself.
 
 For example, in order to achieve a certain research goal, an experiment is used in which a certain combination of *methods* is applied to a *dataset*. The methods can be specified as concepts or indirectly through the use of certain *software*. The result is then quantified with a *performance* using a specific measure. **Example**: *P-values* (measurement) are reported for the *one-tail paired t-test* (method) on *Allbus* (dataset) and *ISSP* (dataset).
-We selected the entity types *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement* as the target research method related entity types (see Table \[tab:entityTypes\]). This decision is based on an ecxamination of the SAGE onthology given by the RCC as a sample of how research method terms might look like.
+We selected the entity types *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement* as the target research method related entity types (see Table \[tab:entityTypes\]). This decision is based on an ecxamination of the SAGE ontology given by the RCC as a sample of how research method terms might look like.
 
-|                                     |                   |                |                                                 |
-|:------------------------------------|:------------------|:--------------:|:------------------------------------------------|
-| \[tab:entityTypes\] **Entity type** | **Corresponding** | **Statistics** | **Examples**                                    |
-|                                     | **SAGE type**     |  **type**[17]  |                                                 |
-| Research Method                     | SAGE-METHOD       |                | Bootstrapping, Active Interviews                |
-| Research Measurement                | SAGE-MEASURE      |                | Latent Variables, Phi coefficient, Z-score      |
-| Research Theory                     | SAGE-THEORY       |                | Frankfurt shool, Feminism, Actor network theory |
-| Research Tool                       | SAGE-TOOL         |                | SPSS, R statistical package                     |
+|                                     |                   |                     |                                                 |
+|:------------------------------------|:------------------|:-------------------:|:------------------------------------------------|
+| \[tab:entityTypes\] **Entity type** | **Corresponding** | **Incl. statistic** | **Examples**                                    |
+|                                     | **SAGE type**     |     **glossary**    |                                                 |
+| Research Method                     | SAGE-METHOD       |                     | Bootstrapping, Active Interviews                |
+| Research Measurement                | SAGE-MEASURE      |                     | Latent Variables, Phi coefficient, Z-score      |
+| Research Theory                     | SAGE-THEORY       |                     | Frankfurt shool, Feminism, Actor network theory |
+| Research Tool                       | SAGE-TOOL         |                     | SPSS, R statistical package                     |
 
 #### Formal problem definition
 
-The task of Named Entity Recognition and Linking is to (i) identify the mentions *m* of research-related entities in a sentence and (ii) link them, if possible, to a reference knowledge base *K* (i.e. the SAGE Thesaurus[18]) or (iii) assign a type to each entity, e.g. a *research method*, selected from a set of predefined types.
+The task of Named Entity Recognition and Linking is to (i) identify the mentions *m* of research-related entities in a sentence and (ii) link them, if possible, to a reference knowledge base *K* (i.e. the SAGE Thesaurus[17]) or (iii) assign a type to each entity, e.g. a *research method*, selected from a set of predefined types.
 
 ### Challenges
 
-There are some major challenges that any named entity recognition, classification and linking system needs to handle. First, regarding NER, identifying the entities boundary is important, thus detecting the exact sequence span. Second, ambiguity errors might arise in classification. For instance,‘range’ might be a domain-specific term from the knowledge base or belong to the general domain vocabulary. This is a challenging task for which context information is required. In the literature, this relates to the problem of **domain adaptation** which includes fine-tuning to specific named entity classes[19]. With respect to entity linking, another challenge is detecting name variations, since entities can be referred to in many different ways. Semantically similar words, synonyms or related words, which might be lexically or syntactically different, are often not listed in the knowledge base (e.g., the lack of certain terms like ‘questioning’ but not ‘questionnaire’). This problem of automatically detecting these relationships is generally known as **linking problem**. Note that part of this problem also results from PDF-to-text conversion which is error-prone. Dealing with incomplete knowledge bases, i.e. **handling of out of vocabulary (OOV) items**, is also a major issue, since knowledge bases are often not exhaustive enough and do not cover specific terms or novel concepts from recent research. Last but not least, the combination of different semantic types gives a more coherent picture of a research article. We hypothesize that such information would be helpful and results in an insightful co-occurrence statistics, and provides additional detail directly related to entity resolution, and finally helps to assess the **relevance of terms** by means of a score.
+There are some major challenges that any named entity recognition, classification and linking system needs to handle. First, regarding NER, identifying the entities boundary is important, thus detecting the exact sequence span. Second, ambiguity errors might arise in classification. For instance,‘range’ might be a domain-specific term from the knowledge base or belong to the general domain vocabulary. This is a challenging task for which context information is required. In the literature, this relates to the problem of **domain adaptation** which includes fine-tuning to specific named entity classes[18]. With respect to entity linking, another challenge is detecting name variations, since entities can be referred to in many different ways. Semantically similar words, synonyms or related words, which might be lexically or syntactically different, are often not listed in the knowledge base (e.g., the lack of certain terms like ‘questioning’ but not ‘questionnaire’). This problem of automatically detecting these relationships is generally known as **linking problem**. Note that part of this problem also results from PDF-to-text conversion which is error-prone. Dealing with incomplete knowledge bases, i.e. **handling of out of vocabulary (OOV) items**, is also a major issue, since knowledge bases are often not exhaustive enough and do not cover specific terms or novel concepts from recent research. Last but not least, the combination of different semantic types gives a more coherent picture of a research article. We hypothesize that such information would be helpful and results in an insightful co-occurrence statistics, and provides additional detail directly related to entity resolution, and finally helps to assess the **relevance of terms** by means of a score.
 
 ### Our approach
 
-Our research method extraction tool builds on Stanford’s CoreNLP and Named Entity Recognition System[20]. The information extraction process follows the workflow depicted in Figure \[fig:pipeline\], using separate modules for pre-processing, classification, linking and term filtering.
+Our research method extraction tool builds on Stanford’s CoreNLP and Named Entity Recognition System[19]. The information extraction process follows the workflow depicted in Figure \[fig:pipeline\], using separate modules for pre-processing, classification, linking and term filtering.
 
-We envision the task of finding entities in scientific publications as a sequence labeling problem, where each input word is classified as being of a dedicated semantic type or not. In order to handle entities related to our domain, we train a CRF based machine learning classifier with major semantic classes, (see Table \[tab:entityTypes\]), using training material from the ACL RD-TEC 2.0 dataset (QasemiZadeh and Schumann, 2016). Apart from this, we follow a domain adaptation approach inspired by (Agerri and Rigau, 2016) and ingest semantic background knowledge extracted from external scientific corpora, in particular the ACL Anthology (Bird et al., 2008; Gildea et al., 2018). We perform entity linking by means of a new gazetteer based on a SAGE dictionary of Social Research Methods(Lewis-Beck et al., 2003), thus putting a special emphasis on the social sciences. The linking component addresses the synonymy problem and matches an entity despite name variations such as spelling variations. Finally, term filtering is carried out based on termhood and unithood, while scoring is achieved by calculating a relevance score based on TF-IDF (cf. Section \[para:relscore\]).
+We envision the task of finding entities in scientific publications as a sequence labeling problem, where each input word is classified as being of a dedicated semantic type or not. In order to handle entities related to our domain, we train a CRF based machine learning classifier with major semantic classes, (see Table \[tab:entityTypes\]), using training material from the ACL RD-TEC 2.0 dataset (QasemiZadeh and Schumann, 2016). Apart from this, we follow a domain adaptation approach inspired by (Agerri and Rigau, 2016) and ingest semantic background knowledge extracted from external scientific corpora, in particular the ACL Anthology (Bird et al., 2008; Gildea et al., 2018). We perform entity linking by means of a new gazetteer based on a SAGE dictionary of Social Research Methods (Lewis-Beck et al., 2003), thus putting a special emphasis on the social sciences. The linking component addresses the synonymy problem and matches an entity despite name variations such as spelling variations. Finally, term filtering is carried out based on termhood and unithood, while scoring is achieved by calculating a relevance score based on TF-IDF (cf. Section \[para:relscore\]).
 
-Our research experiments are based on publications from the Social Science Open Access Repository (SSOAR)[21] as well as the train and test data of the Rich Context Competition corpus[22]. Our work extends previous work on this topic (cf. (Eckle-Kohler et al., 2013)) in various ways: First, we do not limit our study to abstracts, but use the entire fulltext. Second, we focus on a broader range of semantic classes, i.e. *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement*, tackling also the problem of identifying novel entities.
+Our research experiments are based on publications from the Social Science Open Access Repository (SSOAR)[20] as well as the train and test data of the Rich Context Competition corpus[21]. Our work extends previous work on this topic (cf. (Eckle-Kohler et al., 2013)) in various ways: First, we do not limit our study to abstracts, but use the entire fulltext. Second, we focus on a broader range of semantic classes, i.e. *Research Method*, *Research Theory*, *Research Tool* and *Research Measurement*, tackling also the problem of identifying novel entities.
 
 <img src="figures/research-methods/pipeline.png" alt="Overview of the entity extraction pipeline" style="width:47.0%" />
 
 #### Distributed semantic models
 
-For domain adaptation, we integrate further background knowledge. We use topical information from word embeddings trained on an scientific corpus as an additional features to our NER model. For this, we use agglomerative clustering of the word embeddings to identify topical groups of words. The cluster number of each word is used as additional sequential input feature for our CRF model. Semantic representations of words are a successful extension of common features, resulting in higher NER performance (Turian et al., 2010) and can be trained offline. In this work, the word vectors were learned based on 22,878 documents of the scientific ACL Anthology Reference Corpus[23] using Gensim[24] with the skip gram model (cf. (Mikolov et al., 2013)) and a pre-clustering algorithm[25].
+For domain adaptation, we integrate further background knowledge. We use topical information from word embeddings trained on an scientific corpus as an additional features to our NER model. For this, we use agglomerative clustering of the word embeddings to identify topical groups of words. The cluster number of each word is used as additional sequential input feature for our CRF model. Semantic representations of words are a successful extension of common features, resulting in higher NER performance (Turian et al., 2010) and can be trained offline. In this work, the word vectors were learned based on 22,878 documents of the scientific ACL Anthology Reference Corpus[22] using Gensim[23] with the skip gram model (cf. (Mikolov et al., 2013)) and a pre-clustering algorithm[24].
 
 #### Features
 
@@ -172,7 +172,7 @@ The features incorporated into the linear chain CRF are shown in the Table \[ta
 
 #### Knowledge resources
 
-We use the SAGE thesaurus which includes well-defined concepts, an explicit taxonomic hierarchy between concepts as well as labels that specify synonyms of the same concept. A portion of terms is unique to the social science domain (e.g., ‘dependent interviewing’), while others are drawn from related disciplines such as statistics (e.g., ‘conditional likelihood ratio test’)[26]. However, since the thesaurus is not exhaustive and covers only the top-level concepts related to social science methods, our aim was to extend it by automatically extracting further terms from domain-specific texts, in particular from the Social Science Open Access Repository. More concretely, we carried out the following steps to extend SAGE as an off-line step. For step 2 and 3, candidate terms have been extracted by our pipeline for the entire SSOAR corpus.
+We use the SAGE thesaurus which includes well-defined concepts, an explicit taxonomic hierarchy between concepts as well as labels that specify synonyms of the same concept. A portion of terms is unique to the social science domain (e.g., ‘dependent interviewing’), while others are drawn from related disciplines such as statistics (e.g., ‘conditional likelihood ratio test’)[25]. However, since the thesaurus is not exhaustive and covers only the top-level concepts related to social science methods, our aim was to extend it by automatically extracting further terms from domain-specific texts, in particular from the Social Science Open Access Repository. More concretely, we carried out the following steps to extend SAGE as an off-line step. For step 2 and 3, candidate terms have been extracted by our pipeline for the entire SSOAR corpus.
 
 1.  Assignment of semantic types to concepts (manual)
 
@@ -182,7 +182,7 @@ We use the SAGE thesaurus which includes well-defined concepts, an explicit taxo
 
 #### Extracting term variants such as abbreviations, synonyms, and related terms
 
-26.082 candidate terms have been recognized and classified by our pipeline and manually inspected to a) find synonyms and related words that could be linked to SAGE, and b) build a post-filter for incorrectly classified terms. Moreover, abbreviations have been extracted using the algorithm of Schwartz and Hearst (Schwartz and Hearst, 2003). This way, a Named Entity gazetteer could be built and is used at run-time. It comprises 1,111 terms from SAGE and 447 terms from the Statistics glossary as well as 54 previously unseen terms detected by the model-based classifier.
+26,082 candidate terms have been recognized and classified by our pipeline and manually inspected to a) find synonyms and related words that could be linked to SAGE, and b) build a post-filter for incorrectly classified terms. Moreover, abbreviations have been extracted using the algorithm of Schwartz and Hearst (Schwartz and Hearst, 2003). This way, a Named Entity gazetteer could be built and is used at run-time. It comprises 1,111 terms from SAGE and 447 terms from the used glossary of statistical terms[26] as well as 54 previously unseen terms detected by the model-based classifier.
 
 #### Computation of term and document frequency scores
 
@@ -218,23 +218,23 @@ Research field classification
 
 ### Task description
 
-The goal of this task is to identify the research fields covered in the social science publications. In general, two approaches could be applied to this task. One is the extraction of relevant terms of the publications. It means that this task could be seen as a keyword extraction task and the detected terms considered as descriptive terms regarding the research field. The second approach is to learn to classify publications research fields with the use of annotated data in a superviesed manner. The benifit of the second approach is that the classification scheme to describe the research field can be defined experts of the domain. The disadvantage of supervised trained classifiers for this task is the lack of applicable training data. Furthermore, it must be ensured that the training data is comparable to the texts the research field classifier should be applied on.
+The goal of this task is to identify the research fields covered in the social science publications. In general, two approaches could be applied to this task. One is the extraction of relevant terms of the publications. It means that this task could be seen as a keyword extraction task and the detected terms considered as descriptive terms regarding the research field. The second approach is to learn to classify publications research fields with the use of annotated data in a superviesed manner. The benifit of the second approach is that the classification scheme to describe the research field can be defined by experts of the domain. The disadvantage of supervised trained classifiers for this task is the lack of applicable training data. Furthermore, it must be ensured that the training data is comparable to the texts the research field classifier should be applied on.
 
 #### Formal problem definition
 
-Let *P* denote a set of Publications of size *n*, *A* a set of corresponding abstracts of the same size and *L* a set of *k* defined class labels describing research fields. The task of research field classification is to select for each publication *p*<sub>*i*</sub> ∈ *P* based on the information contained in the corresponding abstract *a*<sub>*i*</sub> ∈ *A* a set of labels *C*<sub>*i*</sub> = ⌀ ∩ {*c*<sub>1</sub>…*c*<sub>*n*</sub>|*c*<sub>*n*</sub> ∈ *L*} of *n* labels. The number of *n* denotes the number of labels from *L* describing the research field of *a*<sub>*i*</sub> and can vary for each publication *p*<sub>*i*</sub>. If there is no label *l*<sub>*k*</sub> representing the information given by the abstract *a*<sub>*i*</sub> the set of class labels is the empty set ⌀.
+Let *P* denote a set of publications of size *n*, *A* a set of corresponding abstracts of the same size and *L* a set of *k* defined class labels describing research fields. The task of research field classification is to select for each publication *p*<sub>*i*</sub> ∈ *P* based on the information contained in the corresponding abstract *a*<sub>*i*</sub> ∈ *A* a set of labels *C*<sub>*i*</sub> = ⌀ ∩ {*c*<sub>1</sub>…*c*<sub>*n*</sub>|*c*<sub>*n*</sub> ∈ *L*} of *n* labels. The number of *n* denotes the number of labels from *L* describing the research field of *a*<sub>*i*</sub> and can vary for each publication *p*<sub>*i*</sub>. If there is no label *l*<sub>*k*</sub> representing the information given by the abstract *a*<sub>*i*</sub> the set of class labels is the empty set ⌀.
 
 ### Our approach
 
-Since we didn’t receive any gold standard for this task during the competition we decided to make use of external resources. We decided to use an external labeled dataset to train a text classifier which is able to predict for a given abstract of a publication one or more research field label.
+Since we didn’t receive any gold standard for this task during the competition we decided to make use of external resources. We decided to use an external labeled dataset to train a text classifier which is able to predict one or moreresearch label for a given abstract of a publication.
 
-The publications given througout the competition belongs to the domain of social sciences we considered metadata from a open access repository for the social sciences called SSOAR. The advantages are twofold. On the ond hand, we could rely on professional annotations in a given classification scheme covering the social sciences and related areas. On the other hand the source is openly available.[27]
+The publications given througout the competition belongs to the domain of social sciences we considered metadata from a open access repository for the social sciences called SSOAR. The advantages are twofold. On the one hand, we could rely on professional annotations in a given classification scheme covering the social sciences and related areas. On the other hand the source is openly available.[27]
 
 The annotated data of SSOAR contains four different annotation schemes for research field related information. By reviewing these schemes, we decided to use the Classification Social Science (classoz) annotation scheme. The number of classes in each schema, coverage of each classification, and the distribution of data in each schema affected our decision. An exhausitve description of the used data can be found in \[sec:external\_data\_sources\].
 
 #### Pre-processing and model architecture
 
-SSOAR is a multilingual repository. Also the available abstracts can vary in language which can differ to the language of the publication. We selected all English abstract with valid classification as our dataset. Mainly because of the language of the RCC corpus. But it has to be noted, that the multilingual SSOAR-abstract-corpus has a skewed distribution of languages with English and German as the main languages. We count 22,453 English abstracts with valid classification after filtering. Due to the unequal distribution of labels in the dataset, we need to guaranty enough training data for each label. We selected only labels with frequency over 300 for training the model, which results in a total of 44 out of 154 classification labels representing research fields. For creating train and test set, 22,453 SSOAR publications with their assigned labels were split randomly. We used a train/validation/test split of 70/10/20. We decided to train a text classifier based on the fasttext framework (Joulin et al., 2017). The arguments to use this model was the speed in comparison to a more complex neural net archiecture and the still comparable to state of the art performance (e.g.(Wang et al., 2018)). The model is trained with learning rate 1.0 for 150 epochs. Also, the negative sampling parameter is set to 25.
+SSOAR is a multilingual repository. Therefore, the available abstracts may vary in language and the language of the abstract may differ from the language of the article itself. We selected all English abstract with valid classification as our dataset. Mainly because of the language of the RCC corpus. However, it should be noted that the multilingual SSOAR abstract corpus has a skewed distribution of languages with English and German as the main languages. We count 22,453 English abstracts with valid classification after filtering. Due to the unequal distribution of labels in the dataset, we need to guaranty enough training data for each label. We selected only labels with frequency over 300 for training the model, which results in a total of 44 out of 154 classification labels representing research fields. For creating train and test set, 22,453 SSOAR publications with their assigned labels were split randomly. We used a train/validation/test split of 70/10/20. We decided to train a text classifier based on a fasttext (Joulin et al., 2017) model in the author’s implementation. The arguments to use this model was the speed in comparison to a more complex neural net architecture and the still comparable to state of the art performance (e.g.(Wang et al., 2018)). The model is trained with learning rate 1.0 for 150 epochs. Also, the negative sampling parameter is set to 25.
 
 ### Evaluation
 
@@ -244,9 +244,9 @@ Figure \[fig:fields\_precision\_recall\] shows the performance of the model reg
 
 | Metric            | Value |
 |:------------------|:------|
-| Micro Precisison: | 0.554 |
-| Micro Recall:     | 0.564 |
-| Micro F1:         | 0.559 |
+| Micro precisison: | 0.554 |
+| Micro recall:     | 0.564 |
+| Micro f1:         | 0.559 |
 
 Discussion
 ----------
@@ -357,25 +357,25 @@ Yu R, Gadiraju U, Fetahu B, et al. (2019) KnowMore - knowledge base augmentation
 
 [16] [spacy.io](spacy.io)
 
-[17] Based on <https://www.statistics.com/resources/glossary>
+[17] http://methods.sagepub.com
 
-[18] http://methods.sagepub.com
+[18] apart from those used in traditional NER systems like *Person*, *Location*, or *Organization* with abundant training data, as covered in the Stanford NER system(Finkel et al., 2005)
 
-[19] apart from those used in traditional NER systems like *Person*, *Location*, or *Organization* with abundant training data, as covered in the Stanford NER system(Finkel et al., 2005)
+[19] <https://nlp.stanford.edu/projects/project-ner.shtml>
 
-[20] <https://nlp.stanford.edu/projects/project-ner.shtml>
+[20] <https://www.ssoar.info>
 
-[21] <https://www.ssoar.info>
+[21] <https://coleridgeinitiative.org/richcontextcompetition> with a total of 5,000 English documents
 
-[22] <https://coleridgeinitiative.org/richcontextcompetition> with a total of 5,000 English documents
+[22] <https://acl-arc.comp.nus.edu.sg/>
 
-[23] <https://acl-arc.comp.nus.edu.sg/>
+[23] <https://radimrehurek.com/gensim/>
 
-[24] <https://radimrehurek.com/gensim/>
+[24] Word embeddings are trained with a skip gram model using embedding size equal to 100, word window equal to 5, minimal occurrences of a word to be considered 10. Word embeddings are clustered using agglomerative clustering with a number of clusters set to <span>500, 600, 700</span>. Ward linkage with Euclidean distance is used to minimize the variance within the clusters.
 
-[25] Word embeddings are trained with a skip gram model using embedding size equal to 100, word window equal to 5, minimal occurrences of a word to be considered 10. Word embeddings are clustered using agglomerative clustering with a number of clusters set to <span>500, 600, 700</span>. Ward linkage with euclidean distance is used to minimize the variance within the clusters.
+[25] A glossary of statistical terms as provided in <https://www.statistics.com/resources/glossary/> has been added as well.
 
-[26] A glossary of statistical terms as provided in <https://www.statistics.com/resources/glossary/> has been added as well.
+[26] Based on <https://www.statistics.com/resources/glossary>
 
 [27] A script to download the metadata of SSOAR can be found in github/research-field-classifier
 

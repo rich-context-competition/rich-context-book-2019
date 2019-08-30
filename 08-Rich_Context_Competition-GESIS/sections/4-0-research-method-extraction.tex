@@ -17,7 +17,7 @@ The result is then quantified with a \textit{performance} using a specific measu
 
 \textbf{Example}: \textit{P-values} (measurement) are reported for the \textit{one-tail paired t-test} (method) on \textit{Allbus} (dataset) and \textit{ISSP} (dataset).\\
 We selected the entity types \textit{Research Method}, \textit{Research Theory}, \textit{Research Tool} and \textit{Research Measurement} as the target research method related entity types (see Table~\ref{tab:entityTypes}).
-This decision is based on an ecxamination of the SAGE onthology given by the RCC as a sample of how research method terms might look like.
+This decision is based on an ecxamination of the SAGE ontology given by the RCC as a sample of how research method terms might look like.
 \begin{table}[b]
 \center
 \small
@@ -25,9 +25,9 @@ This decision is based on an ecxamination of the SAGE onthology given by the RCC
 \begin{tabular}{llcl}
   \label{tab:entityTypes}
     \textbf{Entity type} & \textbf{Corresponding}  &
-    \textbf{Statistics} &
+    \textbf{Incl. statistic} &
     \textbf{Examples}  \\
-    &\textbf{SAGE type}&\textbf{type}\footnote{Based on \url{https://www.statistics.com/resources/glossary}}&\\
+    &\textbf{SAGE type}&\textbf{glossary}&\\
     \hline  
     Research Method	  & SAGE-METHOD  &	\ding{51} & Bootstrapping, Active Interviews \\
     Research Measurement 	 &	SAGE-MEASURE  & &  Latent Variables, Phi coefficient, Z-score \\
@@ -76,7 +76,7 @@ In order to handle entities related to our domain, we train a CRF based machine 
 (see Table~\ref{tab:entityTypes}), 
 using training material from the ACL RD-TEC 2.0 dataset \cite{qasemizadeh2016acl}.
 Apart from this, we follow a domain adaptation approach inspired by \cite{agerri2016robust} and ingest semantic background knowledge extracted from external scientific corpora, in particular the ACL Anthology~\cite{bird2008acl,gildea2018acl}.
-We perform entity linking by means of a new gazetteer based on a SAGE dictionary of Social Research Methods\cite{lewis2003sage}, thus putting a special emphasis on the social sciences. 
+We perform entity linking by means of a new gazetteer based on a SAGE dictionary of Social Research Methods~\cite{lewis2003sage}, thus putting a special emphasis on the social sciences. 
 The linking component addresses the synonymy problem and matches an entity despite name variations such as spelling variations. 
 Finally, term filtering is carried out based on termhood and unithood, while scoring is achieved by calculating a relevance score based on TF-IDF (cf. Section~\ref{para:relscore}).
 
@@ -106,7 +106,7 @@ The cluster number of each word is used as additional sequential input feature f
 Semantic representations of words are a successful extension of common features, resulting in higher NER performance~\cite{Turian} and can be trained offline.
 In this work, the word vectors were learned based on 22,878 documents of the scientific ACL Anthology Reference Corpus\footnote{\url{https://acl-arc.comp.nus.edu.sg/}} using Gensim\footnote{\url{https://radimrehurek.com/gensim/}} with the skip gram model (cf. \cite{mikolov2013distributed}) 
 and a pre-clustering algorithm\footnote{
-Word embeddings are trained with a skip gram model using embedding size equal to 100, word window equal to 5, minimal occurrences of a word to be considered 10. Word embeddings are clustered using agglomerative clustering with a number of clusters set to {500, 600, 700}. Ward linkage with euclidean distance is used to minimize the variance within the clusters.}.
+Word embeddings are trained with a skip gram model using embedding size equal to 100, word window equal to 5, minimal occurrences of a word to be considered 10. Word embeddings are clustered using agglomerative clustering with a number of clusters set to {500, 600, 700}. Ward linkage with Euclidean distance is used to minimize the variance within the clusters.}.
 %A summary of the size of the unlabeled English data used for training word embeddings can be found in Table~\ref{tab:UnlabeledData}.
 %\begin{table}
 %\center
@@ -171,12 +171,12 @@ More concretely, we carried out the following steps to extend SAGE as an off-lin
 \end{enumerate}
 
 \paragraph{Extracting term variants such as abbreviations, synonyms, and related terms}%\ \\[1pt]
-26.082 candidate terms have been recognized and classified by our pipeline and manually inspected to  
+26,082 candidate terms have been recognized and classified by our pipeline and manually inspected to  
 a) find synonyms and related words that could be linked to SAGE, and
 b) build a post-filter for incorrectly classified terms. 
 Moreover, abbreviations have been extracted using the algorithm of Schwartz and Hearst
 \cite{SchwartzH03}.
-This way, a Named Entity gazetteer could be built and is used at run-time. It comprises 1,111 terms from SAGE and 447 terms from the Statistics glossary as well as 54 previously unseen terms detected by the model-based classifier. 
+This way, a Named Entity gazetteer could be built and is used at run-time. It comprises 1,111 terms from SAGE and 447 terms from the used glossary of statistical terms\footnote{Based on \url{https://www.statistics.com/resources/glossary}} as well as 54 previously unseen terms detected by the model-based classifier. 
 
 
 

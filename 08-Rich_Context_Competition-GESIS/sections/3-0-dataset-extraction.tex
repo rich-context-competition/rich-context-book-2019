@@ -53,8 +53,8 @@ For each positive training example, we have added one negative sample that conta
 We used a batch size of 25 and a dropout rate of 0.4.
 The model was trained for 300 iterations.
 \paragraph{Evaluation}
-We evaluated our model with respect to four metrics: strict precision and recall, and partial precision and recall.
-While the former are standard evaluation metrics, the latter are their relaxed variants in which the degree to which dataset mentions have to match can vary. 
+We evaluated our model with respect to four metrics: precision and recall, each for strict and for partial match.
+While the strict match metrics are standard evaluation metrics, the partial match metrics are their relaxed variants in which the degree to which dataset mentions have to match can vary. 
 %This evaluation scheme is pased Semeval 2013 description can be found in this blog
 % \url(http://www.davidsbatista.net/blog/2018/05/09/Named_Entity_Evaluation/)
 %In the evaluation method, we have a parameter to control the weight of only partly matched mentions. 
@@ -64,16 +64,16 @@ The scores describe whether a model is able to find the correct positions of dat
 %We set $alpha$ to $1.0$, meaning that the true and extracted dataset mention have to overlap in at least one token to count as a match. Setting $\alpha$
 \begin{table}[b]
     \center 
-    \caption{Results (phase one). } 
+    \caption{Performance of phase one approach of dataset extraction. } 
     \begin{tabular}{lc} 
         \toprule
         Metric  & Value \\
         \midrule
-        Partial Precision   & 0.93 \\
-        Partial Recall      & 0.95 \\
+        Precision (partial match)   & 0.93 \\
+        Recall (strict match)      & 0.95 \\
         \midrule
-        Strict Precision    & 0.80 \\
-        Strict Recall       & 0.81 \\ 
+        Precision (strict match)    & 0.80 \\
+        Recall (strict match)       & 0.81 \\ 
         \bottomrule \\ 
     \end{tabular} 
     \label{table:dataset-mention-eval} 
@@ -84,22 +84,22 @@ Table~\ref{table:dataset-mention-eval} show the results of the dataset mention e
 %Notably  The results show, that in 10\% of the found matches we have not found the strict correct dataset mention, but the correct position and there is a partial match.
 
 \subsubsection{Phase two approach}
-In the second phase of the competition, additional 5,000 publications were provided by RCC. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15.000 publications) in the same manner as in phase one to obtain training data. This time we split the data in 80\% for training and 20\% for test. 
+In the second phase of the competition, additional 5,000 publications were provided by RCC. We extended our approach to consider the list with dataset names supplied by the organizers and re-annotated the complete corpus of 15,000 publications) in the same manner as in phase one to obtain training data. This time we split the data in 80\% for training and 20\% for test. 
 
 \paragraph{Evaluation}
-We resort to the same evaluation metrics as in phase one. However, we calculate precision and recall on the full-text of the publication and not on the paragraphs as in the first phase. Table~\ref{table:dataset-mention-eval-phase-two} show the results achieved by our model. We observe lower precision and recall values. Compared to phase one, there is also a smaller difference between the precision and recall values for the strict and partial version of the metrics. 
+We resort to the same evaluation metrics as in phase one. However, we calculate precision and recall on the full-text of the publication and not on the paragraphs as in the first phase. Table~\ref{table:dataset-mention-eval-phase-two} shows the results achieved by our model. We observe lower precision and recall values. Compared to phase one, there is also a smaller difference between the precision and recall values for the strict and partial version of the metrics. 
 \begin{table}[hb]
     \center 
-    \caption{Results (phase two).} 
+    \caption{Performance of phase two approach for dataset extraction.} 
     \begin{tabular}{lc} 
         \toprule
         Metric  & Value \\
         \midrule
-        Partial Precision   & 0.51 \\
-        Partial Recall      & 0.90 \\
+        Precision (partial match)   & 0.51 \\
+        Recall (partial match)      & 0.90 \\
         \midrule
-        Strict Precision    & 0.49 \\
-        Strict Recall       & 0.87 \\ 
+        Precision (strict match)    & 0.49 \\
+        Recall (strict match)       & 0.87 \\ 
         \bottomrule \\ 
     \end{tabular} 
     \label{table:dataset-mention-eval-phase-two} 

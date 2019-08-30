@@ -7,13 +7,13 @@ In general, two approaches could be applied to this task.
 One is the extraction of relevant terms of the publications.
 It means that this task could be seen as a keyword extraction task and the detected terms considered as descriptive terms regarding the research field.
 The second approach is to learn to classify publications research fields with the use of annotated data in a superviesed manner.
-The benifit of the second approach is that the classification scheme to describe the research field can be defined experts of the domain.
+The benifit of the second approach is that the classification scheme to describe the research field can be defined by experts of the domain.
 The disadvantage of supervised trained classifiers for this task is the lack of applicable training data.
 Furthermore, it must be ensured that the training data is comparable to the texts the research field classifier should be applied on.
 
 %% * Formal definition
 \paragraph{Formal problem definition}
-Let $P$ denote a set of Publications of size $n$, $A$ a set of corresponding abstracts of the same size and $L$ a set of $k$ defined class labels describing research fields.
+Let $P$ denote a set of publications of size $n$, $A$ a set of corresponding abstracts of the same size and $L$ a set of $k$ defined class labels describing research fields.
 The task of research field classification is to select for each publication $p_i\in{P}$ based on the information contained in the corresponding abstract $a_i\in{A}$ a set of labels $C_i = \varnothing \cap \{c_1\dots c_n|c_n \in L\}$ of $n$ labels.
 The number of $n$ denotes the number of labels from $L$ describing the research field of $a_i$ and can vary for each publication $p_i$.
 If there is no label $l_k$ representing the information given by the abstract $a_i$ the set of class labels is the empty set $\varnothing$.
@@ -32,11 +32,11 @@ If there is no label $l_k$ representing the information given by the abstract $a
 %% * Supervised
 %% * Multi label classification
 Since we didn't receive any gold standard for this task during the competition we decided to make use of external resources.
-We decided to use an external labeled dataset to train a text classifier which is able to predict for a given abstract of a publication one or more research field label.
+We decided to use an external labeled dataset to train a text classifier which is able to predict one or moreresearch label for a given abstract of a publication.
 
 The publications given througout the competition belongs to the domain of social sciences we considered metadata from a open access repository for the social sciences called SSOAR.
 The advantages are twofold.
-On the ond hand, we could rely on professional annotations in a given classification scheme covering the social sciences and related areas.
+On the one hand, we could rely on professional annotations in a given classification scheme covering the social sciences and related areas.
 On the other hand the source is openly available.\footnote{A script to download the metadata of SSOAR can be found in github/research-field-classifier}
 
 %% * Classification schmeme Classoz (Why it seems usefull)
@@ -48,10 +48,10 @@ An exhausitve description of the used data can be found in \ref{sec:external_dat
 %%  * selected fields and language
 %%  * titles are often german
 SSOAR is a multilingual repository.
-Also the available abstracts can vary in language which can differ to the language of the publication.
+Therefore, the available abstracts may vary in language and the language of the abstract may differ from the language of the article itself.
 We selected all English abstract with valid classification as our dataset.
 Mainly because of the language of the RCC corpus.
-But it has to be noted, that the multilingual SSOAR-abstract-corpus has a skewed distribution of languages with English and German as the main languages.
+However, it should be noted that the multilingual SSOAR abstract corpus has a skewed distribution of languages with English and German as the main languages.
 We count 22,453 English abstracts with valid classification after filtering.
 %%  * skipped label
 Due to the unequal distribution of labels in the dataset, we need to guaranty enough training data for each label.
@@ -60,8 +60,8 @@ We selected only labels with frequency over 300 for training the model, which re
 For creating train and test set, 22,453 SSOAR publications with their assigned labels were split randomly.
 We used a train/validation/test split of 70/10/20.
 %%* Our model
-We decided to train a text classifier based on the fasttext framework~\cite{joulin2017bag}.
-The arguments to use this model was the speed in comparison to a more complex neural net archiecture and the still comparable to state of the art performance (e.g.\cite{wang2018joint}).
+We decided to train a text classifier based on a fasttext~\cite{joulin2017bag} model in the author's implementation.
+The arguments to use this model was the speed in comparison to a more complex neural net architecture and the still comparable to state of the art performance (e.g.\cite{wang2018joint}).
 %%  General used Fasttext parameter
 The model is trained with learning rate 1.0 for 150 epochs.
 Also, the negative sampling parameter is set to 25.
@@ -138,9 +138,9 @@ All these metrics remain the same till threshold 0.2. Till threshold 0.6, we can
   \toprule
       Metric & Value \\
   \midrule
-      Micro Precisison:  & 0.554 \\
-      Micro Recall: 	 & 0.564 \\
-      Micro F1:          & 0.559 \\
+      Micro precisison:  & 0.554 \\
+      Micro recall: 	 & 0.564 \\
+      Micro f1:          & 0.559 \\
   \bottomrule
 \end{tabular}
 \end{table}
