@@ -91,8 +91,7 @@ The \emph{one correct} named curve indicates the quality of the publication wise
 It shows the share of all publications in the test set where at least one of the predicted research field labels can be found in the ground truth data.
 For instance, if a threshold of 0.1 is selected for 75\% of the publications in the test set, at least one of the model predictions are correct.
 This value decreases with increasing threshold simmilar to the recall metric.
-The final metrics for our model and a selected threshold of 0.1 is shown in table \ref{tab:eval_research_field}.
-The final micro f1 value on the test set is 0.56.
+The final micro f1 value on the test set for our model and a selected threshold of 0.1 is 0.56 (precison 0.55, recall 0.56).
 %TODO what is the "default threshold" and why does it matter? what is the line "without prediction" and what is "share allwrong prediction"? 
 
 %%  comparison to baseline (SVM?)
@@ -118,32 +117,17 @@ For this threshold, the model generates a prediction for all items and about hal
 All these metrics remain the same till threshold 0.2. Till threshold 0.6, we can see a dramatic increase in the micro precision and the number of items without any correct prediction. Both of these metrics pass 0.8. On the other hand, micro recall falls to the below of 0.2. In this case, selecting threshold seems hard task, since the conflict point of precision and recall is a threshold about 0.25 but both of these metrics at the point are not more than 0.3 and also we have more than 0.4 items with completely wrong predictions. Also, the default threshold doesn't look promising. In spite of micro precision about 0.7, we have a problem with the very high number of items without any prediction.
 \end{comment}
 
+
 \begin{figure}[t]
 \centering
 %\subfloat[Random Forest Evaluation]{\includegraphics[width=0.49\textwidth]{figures/research-fields/random-forest-evaluation.png}\label{fig:rf}}
-\includegraphics[width=.49\textwidth]{figures/research-fields/fields-precision-recall.png}
+\includegraphics[width=.7\textwidth]{figures/research-fields/fields-precision-recall.png}
 %\includegraphics[width=.49\textwidth]{figures/research-fields/fast-text-evaluation.png}
 %\vspace{-1em}
-    \caption{Metrics for different selected probability thresholds (validation set)}
+    \caption{Performance for different selected probability thresholds (validation set)}
 \label{fig:fields_precision_recall}
 \end{figure}
 
-
-\begin{table}[b]
-\center
-\small
-    \caption{Evaluation results on test set}
-  \label{tab:eval_research_field}
-  \begin{tabular}{ll}
-  \toprule
-      Metric & Value \\
-  \midrule
-      Micro precisison:  & 0.554 \\
-      Micro recall: 	 & 0.564 \\
-      Micro f1:          & 0.559 \\
-  \bottomrule
-\end{tabular}
-\end{table}
 
 %The trends of micro f1, micro recall, and publications with just wrong predictions are falling smoothly, but the trend of micro precision and number of publications without any prediction are rising gradually. 
 %The Micro precision still is higher than 0.7 for threshold 0.4. Also, the number of items without prediction is lower in threshold 0.4 than threshold 0.5 (the difference is about 0.1).
