@@ -54,36 +54,11 @@ are not of interest. This task has two sub-tasks:
 ### Provided Data ###
 
 The provided knowledge base of known datasets includes approximately 10K
-datasets used in social science research. Many of the datasets in the
-knowledge base are specific years or sections of larger surveys, e.g.,
-
--   Monitoring the Future: A Continuing Study of the Lifestyles and
-    Values of Youth, 1980
-
--   Monitoring the Future: A Continuing Study of the Lifestyles and
-    Values of Youth, 1983
-
--   Monitoring the Future: A Continuing Study of American Youth
-    (12th-Grade Survey), 1996
-
-The high textual similarity between different datasets in the knowledge
-base makes the linking task more challenging.
-
-In the first phase of the RCC, organizers provided participants with 5K
-papers, partially annotated with dataset usage to serve as training
-data. For each paper, the full text, metadata, and PDF file were
-provided. For each annotation, the paper ID and the corresponding
-dataset ID in the knowledge base were provided. For most annotations,
-the textual mentions in the paper were also provided, but the position
-of the mention in the paper text was not specified. This means that for
-a mention that appears multiple times in a paper, it is ambiguous which
-of these mentions is actually the reference to the dataset that has been
-labeled. In order to actually label the text in the paper, we need to
-search the paper for the annotated mention, and if the mention appears
-multiple times, it is not clear which of these are valid examples of
-dataset usage in a paper. Approximately 10% of the datasets in the
+datasets used in social science research. The high textual similarity between
+different datasets in the knowledge base informs our approach for linking dataset
+mentions to their dataset in the knowledge base. Approximately 10% of the datasets in the
 knowledge base were linked one or more times in the provided corpus of
-5K papers.
+5K papers. To attempt to generalize mention discovery beyond those present in the knowledge base, we train a Named Entity Recognition model on the noisy annotations provided by the labeled mentions in the knowledge base.
 
 ![image](datasets.png){width="13cm"}
 
