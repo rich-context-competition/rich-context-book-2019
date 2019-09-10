@@ -100,7 +100,7 @@ i.e. \textit{Research Method}, \textit{Research Theory}, \textit{Research Tool} 
 \paragraph{Distributed semantic models}%\ \\[1pt]
 \label{subsec:dist-model}
 For domain adaptation, we integrate further background knowledge.
-We use topical information from word embeddings trained on an scientific corpus as an additional features to our NER model.
+We use topical information from word embeddings trained on an scientific corpus as an additional feature to our NER model.
 For this, we use agglomerative clustering of the word embeddings to identify topical groups of words.
 The cluster number of each word is used as additional sequential input feature for our CRF model.
 Semantic representations of words are a successful extension of common features, resulting in higher NER performance~\cite{Turian} and can be trained offline.
@@ -226,7 +226,12 @@ It has to be noted that only a small portion of the social science terms is actu
 \paragraph{Preliminary results}%\ \\[1pt]
 Our method has been tested on 100 fulltext papers from SSOAR and ten documents from the Rich Context Competition (RCC), all randomly selected from a hold out corpus.
 In our experiments on SSOAR Social Science publications, we compared results to the given metadata information.
-The main finding was that while most entities from the SAGE thesaurus could be extracted and linked reliably (e.g., 'Paired t-test'), they could not be easily mapped to the SSOAR metadata terms, which consist of only a few abstract classes (e.g., 'quantitative analysis'). Furthermore, our tool was tested by the RCC organizer, were the judges reviewed ten random publications and generated qualitative scores for each document. %COMMENT (AZ) Yes. We were the winning team on this task. But what results to put here?
+The main finding was that while most entities from the SAGE thesaurus could be extracted and linked reliably (e.g., 'Paired t-test'), they could not be easily mapped to the SSOAR metadata terms, which consist of only a few abstract classes (e.g., 'quantitative analysis').
+Furthermore, our tool was tested by the RCC organizer, were the judges reviewed ten random publications and generated qualitative scores for each document.
+In this evaluation, the research method extraction tool received the overall best results of all competitors for this task.\footnote{Rank: 1,2,2,1,1 for judges 1-5.}
+
+
+%COMMENT (AZ) Yes. We were the winning team on this task. But what results to put here?
 
 %COMMENT (AZ) Please double check 
 %\subsubsection{Conclusion and Future Work}

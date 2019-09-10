@@ -40,12 +40,11 @@ In general, however, our apporach to use a weakly labled corpus created using a 
 \end{comment}
 
 \paragraph{Research method extraction.} %TODO as above, best to start with a brief summary of the results (evaluation results) and their interpretation. 
-We consider the extraction of research methods from full text as the most challenging task. This is because the sample vocabulary given by the RCC covers a large thematic area, from dataset, over mathematical models to qualitative methods.
-The task itself was defined as the identification of research methods associated with specific publication.
-On the one hand, participants were confronted with a lack of training data in the competition. On the other hand, in contrast to the task of research field classification, we were not able to identify external corpora which could be applied on this task right away.
-We combined models from another research domain with a manually currated extension of known research method terms.
+We consider the extraction of research methods from full text as the most challenging task.
+This is because the sample vocabulary given by the RCC covers a large thematic areai.
+The task itself was defined as the identification of research methods associated with a specific publication, which in turn are drawn from a specific research field.
+Since no training data has been provided, we combined models from another research domain with a manually currated extension of known research method terms.
 The qualitative reviews during the two phases of the competiton attested that this approach works.
-A valid quantitative evaluation is prevented by the lack of ground truth data.
 
 \paragraph{Research field classification.}
 Our supervised machine learning approach to handle the research field classification task performs well on the dataset created from social science publication metadata. A micro F1 measure of above 55\% seems to indicate reasonable performance considering the small dataset with 44~labels and a mean number of keywords of three terms per publication.
