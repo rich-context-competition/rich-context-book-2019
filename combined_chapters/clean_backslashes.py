@@ -28,11 +28,11 @@ def replace(file_path):
 				try:
  					if line[-2] == "\\" and line[-3] != "\\":
  						line.rstrip()
- 						new_file.write(line.rstrip().replace("\\", "  "))
+ 						new_file.write(line.rstrip().replace("\\", "  ") + "\n")
  					else:
- 						new_file.write(line.rstrip())
+ 						new_file.write(line.rstrip() + "\n")
  				except:
-		 			new_file.write(line.rstrip())
+		 			new_file.write(line.rstrip() + "\n")
     #Remove original file
     remove(file_path)
     #Move new file
