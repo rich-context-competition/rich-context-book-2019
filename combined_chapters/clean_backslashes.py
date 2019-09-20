@@ -1,4 +1,12 @@
-# clean backslashes from manuscript
+"""
+Some of the file conversion introduces double backslashes at the 
+end of lines, creating formatting problems in markdown.
+
+This script looks for a double backslaash at the end of a line
+that is not part of a run on set of backslashes, and replaces them 
+with whitespace.  
+"""
+
 
 import sys
 import glob
