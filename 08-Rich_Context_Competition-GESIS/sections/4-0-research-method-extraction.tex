@@ -6,7 +6,7 @@
 \subsubsection{Task description}
 Inspired by a recent work of Nasar et al. \cite{nasar2018information}, we define a list of basic entity types that give key-insights into scholarly publications. 
 We adapted the list of semantic entity types to the domain of the social sciences with a focus on \textit{research methods},
-but also including related entity types such as \textit{Theory, Model, Measurement, Tool, Performance}. We suspect that the division into semantic types might be helpful to find \textit{research methods}.
+but also including related entity types such as \textit{theory, todel, measurement, tool, performance}. We suspect that the division into semantic types might be helpful to find \textit{research methods}.
 The reason is that the related semantic entities types might provide clues or might be directly related to the research method itself.
 
 For example, in order to achieve a certain research goal, an experiment is used in which a certain combination of \textit{methods} is applied to a \textit{dataset}.
@@ -16,7 +16,7 @@ The result is then quantified with a \textit{performance} using a specific measu
 %\\
 
 \textbf{Example}: \textit{P-values} (measurement) are reported for the \textit{one-tail paired t-test} (method) on \textit{Allbus} (dataset) and \textit{ISSP} (dataset).\\
-We selected the entity types \textit{Research Method}, \textit{Research Theory}, \textit{Research Tool} and \textit{Research Measurement} as the target research method related entity types (see Table~\ref{tab:entityTypes}).
+We selected the entity types \textit{research method}, \textit{research theory}, \textit{research tool} and \textit{research measurement} as the target research method related entity types (see Table~\ref{tab:entityTypes}).
 This decision is based on an ecxamination of the SAGE ontology given by the RCC as a sample of how research method terms might look like.
 \begin{table}[b]
 \center
@@ -31,7 +31,7 @@ This decision is based on an ecxamination of the SAGE ontology given by the RCC 
     \hline  
     Research Method	  & SAGE-METHOD  &	\ding{51} & Bootstrapping, Active Interviews \\
     Research Measurement 	 &	SAGE-MEASURE  & &  Latent Variables, Phi coefficient, Z-score \\
-    Research Theory  &	SAGE-THEORY	 &  & Frankfurt shool, Feminism, Actor network theory \\  
+    Research Theory  &	SAGE-THEORY	 &  & Frankfurt school, Feminism, Actor network theory \\  
     Research Tool  &	SAGE-TOOL  & &  SPSS, R statistical package \\ 
 \end{tabular}
 \end{table}
@@ -76,7 +76,7 @@ In order to handle entities related to our domain, we train a CRF based machine 
 (see Table~\ref{tab:entityTypes}), 
 using training material from the ACL RD-TEC 2.0 dataset \cite{qasemizadeh2016acl}.
 Apart from this, we follow a domain adaptation approach inspired by \cite{agerri2016robust} and ingest semantic background knowledge extracted from external scientific corpora, in particular the ACL Anthology~\cite{bird2008acl,gildea2018acl}.
-We perform entity linking by means of a new gazetteer based on a SAGE dictionary of Social Research Methods~\cite{lewis2003sage}, thus putting a special emphasis on the social sciences. 
+We perform entity linking by means of a new gazetteer based on th SAGE dictionary of Social Research Methods~\cite{lewis2003sage}, thus putting a special emphasis on the social sciences. 
 The linking component addresses the synonymy problem and matches an entity despite name variations such as spelling variations. 
 Finally, term filtering is carried out based on termhood and unithood, while scoring is achieved by calculating a relevance score based on TF-IDF (cf. Section~\ref{para:relscore}).
 
@@ -104,7 +104,7 @@ We use topical information from word embeddings trained on an scientific corpus 
 For this, we use agglomerative clustering of the word embeddings to identify topical groups of words.
 The cluster number of each word is used as additional sequential input feature for our CRF model.
 Semantic representations of words are a successful extension of common features, resulting in higher NER performance~\cite{Turian} and can be trained offline.
-In this work, the word vectors were learned based on 22,878 documents of the scientific ACL Anthology Reference Corpus\footnote{\url{https://acl-arc.comp.nus.edu.sg/}} using Gensim\footnote{\url{https://radimrehurek.com/gensim/}} with the skip gram model (cf. \cite{mikolov2013distributed}) 
+In this work, the word vectors were learned based on 22,878 documents of the scientific ACL Anthology Reference Corpus\footnote{\url{https://acl-arc.comp.nus.edu.sg/}} using Gensim\footnote{\url{https://radimrehurek.com/gensim/}} with the skip-gram model (cf. \cite{mikolov2013distributed}) 
 and a pre-clustering algorithm\footnote{
 Word embeddings are trained with a skip gram model using embedding size equal to 100, word window equal to 5, minimal occurrences of a word to be considered 10. Word embeddings are clustered using agglomerative clustering with a number of clusters set to {500, 600, 700}. Ward linkage with Euclidean distance is used to minimize the variance within the clusters.}.
 %A summary of the size of the unlabeled English data used for training word embeddings can be found in Table~\ref{tab:UnlabeledData}.
