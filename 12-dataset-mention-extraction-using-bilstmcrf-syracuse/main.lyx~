@@ -258,8 +258,8 @@ In this article, we describe a method for extracting dataset mentions based
  chapter 6
 \series default
 , but we only focus on the detection of dataset mentions.
- We tested our model on a novel dataset produced for the Rich Context Competitio
-n challenge.
+ the We tested our model on a novel dataset produced for the Rich Context
+ Competition challenge.
  We achieve a relatively good performance of 
 \begin_inset Formula $F_{1}=0.885$
 \end_inset
