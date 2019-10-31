@@ -144,7 +144,7 @@ sed -i.bu "s/{#sec:areas}//g" chap06.md
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 6 - Allen Institute for Artificial Intelligence (AI2)' >> /tmp/newfile
+echo '# Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap06.md >> /tmp/newfile 
 cp /tmp/newfile chap06.md
@@ -164,7 +164,7 @@ sed -i.bu "s/\](images/\](combined_images/g" chap07.md
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 7 - KAIST' >> /tmp/newfile
+echo '# Chapter 7 - Finding datasets in publications: The KAIST approach' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap07.md   >> /tmp/newfile 
 cp /tmp/newfile chap07.md
@@ -183,7 +183,7 @@ sed -i.bu "s/figures\/research-fields/combined_images/g" chap08.md
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 8 - GESIS' >> /tmp/newfile
+echo '# Chapter 8 - Finding datasets in publications: The GESIS approach' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap08.md   >> /tmp/newfile 
 cp /tmp/newfile chap08.md
@@ -203,7 +203,7 @@ sed -i.bu "s/{#preprocess}//g" chap09.md
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 9 - DICE' >> /tmp/newfile
+echo '# Chapter 9 - Finding datasets in publications: The University of Paderborn approach' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap09.md  >> /tmp/newfile 
 cp /tmp/newfile chap09.md
@@ -220,7 +220,7 @@ cp ../10-Simple_Extraction_for_Social_Science_Publications-Singapore/10-Simple_E
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 10 - Singapore' >> /tmp/newfile
+echo '# Chapter 10 - Finding datasets in publications: The Singapore Management University approach' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap10.md    >> /tmp/newfile 
 cp /tmp/newfile chap10.md 
@@ -240,7 +240,7 @@ sed -i.bu "s/\](img/\](combined_images/g" chap11.md
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 11 - Syracuse' >> /tmp/newfile
+echo '# Chapter 11 - Finding datasets in publications: The University of Syracuse approach' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap11.md    >> /tmp/newfile 
 cp /tmp/newfile chap11.md
