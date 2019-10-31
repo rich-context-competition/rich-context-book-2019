@@ -30,8 +30,8 @@ mkdir 13_images
 
 
 echo "trying chapter 1"
-cp ../01-Introduction/Rich\ Context_monograph.docx . 
-pandoc Rich\ Context_monograph.docx  -o chap01.md
+cp ../01-Introduction/Intro\ chapter_October\ 28.docx . 
+pandoc Intro\ chapter_October\ 28.docx -o chap01.md
 # sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" 01-Introduction.md
 # 
 # sed -i.bu '1s;^;# Chapter 1 - Introduction  ;' 01-Introduction.md
