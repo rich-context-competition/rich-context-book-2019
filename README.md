@@ -31,6 +31,8 @@ Each contributor chapter has it's own directory. This is where contributors plac
 
 These chapters come in in different formats, and we convert these chapters to markdown, and rename the source files to a consistent file name, and then place these converted files into `combined_chapters`. 
 
+Some of the source directory names **do not** correspond to where they will appear in the book. As we go through the editing process we may move chapters around, but to reduce confusion for the contributoing authors we are keeping the source folder names stable, and renaming the chapters in the complication process. 
+
 
 
 ## Viewing the latest compiled version  
