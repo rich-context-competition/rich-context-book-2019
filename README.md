@@ -12,11 +12,17 @@ The goal is to manage the process via github issues on this repo. Feedback on th
 ## Book Schedule
 
 - [x] Draft white papers – Feb 15 
-- [ ] Review and edit by Ian/Julia - March 15  
-- [ ] Second draft by June 15  
-- [ ] Send for review  
-- [ ] Response by August 15  
-- [ ] Final versions October 15  
+- [x] Review and edit by Ian/Julia - March 15  
+- [x] Second draft by June 15  
+- [x] Send for review  
+- [x] Response by August 15  
+- [ ] Reviewer comments incorporated
+- [ ] Final version delivered to SAGE November 30th  
+- [ ] Book transmitted to Production week of December 2nd  
+- [ ] Copy Editing Jan 2020  
+- [ ] Typesetting early March 2020 
+- [ ] Online publication April / May 2020 
+- [ ] Print publication May / June 2020  
 
 
 ## Book Outline
