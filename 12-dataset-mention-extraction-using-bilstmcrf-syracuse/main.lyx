@@ -994,7 +994,7 @@ For all of our results, we use
  as the measure of performance.
  This measure is the harmonic average of the precision and recall and it
  is the standard measure used in sequence labeling tasks.
- This metric varies from 0 to 1, the higher the better performance.
+ This metric varies from 0 to 1, the higher the better.
  Our method achieved a relatively high 
 \begin_inset Formula $F_{1}$
 \end_inset
@@ -1025,7 +1025,7 @@ For all of our results, we use
 \uwave default
 \noun default
 \color inherit
- for detecting mentions, in line with previous studies.
+ for detecting mentions.
 \end_layout
 
 \begin_layout Standard
@@ -1392,18 +1392,18 @@ learning rate
 \end_layout
 
 \begin_layout Standard
-We train models using the training data, monitor the performance using the
- validation data (we stop training if the performance doesn't improve for
- the last 10 epochs).
+We train models using the training data and monitor the performance using
+ the validation data (we stop training if the performance does not improve
+ for the last 10 epochs).
  We are using the Adam optimizer with learning rate of 0.001 and batch size
  equal to 64.
  The hidden size of LSTM for character and word embedding is 80 and 300,
  respectively.
- For the regularization methods to avoid over-fitting, we use L2 regularization
- with alpha set to 0.01, we also use dropout rate equal to 0.5.
+ For the regularization methods, and to avoid over-fitting, we use L2 regulariza
+tion set to 0.01 and we also use dropout rate equal to 0.5.
  We trained 8 models with a combination of different GloVe vector size (50,
  100, 300 and 300) and dropout rate (0.0, 0.5).
- The hyper-parameter setting are present in Table 
+ The hyper-parameter settings are present in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Model-search-space"
@@ -2000,7 +2000,9 @@ noprefix "false"
 
 \end_inset
 
-), and it takes 15:58:50 for the training.
+), and it takes 15 hours 58 minutes for the training on an NVIDIA GTX 1080
+ Ti GPU in a computer with an Intel Xeon E5-1650v4 3.6 GHz CPU with 128 GB
+ of RAM.
 \end_layout
 
 \begin_layout Standard
@@ -2040,6 +2042,36 @@ One of the shortcomings of our approach is that the architecture is lacking
  We are exploring new architectures using self-attention and multiple-head
  attention.
  We hope to explore these approaches in the near future.
+\end_layout
+
+\begin_layout Standard
+There are number of improvements that we can make in the future.
+ A first improvement is to use non-recurrent neural architectures such as
+ the Transformer which has shown to be faster and a more effective learner
+ compared to recurrent neural networks.
+ Another improvement would be to bootstrap information from other dataset
+ sources such as open access full-text articles from PubMed Open Access
+ Subset.
+ This dataset contains dataset 
+\emph on
+citations
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "datarank"
+literal "false"
+
+\end_inset
+
+—in contrast to the most common types of citations to publications.
+ The location of this citations within the full-text could be exploited
+ to perform entity recognition.
+ While this would be a somewhat different problem than the one solved in
+ this article, it would still be useful for the goal of tracking dataset
+ usage.
+ In sum, by improving the learning techniques and the dataset size and quality,
+ we could significantly increase the success of finding datasets in publications.
 \end_layout
 
 \begin_layout Standard
