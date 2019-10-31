@@ -1,7 +1,6 @@
+# Chapter 10 - Finding datasets in publications: The Singapore Management University approach
 
----
-
-# Chapter 10 - Singapore
+## Simple Extraction for Social Science Publications
 
 <!--
 ---
@@ -16,8 +15,6 @@ bibliography:
 title: Simple Extraction for Social Science Publications
 ---
 -->
-
-## Chapter: Simple Extraction for Social Science Publications
 
 Philips Kokoh Prasetyo, Amila Silva, Ee-Peng Lim, Palakorn Achananuparp  
 Living Analytics Research Centre, Singapore Management University  

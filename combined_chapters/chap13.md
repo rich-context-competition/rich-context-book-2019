@@ -1,9 +1,4 @@
-
----
-
-# Chapter 13 - The future of context
-
-# The Future of AI in Rich Context
+# Chapter 13 - The Future of AI in Rich Context
 
 **Paco Nathan**
 

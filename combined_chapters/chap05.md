@@ -1,7 +1,4 @@
-
----
-
-# Chapter 5 - Compettion Design
+# Chapter 5 - Competition Design
 
 **Andrew Gordon, Ekaterina Levitskaya, Jonathan Morgan, Paco Nathan and
 Sophie Rand - New York University**

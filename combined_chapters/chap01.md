@@ -1,50 +1,23 @@
-
-
-# Chapter 1 - Introduction
-
-
-Rich Context Introductory Chapter
+# Chapter 1 - Rich Context Introductory Chapter
 
 Ian Mulvany, Paco Nathan, Sophie Rand, Julia Lane
 
-The social sciences are at a crossroads. The enormous growth of the
-scientific enterprise, coupled with rapid technological progress, has
-created opportunities to conduct research at a scale that would have
-been almost unimaginable a generation or two ago. The rise of cheap
-computing, connected mobile devices, and social networks with global
-reach allows researchers to rapidly acquire massive, rich datasets; to
-routinely fit statistical models that would once have seemed intractably
-complex; and to probe the way that people think, feel, behave, and
-interact with one another in ever more naturalistic, fine-grained ways.
-Yet much of the core infrastructure is manual and ad-hoc in nature,
-threatening the legitimacy and utility of social science research.
+## Introduction
 
-We can and must do better. The great challenges of our time are human in
-nature - terrorism, climate change, the use of natural resources, and
-the nature of work - and require robust social science to understand the
-sources and consequences. Yet the lack of reproducibility and
-replicability evident in many fields(*1*--*5*) is even more acute in the
-study of human behavior both because of the difficulty of sharing
-confidential data and because of the lack of scientific infrastructure.
-There is an enormous interest, while only a fraction of datasets are
-identified in scientific research, those publications that do cite data
-are cited up to 25% more than those that do not(*6*)
-
-The central argument we advance in this monograph is that advances in
-technology---and particularly, in automation---can now change the way in
-which social science is done. Social scientists have eagerly adopted new
-technologies in virtually every area of social science research---from
-literature searches to data storage to statistical analysis to
-dissemination of results.
-
-A major challenge is search and discovery. The vast majority of social
-science data and outputs cannot be easily discovered by other
-researchers even when nominally deposited in the public domain. A new
-generation of automated search tools could help researchers discover how
-data are being used, in what research fields, with what methods, with
-what code and with what findings. And automation can be used to reward
-researchers who validate the results and contribute additional
-information about use, fields, methods, code, and findings.(*7*)
+Science is at a crossroads. The enormous growth of access to data
+coupled with rapid technological progress, has created opportunities to
+conduct empirical research at a scale that would have been almost
+unimaginable a generation or two ago. Researchers can now rapidly
+acquire and develop massive, rich datasets; routinely fit complex
+statistical models; and conduct their science in increasingly
+fine-grained ways. Yet there is no automated way to search for and
+discover what datasets are used in empirical research, leading to
+fundamental irreproducibility of empirical science and threatening its
+legitimacy and utility(*1*, *2*). There is an enormous interest to
+change the current manual and ad-hoc system, and incentives are
+increasingly aligned: while only a fraction of datasets are identified
+in scientific research, those publications that do cite data are cited
+up to 25% more than those that do not(*3*).
 
 Vannevar Bush foreshadowed the issue more than 60 years ago:
 
@@ -57,35 +30,101 @@ Vannevar Bush foreshadowed the issue more than 60 years ago:
 > his publication did not reach the few who were capable of grasping and
 > extending it; and this sort of catastrophe is undoubtedly being
 > repeated all about us, as truly significant attainments become lost in
-> the mass of the inconsequential"(*8*).
+> the mass of the inconsequential"(*11*).
 
-This challenge is particularly true for empirical research. Faced with a
-never-ending stream of new findings and datasets generated using
-different code and analytical techniques, researchers cannot readily
-determine who has worked in an area before, what methods were used, what
-was produced, and where those products can be found. Resolving such
-uncertainties consumes an enormous amount of time and energy for many
-social scientists. Automated tools and services could greatly facilitate
-the process---often by passively capitalizing on the accumulated labor
-of one's extended research community.
+We can do better -- and we now have the opportunity to do so.
 
-In sum, the use of data depends critically on knowing how it has been
-produced and used before: the required elements what do the data
-***measure***, what ***research*** has been done by what
-***researchers,*** with what ***code***, and with what ***results***.
-Acquiring that knowledge has historically been manual and inadequate.
-The challenge is particularly acute in the case of confidential data on
-human subjects, since it is impossible to provide fully open access to
-the source files.
+The core problem that needs to be addressed is automating the search for
+and discovery of datasets used in empirical data -- building an
+Amazon.com for data. The vast majority of scientific data and outputs
+cannot be easily discovered by other researchers even when nominally
+deposited in the public domain. Faced with a never-ending stream of new
+findings and datasets generated using different code and analytical
+techniques, researchers cannot readily determine who has worked in an
+area before, what methods were used, what was produced, and where those
+products can be found. Resolving such uncertainties consumes an enormous
+amount of time and energy for many social scientists. A new generation
+of automated search tools could help researchers discover how data are
+being used, in what research fields, with what methods, with what code
+and with what findings ---often by passively capitalizing on the
+accumulated labor of one's extended research community. And automation
+can be used to reward researchers who validate the results and
+contribute additional information about use, fields, methods, code, and
+findings.(*8*)
 
-Although a field is developing to generate automated approaches, there
-are five major scientific challenges: (i) document corpus development,
-(ii) ontology development for dataset entity classification, (iii)
-natural language processing and machine learning models for dataset
-entity extraction, (iv) graph models for improving search and discovery,
-and (v) the use of the results to engage the community to both validate
-the model results, retrain the model and to contribute code and
-knowledge.
+New advances in technology---and particularly, in automation---can now
+change the way in which social science, and hence other sciences, is
+done. The place to start is with the social sciences. The great
+challenges of our time are human in nature - terrorism, climate change,
+the use of natural resources, and the nature of work - and require
+robust science to understand the sources and consequences. The lack of
+reproducibility and replicability evident in many fields(*1*, *4*--*7*)
+is even more acute in the study of human behavior both because of the
+difficulty of sharing confidential data and because of the lack of
+scientific infrastructure. Social scientists have eagerly adopted new
+technologies in virtually every area of social science research---from
+literature searches to data storage to statistical analysis to
+dissemination of results(*8*). And, in the United States, the recent
+passage of the Foundations of Evidence-based Policymaking Act(*9*, *10*)
+and the focus on a Federal Data Strategy, mean that there is an
+important use case for showcasing the value of new approaches.
+
+The knowing how it has been produced and used before: the required
+elements what do the data ***measure***, what ***research*** has been
+done by what ***researchers,*** with what ***code***, and with what
+***results***. Acquiring that knowledge has historically been manual and
+inadequate. The challenge is particularly acute in the case of
+confidential data on human subjects, since it is impossible to provide
+fully open access to the source files.
+
+## How this book came to be
+
+This book was born out of a need to solve a very concrete problem. In
+2016, the US Congress passed the Commission on Evidence-based
+Policymaking Act to make a set of recommendations on how to better use
+data for decision-making. The US Census Bureau was charged with
+supporting the deliberations of the Commission and asked our team at New
+York University to build a secure access facility in which data from
+multiple agencies could be securely hosted.
+
+After we built the facility, and had dozens of users, we realized that
+putting data in one place, while necessary, was not sufficient for good
+analytical work to be done. Every user who accessed the data wanted to
+know what other work had been done with the data, with what assumptions
+and what results. We were able to provide them with some information,
+but essentially the information was drawn from our own research
+experience and was certainly not representative of the entire field. The
+obvious solution was to see if computer scientists had the technological
+tools available to automate the discovery of research datasets and the
+associated research methods and fields in research publications. Our
+computer science colleagues assured us that, while the technology
+existed in principle, no single team was known for having developed a
+solution.
+
+We decided to see what we could to advance the field, and approached
+Schmidt Sciences, the Alfred P. Sloan Foundation and the Overdeck Family
+Foundation for support. As part of that support, we ran the competition
+with the results described in this book. We challenged participants to
+combine machine learning and natural language processing methods to
+identify the datasets used in a corpus of social science publications
+and infer both the scientific methods and fields used in the analysis
+and the research fields.
+
+The core of the book describes both how the competition was set up, as
+well as the results achieved by different competing teams. However, as
+is always the case with exciting research agendas, the competition
+helped us identify five major scientific challenges that need to be
+addressed: (i) document corpus development, (ii) ontology development
+for dataset entity classification, (iii) natural language processing and
+machine learning models for dataset entity extraction, (iv) graph models
+for improving search and discovery, and (v) the use of the results to
+engage the community to both validate the model results, retrain the
+model and to contribute code and knowledge. So the other chapters in the
+book provide an overview of what could be done with more resources and
+talent devoted to this interesting question. The next section provides a
+more detailed overview of the contribution of each chapter.
+
+## Book overview
 
 Section 1 provides an overview of the motivation and approach. Section 2
 describes new approaches to develop corpora and ontologies. Section 3
@@ -129,8 +168,7 @@ of measuring dataset value - a dataset recommendation system, enabling
 expedient sharing of available datasets through the research community.
 
 Chapter 3 outlines the operational approach that was taken to develop
-the [Rich Context
-Competition](https://coleridgeinitiative.org/richcontextcompetition).
+the [Rich Context Competition](https://coleridgeinitiative.org/richcontextcompetition).
 The goal of the competition, the results of which are described in
 Section 2, was to implement AI to automatically extract metadata from
 research - identifying datasets in publications, authors and experts,
@@ -139,24 +177,20 @@ practitioners in AI and NLP to develop models based on a corpus
 developed at the Interuniversity Consortium of Political and Social
 Research. The competition attracted 20 teams from around the world and
 resulted in four finalists presenting their results at NYU on February
-15, 2019 (see the [agenda and video
-here](https://coleridgeinitiative.org/richcontextcompetition/workshopagenda)).
+15, 2019 (see the [agenda and video here](https://coleridgeinitiative.org/richcontextcompetition/workshopagenda)).
 
 The results of the competition provided metadata to describe links among
 datasets used in social science research. In other words, the outcome of
 the competition generated the basis for a moderately-sized knowledge
-graph. the [winning
-team](https://ocean.sagepub.com/blog/an-interview-with-the-allen-institute-for-artificial-intelligence)
-in the Rich Context Competition was from [Allen
-AI](https://allenai.org/) which is a leader in the field of using
+graph. the [winning team](https://ocean.sagepub.com/blog/an-interview-with-the-allen-institute-for-artificial-intelligence)
+in the Rich Context Competition was from [Allen AI](https://allenai.org/) which is a leader in the field of using
 embedded models for natural language. Typical open source frameworks
 which are popular for deep learning research include
 [PyTorch](https://pytorch.org/) (from Facebook) and the more recent
 [Ray](https://ray.readthedocs.io/en/latest/distributed_training.html)
 (from UC Berkeley RISElab).
 
-Section 2:
-===========
+## Section 2: 
 
 A major challenge is developing a training corpus that sufficiently
 represents the population of all documents, and tagging the datasets in
@@ -164,7 +198,7 @@ the corpus. It is essential to do this well if high quality models are
 to be developed. There is a literature outlining the issues with
 developing a \"gold standard corpus\" (GSC) of language around data
 being mentioned and used in analysis in academic publications, since
-creating one is time-consuming and expensive (*9*) In Chapter 4
+creating one is time-consuming and expensive (*12*) In Chapter 4
 "Standardized Metadata, Full Text and Training/Evaluation for Extraction
 Models", Sebastian tk and Alex Wade describe the need for, and
 strategies for collecting, large sets of annotated full-text sources for
@@ -220,8 +254,7 @@ cloud computing enabling sharing and reproducibility; and collection
 management systems which can provide metrics on usage, like number of
 downloads, maintenance of datasets, etc. 
 
-Section 3:
-===========
+## Section 3: 
 
 Chapter 6, by the Allen AI team, describes their overarching approach.
 The team used a named entity recognition model to predict dataset
@@ -273,8 +306,7 @@ extraction task. They adopt weakly supervised classification for
 research methods and fields identification tasks utilizing SAGE
 Knowledge as an external source and as a proxy for weak labels.
 
-Section 4: Looking forward
-==========================
+## Section 4: Looking forward
 
 In Chapter 11, researchers from Digital Science describe the role user
 engagement plays in creating rich context around datasets, which are
@@ -327,24 +359,63 @@ latter step, in the broader sense Rich Context helps establish a
 community focused on contributing code plus knowledge into the research
 process
 
-References
-==========
+## More resources
 
-1\. C. F. Camerer *et al.*, Evaluating the replicability of social
-science experiments in Nature and Science between 2010 and 2015. *Nat.
-Hum. Behav.* **2**, 637 (2018).2. A. Dafoe, Science deserves better: the
-imperative to share complete replication files. *PS Polit. Sci. Polit.*
-**47**, 60--66 (2014).3. J. P. A. Ioannidis, Why Most Published Research
-Findings Are False. *PLoS Med*. **2**, e124 (2005).4. N. Young, J.
-Ioannidis, O. Al-Ubaydli, Why Current Publication Practices May Distort
-Science. *PLoS Med* (2008).5. G. Christensen, E. Miguel, Transparency,
-reproducibility, and the credibility of economics research. *J. Econ.
-Lit.* **56**, 920--980 (2018).6. G. Colavizza, I. Hrynaszkiewicz, I.
-Staden, K. Whitaker, B. McGillivray, The citation advantage of linking
-publications to research data (2019), (available at
-https://arxiv.org/pdf/1907.02565.pdf).7. T. Yarkoni *et al.*, "Enhancing
-and accelerating social science via automation: Challenges and
-Opportunities" (2019), , doi:10.31235/osf.io/vncwe.8. V. Bush, *Science,
-the endless frontier: A report to the President* (US Govt. print. off.,
-1945).9. L. Wissler, M. Almashraee, D. M. Díaz, A. Paschke, in *IEEE
-GSC* (2014).
+General competition information
+
+The competition had two phases. In the first phase, participants were
+provided with labeled data, consisting of a corpus of 2,500 publications
+matched to the datasets cited within them. Participants could use this
+data to train and tune their algorithms. In the second phase, they were
+provided with a large corpus of unlabeled documents and asked to
+identify the datasets used in the documents in a test corpus, as well as
+the associated methods and research fields. The participants were scored
+on the accuracy of their techniques, the quality of their documentation
+and code, and the efficiency of the algorithm -- and also on their
+ability to find methods and research fields in the associated passage
+retrieval.
+
+The timeline was as follows:
+
+  - **September 30 2018:** Participants submit a letter of intent (see [How to Participate](https://coleridgeinitiative.org/richcontextcompetition#howtoparticipate))
+
+  - **October 15 2018:** Participants notified and Phase 1 data provided (see [First Phase Participation](https://coleridgeinitiative.org/richcontextcompetition#phase1participation))
+
+  - **November 15 2018:** Preliminary algorithm submitted (see [Program Requirements](https://coleridgeinitiative.org/richcontextcompetition#programreqs))
+
+  - **December 1 2018:** 15 finalists selected (see [First Phase Evaluation](https://coleridgeinitiative.org/richcontextcompetition#phase1evaluation)) and Phase 2 data provided (see [Second Phase Participation](https://coleridgeinitiative.org/richcontextcompetition#phase2participation))
+
+  - **January 15, 2019:** The algorithms of up to 6 teams are selected for final submission (see [Second Phase Evaluation](https://coleridgeinitiative.org/richcontextcompetition#phase2evaluation))
+
+  - **February 15 2019:** Workshop is held in New York for final presentation and selection of winning algorithms (see [Second Phase Evaluation](https://coleridgeinitiative.org/richcontextcompetition#phase2evaluation))
+
+All the information provided to participants was available here:
+<https://github.com/Coleridge-Initiative/rich-context-competition>
+
+
+## References
+
+1\. J. P. A. Ioannidis, Why Most Published Research Findings Are False. *PLoS Med*. **2**, e124 (2005).
+
+2\. M. R. Munafò *et al.*, A manifesto for reproducible science. *Nat. Hum. Behav.* **1**, 21 (2017).
+
+3\. G. Colavizza, I. Hrynaszkiewicz, I. Staden, K. Whitaker, B. McGillivray, The citation advantage of linking publications to research data (2019), (available at <https://arxiv.org/pdf/1907.02565.pdf>).
+
+4\. C. F. Camerer *et al.*, Evaluating the replicability of social science experiments in Nature and Science between 2010 and 2015. *Nat. Hum. Behav.* **2**, 637 (2018).
+
+5\. A. Dafoe, Science deserves better: the imperative to share complete replication files. *PS Polit. Sci. Polit.* **47**, 60--66 (2014).
+
+6\. N. Young, J. Ioannidis, O. Al-Ubaydli, Why Current Publication Practices May Distort Science. *PLoS Med* (2008).
+
+7\. G. Christensen, E. Miguel, Transparency, reproducibility, and the credibility of economics research. *J. Econ. Lit.* **56**, 920--980 (2018).
+
+8\. T. Yarkoni *et al.*, "Enhancing and accelerating social science via automation: Challenges and Opportunities" (2019), , doi:10.31235/osf.io/vncwe.
+
+9\. N. Hart, T. Shaw, Congress Provides New Foundation for Evidence-Based Policymaking (2018), (available at
+<https://bipartisanpolicy.org/blog/congress-provides-new-foundation-for-evidence-based-policymaking/>).
+
+10\. Office of Management and Budget, Federal Data Strategy (2019), (available at <https://strategy.data.gov>).
+
+11\. V. Bush, *Science, the endless frontier: A report to the President* (US Govt. print. off., 1945).
+
+12\. L. Wissler, M. Almashraee, D. M. Díaz, A. Paschke, in *IEEE GSC* (2014).

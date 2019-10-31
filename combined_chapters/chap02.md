@@ -1,7 +1,4 @@
-
----
-
-# Chapter 2 - Bundesbank
+# Chapter 2 - Who’s Waldo: Conceptual issues when characterizing data in empirical research
 
 Title: Who’s Waldo: Conceptual issues when characterizing data in empirical research
 Author:Stefan Bender, Hendrik Doll, Christian Hirsch [^footnote0]

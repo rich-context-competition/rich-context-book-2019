@@ -1,10 +1,6 @@
-
-
----
-
 # Chapter 4 - Metadata for Social Science Datasets
 
-> Metadata for Administrative and Social Science Data
+## Metadata for Administrative and Social Science Data
 
 Robert B Allen
 
@@ -21,8 +17,7 @@ standards but they are applied unevenly so that there is no
 comprehensive approach. There has been greater emphasis on structural
 issues than on semantic descriptions.
 
-INTRODUCTION
-============
+## INTRODUCTION
 
 Evidence-based policy needs relevant data (Commission on Evidence-Based
 Policy, 2018; Lane, 2016). Such data is valuable, but often difficult to
@@ -66,8 +61,7 @@ describes services. Section 6 describes the techniques for documenting
 the internal structure of data sets. Section 7 discusses
 cyberinfrastructure.
 
-DATA, METADATA, AND DIGITAL DATA OBJECTS
-========================================
+## DATA, METADATA, AND DIGITAL DATA OBJECTS
 
 A metadata element describes some attribute of a digital object. The
 simplest metadata identifies the digital object.[^4] Individual metadata
@@ -97,8 +91,7 @@ data dictionaries. Moreover, they are often characterized by Unified
 Modeling Language (UML) Class Diagrams which are common for data
 modeling.
 
-SEMANTIC DESCRIPTIONS
-=====================
+## SEMANTIC DESCRIPTIONS
 
 Semantic data models have become widely explored. In particular, the
 Semantic Web utilizes nodes which are implemented with XML. RDF
@@ -149,8 +142,7 @@ while social terms are especially difficult to define for vernacular
 speech, it seems possible to make clear, though perhaps cumbersome,
 definitions for scholarly applications.
 
-DATA REPOSITORIES
-=================
+## DATA REPOSITORIES
 
 A data repository holds data sets and related digital objects. It
 provides access to the data sets and supports search. Metadata is
@@ -220,8 +212,7 @@ facilitates tracing the origins of data used in analyses and helps to
 acknowledge the work of the creators of the data sets. Standards have
 been developed for such citations (Martone, 2014; Silvello, 2017).
 
-SERVICES
-========
+## SERVICES
 
 The purpose of metadata and other aspects of information organization
 and management is to provide services to users. Indeed, "service
@@ -321,8 +312,7 @@ For instance, DCAT Application Profiles (DCAT-AP) support standardized
 metadata exchange between repositories in different jurisdictions in the
 EU.[^32]
 
-DETAILS ABOUT THE DATA IN DATA SETS
-===================================
+## DETAILS ABOUT THE DATA IN DATA SETS
 
 Data Cubes
 ----------
@@ -374,8 +364,7 @@ community models could be implemented. Further, highly-structured
 evidence and claims might be applied to the evaluation of evidence-based
 social policy.
 
-CYBERINFRASTRUCTURE
-===================
+## CYBERINFRASTRUCTURE
 
 Information Institutions and Organizations
 ------------------------------------------
@@ -422,8 +411,7 @@ replicable. Highly-networked data centers also facilitate the Internet
 of Things (IoT) which will generate massive data sets such as for "smart
 cities".
 
-CONCLUSION
-==========
+## CONCLUSION
 
 Data may not be useful when stand-alone without context. Some of the
 biggest issues for the retrieval of information from data sets concern
@@ -432,17 +420,9 @@ the discovery of and access to data sets. We need richer, more
 systematic, and more interoperable metadata standards. Even more
 attention to metadata would further support evidence-based policy.
 
-ACKNOWLEDGMENTS {#acknowledgments .ListParagraph}
-===============
-
+## ACKNOWLEDGMENTS
 Julia Lane and members of NYU's Center for Urban Science and Progress
 provided useful advice and comments.
-
-REFERENCES {#references .ListParagraph}
-==========
-
-Allen, R.B. (2015). Repositories with direct representation, *Networked
-Knowledge Representation Systems,* arXiv: 1512.09070
 
 Allen, R.B. (2018). *Issues for Using Semantic Modeling to Represent
 Mechanisms*, arXiv:1812.11431
@@ -456,9 +436,7 @@ Basic Formal Ontology*, MIT Press, Cambridge. MA.
 Austin, C.C., Bloom, T., Dallmeier-Tiessen, S., Khodiyar, V.K., Murphy,
 F., Nurnberger, A., et al. (2017). Key components of data publishing:
 Using current best practices to develop a reference model for data
-publishing. *In[ternational Journal on Digital
-Libraries](https://link.springer.com/journal/799), 18*(2) 77--92, doi:
-10.1007/s00799-016-0178-2
+publishing. [*International Journal on Digital Libraries*](https://link.springer.com/journal/799), 18(2) 77--92, doi: 10.1007/s00799-016-0178-2
 
 Commission on Evidence-Based Policymaking. (2018). The Promise of
 Evidence-Based Policymaking, <https://www.cep.gov/cep-final-report.html>
@@ -503,8 +481,7 @@ Duerr, R., et al. (2015). Achieving human and machine accessibility of
 cited data in scholarly publications, *PeerJ Computer Science* 1: e1,
 doi 10.7717/peerj-cs.1
 
-Tonkin, E., (2009). MetRe [supporting the metadata revision
-process.](https://research-information.bristol.ac.uk/en/publications/metre-supporting-the-metadata-revision-process(b2fa9a79-e50b-4888-b510-336aacf73da5).html)
+Tonkin, E., (2009). MetRe [supporting the metadata revision process.](https://research-information.bristol.ac.uk/en/publications/metre-supporting-the-metadata-revision-process(b2fa9a79-e50b-4888-b510-336aacf73da5).html)
 *International Conference on Digital Libraries*,
 
 Vardigan, M., Heus,P., & Thomas, W. (2008). Data documentation
@@ -544,7 +521,7 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
     companies. The Schema.org dataset schema
     (<https://schema.org/Dataset>) is used by the Google Data Search.
 
-[^6]:
+[^6]: MISSING
 
 [^7]: https://www.w3.org/TR/vocab-dcat/
 
@@ -560,14 +537,14 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
     Initiative (DDI) is different from the Data Discovery Index (DDI)
     associated with DataMed.
 
-[^13]: [https://www.cessda.eu/]{.underline}
+[^13]: [https://www.cessda.eu/]
 
 [^14]: <https://www.europeansocialsurvey.org/data/>
 
 [^15]: The Australia National Data Service, <https://www.ands.org.au/>
 
 [^16]: There are additional collections at <http://data.census.gov>,
-    <http://gss.norc.org>. [ ]{.underline} <http://electionstudies.org>,
+    <http://gss.norc.org>, <http://electionstudies.org>,
     <http://psidonline.isr.umich.edu>, and <http://www.nlsinfo.org>.
 
 [^17]: <https://www.earthcube.org/>
@@ -619,3 +596,4 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
 [^38]: <https://duraspace.org/vivo/>
 
 [^39]: <https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/>
+

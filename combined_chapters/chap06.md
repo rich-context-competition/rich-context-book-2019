@@ -1,7 +1,6 @@
+# Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach
 
----
-
-# Chapter 6 - Allen Institute for Artificial Intelligence (AI2)
+## The AI2 Submission at The Rich Context Competition
 
 ---
 author:
@@ -16,8 +15,7 @@ bibliography:
 title: The AI2 Submission at The Rich Context Competition
 ---
 
-[Introduction](#sec:intro)
-============
+## [Introduction](#sec:intro)
 
 The Allen Institute for Artificial Intelligence (AI2) is a non-profit
 research institute founded by Paul G. Allen with the goal of advancing
@@ -40,8 +38,7 @@ of the RCC competition:
 2. predicting the field of research of publications
 3. extracting the methods used in publications
 
-[Methods](#sec:methods)
-=======
+## [Methods](#sec:methods)
 
 [Dataset Extraction and Linking](#sec:datasets_methods)
 ------------------------------
@@ -180,8 +177,7 @@ were attempted but proved unsuccessful: a weakly-supervised model for
 named entity recognition, and using open information extraction (openIE)
 to further generalize the list of candidate methods.
 
-[Results](#sec:results)
-============
+## [Results](#sec:results)
 
 [Dataset Extraction and Linking](#sec:datasets_results)
 ------------------------------
@@ -216,7 +212,6 @@ our final model.
 
 NER precision, recall and F1 performance (%) on the development and
 test sets.
-[\[tab:ner\_results\]]{#tab:ner_results label="tab:ner_results"}
 
 |                                   | prec.   | recall   |  F1  |
 | --------------------------------- | ------- | -------- | ---- |
@@ -230,7 +225,7 @@ test sets.
 End-to-end precision, recall and F1 performance (%) for citation
 prediction on the development set provided in phase 1 of the
 competition.
-[\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"}
+
 
 |                   | prec.   | recall   |  F1    |
 | ----------------- | ------- | -------- | ------ |
@@ -240,21 +235,18 @@ competition.
 End-to-end precision, recall, and F1 performance (%) for dataset
 prediction on the phase 1 and phase 2 holdout sets. Note that the
 phase 1 holdout results are for citation prediction, while the phase 2 holdout results are for mention prediction.
-[\[tab:test\_results\]]{#tab:test_results label="tab:test_results"}
 
 We report the end-to-end performance of our approach (on the development
 set provided by the organizers in the first phase) in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"}. This is the performance after using the
+??? . This is the performance after using the
 linking classifier to predict which candidate mention--dataset pairs are
 correct extractions. We note that the development set provided in phase
 1 ended up having significantly more overlap with the training data than
 the actual test set did. As a result, the numbers reported in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"} are not indicative of test set performance.
+???
+are not indicative of test set performance.
 End to end performance from our phase 2 submission can be seen in Table
-[\[tab:test\_results\]](#tab:test_results){reference-type="ref"
-reference="tab:test_results"}. This performance is reflective of our
+???. This performance is reflective of our
 focus on the linking component of this task. Aside from the competition
 development set, we also used a random portion of the training set as an
 additional development set. The initial model only uses a dataset
@@ -294,8 +286,7 @@ annotation, we resorted to using yield as an alternative metric. Our
 final submission for method extraction has 95% precision and yield of
 1.5 methods per paper on the manually inspected subset of papers. Similarly to research area prediction, the main limiation here is the difficulty our model has finding new methods, as it is limited to the SAGE ontology and a few hand-crafted patterns.
 
-[Future Work and Lessons Learned](#sec:future_work)
-============
+## [Future Work and Lessons Learned](#sec:future_work)
 
 We now provide some possible directions of improvement for each
 component of our submission. For dataset extraction, the most promising
@@ -314,8 +305,7 @@ exactly is meant by a method, as it is currently unclear what a
 successful method extraction looks like.
 The main lesson learned is that, when presented with noisy, distantly supervised, real-world data, to produce a production-quality system, it becomes very important to (1) have a high-confidence evaluation dataset, and (2) look for other data sources that are similar enough to the task at hand to be useful. Taking steps towards both of these objectives are promising avenues of future work.
 
-[Conclusion](#sec:conclusion)
-==========
+## [Conclusion](#sec:conclusion)
 
 This report summarizes the AI2 submission at the RCC competition. We
 identify dataset mentions by combining the predictions of an NER model
@@ -328,16 +318,14 @@ use a rule-based system utilizing a dictionary and common patterns,
 followed by a scoring function which takes into account the prominence
 of a candidate in foreground and background corpora.
 
-[Acknowledgments](#sec:acknowledgements)
-===============
+## [Acknowledgments](#sec:acknowledgements)
 
 We would like to thank the competition organizers for their tireless
 efforts in preparing the data, answering all our questions, doing the
 evaluations, and providing feedback. We also would like to thank Zhihong
 (Iris) Shen for helping us use the MAG data.
 
-[Appendix](#sec:appendix)
-========
+## [Appendix](#sec:appendix)
 
 The code for the submission can be found [here](https://github.com/allenai/coleridge-rich-context-ai2). There is a README with additional documentation at this github repo.
 

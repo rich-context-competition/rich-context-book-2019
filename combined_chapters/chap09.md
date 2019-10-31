@@ -1,7 +1,6 @@
+# Chapter 9 - Finding datasets in publications: The University of Paderborn approach
 
----
-
-# Chapter 9 - DICE
+## Combining Embeddings and Conditional Random Fields for Research Dataset, Field and Method Recognition and Linking
 
 ---
 abstract: |
@@ -38,8 +37,7 @@ title: |
     Recognition and Linking
 ---
 
-Literature Review
-=================
+## Literature Review
 
 Previous works on information retrieval from scientific articles are
 mainly seen in the field of Bio-medical Sciences and Computer Science,
@@ -79,8 +77,8 @@ is not only somewhat different from the ones mentioned above, but also
 our approach for tackling it is radically disparate. The following
 sections describe our approach in detail.
 
-Project Architecture
-====================
+
+## Project Architecture
 
 ![Data Flow Pipeline: Red lines depict the flow of given and generated
 files between components whereas black lines represent the generation of
@@ -98,8 +96,8 @@ was passed onto the Dataset Detection module and using the Dataset
 Vocabulary, it identified Dataset Citations and Mentions. The following
 sections provide a detailed overview of each of these components.
 
-Preprocessing
-=============
+
+## Preprocessing
 
 The publications were provided in two formats: PDF and text. For
 Phase-1, we used the given text files, however during Phase-2, we came
@@ -168,8 +166,7 @@ containing relevant data, and noun phrases from the relevant sections,
 respectively. These files were then passed on to the other two
 components of the pipeline, which have been discussed below.
 
-Approach
-========
+## Approach
 
 Research Fields and Methods Identification
 ------------------------------------------
@@ -360,8 +357,8 @@ true positives. For research methods and fields, a manual evaluation
 (see the next section for details) was done to test if the results made
 sense with the articles.
 
-Evaluation
-==========
+
+## Evaluation
 
 We performed a quantitative evaluation for Dataset Extraction using the
 evaluation script provided by the competition organizers. This
@@ -410,8 +407,8 @@ transcript & Qualitative interviewing & **Sampling design**
 6053 & Autoregressive integrated moving average (ARIMA) time-series
 model & Methodological pluralism & **Multivariate statistics**  
 
-Discussion
-==========
+
+## Discussion
 
 Throughout the course of this competition, we encountered several
 challenges and limitations in all the three stages of the pipeline. In
@@ -473,8 +470,7 @@ have done differently.
     handcrafted rules derived from sentence structure and other
     heuristics.
 
-Future Agenda
-=============
+## Future Agenda
 
 The data provided to us in the competition displayed a cornucopia of
 inconsistencies even after human processing. We hence propose that
@@ -513,8 +509,8 @@ fast-paced research and eliminate the need to manually update the
 domain-specific ontologies for fields, methods and other metadata as new
 research innovations come up.
 
-Appendix
-========
+
+## Appendix
 
 The code and documentation for all our submissions can be found here:
 <https://github.com/dice-group/rich-context-competition>.

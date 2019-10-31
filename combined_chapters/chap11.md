@@ -1,7 +1,6 @@
+# Chapter 11 - Finding datasets in publications: The University of Syracuse approach
 
----
-
-# Chapter 11 - Syracuse
+## Dataset mention extraction in scientific articles using a BiLSTM-CRF model
 
 ---
 abstract: |
@@ -27,8 +26,7 @@ title: |
     model
 ---
 
-Introduction
-============
+## Introduction
 
 Science is fundamentally an incremental discipline that depends on
 previous scientist’s work. Datasets form an integral part of this
@@ -76,8 +74,7 @@ tested our model on a novel dataset produced for the Rich Context
 Competition challenge. We achieve a relatively good performance of
 $F_{1}=0.885$. We discuss the limitations of our model.
 
-The dataset
-===========
+## The dataset
 
 The Rich Context Dataset challenge was proposed by the New York
 University’s Coleridge Initiative [@richtextcompetition]. The challenge
@@ -99,8 +96,7 @@ labels in one line and use a empty line as a separator between
 sentences. Sentences were randomly split by 70%, 15%, 15% for training
 set, validation set and testing set, respectively.
 
-The Proposed Method
-===================
+## The Proposed Method
 
 Overall view of the architecture
 --------------------------------
@@ -209,8 +205,7 @@ Field (CRF) layer that takes into account the transition nature of the
 beginning, intermediate, and ends of mentions. For a reference of CRF,
 refer to [@lafferty2001conditional]
 
-Results
-=======
+## Results
 
 In this work, we wanted to propose a model for the Rich Context
 Competition challenge. We propose a relatively standard architecture
@@ -259,8 +254,7 @@ datasets, and 12,624 (12.42%) are linked to three datasets. If these
 difficulties are not overcome, then the predictions from the linkage
 process will be noisy and therefore impossible to tell apart.
 
-Conclusion
-==========
+## Conclusion
 
 In this work, we report a high accuracy model for the problem of
 detecting dataset mentions. Because our method is based on a standard
@@ -287,8 +281,7 @@ strive to improve the quality of these datasets so that techniques like
 this one can be more broadly applied. The importance of dataset mention
 and linkage therefore could be fully appreciated by the community.
 
-Acknowledgements {#acknowledgements .unnumbered}
-================
+## Acknowledgements
 
 Tong Zeng was funded by the China Scholarship Council \#201706190067.
 Daniel E. Acuna was funded by the National Science Foundation awards

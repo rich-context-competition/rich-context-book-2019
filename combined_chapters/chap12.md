@@ -1,10 +1,6 @@
-
----
-
 # Chapter 12 - Standard Test Corpora
 
-Rich Context Book Chapter - Standardized Metadata, Full Text and
-Training/Evaluation for Extraction Models
+## Standardized Metadata, Full Text and Training/Evaluation for Extraction Models
 
 \
 
