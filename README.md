@@ -25,20 +25,3 @@ The goal is to manage the process via github issues on this repo. Feedback on th
 - [ ] Print publication May / June 2020  
 
 
-## Book Outline
-
-- Book structure  
-- Editors’ overview  
-- Why it matters: use cases
--- Bundesbank 
--- SAGE  
-- Competition Design  
--- Text  
--- Data  
--- Github  
-- Technical approaches  
--- Text  
--- Code  
--- Documentation  
-- The future from information science (Bob Allen)   
-- The future for AI (editors).   
