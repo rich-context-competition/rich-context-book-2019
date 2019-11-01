@@ -326,4 +326,25 @@ pandoc rich_context_book.md -o rich_context_book.html
 cp -r -f combined_images sphinx_version/
 cp chap*.md sphinx_version/
 
+# now try to resolve issues with formatting of sphinx versions. 
 
+cd sphinx_version/ 
+
+# chap 4 remove lines like {#acknowledgments \.ListParagraph}
+sed -i.bu "s/{#acknowledgments \.ListParagraph}//g" chap04.md
+
+
+# chap 6 remove lines like [\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"} 
+sed -i.bu "s/\[\\\\\[tab:ner\\\_results\\\]\]{#tab:ner\_results label=\"tab:ner\_results\"}//g" chap06.md 
+sed -i.bu "s/\[\\\\\[tab:e2e\\\_results\\\]\]{#tab:e2e\_results label=\"tab:e2e\_results\"}//g" chap06.md
+sed -i.bu "s/\[\\\\\[tab:test\\\_results\\\]\]{#tab:test\_results label=\"tab:test\_results\"}//g" chap06.md
+sed -i.bu "s/\[\\\\\[tab:e2e\\\\_results\\\\\]\](#tab:e2e_results){reference-type=\"ref\" reference=\"tab:e2e_results\"}//g" chap06.md
+sed -i.bu "s/\[\\\\\[tab:test\\\\_results\\\\\]\](#tab:test_results){reference-type=\"ref\" reference=\"tab:test_results\"}//g" chap06.md
+
+sed -i.bu "s/{#acknowledgments \.unnumbered}//g" chap11.md
+
+# remove temp files 
+rm *.bu 
+
+# attempt to make the sphinx version of the book 
+make html 
