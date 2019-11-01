@@ -1,7 +1,7 @@
 
 ---
 
-# Chapter 6 - Allen Institute for Artificial Intelligence (AI2)
+# Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach
 
 ---
 author:

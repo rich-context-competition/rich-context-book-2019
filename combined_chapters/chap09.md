@@ -1,7 +1,7 @@
 
 ---
 
-# Chapter 9 - DICE
+# Chapter 9 - Finding datasets in publications: The University of Paderborn approach
 
 ---
 abstract: |

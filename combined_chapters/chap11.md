@@ -1,7 +1,7 @@
 
 ---
 
-# Chapter 11 - Syracuse
+# Chapter 11 - Finding datasets in publications: The University of Syracuse approach
 
 ---
 abstract: |

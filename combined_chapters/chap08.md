@@ -1,7 +1,7 @@
 
 ---
 
-# Chapter 8 - GESIS
+# Chapter 8 - Finding datasets in publications: The GESIS approach
 
 The contribution of GESIS to the Rich Context Competition
 =========================================================

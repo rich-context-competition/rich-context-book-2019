@@ -1,7 +1,7 @@
 
 ---
 
-# Chapter 10 - Singapore
+# Chapter 10 - Finding datasets in publications: The Singapore Management University approach
 
 <!--
 ---
