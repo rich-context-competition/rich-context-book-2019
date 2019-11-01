@@ -59,10 +59,14 @@ Roughly this will:
 - remove artifacts created in the conversion process  
 - create one markdown file `rich_context_book.md`  
 - attempt to chreate a html version of the book using pandoc  
-- copy artifacts into a directory ready to run sphinx on  
+- copy artifacts into the `~/combined_chapters/spinx_version` directory ready for a spinx run  
+- clean up some of the markdown files in `~/combined_chapters/spinx_version` 
+- run sphinx to generate a html version of the book 
 
 
 
 ## Viewing a human readable version of the book  
 
 In addition to creating the markdown version, we have also used sphinx to generate an easier to read html version of the book. This is created on an ad-hoc basis and may not be up to date with the latest versions of the contributor chapters, but it is a lot easier to read. You can view this version of the book here:  [richcontextbook-update](https://tinyurl.com/richcontextbook-update).  
+
+When we combine and compile the book chapters we generate an html viewable version of the book which is placed into ``~/combined_chapters/spinx_version/_build/html`. 
