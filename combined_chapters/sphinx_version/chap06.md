@@ -1,9 +1,5 @@
-
----
-
 # Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach
 
----
 author:
 - |
     Daniel King, Waleed Ammar, Iz Beltagy, Christine Betts  
@@ -331,10 +327,10 @@ evaluations, and providing feedback. We also would like to thank Zhihong
 
 ## [Appendix](#sec:appendix)
 
-The code for the submission can be found [here](https://github.com/allenai/coleridge-rich-context-ai2). There is a README with additional documentation at this github repo.
+The code for the submission can be found at <https://github.com/allenai/coleridge-rich-context-ai2>. There is a README with additional documentation at this github repo.
 
 
-[^1]: [www.semanticscholar.org](www.semanticscholar.org)
+[^1]: <https://www.semanticscholar.org>
 
 [^2]: <https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py>
 

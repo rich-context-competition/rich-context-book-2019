@@ -1,6 +1,3 @@
-
----
-
 # Chapter 10 - Finding datasets in publications: The Singapore Management University approach
 
 <!--
@@ -58,6 +55,7 @@ our approach in section \[sec:methods\], and discuss our experiment
 results in section \[sec:experiments\]. Finally, we wrap up with
 conclusion and future work in section \[sec:conclusion\].
  -->
+
 
 ### 2. Related Work
 

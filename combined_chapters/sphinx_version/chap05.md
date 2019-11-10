@@ -1,6 +1,3 @@
-
----
-
 # Chapter 5 - Competition Design
 
 **Andrew Gordon, Ekaterina Levitskaya, Jonathan Morgan, Paco Nathan and
@@ -623,20 +620,20 @@ for the judges.*
     Overview of the TREC--2012 Microblog Track. NIST Special Publication
     500--298: The Twenty-First Text REtrieval Conference Proceedings
     (TREC 2012), 2012, 20. Retrieved from
-    [[https://www.nist.gov/publications/overview-trec--2012-microblog-track]{.underline}](https://www.nist.gov/publications/overview-trec%E2%80%932012-microblog-track)
+    <https://www.nist.gov/publications/overview-trec--2012-microblog-track>
 
 [^2]: See
-    [[http://www.patentsview.org/community/workshop-2015]{.underline}](http://www.patentsview.org/community/workshop-2015)
+    <http://www.patentsview.org/community/workshop-2015>
 
 [^3]: For details about the metadata provided for each type of data, see
-    [[https://github.com/Coleridge-Initiative/rich-context-competition/wiki/Dataset-Description]{.underline}](https://github.com/Coleridge-Initiative/rich-context-competition/wiki/Dataset-Description)
+    <https://github.com/Coleridge-Initiative/rich-context-competition/wiki/Dataset-Description>
 
 [^4]: For more details, including an FAQ that provides guidance on
     specific issues that arose during coding, e.g., how to handle data
     sets that span multiple years, see the content analysis protocol
-    [[https://docs.google.com/document/d/1xuZL\_-z1re6TO3Sv8\_9tdFk7z6ovyqTwDVgc1bYO3Ag/edit?usp=sharing]{.underline}](https://docs.google.com/document/d/1xuZL_-z1re6TO3Sv8_9tdFk7z6ovyqTwDVgc1bYO3Ag/edit?usp=sharing)
+    <https://docs.google.com/document/d/1xuZL\_-z1re6TO3Sv8\_9tdFk7z6ovyqTwDVgc1bYO3Ag/edit?usp=sharing>
 
-[^5]: [[https://github.com/Coleridge-Initiative/rich-context-competition]{.underline}](https://github.com/Coleridge-Initiative/rich-context-competition)
+[^5]: <https://github.com/Coleridge-Initiative/rich-context-competition>
 
 [^6]: The protocol is described in
-    [[https://docs.google.com/document/d/1Hi13N6gfiRz9nfwCoUQrey8v\_ozY7fKHMtHV4GgX2ys/edit]{.underline}](https://docs.google.com/document/d/1Hi13N6gfiRz9nfwCoUQrey8v_ozY7fKHMtHV4GgX2ys/edit)
+    <https://docs.google.com/document/d/1Hi13N6gfiRz9nfwCoUQrey8v\_ozY7fKHMtHV4GgX2ys/edit>

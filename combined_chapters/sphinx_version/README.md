@@ -2,7 +2,18 @@
 
 ## Known Issues
 
-There are known issues in the generated markdown source for:
+Be sure to run `make clean` after edits and prior to `make html` so
+that generated HTML/CSS/JS doesn't get "stuck"
+
+Some things that cause problems in Sphinx:
+
+ - using a `---` separator at the start of a section
+ - any instance of `](` which isn't an anchor (e.g., how some people write citations)
+ - formatting macros inside of comments
+ - poorly formatted URLs ... just use `<https://foo.bar/baz/>` style instead
+
+
+There are other known issues in the generated markdown source for:
 
 #### Chapter 4
 
@@ -60,11 +71,17 @@ especially tricky in Flask.
 
 ## Running
 
-To regenerate the static HTML from the Markdown chapter sources, first
-run:
+First, initialize with:
 
 ```
 source ~/venv/bin/activate
+```
+
+Then to regenerate the static HTML from the Markdown chapter sources
+after edits:
+
+```
+make clean
 make html
 ```
 

@@ -1,9 +1,5 @@
-
----
-
 # Chapter 9 - Finding datasets in publications: The University of Paderborn approach
 
----
 abstract: |
     The steadily increasing number of publications available to researchers
     makes it difficult to keep track of the state of the art. In particular,
@@ -519,7 +515,7 @@ The code and documentation for all our submissions can be found here:
 
 [^4]: <https://github.com/allenai/science-parse>
 
-[^5]: \[poppler\]<https://manpages.debian.org/testing/poppler-utils>
+[^5]: <https://manpages.debian.org/testing/poppler-utils>
 
 [^6]: <https://github.com/explosion/spaCy>
 
@@ -527,7 +523,7 @@ The code and documentation for all our submissions can be found here:
 
 [^8]: <https://en.wikipedia.org/wiki/Category:Statistical_methods>
 
-[^9]: https://spacy.io/api/tokenizer
+[^9]: <https://spacy.io/api/tokenizer>
 
 [^10]: <https://rasa.com/docs/nlu>
 

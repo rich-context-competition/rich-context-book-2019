@@ -1,6 +1,3 @@
-
----
-
 # Chapter 8 - Finding datasets in publications: The GESIS approach
 
 > The contribution of GESIS to the Rich Context Competition
@@ -47,7 +44,7 @@ Another external source we have used to discover research methods is the ACL Ant
 
 ### Pre-processing
 
-Although the organizers of the RCC offered plain texts for the publication, we decided to build our own pre-processing pipeline. The extraction of text from PDF files is still an error prone process. To handle de-hyphenation and paragraph segmentation during extraction time and benefit from automatic metadata extraction (i.e. title, author, abstracts and references) we decided to use a third party extraction tool. The Cermine Extraction Tool[14](Tkaczyk et al., 2015) transforms the files into XML documents using the Journal Article Tag Suite[15](Jats). For the competition we identified two interesting elements of the Jats XML format, i.e., &lt;front&gt; and &lt;body&gt;. The &lt;front&gt; element contains the metadata of the publication, whereas the &lt;body&gt; contains the main textual and graphic content of the publication. As a last step of the pre-processing, we removed all linebreaks from the publication. The output of this step is a list of metadata fields and values, as shown in Table \[tab:example-paragraph\] for each publication paragraph.
+Although the organizers of the RCC offered plain texts for the publication, we decided to build our own pre-processing pipeline. The extraction of text from PDF files is still an error prone process. To handle de-hyphenation and paragraph segmentation during extraction time and benefit from automatic metadata extraction (i.e. title, author, abstracts and references) we decided to use a third party extraction tool. The Cermine Extraction Tool[14] (Tkaczyk et al., 2015) transforms the files into XML documents using the Journal Article Tag Suite[15] (Jats). For the competition we identified two interesting elements of the Jats XML format, i.e., &lt;front&gt; and &lt;body&gt;. The &lt;front&gt; element contains the metadata of the publication, whereas the &lt;body&gt; contains the main textual and graphic content of the publication. As a last step of the pre-processing, we removed all linebreaks from the publication. The output of this step is a list of metadata fields and values, as shown in Table \[tab:example-paragraph\] for each publication paragraph.
 
 |                   | Example Text Field Data         |
 |:------------------|:--------------------------------|
@@ -333,13 +330,13 @@ Yu R, Gadiraju U, Fetahu B, et al. (2019) KnowMore - knowledge base augmentation
 
 [1] <https://www.gesis.org/en/institute>
 
-[2] [ https://www.gesis.org/en/institute/departments/knowledge-technologies-for-the-social-sciences/]( https://www.gesis.org/en/institute/departments/knowledge-technologies-for-the-social-sciences/)
+[2] <https://www.gesis.org/en/institute/departments/knowledge-technologies-for-the-social-sciences/>
 
 [3] <https://www.gesis.org/en/research/applied-computer-science/labs/wts-research-labs>
 
 [4] <https://www.gesis.org/en/research/external-funding-projects/archive/infolis-i-and-ii>
 
-[5] [search.gesis.org](search.gesis.org)
+[5] <https://search.gesis.org>
 
 [6] <https://datasearch.gesis.org/>
 
@@ -355,15 +352,15 @@ Yu R, Gadiraju U, Fetahu B, et al. (2019) KnowMore - knowledge base augmentation
 
 [12] <https://www.gesis.org/angebot/recherchieren/tools-zur-recherche/klassifikation-sozialwissenschaften> (in German)
 
-[13] <span><http://www.openarchives.org></span>
+[13] <http://www.openarchives.org>
 
 [14] <https://github.com/CeON/CERMINE>
 
 [15] <https://jats.nlm.nih.gov>
 
-[16] [spacy.io](spacy.io)
+[16] <https://spacy.io/>
 
-[17] http://methods.sagepub.com
+[17] <http://methods.sagepub.com>
 
 [18] apart from those used in traditional NER systems like *Person*, *Location*, or *Organization* with abundant training data, as covered in the Stanford NER system(Finkel et al., 2005)
 

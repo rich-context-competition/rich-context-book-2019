@@ -1,9 +1,5 @@
-
----
-
 # Chapter 11 - Finding datasets in publications: The University of Syracuse approach
 
----
 abstract: |
     Datasets are critical for scientific research, playing a role in
     replication, reproducibility, and efficiency. Researchers have recently

@@ -1,6 +1,3 @@
-
----
-
 # Chapter 2 - Who’s Waldo: Conceptual issues when characterizing data in empirical research
 
 Title: Who’s Waldo: Conceptual issues when characterizing data in empirical research

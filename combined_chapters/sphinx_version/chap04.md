@@ -1,5 +1,3 @@
----
-
 # Chapter 4 - Metadata for Social Science Datasets
 
 > Metadata for Administrative and Social Science Data
