@@ -27,8 +27,7 @@ title: |
     model
 ---
 
-Introduction
-============
+## Introduction
 
 Science is fundamentally an incremental discipline that depends on
 previous scientist’s work. Datasets form an integral part of this
@@ -76,8 +75,7 @@ tested our model on a novel dataset produced for the Rich Context
 Competition challenge. We achieve a relatively good performance of
 $F_{1}=0.885$. We discuss the limitations of our model.
 
-The dataset
-===========
+## The dataset
 
 The Rich Context Dataset challenge was proposed by the New York
 University’s Coleridge Initiative [@richtextcompetition]. The challenge
@@ -99,11 +97,9 @@ labels in one line and use a empty line as a separator between
 sentences. Sentences were randomly split by 70%, 15%, 15% for training
 set, validation set and testing set, respectively.
 
-The Proposed Method
-===================
+## The Proposed Method
 
-Overall view of the architecture
---------------------------------
+### Overall view of the architecture
 
 In this section, we propose a model for detecting mentions based on a
 BiLSTM-CRF architecture. At a high level, the model uses a
@@ -137,8 +133,7 @@ is in Fig \[fig:NetworkArchitecture\] and the components are as follows:
 ![\[fig:NetworkArchitecture\]Network Architecture of BiLSTM-CRF
 network](combined_images/bilistm_crf_network_structure_pic){width="80.00000%"}
 
-Character Embedding
--------------------
+### Character Embedding
 
 Similar to the bag of words assumption, we can consider a token is
 composed by a bag of characters. In this layer, we convert each token to
@@ -147,8 +142,7 @@ LSTM network to get a fixed length representation of the token. After
 learning the bidirectional LSTM network, we can solve the
 out-of-vocabulary problem for pre-trained word embeddings.
 
-Word Embedding
---------------
+### Word Embedding
 
 The embedding is the first layer of our network and it is responsible
 for mapping the word from string into vectors of numbers as the input
@@ -161,8 +155,7 @@ embedding vector and the $V$ is the Vocabulary of the tokens. In this
 paper, the matrix $M^{tkn}$ is initialized by pre-trained GloVe vectors
 [@pennington2014glove], but will be updated by learning from our corpus.
 
-LSTM
-----
+### LSTM
 
 Recurrent neural network (RNN) is a powerful tool to capture features
 from sequential data, such as temporal series, and text. RNN could
@@ -209,8 +202,7 @@ Field (CRF) layer that takes into account the transition nature of the
 beginning, intermediate, and ends of mentions. For a reference of CRF,
 refer to [@lafferty2001conditional]
 
-Results
-=======
+## Results
 
 In this work, we wanted to propose a model for the Rich Context
 Competition challenge. We propose a relatively standard architecture
@@ -259,8 +251,7 @@ datasets, and 12,624 (12.42%) are linked to three datasets. If these
 difficulties are not overcome, then the predictions from the linkage
 process will be noisy and therefore impossible to tell apart.
 
-Conclusion
-==========
+## Conclusion
 
 In this work, we report a high accuracy model for the problem of
 detecting dataset mentions. Because our method is based on a standard
@@ -287,8 +278,7 @@ strive to improve the quality of these datasets so that techniques like
 this one can be more broadly applied. The importance of dataset mention
 and linkage therefore could be fully appreciated by the community.
 
-Acknowledgements {#acknowledgements .unnumbered}
-================
+## Acknowledgements
 
 Tong Zeng was funded by the China Scholarship Council \#201706190067.
 Daniel E. Acuna was funded by the National Science Foundation awards

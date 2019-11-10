@@ -438,7 +438,7 @@ ACKNOWLEDGMENTS
 Julia Lane and members of NYU's Center for Urban Science and Progress
 provided useful advice and comments.
 
-REFERENCES {#references .ListParagraph}
+REFERENCES
 ==========
 
 Allen, R.B. (2015). Repositories with direct representation, *Networked
@@ -560,14 +560,14 @@ stewardship, *Scientific Data, 3*, 160018. doi: 10.1038/sdata.2016.18
     Initiative (DDI) is different from the Data Discovery Index (DDI)
     associated with DataMed.
 
-[^13]: [https://www.cessda.eu/]{.underline}
+[^13]: <https://www.cessda.eu/>
 
 [^14]: <https://www.europeansocialsurvey.org/data/>
 
 [^15]: The Australia National Data Service, <https://www.ands.org.au/>
 
 [^16]: There are additional collections at <http://data.census.gov>,
-    <http://gss.norc.org>. [ ]{.underline} <http://electionstudies.org>,
+    <http://gss.norc.org>, <http://electionstudies.org>,
     <http://psidonline.isr.umich.edu>, and <http://www.nlsinfo.org>.
 
 [^17]: <https://www.earthcube.org/>

@@ -5,8 +5,7 @@ Rich Context Introductory Chapter
 
 Ian Mulvany, Paco Nathan, Sophie Rand, Julia Lane
 
-Introduction
-============
+## Introduction
 
 Science is at a crossroads. The enormous growth of access to data
 coupled with rapid technological progress, has created opportunities to
@@ -81,8 +80,7 @@ inadequate. The challenge is particularly acute in the case of
 confidential data on human subjects, since it is impossible to provide
 fully open access to the source files.
 
-How this book came to be
-========================
+## How this book came to be
 
 This book was born out of a need to solve a very concrete problem. In
 2016, the US Congress passed the Commission on Evidence-based
@@ -129,8 +127,7 @@ book provide an overview of what could be done with more resources and
 talent devoted to this interesting question. The next section provides a
 more detailed overview of the contribution of each chapter.
 
-Book overview
-=============
+## Book overview
 
 Section 1 provides an overview of the motivation and approach. Section 2
 describes new approaches to develop corpora and ontologies. Section 3
@@ -200,8 +197,7 @@ which are popular for deep learning research include
 [Ray](https://ray.readthedocs.io/en/latest/distributed_training.html)
 (from UC Berkeley RISElab).
 
-Section 2:
-===========
+## Section 2:
 
 A major challenge is developing a training corpus that sufficiently
 represents the population of all documents, and tagging the datasets in
@@ -265,8 +261,7 @@ cloud computing enabling sharing and reproducibility; and collection
 management systems which can provide metrics on usage, like number of
 downloads, maintenance of datasets, etc. 
 
-Section 3:
-===========
+## Section 3:
 
 Chapter 6, by the Allen AI team, describes their overarching approach.
 The team used a named entity recognition model to predict dataset
@@ -318,8 +313,7 @@ extraction task. They adopt weakly supervised classification for
 research methods and fields identification tasks utilizing SAGE
 Knowledge as an external source and as a proxy for weak labels.
 
-Section 4: Looking forward
-==========================
+## Section 4: Looking forward
 
 In Chapter 11, researchers from Digital Science describe the role user
 engagement plays in creating rich context around datasets, which are
@@ -372,8 +366,7 @@ latter step, in the broader sense Rich Context helps establish a
 community focused on contributing code plus knowledge into the research
 process
 
-More resources
-==============
+## More resources
 
 General competition information
 
@@ -419,30 +412,17 @@ All the information provided to participants was available here
 
 [https://github.com/Coleridge-Initiative/rich-context-competition](https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_Coleridge-2DInitiative_rich-2Dcontext-2Dcompetition&d=DwMFaQ&c=slrrB7dE8n7gBJbeO0g-IQ&r=omwcNBUqPba9pikmkXZXk2bFQ7zxZPhI5OH9dd8lFDA&m=jJJRJpvbdwLAeHNwur9CtaqPIY6UXS4q64avAMUSVV0&s=abG_3lYZ3eu8BWs6kkau2rcXOIwLyiymwo0uj6vwGt0&e=)
 
-References
-==========
+## References
 
-1\. J. P. A. Ioannidis, Why Most Published Research Findings Are False.
-*PLoS Med*. **2**, e124 (2005).2. M. R. Munafò *et al.*, A manifesto for
-reproducible science. *Nat. Hum. Behav.* **1**, 21 (2017).3. G.
-Colavizza, I. Hrynaszkiewicz, I. Staden, K. Whitaker, B. McGillivray,
-The citation advantage of linking publications to research data (2019),
-(available at https://arxiv.org/pdf/1907.02565.pdf).4. C. F. Camerer *et
-al.*, Evaluating the replicability of social science experiments in
-Nature and Science between 2010 and 2015. *Nat. Hum. Behav.* **2**, 637
-(2018).5. A. Dafoe, Science deserves better: the imperative to share
-complete replication files. *PS Polit. Sci. Polit.* **47**, 60--66
-(2014).6. N. Young, J. Ioannidis, O. Al-Ubaydli, Why Current Publication
-Practices May Distort Science. *PLoS Med* (2008).7. G. Christensen, E.
-Miguel, Transparency, reproducibility, and the credibility of economics
-research. *J. Econ. Lit.* **56**, 920--980 (2018).8. T. Yarkoni *et
-al.*, "Enhancing and accelerating social science via automation:
-Challenges and Opportunities" (2019), , doi:10.31235/osf.io/vncwe.9. N.
-Hart, T. Shaw, Congress Provides New Foundation for Evidence-Based
-Policymaking (2018), (available at
-https://bipartisanpolicy.org/blog/congress-provides-new-foundation-for-evidence-based-policymaking/).10.
-Office of Management and Budget, Federal Data Strategy (2019),
-(available at https://strategy.data.gov).11. V. Bush, *Science, the
-endless frontier: A report to the President* (US Govt. print. off.,
-1945).12. L. Wissler, M. Almashraee, D. M. Díaz, A. Paschke, in *IEEE
-GSC* (2014).
+1\. J. P. A. Ioannidis, Why Most Published Research Findings Are False. *PLoS Med*. **2**, e124 (2005).
+2\. M. R. Munafò *et al.*, A manifesto for reproducible science. *Nat. Hum. Behav.* **1**, 21 (2017).
+3\. G. Colavizza, I. Hrynaszkiewicz, I. Staden, K. Whitaker, B. McGillivray, The citation advantage of linking publications to research data (2019), (available at https://arxiv.org/pdf/1907.02565.pdf).
+4\. C. F. Camerer *et al.*, Evaluating the replicability of social science experiments in Nature and Science between 2010 and 2015. *Nat. Hum. Behav.* **2**, 637 (2018).
+5\. A. Dafoe, Science deserves better: the imperative to share complete replication files. *PS Polit. Sci. Polit.* **47**, 60--66 (2014).
+6\. N. Young, J. Ioannidis, O. Al-Ubaydli, Why Current Publication Practices May Distort Science. *PLoS Med* (2008).
+7\. G. Christensen, E. Miguel, Transparency, reproducibility, and the credibility of economics research. *J. Econ. Lit.* **56**, 920--980 (2018).
+8\. T. Yarkoni *et al.*, "Enhancing and accelerating social science via automation: Challenges and Opportunities" (2019), , doi:10.31235/osf.io/vncwe.
+9\. N. Hart, T. Shaw, Congress Provides New Foundation for Evidence-Based Policymaking (2018), (available at https://bipartisanpolicy.org/blog/congress-provides-new-foundation-for-evidence-based-policymaking/).
+10\. Office of Management and Budget, Federal Data Strategy (2019), (available at https://strategy.data.gov).
+11\. V. Bush, *Science, the endless frontier: A report to the President* (US Govt. print. off., 1945).
+12\. L. Wissler, M. Almashraee, D. M. Díaz, A. Paschke, in *IEEE GSC* (2014).

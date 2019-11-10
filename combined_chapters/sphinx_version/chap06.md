@@ -67,9 +67,9 @@ knowledge base were linked one or more times in the provided corpus of
 
 ![image](combined_images/datasets.png){width="13cm"}
 
-We provide a high-level overview of our approach in Figure
-[\[fig:datasets\]](#fig:datasets){reference-type="ref"
-reference="fig:datasets"}. First, we use a named entity recognition
+We provide a high-level overview of our approach in Figure N.
+
+First, we use a named entity recognition
 (NER) model to predict dataset mentions. For each mention, we generate a
 list of candidate datasets from the knowledge base. We also developed a
 rule based extraction system which searches for dataset mentions seen in
@@ -186,9 +186,9 @@ to further generalize the list of candidate methods.
 [Dataset Extraction and Linking](#sec:datasets_results)
 ------------------------------
 
-First, we report the results of our NER model in Table
-[\[tab:ner\_results\]](#tab:ner_results){reference-type="ref"
-reference="tab:ner_results"}. Since it is easy for the model to memorize
+First, we report the results of our NER model in Table N.
+
+Since it is easy for the model to memorize
 the dataset mentions seen at training time, we created disjoint train,
 development, and test sets based on the paper--dataset annotations
 provided for the competition. In particular, we sort datasets by the
@@ -243,18 +243,17 @@ phase 1 holdout results are for citation prediction, while the phase 2 holdout r
 
 
 We report the end-to-end performance of our approach (on the development
-set provided by the organizers in the first phase) in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"}. This is the performance after using the
+set provided by the organizers in the first phase) in Table N.
+
+This is the performance after using the
 linking classifier to predict which candidate mention--dataset pairs are
 correct extractions. We note that the development set provided in phase
 1 ended up having significantly more overlap with the training data than
-the actual test set did. As a result, the numbers reported in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"} are not indicative of test set performance.
-End to end performance from our phase 2 submission can be seen in Table
-[\[tab:test\_results\]](#tab:test_results){reference-type="ref"
-reference="tab:test_results"}. This performance is reflective of our
+the actual test set did. As a result, the numbers reported in Table N.
+are not indicative of test set performance.
+End to end performance from our phase 2 submission can be seen in Table N.
+
+This performance is reflective of our
 focus on the linking component of this task. Aside from the competition
 development set, we also used a random portion of the training set as an
 additional development set. The initial model only uses a dataset
