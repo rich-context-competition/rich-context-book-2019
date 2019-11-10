@@ -1,9 +1,7 @@
 
 ---
 
-# Chapter 3 - Digital Science Use Cases
-
-Enriching context and enhancing engagement around datasets
+# Chapter 3 - Digital Science Use Cases: Enriching context and enhancing engagement around datasets
 
 Christian Herzog^1,a^, Daniel W Hook^1,2,3,b^, Mark Hahnel^1,c^, Stacy
 nKonkiel^1,d^, and Duane E. Williams^1,e^

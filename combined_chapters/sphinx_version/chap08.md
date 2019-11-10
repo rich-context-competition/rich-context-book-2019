@@ -3,8 +3,7 @@
 
 # Chapter 8 - Finding datasets in publications: The GESIS approach
 
-The contribution of GESIS to the Rich Context Competition
-=========================================================
+> The contribution of GESIS to the Rich Context Competition
 
 **Authors:** *Wolfgang Otto, Andrea Zielinski, Behnam Ghavimi, Dimitar Dimitrov, Narges Tavakolpoursaleh, Karam Abdulahhad, Katarina Boland, Stefan Dietze*
 **Affiliation:** *GESIS – Leibniz Institute for the Social Sciences, Cologne, Germany*

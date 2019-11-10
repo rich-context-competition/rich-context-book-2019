@@ -1,7 +1,5 @@
 
-# Chapter 1 - Introduction
-
-Rich Context Introductory Chapter
+# Chapter 1 - Rich Context Introductory Chapter
 
 Ian Mulvany, Paco Nathan, Sophie Rand, Julia Lane
 
