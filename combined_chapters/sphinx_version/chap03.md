@@ -4,10 +4,9 @@
 # Chapter 3 - Digital Science Use Cases
 
 Enriching context and enhancing engagement around datasets
-==========================================================
 
 Christian Herzog^1,a^, Daniel W Hook^1,2,3,b^, Mark Hahnel^1,c^, Stacy
-Konkiel^1,d^, and Duane E. Williams^1,e^
+nKonkiel^1,d^, and Duane E. Williams^1,e^
 
 ^1^Digital Science, London, N1 9XW, UK
 
@@ -23,8 +22,7 @@ Missouri, USA
 ^d^[<https://orcid.org/0000-0002-0546-8257>]{.underline}
 ^e^[[https://orcid.org/0000-0002-2111-3413]{.underline}](https://orcid.org/0000-0002-2111-3413))
 
-Introduction
-------------
+## Introduction
 
 The relationship between research, researchers and data is changing.
 Data has always played a critical role in scientific research, but in
@@ -73,8 +71,7 @@ the incentives, triggers and frameworks that encourage the dataset
 stewards, experts and users to contribute to these critical information
 elements.
 
-Information Infrastructure
---------------------------
+## Information Infrastructure
 
 It is important to understand that any successful information
 infrastructure for research data will necessarily be deeply linked with
@@ -172,8 +169,7 @@ interpretation, and availability of data. These challenges are
 interconnected with challenges we face when thinking about the cultural
 infrastructure for data, as well.
 
-Cultural Infrastructure
------------------------
+## Cultural Infrastructure
 
 There are two main aspects to cultural infrastructure: incentives and
 capability. Both of these aspects are strong drivers in how researchers
@@ -251,8 +247,7 @@ fully contextualised is often significant. However, governments and
 foundations have not necessarily prioritised these activities in their
 grant programs (though this is changing)[^6]^,^[^7].
 
-Enriching context
------------------
+## Enriching context
 
 While we at Digital Science cannot solve all the issues raised here, the
 points discussed do offer a blueprint for a generalised approach to

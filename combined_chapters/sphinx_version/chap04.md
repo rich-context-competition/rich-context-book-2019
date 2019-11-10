@@ -1,5 +1,3 @@
-
-
 ---
 
 # Chapter 4 - Metadata for Social Science Datasets
@@ -21,8 +19,7 @@ standards but they are applied unevenly so that there is no
 comprehensive approach. There has been greater emphasis on structural
 issues than on semantic descriptions.
 
-INTRODUCTION
-============
+## INTRODUCTION
 
 Evidence-based policy needs relevant data (Commission on Evidence-Based
 Policy, 2018; Lane, 2016). Such data is valuable, but often difficult to
@@ -66,8 +63,7 @@ describes services. Section 6 describes the techniques for documenting
 the internal structure of data sets. Section 7 discusses
 cyberinfrastructure.
 
-DATA, METADATA, AND DIGITAL DATA OBJECTS
-========================================
+## DATA, METADATA, AND DIGITAL DATA OBJECTS
 
 A metadata element describes some attribute of a digital object. The
 simplest metadata identifies the digital object.[^4] Individual metadata
@@ -97,8 +93,7 @@ data dictionaries. Moreover, they are often characterized by Unified
 Modeling Language (UML) Class Diagrams which are common for data
 modeling.
 
-SEMANTIC DESCRIPTIONS
-=====================
+## SEMANTIC DESCRIPTIONS
 
 Semantic data models have become widely explored. In particular, the
 Semantic Web utilizes nodes which are implemented with XML. RDF
@@ -149,8 +144,7 @@ while social terms are especially difficult to define for vernacular
 speech, it seems possible to make clear, though perhaps cumbersome,
 definitions for scholarly applications.
 
-DATA REPOSITORIES
-=================
+## DATA REPOSITORIES
 
 A data repository holds data sets and related digital objects. It
 provides access to the data sets and supports search. Metadata is
@@ -158,8 +152,7 @@ integral to these services at several levels. In addition to item-level
 metadata for the data sets, there can also be study-level metadata or
 collection-level metadata.
 
-The Inter-University Consortium for Political and Social Research (ICPSR)
--------------------------------------------------------------------------
+### The Inter-University Consortium for Political and Social Research (ICPSR)
 
 ICPSR[^11] is a major repository of public-use social science and
 administrative data sets derived from questionnaires and surveys. The
@@ -171,8 +164,7 @@ extension of DDI that describes the broader context in which the survey
 was administered as well as the details about the preservation of the
 file (see Section 5.3).
 
-Repositories of Governmental and NGO Statistical Agencies
----------------------------------------------------------
+### Repositories of Governmental and NGO Statistical Agencies
 
 Statistical data collection is a core function of government. Most
 countries have national statistical agencies. While these statistical
@@ -187,8 +179,7 @@ data.gov.[^16] In addition, there are many non-governmental and
 inter-governmental agencies such as the OECD, the World Bank, and the
 United Nations, which host data sets.
 
-Other Data Repositories
------------------------
+### Other Data Repositories
 
 Many data sets are produced, curated, and used in the natural sciences
 such as astronomy and geosciences. Some of these data sets have highly
@@ -208,8 +199,7 @@ for exploring them. Similarly, there are very large data sets from
 medical research such as from clinical trials and from clinical practice
 including Electronic Health Records (EHRs).
 
-Ecosystem of Texts and Data Sets
---------------------------------
+### Ecosystem of Texts and Data Sets
 
 Data sets are often associated with text reports. For example, the Dryad
 Digital Repository[^21] hosts data sets from scholarly publications
@@ -220,16 +210,14 @@ facilitates tracing the origins of data used in analyses and helps to
 acknowledge the work of the creators of the data sets. Standards have
 been developed for such citations (Martone, 2014; Silvello, 2017).
 
-SERVICES
-========
+## SERVICES
 
 The purpose of metadata and other aspects of information organization
 and management is to provide services to users. Indeed, "service
 science" is an approach in information technology which focuses on the
 design and delivery of services rather than on underlying technologies.
 
-Search
-------
+### Search
 
 Searching for data sets differs from the familiar web-based text search
 because data repositories are generally hosted by either relational
@@ -239,8 +227,7 @@ of federated search is supported by the Open Archives Initiative
 Protocol for Metadata Harvesting (OAI-PMH);[^22] both data.gov and ICPSR
 use OAI-PMH.
 
-From Statistical Packages to Virtual Research Environments
-----------------------------------------------------------
+### From Statistical Packages to Virtual Research Environments
 
 There is an increasingly rich set of analytic tools. Some of the
 earliest tools were statistical packages such as SPSS, R, SAS, and
@@ -257,8 +244,7 @@ provide users with a robust research environment. WissKI[^25] is a
 platform for coordinating digital humanities data sets which are based
 on Drupal.
 
-Preservation
-------------
+### Preservation
 
 Lost data is often irreplaceable. Even if the data is not entirely lost,
 users need confidence that the quality of stored data has not been
@@ -286,8 +272,7 @@ happened to the data in the dataset. Typically, provenance ontologies
 include actors, events, and digital objects. Potentially, blockchains
 could provide an even greater level of trust in digital provenance.
 
-Metadata Quality and Metadata Management
-----------------------------------------
+### Metadata Quality and Metadata Management
 
 Metadata, whether for texts or data sets, needs to be complete,
 consistent, standardized, machine processable, and timely (Park, 2009).
@@ -321,11 +306,9 @@ For instance, DCAT Application Profiles (DCAT-AP) support standardized
 metadata exchange between repositories in different jurisdictions in the
 EU.[^32]
 
-DETAILS ABOUT THE DATA IN DATA SETS
-===================================
+## DETAILS ABOUT THE DATA IN DATA SETS
 
-Data Cubes
-----------
+### Data Cubes
 
 Many notable data management techniques were originally developed for
 managing and processing business data.[^33] One such technique is data
@@ -343,8 +326,7 @@ cubes such as the Statistical Data and Metadata eXchange (*SDMX) used in
 the financial services industry and the* W3C Data Cube[^34] standard
 that is applied in projects such as EarthCube.
 
-Sequential Activities and Modeling Research
--------------------------------------------
+### Sequential Activities and Modeling Research
 
 Entities change over time, yet knowledge representation frameworks
 rarely model change. In order to represent changes, models need to
@@ -374,11 +356,9 @@ community models could be implemented. Further, highly-structured
 evidence and claims might be applied to the evaluation of evidence-based
 social policy.
 
-CYBERINFRASTRUCTURE
-===================
+## CYBERINFRASTRUCTURE
 
-Information Institutions and Organizations
-------------------------------------------
+### Information Institutions and Organizations
 
 Libraries and archives (whether traditional or digital) have the
 mission, and often the resources, to develop standards and maintain
@@ -407,8 +387,7 @@ as VIVO[^38] and the Microsoft Academic Graph (MAG)[^39] which allow
 authors to be tracked across research reports and projects, and across
 publishers.
 
-Cloud Technologies, Software as a Service, and the Internet of Things
----------------------------------------------------------------------
+### Cloud Technologies, Software as a Service, and the Internet of Things
 
 We are now well into the era of cloud computing (Foster & Gannon, 2017),
 allowing flexible allocation of computing, networking and storage
@@ -422,8 +401,7 @@ replicable. Highly-networked data centers also facilitate the Internet
 of Things (IoT) which will generate massive data sets such as for "smart
 cities".
 
-CONCLUSION
-==========
+## CONCLUSION
 
 Data may not be useful when stand-alone without context. Some of the
 biggest issues for the retrieval of information from data sets concern
@@ -432,14 +410,12 @@ the discovery of and access to data sets. We need richer, more
 systematic, and more interoperable metadata standards. Even more
 attention to metadata would further support evidence-based policy.
 
-ACKNOWLEDGMENTS 
-===============
+## ACKNOWLEDGMENTS 
 
 Julia Lane and members of NYU's Center for Urban Science and Progress
 provided useful advice and comments.
 
-REFERENCES
-==========
+## REFERENCES
 
 Allen, R.B. (2015). Repositories with direct representation, *Networked
 Knowledge Representation Systems,* arXiv: 1512.09070
