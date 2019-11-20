@@ -1,5 +1,3 @@
-# Finding datasets in publications: The KAIST approach
-## Text Mining Using Question Answering
 ---
 author:
 - |
@@ -27,6 +25,10 @@ bibliography:
 - 'bibliography.bib'
 title: Rich Text Competition
 ---
+
+# Finding datasets in publications: The KAIST approach
+## Text Mining Using Question Answering
+
 
 Non technical overview
 =============
