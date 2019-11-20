@@ -62,8 +62,9 @@ The approach followed to retrieve dataset names is based on Machine Reading Ques
 
 MRQA models are neural networks that find answers for given queries according to a text. These answers must appear explicitly in the text. Since the dataset retrieval task is about finding explicit dataset mentions from publications, MRQA models are suitable for this task.
 
-The MRQA model used in this work is Document QA [@clark2017simple]. It uses Bi-GRU, bi-attention, and self-attention mechanism. In addition, Document QA performs a paragraph selection that pre-filters and selects the *k* most relevant paragraphs using TF-IDF similarity between the query and paragraphs of the text. 
+The MRQA model used in this work is Document QA [@clark2017simple]. It uses Bi-GRU, bi-attention, and self-attention mechanism. In addition, Document QA performs a paragraph selection that pre-filters and selects the *k* most relevant paragraphs using TF-IDF similarity between the query and paragraphs of the text. They used a pre-trained model on SQuAD v1.1. For details about the implementation and and computing resources to train it we refer to the original publication.
 The KAIST team had the hypothesis that MRQA models do not need the full publication to find the datasets used. Rather, the MRQA models only need to process the paragraph where the answer appears. Since Document QA includes a paragraph selection stage, they used this model.
+
 
 ### Query generation module 
 
@@ -75,7 +76,7 @@ This list is used two times in their pipelined system. First, concatenating the 
 
 ### Entity Typing Model
 
-Ultra-Fine Entity Typing [@Choi:2018:ACL] can predict a set of free-from phrases like *criminal* or *skyscraper* given a sentence with an entity mention. For example, in the sentence: *Bob robbed John and he was arrested shortly afterward*, Bob is of type *criminal*. In the task of the present book, candidate answers proposed by the MRQA model and the sentence in which they appear are input into Ultra-Fine Entity Typing. This system can predict 10k different entity types among which *dataset* is included. However, after a few experiments they observed that most of the entity types obtained from the dataset names are not *dataset* but *organization*, *agency*, and similar types. This is due to the fact that datasets are usually created by organizations and thus, they include the name of the organization. Since these entity types are consistent, they used them as a feature for their candidate answer classifier.
+Ultra-Fine Entity Typing [@Choi:2018:ACL] can predict a set of free-from phrases like *criminal* or *skyscraper* given a sentence with an entity mention. For example, in the sentence: *Bob robbed John and he was arrested shortly afterward*, Bob is of type *criminal*. In the task of the present book, candidate answers proposed by the MRQA model and the sentence in which they appear are input into Ultra-Fine Entity Typing. This system can predict 10k different entity types among which *dataset* is included. However, after a few experiments they observed that most of the entity types obtained from the dataset names are not *dataset* but *organization*, *agency*, and similar types. This is due to the fact that datasets are usually created by organizations and thus, they include the name of the organization. Since these entity types are consistent, they used them as a feature for their candidate answer classifier. In this work, they used the pre-trained model that was released with the original publication. For detailes about the implementation and computing resources to train it, we refer to the original publication.
 
 ### Candidate Answer Classifier
 
