@@ -1,4 +1,4 @@
-%% LyX 2.3.2 created this file.  For more info, see http://www.lyx.org/.
+%% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[english]{llncs}
 \usepackage[T1]{fontenc}
@@ -20,7 +20,8 @@
 
 \usepackage{babel}
 \begin{document}
-\title{Dataset mention extraction in scientific articles using a BiLSTM-CRF
+\title{Finding datasets in publications: The Syracuse University approach}
+\subtitle{Dataset mention extraction in scientific articles using a BiLSTM-CRF
 model}
 \author{Tong Zeng$^{1,2}$ and Daniel Acuna$^{1}$\thanks{Corresponding author: deacuna@syr.edu}}
 \institute{$^{1}$School of Information Studies, Syracuse University, Syracuse,
@@ -51,17 +52,17 @@ Science is fundamentally an incremental discipline that depends on
 previous scientist's work. Datasets form an integral part of this
 process and therefore should be shared and cited as any other scientific
 output. This ideal is far from reality: the credit that datasets currently
-receive does not correspond to their actual usage. One of the issues
-is that there is no standard for citing datasets, and even if they
-are cited, they are not properly tracked by major scientific indices.
-Interestingly, while datasets are still used and mentioned in articles,
-we lack methods to extract such mentions and properly reconstruct
-dataset citations. The Rich Context Competition challenge aims at
-closing this gap by inviting scientists to produce automated dataset
-mention and linkage detection algorithms. In this article, we detail
-our proposal to solve the dataset mention step. Our approach attempts
-to provide a first approximation to better give credit and keep track
-of datasets and their usage.
+receive does not correspond to their actual usage\citep{datarank}.
+One of the issues is that there is no standard for citing datasets,
+and even if they are cited, they are not properly tracked by major
+scientific indices. Interestingly, while datasets are still used and
+mentioned in articles, we lack methods to extract such mentions and
+properly reconstruct dataset citations. The Rich Context Competition
+challenge aims at closing this gap by inviting scientists to produce
+automated dataset mention and linkage detection algorithms. In this
+article, we detail our proposal to solve the dataset mention step.
+Our approach attempts to provide a first approximation to better give
+credit and keep track of datasets and their usage.
 
 The problem of dataset extraction has been explored before. \citet{ghavimiIdentifyingImprovingDataset2016}
 and \citet{ghavimiSemiautomaticApproachDetecting2017} use a relatively
@@ -88,9 +89,11 @@ In this article, we describe a method for extracting dataset mentions
 based on a deep recurrent neural network. In particular, we used a
 Bidirectional Long short-term Memory (BiLSTM) sequence to sequence
 model paired with a Conditional Random Field (CRF) inference mechanism.
-We tested our model on a novel dataset produced for the Rich Context
-Competition challenge. We achieve a relatively good performance of
-$F_{1}=0.885$. We discuss the limitations of our model.
+The architecture is similar to\textbf{ chapter 6}, but we only focus
+on the detection of dataset mentions. We tested our model on a novel
+dataset produced for the Rich Context Competition challenge. We achieve
+a relatively good performance of $F_{1}=0.885$. We discuss the limitations
+of our model.
 
 \section{The dataset}
 
@@ -106,13 +109,39 @@ of the competitors and also the quality of the code, documentation,
 and efficiency.
 
 We adopt the CoNLL 2003 format \citep{tjong2003introduction} to annotate
-whether a token is a part of dataset mention. Concretely, B-DS denotes
-a token that is the first token of a dataset mention, I-DS denotes
-a token that is inside of dataset mention, and O denotes a token that
-is not a part of dataset mention. We then put each token and its corresponding
-labels in one line and use a empty line as a separator between sentences.
-Sentences were randomly split by 70\%, 15\%, 15\% for training set,
-validation set and testing set, respectively.
+whether a token is a part of dataset mention. Concretely, we use the
+tag DS denotes a dataset mention; The B- prefix indicates that the
+token is the beginning of a dataset mention, the I- prefix indicates
+the token is inside of dataset mention, and O denotes a token that
+is not a part of dataset mention. We put each token and its tag (separated
+by horizontal tab control character) in one line, and use the end
+of line (\textbackslash n) control character as separator between
+sentences. The dataset were randomly split by 70\%, 15\%, 15\% for
+training set, validation set and testing set, respectively.
+
+\begin{table}
+
+\centering{}\caption{Example of a sentence annotated by IOB tagging format.}
+\begin{tabular}{cc}
+\hline 
+Token & Annotation\tabularnewline
+\hline 
+This & O\tabularnewline
+\multicolumn{2}{c}{...}\tabularnewline
+data & O\tabularnewline
+from & O\tabularnewline
+the & O\tabularnewline
+Monitoring & B-DS\tabularnewline
+the & I-DS\tabularnewline
+Future & I-DS\tabularnewline
+( & O \tabularnewline
+MTF & B-DS\tabularnewline
+) & O\tabularnewline
+\textbackslash n & \tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
 
 \section{The Proposed Method}
 
@@ -133,13 +162,13 @@ hyper-parameters, and training parameters. A schematic view of the
 model is in Fig \ref{fig:NetworkArchitecture} and the components
 are as follows:
 \begin{enumerate}
-\item Character embedding layer: treat a token as a sequence of characters
+\item Character encoder layer: treat a token as a sequence of characters
 and encode the characters by using a bidirectional LSTM to get a vector
 representation.
 \item Word embedding layer: mapping each token into fixed sized vector representation
 by using a pre-trained word vector.
-\item One BiLSTM layer: make use of Bidirectional LSTM network to capture
-the high level representation of the whole token sequence input.
+\item BiLSTM layer: make use of Bidirectional LSTM network to capture the
+high level representation of the whole token sequence input.
 \item Dense layer: project the output of the previous layer to a low dimensional
 vector representation of the the distribution of labels.
 \item CRF layer: find the most likely sequence of labels.
@@ -153,39 +182,54 @@ network}
 \end{figure}
 
 
-\subsection{Character Embedding}
+\subsection{Character encoder}
 
-Similar to the bag of words assumption, we can consider a token is
-composed by a bag of characters. In this layer, we convert each token
-to a sequence of characters, then feed the sequence into a bidirectional
-LSTM network to get a fixed length representation of the token. After
-learning the bidirectional LSTM network, we can solve the out-of-vocabulary
-problem for pre-trained word embeddings.
+Similar to the bag of words assumption, a word could be composed of
+characters sampled from a bag of characters. Previous research \citep{santos2014learning,jozefowicz2016exploring}
+has shown that the use of character-level embedding could benefit
+multiple NLP-related tasks. In order to use character-level information,
+we break down a word into a sequence of characters, then build a vocabulary
+of characters. We initialize the character embedding weights using
+the vocabulary size of a pre-defined embedding dimension, then update
+the weights during the training process to get the fixed-size character
+embedding. Next, we feed a sequence of the character embedding into
+an encoder (a bidirectional LSTM network) to produce a vector representation
+of a word. By using a character encoder, we can solve the out-of-vocabulary
+problem for pre-trained word embedding, as every word could be composed
+of characters.
 
 \subsection{Word Embedding}
 
-The embedding is the first layer of our network and it is responsible
-for mapping the word from string into vectors of numbers as the input
-for other layers on top. For a given sentence $S$, we first convert
-it into a sequence consisting of $n$ tokens, $S=\{c_{1},c_{2},\cdots,c_{n},\}$
-. For each token $c_{i}$we lookup the embedding vector $x_{i}$ from
-a word embedding matrix $M^{tkn}\in\mathbb{R}^{d|V|}$, where the
-$d$ is the dimension of the embedding vector and the $V$ is the
-Vocabulary of the tokens. In this paper, the matrix $M^{tkn}$ is
-initialized by pre-trained GloVe vectors \citep{pennington2014glove},
-but will be updated by learning from our corpus.
+The word embedding layer is responsible for storing and retrieving
+the vector representation of words. Concretely, the word embedding
+layer contains a word embedding matrix $M^{tkn}\in\mathbb{R}^{|V|d}$,
+where the $V$ is the vocabulary of the tokens and the $d$ is the
+size of the embedding vector. The embedding matrix was initialized
+by a pre-trained GloVe vectors \citep{pennington2014glove}, and updated
+by learning from the data. In order to retrieve from the embedding
+matrix, we first convert a given sentence into a sequence of tokens,
+then for each token we lookup the embedding matrix to get its vector
+representation. Finally, we get a sequence of vectors as input for
+the encoder layer.
 
 \subsection{LSTM}
 
-Recurrent neural network (RNN) is a powerful tool to capture features
-from sequential data, such as temporal series, and text. RNN could
-capture long-distance dependency in theory but it suffers from the
-gradient exploding/vanishing problems \citep{pascanu2013difficulty}.
-The Long short-term memory (LSTM) architecture was proposed by \citet{hochreiter1997long}
-and it is a variant of RNN which copes with the gradient problem.
-LSTM introduces several gates to control the proportion of information
-to forget from previous time steps and to pass to the next time step.
-Formally, LSTM could be described by the following equations:
+The Recurrent Neural Network (RNN) is a type of artificial neural
+network which takes the output of previous step as input of the current
+step recurrently. This recurrent nature allows it to learn from sequential
+data, for example, the text which consists of a sequence of works.
+RNN could capture contextual information in variable-length sequences
+in theory but it suffers from gradient exploding/vanishing problems
+\citep{pascanu2013difficulty}. The Long Short-Term Memory (LSTM)
+architecture was proposed by \citet{hochreiter1997long} to cope with
+these gradient problems. Similar to standard RNN, the LSTM network
+also has a repeating module called LSTM cell. The cell remembers information
+over arbitrary time steps because it allows information to flow along
+it without change. The cell state is regulated by a forget gate and
+an input gate which control the proportion of information to forget
+from a previous time step and to remember for a next time step. Also,
+there is a output gate controlling the information to flow out of
+the cell. The LSTM could be defined formally by the following equations:
 
 \begin{equation}
 i_{t}=\sigma(W_{i}x_{t}+W_{i}h_{t-1}+b_{i})
@@ -205,21 +249,20 @@ c_{t}=f_{t}\bigotimes c_{t-1}+i_{t}\bigotimes g_{t}
 \begin{equation}
 h_{t}=o_{t}\bigotimes tanh(c_{t})
 \end{equation}
-where the $\sigma$ is the sigmoid function, $\bigotimes$ denotes
-the dot product, $b$ is the bias, $W$ is the parameters, $x_{t}$
-is the input at time $t$, $c_{t}$ is the LSTM cell state at time
-$t$ and $h_{t}$ is hidden state at time $t$. The $i_{t}$, $f_{t}$,
+where $x_{t}$ is the input at time $t$, $W$ is the weights, $b$
+is the bias. The $\sigma$ is the sigmoid function, $\bigotimes$
+denotes the dot product, $c_{t}$ is the LSTM cell state at time $t$
+and $h_{t}$ is hidden state at time $t$. The $i_{t}$, $f_{t}$,
 $o_{t}$ and $g_{t}$ are named as input, forget, output and cell
-gates respectively, they control the information to keep in its state
-and pass to next step.
+gates respectively.
 
-LSTM gets information from the previous steps, which is left context
-in our task. However, it is important to consider the information
-in the right context. A solution of this information need is bidirectional
-LSTM \citep{graves2013speech}. The idea of Bi-LSTM is to use LSTM
-layers and feed the forward and backward flows separately, and then
-concatenate the hidden states of the two LSTM to modeling both the
-left and right contexts
+LSTM can learn from the previous steps, which is the left context
+if we feed the sequence from left to right. However, the information
+in the right context is also important for some tasks. The bidirectional
+LSTM \citep{graves2013speech} satisfies this information need by
+using two LSTMs. Concretely, one LSTM layer was fed by a forward sequence
+and the other by a backward sequence. The final hidden states of each
+LSTM were concatenated to model the left and right contexts
 
 \begin{equation}
 h_{t}=[\overrightarrow{h_{t}}\varoplus\overleftarrow{h_{t}}]
@@ -234,15 +277,49 @@ of CRF, refer to \citep{lafferty2001conditional}
 
 In this work, we wanted to propose a model for the Rich Context Competition
 challenge. We propose a relatively standard architecture based on
-a BiLSTM-CRF recurrent neural network. We now describe the results
-of this network on the dataset provided by the competition.
+a BiLSTM-CRF recurrent neural network. We now describe the evaluation
+metrics, hyper-parameter setting, and the results of this network
+on the dataset provided by the competition.
 
-For all of our results, we use $F_{1}$ as the measure of choice.
+For all of our results, we use $F_{1}$ as the measure of performance.
 This measure is the harmonic average of the precision and recall and
 it is the standard measure used in sequence labeling tasks. This metric
-varies from 0 to 1, and the unit is the highest possible value. Our
-method achieved a relatively high $F_{1}$ of 0.885 for detecting
-mentions, in line with previous studies.
+varies from 0 to 1, the higher the better. Our method achieved a relatively
+high $F_{1}$ of 0.885 for detecting mentions.
+
+\begin{table}
+\caption{\label{tab:Model-search-space}Model search space and best assignments}
+
+\centering{}%
+\begin{tabular}{ccc}
+\hline 
+Hyper-parameter & Search space & Best parameter\tabularnewline
+\hline 
+number of epochs & 50 & 50\tabularnewline
+patience & 10 & 10\tabularnewline
+batch size & 64 & 64\tabularnewline
+pre-trained word vector size & choice{[}50, 100, 200,300{]} & 100\tabularnewline
+encoder hidden size & 300 & 300\tabularnewline
+number of encoder layers & 2 & 2\tabularnewline
+dropout rate & choice{[}0.0,0.5{]} & 0.5\tabularnewline
+learning rate optimizer & adam & adam\tabularnewline
+l2 regularizer & 0.01 & 0.01\tabularnewline
+learning rate & 0.001 & 0.001\tabularnewline
+\hline 
+\end{tabular}
+\end{table}
+
+We train models using the training data and monitor the performance
+using the validation data (we stop training if the performance does
+not improve for the last 10 epochs). We are using the Adam optimizer
+with learning rate of 0.001 and batch size equal to 64. The hidden
+size of LSTM for character and word embedding is 80 and 300, respectively.
+For the regularization methods, and to avoid over-fitting, we use
+L2 regularization set to 0.01 and we also use dropout rate equal to
+0.5. We trained 8 models with a combination of different GloVe vector
+size (50, 100, 300 and 300) and dropout rate (0.0, 0.5). The hyper-parameter
+settings are present in Table \ref{tab:Model-search-space}. 
+
 \begin{table}
 \caption{\label{tab:Performance-of-proposed}Performance of proposed network}
 
@@ -263,18 +340,12 @@ m8 & 300 & 0.5 & 0.876 & 0.878 & 0.877\tabularnewline
 \end{tabular}
 \end{table}
 
-We train models using the training data, monitor the performance using
-the validation data (we stop training if the performance doesn't improve
-for the last 10 epochs). We are using the Adam optimizer with learning
-rate of 0.001 and batch size equal to 64. The hidden size of LSTM
-for character and word embedding is 80 and 300, respectively. For
-the regularization methods to avoid over-fitting, we use L2 regularization
-with alpha set to 0.01, we also use dropout rate equal to 0.5. We
-trained 8 models with a combination of different GloVe vector size
-(50, 100, 300 and 300) and dropout rate (0.0, 0.5). The performances
-are reported on the test dataset in Table \ref{tab:Performance-of-proposed}.
+The test performances are reported in Table \ref{tab:Performance-of-proposed}.
 The best model is trained by word vector size 100 and dropout rate
-0.5 with $F_{1}$ score 0.885.
+0.5 with $F_{1}$ score 0.885 (Table \ref{tab:Performance-of-proposed}),
+and it takes 15 hours 58 minutes for the training on an NVIDIA GTX
+1080 Ti GPU in a computer with an Intel Xeon E5-1650v4 3.6 GHz CPU
+with 128 GB of RAM.
 
 We also found some limitations to the dataset. Firstly, we found that
 mentions are nested (e.g. HRS, RAND HRS, RAND HRS DATA are linked
@@ -301,6 +372,21 @@ when the task requires spatially distant information, such as this
 one. These benefits could also translate to better linkage. We are
 exploring new architectures using self-attention and multiple-head
 attention. We hope to explore these approaches in the near future.
+
+There are number of improvements that we can make in the future. A
+first improvement is to use non-recurrent neural architectures such
+as the Transformer which has shown to be faster and a more effective
+learner compared to recurrent neural networks. Another improvement
+would be to bootstrap information from other dataset sources such
+as open access full-text articles from PubMed Open Access Subset.
+This dataset contains dataset \emph{citations} \citep{datarank}---in
+contrast to the most common types of citations to publications. The
+location of this citations within the full-text could be exploited
+to perform entity recognition. While this would be a somewhat different
+problem than the one solved in this article, it would still be useful
+for the goal of tracking dataset usage. In sum, by improving the learning
+techniques and the dataset size and quality, we could significantly
+increase the success of finding datasets in publications.
 
 Our proposal, however, is surprisingly effective. Because we have
 barely modified a general RNN architecture, we expect that our results

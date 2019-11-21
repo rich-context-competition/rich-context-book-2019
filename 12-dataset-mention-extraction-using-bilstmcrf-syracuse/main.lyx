@@ -732,17 +732,17 @@ literal "false"
 
 \end_inset
 
- have shown that the use of character level embedding could benefit multiple
- NLP related tasks.
- In order to use character level information, we break down a word into
+ has shown that the use of character-level embedding could benefit multiple
+ NLP-related tasks.
+ In order to use character-level information, we break down a word into
  a sequence of characters, then build a vocabulary of characters.
- We initialize the character embedding weights by using the vocabulary size
- a pre-defined embedding dimension, then update the weights during the training
- process to get the fixed size character embedding.
+ We initialize the character embedding weights using the vocabulary size
+ of a pre-defined embedding dimension, then update the weights during the
+ training process to get the fixed-size character embedding.
  Next, we feed a sequence of the character embedding into an encoder (a
  bidirectional LSTM network) to produce a vector representation of a word.
  By using a character encoder, we can solve the out-of-vocabulary problem
- for pre-trained word embedding, as every word could be composed by characters.
+ for pre-trained word embedding, as every word could be composed of characters.
 \end_layout
 
 \begin_layout Subsection
@@ -774,9 +774,9 @@ literal "false"
 \end_inset
 
 , and updated by learning from the data.
- In order to use retrieve from the embedding matrix, we first convert a
- given sentence into a sequence of tokens, then for each token we lookup
- the embedding matrix to get its vector representation.
+ In order to retrieve from the embedding matrix, we first convert a given
+ sentence into a sequence of tokens, then for each token we lookup the embedding
+ matrix to get its vector representation.
  Finally, we get a sequence of vectors as input for the encoder layer.
 \end_layout
 
@@ -786,11 +786,12 @@ LSTM
 
 \begin_layout Standard
 The Recurrent Neural Network (RNN) is a type of artificial neural network
- which takes the output of previous step as input of current step recurrently.
- This recurrent nature allow it learning from the sequential data, for example,
+ which takes the output of previous step as input of the current step recurrentl
+y.
+ This recurrent nature allows it to learn from sequential data, for example,
  the text which consists of a sequence of works.
  RNN could capture contextual information in variable-length sequences in
- theory but it suffers from the gradient exploding/vanishing problems 
+ theory but it suffers from gradient exploding/vanishing problems 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "pascanu2013difficulty"
@@ -799,7 +800,7 @@ literal "false"
 \end_inset
 
 .
- The Long short-term memory (LSTM) architecture was proposed by 
+ The Long Short-Term Memory (LSTM) architecture was proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "hochreiter1997long"
@@ -807,16 +808,16 @@ literal "false"
 
 \end_inset
 
- to copes with the gradient problems.
+ to cope with these gradient problems.
  Similar to standard RNN, the LSTM network also has a repeating module called
  LSTM cell.
  The cell remembers information over arbitrary time steps because it allows
  information to flow along it without change.
- The cell state is regulated by forget gate and input gate which controls
- the proportion of information the to forget from previous time step and
- to remember for next time step.
- Also, there is a output gate controls the information to flow out of the
- cell.
+ The cell state is regulated by a forget gate and an input gate which control
+ the proportion of information to forget from a previous time step and to
+ remember for a next time step.
+ Also, there is a output gate controlling the information to flow out of
+ the cell.
  The LSTM could be defined formally by the following equations:
 \end_layout
 
@@ -930,8 +931,8 @@ where
 \end_layout
 
 \begin_layout Standard
-LSTM can learn from the previous steps, which is left context if we feed
- the sequence from left to right.
+LSTM can learn from the previous steps, which is the left context if we
+ feed the sequence from left to right.
  However, the information in the right context is also important for some
  tasks.
  The bidirectional LSTM 
@@ -943,9 +944,10 @@ literal "false"
 \end_inset
 
  satisfies this information need by using two LSTMs.
- Concretely, one LSTM layer was feed by forward sequence and the other by
- backward sequence, then the final hidden state of each LSTM were concatenated
- to modeling both the left and right contexts
+ Concretely, one LSTM layer was fed by a forward sequence and the other
+ by a backward sequence.
+ The final hidden states of each LSTM were concatenated to model the left
+ and right contexts
 \end_layout
 
 \begin_layout Standard
