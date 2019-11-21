@@ -654,9 +654,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Enumerate
-Character embedding layer: treat a token as a sequence of characters and
- encode the characters by using a bidirectional LSTM to get a vector representat
-ion.
+Character encoder layer: treat a token as a sequence of characters and encode
+ the characters by using a bidirectional LSTM to get a vector representation.
 \end_layout
 
 \begin_layout Enumerate
@@ -665,8 +664,8 @@ Word embedding layer: mapping each token into fixed sized vector representation
 \end_layout
 
 \begin_layout Enumerate
-One BiLSTM layer: make use of Bidirectional LSTM network to capture the
- high level representation of the whole token sequence input.
+BiLSTM layer: make use of Bidirectional LSTM network to capture the high
+ level representation of the whole token sequence input.
 \end_layout
 
 \begin_layout Enumerate
@@ -719,17 +718,31 @@ Network Architecture of BiLSTM-CRF network
 \end_layout
 
 \begin_layout Subsection
-Character Embedding
+Character encoder
 \end_layout
 
 \begin_layout Standard
-Similar to the bag of words assumption, we can consider a token is composed
- by a bag of characters.
- In this layer, we convert each token to a sequence of characters, then
- feed the sequence into a bidirectional LSTM network to get a fixed length
- representation of the token.
- After learning the bidirectional LSTM network, we can solve the out-of-vocabula
-ry problem for pre-trained word embeddings.
+Similar to the bag of words assumption, a word could be composed of characters
+ sampled from a bag of characters.
+ Previous research 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "santos2014learning,jozefowicz2016exploring"
+literal "false"
+
+\end_inset
+
+ have shown that the use of character level embedding could benefit multiple
+ NLP related tasks.
+ In order to use character level information, we break down a word into
+ a sequence of characters, then build a vocabulary of characters.
+ We initialize the character embedding weights by using the vocabulary size
+ a pre-defined embedding dimension, then update the weights during the training
+ process to get the fixed size character embedding.
+ Next, we feed a sequence of the character embedding into an encoder (a
+ bidirectional LSTM network) to produce a vector representation of a word.
+ By using a character encoder, we can solve the out-of-vocabulary problem
+ for pre-trained word embedding, as every word could be composed by characters.
 \end_layout
 
 \begin_layout Subsection
@@ -737,48 +750,22 @@ Word Embedding
 \end_layout
 
 \begin_layout Standard
-The embedding is the first layer of our network and it is responsible for
- mapping the word from string into vectors of numbers as the input for other
- layers on top.
- For a given sentence 
-\begin_inset Formula $S$
-\end_inset
-
-, we first convert it into a sequence consisting of 
-\begin_inset Formula $n$
-\end_inset
-
- tokens, 
-\begin_inset Formula $S=\{c_{1},c_{2},\cdots,c_{n},\}$
-\end_inset
-
- .
- For each token 
-\begin_inset Formula $c_{i}$
-\end_inset
-
-we lookup the embedding vector 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- from a word embedding matrix 
-\begin_inset Formula $M^{tkn}\in\mathbb{R}^{d|V|}$
+The word embedding layer is responsible for storing and retrieving the vector
+ representation of words.
+ Concretely, the word embedding layer contains a word embedding matrix 
+\begin_inset Formula $M^{tkn}\in\mathbb{R}^{|V|d}$
 \end_inset
 
 , where the 
-\begin_inset Formula $d$
-\end_inset
-
- is the dimension of the embedding vector and the 
 \begin_inset Formula $V$
 \end_inset
 
- is the Vocabulary of the tokens.
- In this paper, the matrix 
-\begin_inset Formula $M^{tkn}$
+ is the vocabulary of the tokens and the 
+\begin_inset Formula $d$
 \end_inset
 
- is initialized by pre-trained GloVe vectors 
+ is the size of the embedding vector.
+ The embedding matrix was initialized by a pre-trained GloVe vectors 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "pennington2014glove"
@@ -786,7 +773,11 @@ literal "false"
 
 \end_inset
 
-, but will be updated by learning from our corpus.
+, and updated by learning from the data.
+ In order to use retrieve from the embedding matrix, we first convert a
+ given sentence into a sequence of tokens, then for each token we lookup
+ the embedding matrix to get its vector representation.
+ Finally, we get a sequence of vectors as input for the encoder layer.
 \end_layout
 
 \begin_layout Subsection
@@ -794,10 +785,12 @@ LSTM
 \end_layout
 
 \begin_layout Standard
-Recurrent neural network (RNN) is a powerful tool to capture features from
- sequential data, such as temporal series, and text.
- RNN could capture long-distance dependency in theory but it suffers from
- the gradient exploding/vanishing problems 
+The Recurrent Neural Network (RNN) is a type of artificial neural network
+ which takes the output of previous step as input of current step recurrently.
+ This recurrent nature allow it learning from the sequential data, for example,
+ the text which consists of a sequence of works.
+ RNN could capture contextual information in variable-length sequences in
+ theory but it suffers from the gradient exploding/vanishing problems 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "pascanu2013difficulty"
@@ -814,10 +807,17 @@ literal "false"
 
 \end_inset
 
- and it is a variant of RNN which copes with the gradient problem.
- LSTM introduces several gates to control the proportion of information
- to forget from previous time steps and to pass to the next time step.
- Formally, LSTM could be described by the following equations:
+ to copes with the gradient problems.
+ Similar to standard RNN, the LSTM network also has a repeating module called
+ LSTM cell.
+ The cell remembers information over arbitrary time steps because it allows
+ information to flow along it without change.
+ The cell state is regulated by forget gate and input gate which controls
+ the proportion of information the to forget from previous time step and
+ to remember for next time step.
+ Also, there is a output gate controls the information to flow out of the
+ cell.
+ The LSTM could be defined formally by the following equations:
 \end_layout
 
 \begin_layout Standard
@@ -868,23 +868,7 @@ h_{t}=o_{t}\bigotimes tanh(c_{t})
 
 \end_inset
 
-where the 
-\begin_inset Formula $\sigma$
-\end_inset
-
- is the sigmoid function, 
-\begin_inset Formula $\bigotimes$
-\end_inset
-
- denotes the dot product, 
-\begin_inset Formula $b$
-\end_inset
-
- is the bias, 
-\begin_inset Formula $W$
-\end_inset
-
- is the parameters, 
+where 
 \begin_inset Formula $x_{t}$
 \end_inset
 
@@ -893,6 +877,23 @@ where the
 \end_inset
 
 , 
+\begin_inset Formula $W$
+\end_inset
+
+ is the weights, 
+\begin_inset Formula $b$
+\end_inset
+
+ is the bias.
+ The 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is the sigmoid function, 
+\begin_inset Formula $\bigotimes$
+\end_inset
+
+ denotes the dot product, 
 \begin_inset Formula $c_{t}$
 \end_inset
 
@@ -925,15 +926,15 @@ where the
 \begin_inset Formula $g_{t}$
 \end_inset
 
- are named as input, forget, output and cell gates respectively, they control
- the information to keep in its state and pass to next step.
+ are named as input, forget, output and cell gates respectively.
 \end_layout
 
 \begin_layout Standard
-LSTM gets information from the previous steps, which is left context in
- our task.
- However, it is important to consider the information in the right context.
- A solution of this information need is bidirectional LSTM 
+LSTM can learn from the previous steps, which is left context if we feed
+ the sequence from left to right.
+ However, the information in the right context is also important for some
+ tasks.
+ The bidirectional LSTM 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "graves2013speech"
@@ -941,9 +942,9 @@ literal "false"
 
 \end_inset
 
-.
- The idea of Bi-LSTM is to use LSTM layers and feed the forward and backward
- flows separately, and then concatenate the hidden states of the two LSTM
+ satisfies this information need by using two LSTMs.
+ Concretely, one LSTM layer was feed by forward sequence and the other by
+ backward sequence, then the final hidden state of each LSTM were concatenated
  to modeling both the left and right contexts
 \end_layout
 
