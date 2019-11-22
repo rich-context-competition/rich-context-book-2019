@@ -8,7 +8,7 @@ author:
     daniel\@allenai.org\
 bibliography:
 - 'acl2015.bib'
-title: The AI2 Submission at The Rich Context Competition
+title: Finding datasets in publications: The Allen Institute for AI Approach
 ---
 
 [Introduction](#sec:intro)
@@ -30,7 +30,7 @@ and biomedical literature, and we plan to expand our coverage in 2019 to
 other scientific areas, including social sciences.
 
 In the following sections, we describe our approach to the three tasks
-of the RCC competition: 
+of the RCC competition, which are described in more detail in Chapter 5: 
 1. extracting the datasets used in publications, 
 2. predicting the field of research of publications
 3. extracting the methods used in publications
@@ -58,14 +58,14 @@ datasets used in social science research. The high textual similarity between
 different datasets in the knowledge base informs our approach for linking dataset
 mentions to their dataset in the knowledge base. Approximately 10% of the datasets in the
 knowledge base were linked one or more times in the provided corpus of
-5K papers. To attempt to generalize mention discovery beyond those present in the knowledge base, we train a Named Entity Recognition model on the noisy annotations provided by the labeled mentions in the knowledge base.
+5K papers. To attempt to generalize mention discovery beyond those present in the knowledge base, we train a named entity recognition (NER) model on the noisy annotations provided by the labeled mentions in the knowledge base.
 
 ![image](datasets.png){width="13cm"}
 
 We provide a high-level overview of our approach in Figure
 [\[fig:datasets\]](#fig:datasets){reference-type="ref"
-reference="fig:datasets"}. First, we use a named entity recognition
-(NER) model to predict dataset mentions. For each mention, we generate a
+reference="fig:datasets"}. First, we use an NER
+ model to predict dataset mentions. For each mention, we generate a
 list of candidate datasets from the knowledge base. We also developed a
 rule based extraction system which searches for dataset mentions seen in
 the training set, adding the corresponding dataset IDs in the training
@@ -78,10 +78,10 @@ Next, we describe each of the sub-components in more detail.
 
 We first constructed a set of rule based candidate citations by exact
 string matching mentions and dataset names from the provided knowledge
-base. We found this to have high recall on the provided development fold
-and our own development fold that we created. However, after our test
+base. We found this to have high recall and low precision, both on the provided development fold
+and our own development fold that we created. High recall and low precision was the desired outcome for this candidate generation step. However, after our test
 submission, it became clear that there were many datasets in the actual
-test set that did not have mentions in the provided knowledge base.
+test set that did not have mentions in the provided knowledge base. If the provided development fold had been representative of the test set (rather than the train set) in terms of what datasets were mentioned in it, we could have discovered this issue sooner. In this case, it would have been more representative of the test set if it included more datasets that did not have example mentions in the provided knowledge base. The importance of reliable evaluation and training data is discussed further in Chapter 12.
 
 To address this limitation, we developed an NER model to predict
 additional dataset mentions. For NER, we use a bi-LSTM model with a CRF
@@ -100,7 +100,7 @@ sentence length. We use 50-dimensional Glove word embeddings
 [@Pennington2014GloveGV], 16-dimensional character embeddings with 64
 CNN filters of sizes (2, 3, 4). The CNN character encoder outputs
 128-dimensional vectors. We optimize model parameters using ADAM
-[@Kingma2014AdamAM] with a learning rate of 0.001.
+[@Kingma2014AdamAM] with a learning rate of 0.001. Training the model took approximately 12 hours on a single GPU.
 
 In order to generate linking candidates for the NER mentions, we score
 each candidate dataset based on TF-IDF weighted token overlap between the mention
@@ -113,15 +113,28 @@ for each mention as the linking candidates for that mention.
 The linking model takes as input a dataset mention, its context, and one
 of the candidate datasets in the knowledge base, and outputs a binary
 label. We use a gradient boosted trees classifier using the XGBoost
-implementation.[^3] The model takes as input the following features: prior probability of
-entity, prior probability of entity given mention, prior probability of
-mention given entity, whether a year appears in the mention context and
-in the dataset title, mention length, mention sentence length, whether
-the mention is an acronym, estimated section title of the mention,
-overlap between mention context and dataset keywords provided in the
-knowledge base, and the TF-IDF weighted token overlap. We note that it
-is possible to predict zero, one or multiple dataset IDs for the same
-mention, and each dataset candidate is scored independently.
+implementation.[^3] The model takes as input the following features:
+
+* prior probability of entity, estimated based on number of occurrences in the training set (float between 0 and 1)
+* prior probability of entity given mention, estimated based on number of occurrences in the training set (float between 0 and 1)
+* prior probability of mention given entity, estimated based on number of occurrences in the training set (float between 0 and 1)
+* whether the same year appears both in the mention context and in the dataset title (binary)
+* mention length (int)
+* mention sentence length (int)
+* whether the mention is an acronym, computed by checking if it is one token that is all upper case (binary)
+* estimated section title of the mention, computed by searching backwards from the mention for the nearest section header (binary one-hot)
+* count of overlapping words between the mention context and dataset keywords provided in the knowledge base (int)
+
+We note that it is possible to predict zero, one or multiple dataset IDs for the same mention, and each dataset candidate is scored independently.
+
+We performed a randomized hyperparameter search with 100 iterations over the following hyperparameters and ranges and used a learning rate of 10^-1:
+
+* `max_depth` : `range(2, 8)`
+* `n_estimators` : `range(1, 50)`
+* `colsample_by_tree` : `numpy.linspace(0.1, 0.5, 5)`
+* `min_child_weight` : `range(5, 11)`
+
+Each model took a negligible amount of time to train, and the entire hyperparameter search took a few minutes to train on a machine with 8 CPUs.
 
 [Research Area Prediction](#sec:areas_methods)
 ------------------------
@@ -151,7 +164,7 @@ title and predicts one of the fields in this level. We additionally
 incorporate ELMo embeddings [@Peters2018DEEPCW] to improve performance.
 In the final submission, we always predict the most likely field from
 the L0 classifier, and only report the most likely field from the L1
-classifier if it exceeds a certain threshold. It takes approximately 1.5
+classifier if its prediction exceeds a score of 0.4. It takes approximately 1.5
 and 3.5 hours for the L0 and L1 classifiers to converge, respectively.
 
 [Research Method Extraction](#sec:methods_methods)
@@ -163,7 +176,7 @@ The third task in the competition is to extract the scientific methods
 used in the research paper. Since no training data was provided, we
 started by inspecting a subset of the provided papers to get a better
 understanding of what kind of methods are used in social science and how
-they are referred to within papers.
+they are referred to within papers. This limitation, and the difficulty of working on an undefined task, is discussed in Chapter 2.
 
 ### Methods ###
 
@@ -202,7 +215,7 @@ We also experimented with adding ELMo embeddings [@Peters2018DEEPCW],
 but it significantly slowed down training and decoding which would have
 disqualified our submission due to the runtime requirements of the
 competition. As a result, we decided not to include ELMo embeddings in
-our final model.
+our final model. If the requirements for the competition had permitted the use of a GPU at evaluation time, neural network based embeddings like ELMo could be leveraged.
 
 |            | prec.   | recall  |  F1    |
 | ---------- | ------- | ------- | ------ |
@@ -267,7 +280,7 @@ further improvements ($\Delta = 2.8$ F1). Finally, adding the NER-based
 mentions significantly improves recall at the cost of lower precision,
 with a positive net effect on F1 score ($\Delta = 0.7$ F1).
 
-Two clear limitations of our model are its difficulty in generalizing to unseen datasets, and its inability to effectively distinguish between datasets that are used in a publication and datasets that are merely reference. These limitations are the main causes of the low recall (due to difficulty generalizing to unseen datasets) and low precision (due to difficulty distinguishing between used datasets and referenced datasets).
+Two clear limitations of our model are its difficulty in generalizing to unseen datasets, and its inability to effectively distinguish between datasets that are used in a publication and datasets that are merely referenced. These limitations are the main causes of the low recall (due to difficulty generalizing to unseen datasets) and low precision (due to difficulty distinguishing between used datasets and referenced datasets). An interesting approach to improving recall is presented in Chapter 7, and could potentially be leveraged in future work.
 
 [Research Area Prediction](#sec:areas_results)
 ------------------------
@@ -277,7 +290,7 @@ hyper-parameters, evaluated on a held out development set of papers from
 the Microsoft Academic Graph. Our final model contained 512 hidden
 dimensions, 2 layers and 0.5 dropout prior to classification. The top
 performing classifier achieved 84.4% accuracy on our development set on
-L0 fields, and 65.2% accuracy on our development set on L1 fields. The main limitation of using MAG for this problem is that our model cannot find new fields of research, and is limited to those provided by MAG. Additionally, our method performs classification based only on the titles of papers, while there are other pieces of information about the paper that would be useful for classifying the field of research.
+L0 fields, and 65.2% accuracy on our development set on L1 fields. The main limitation of using MAG for this problem is that our model cannot find new fields of research, and is limited to those provided by MAG. Additionally, our method performs classification based only on the titles of papers, while there are other pieces of information about the paper that would be useful for classifying the field of research. Other resources that could have been used to help with this task are presented in Chapters 7 and 8.
 
 [Research Method Extraction](#sec:methods_results)
 --------------------------
@@ -287,27 +300,7 @@ extractor for a subset of 50 papers from the provided test set to
 compute precision. Since evaluating recall requires a careful
 annotation, we resorted to using yield as an alternative metric. Our
 final submission for method extraction has 95% precision and yield of
-1.5 methods per paper on the manually inspected subset of papers. Similarly to research area prediction, the main limiation here is the difficulty our model has finding new methods, as it is limited to the SAGE ontology and a few hand-crafted patterns. 
-
-[Future Work and Lessons Learned](#sec:future_work)
-============
-
-We now provide some possible directions of improvement for each
-component of our submission. For dataset extraction, the most promising
-avenue of improvement is to improve the NER model, and the most
-promising avenue to improve the NER model is to collect less noisy data.
-We effectively have distantly supervised training data for the NER
-model, and the first thing to try would be directly annotating papers
-with dataset mentions to provide a clearer signal for the NER model. For
-research area prediction, it would help to include signals beyond just
-the paper title for predicting the field of study. The difficulty here
-is finding labeled training data that includes richer signals like
-abstract text and paper keywords. For method prediction, exploring
-the use of open information extraction is a potential avenue
-of future research. Additionally, it would be helpful to clarify what
-exactly is meant by a method, as it is currently unclear what a
-successful method extraction looks like.
-The main lesson learned is that, when presented with noisy, distantly supervised, real-world data, to produce a production-quality system, it becomes very important to (1) have a high-confidence evaluation dataset, and (2) look for other data sources that are similar enough to the task at hand to be useful. Taking steps towards both of these objectives are promising avenues of future work.
+1.5 methods per paper on the manually inspected subset of papers. Similarly to research area prediction, the main limiation here is the difficulty our model has finding new methods, as it is limited to the SAGE ontology and a few hand-crafted patterns. One potential way to alleviate this issue is to leverage external resources, as presented in Chapter 8.
 
 [Conclusion](#sec:conclusion)
 ==========
@@ -322,6 +315,25 @@ the top two levels in the MAG hierarchy for fields of study. Finally, to extract
 use a rule-based system utilizing a dictionary and common patterns,
 followed by a scoring function which takes into account the prominence
 of a candidate in foreground and background corpora.
+
+We now provide some possible directions of improvement for each
+component of our submission. For dataset extraction, the most promising
+avenue of improvement is to improve the NER model, and the most
+promising avenue to improve the NER model is to collect less noisy data.
+We effectively have distantly supervised training data for the NER
+model, and the first thing to try would be directly annotating papers
+with dataset mentions to provide a clearer signal for the NER model. As mentioned previously and discussed in Chapters 5 and 8, the dataset mentions provided are not located in the text, and are simply extracted strings. Given these strings, labels in the actual text can be created by searching for the provided string. However, this is a noisy process, as the string may occur multiple times in the document, and all occurrences may or may not be correct dataset mentions. This is especially problematic when the string is a common word (e.g. "time"). Therefore, directly annotating the strings in the full text (i.e. providing character offsets for the strings) would help to reduce the noise in the NER data. For
+research area prediction, it would help to include signals beyond just
+the paper title for predicting the field of study. The difficulty here
+is finding labeled training data that includes richer signals like
+abstract text and paper keywords. For method prediction, exploring
+the use of open information extraction is a potential avenue
+of future research. Additionally, it would be helpful to clarify what
+exactly is meant by a method, as it is currently unclear what a
+successful method extraction looks like.
+The main lesson learned is that, when presented with noisy, distantly supervised, real-world data, to produce a production-quality system, it becomes very important to (1) have a high-confidence evaluation dataset, and (2) look for other data sources that are similar enough to the task at hand to be useful. Taking steps towards both of these objectives are promising avenues of future work.
+
+As discussed in Chapter 1 and throughout, the dataset extraction discussed in this report is intended to be part of a broader effort to create infrastructure and tools that will aid in the discovery and usage of datasets in social science research. This is critical to enable reproduciblity, collaboration, and effective use of data. We look forward to seeing what comes out of this project as a whole, and how AI techniques can be leveraged to have positive impact in the social sciences.
 
 [Acknowledgments](#sec:acknowledgements)
 ===============
