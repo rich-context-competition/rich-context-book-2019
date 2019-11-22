@@ -85,7 +85,7 @@ test set that did not have mentions in the provided knowledge base. If the provi
 
 To address this limitation, we developed an NER model to predict
 additional dataset mentions. For NER, we use a bi-LSTM model with a CRF
-decoding layer, similar to [@Peters2018DEEPCW], and implemented using
+decoding layer, similar to Peters et al., 2018, and implemented using
 the AllenNLP framework<sup>2</sup>. In order to train the NER model, we
 automatically generate mention labels by string matching mentions in the
 provided annotations against the full text of a paper. This results in
@@ -97,10 +97,10 @@ are correct examples of dataset usage.
 We limit the percentage of negative examples (i.e., sentences with no
 mentions) used in training to 50%, and use 40 words as the maximum
 sentence length. We use 50-dimensional Glove word embeddings
-[@Pennington2014GloveGV], 16-dimensional character embeddings with 64
+(Pennington et al., 2014), 16-dimensional character embeddings with 64
 CNN filters of sizes (2, 3, 4). The CNN character encoder outputs
 128-dimensional vectors. We optimize model parameters using ADAM
-[@Kingma2014AdamAM] with a learning rate of 0.001. Training the model took approximately 12 hours on a single GPU.
+(Kingma and Ba, 2014) with a learning rate of 0.001. Training the model took approximately 12 hours on a single GPU.
 
 In order to generate linking candidates for the NER mentions, we score
 each candidate dataset based on TF-IDF weighted token overlap between the mention
@@ -145,7 +145,7 @@ The second task of the competition is to predict research areas of a
 paper. The task does not specify the set of research areas of interest,
 nor is training data provided for the task. After manual inspection of a
 subset of the papers in the provided test set, the SAGE taxonomy of
-research, and the Microsoft Academic Graph (MAG) [@Shen2018AWS], we
+research, and the Microsoft Academic Graph (MAG) (Shen et al., 2018), we
 decided to use a subset of the fields of study in MAG as labels. In
 particular, we included all fields related to social science or papers
 from the provided training corpus. However, since the abstract and full
@@ -161,7 +161,7 @@ than 100 papers were excluded.
 
 For each level, we trained a bi-directional LSTM which reads the paper
 title and predicts one of the fields in this level. We additionally
-incorporate ELMo embeddings [@Peters2018DEEPCW] to improve performance.
+incorporate ELMo embeddings (Peters et al., 2018) to improve performance.
 In the final submission, we always predict the most likely field from
 the L0 classifier, and only report the most likely field from the L1
 classifier if its prediction exceeds a score of 0.4. It takes approximately 1.5
@@ -210,7 +210,7 @@ same split as *d<sub>1</sub>*. For any further conflicts, we prefer to
 put papers in the development split over the train split, and the test
 split over the development split.
 
-We also experimented with adding ELMo embeddings [@Peters2018DEEPCW],
+We also experimented with adding ELMo embeddings (Peters et al., 2018),
 but it significantly slowed down training and decoding which would have
 disqualified our submission due to the runtime requirements of the
 competition. As a result, we decided not to include ELMo embeddings in
@@ -337,10 +337,17 @@ efforts in preparing the data, answering all our questions, doing the
 evaluations, and providing feedback. We also would like to thank Zhihong
 (Iris) Shen for helping us use the MAG data.
 
-[Appendix](#sec:appendix)
-========
+[References](#sec:references)
+===========
 
-The code for the submission can be found on GitHub<sup>4</sup>. There is a README with additional documentation at this github repo.
+Diederik  P.  Kingma  and  Jimmy  Ba.    2014.    Adam:A  method  for  stochastic  optimization.CoRR,abs/1412.6980.
+
+Jeffrey   Pennington,   Richard   Socher,   and   Christo-pher D. Manning.  2014.  Glove:  Global vectors forword representation. InEMNLP.
+
+Matthew  E.  Peters,   Mark  Neumann,   Mohit  Iyyer,Matt Gardner, Christopher Clark, Kenton Lee, andLuke  S.  Zettlemoyer.   2018.   
+Deep  contextualizedword representations. InNAACL 2018.
+
+Zhihong  Shen,  Hao  Ma,  and  Kuansan  Wang.   2018.A web-scale system for scientific knowledge explo-ration. InACL
 
 [Footnotes](#sec:footnotes)
 ========
@@ -352,3 +359,8 @@ The code for the submission can be found on GitHub<sup>4</sup>. There is a READM
 3: https://xgboost.readthedocs.io/en/latest/
 
 4: https://github.com/allenai/coleridge-rich-context-ai2
+
+[Appendix](#sec:appendix)
+========
+
+The code for the submission can be found on GitHub<sup>4</sup>. There is a README with additional documentation at this github repo.
