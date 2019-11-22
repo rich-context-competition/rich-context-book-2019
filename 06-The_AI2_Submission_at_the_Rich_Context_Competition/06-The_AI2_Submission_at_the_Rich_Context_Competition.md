@@ -227,7 +227,7 @@ test sets.
 |                                   | prec.   | recall   |  F1  |
 | --------------------------------- | ------- | -------- | ---- |
 | baseline                          | 28.7    | 58.0     | 38.4 |
-| \+ p(d $\mid$ m), p(m $\mid$ d)   | 39.6    | 42.0     | 40.7 |
+| \+ p(d\|m), p(m\|d)               | 39.6    | 42.0     | 40.7 |
 | \+ year matching                  | 35.1    | 57.0     | 43.5 |
 | \+ aggregated mentions, tuning, and other features | 72.5 | 45.0 | 55.5 |
 | \+ dev set examples               | 77.0    | 47.0     | 58.3 |
