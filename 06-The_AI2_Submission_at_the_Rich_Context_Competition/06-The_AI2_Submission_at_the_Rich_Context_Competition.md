@@ -60,11 +60,11 @@ mentions to their dataset in the knowledge base. Approximately 10% of the datase
 knowledge base were linked one or more times in the provided corpus of
 5K papers. To attempt to generalize mention discovery beyond those present in the knowledge base, we train a named entity recognition (NER) model on the noisy annotations provided by the labeled mentions in the knowledge base.
 
-![image](datasets.png){width="13cm"}
+![image](datasets.png)
+Figure 6.1: A high-level overview of our appraoch to dataset mention detection and linking.
 
 We provide a high-level overview of our approach in Figure
-[\[fig:datasets\]](#fig:datasets){reference-type="ref"
-reference="fig:datasets"}. First, we use an NER
+6.1. First, we use an NER
  model to predict dataset mentions. For each mention, we generate a
 list of candidate datasets from the knowledge base. We also developed a
 rule based extraction system which searches for dataset mentions seen in
@@ -195,8 +195,7 @@ to further generalize the list of candidate methods.
 ------------------------------
 
 First, we report the results of our NER model in Table
-[\[tab:ner\_results\]](#tab:ner_results){reference-type="ref"
-reference="tab:ner_results"}. Since it is easy for the model to memorize
+6.1. Since it is easy for the model to memorize
 the dataset mentions seen at training time, we created disjoint train,
 development, and test sets based on the paper--dataset annotations
 provided for the competition. In particular, we sort datasets by the
@@ -222,9 +221,8 @@ our final model. If the requirements for the competition had permitted the use o
 | dev set    | 53.4    | 50.3    | 51.8   |
 | test set   | 50.7    | 41.8    | 45.8   |
 
-NER precision, recall and F1 performance (%) on the development and
+Table 6.1: NER precision, recall and F1 performance (%) on the development and
 test sets.
-[\[tab:ner\_results\]]{#tab:ner_results label="tab:ner_results"}
 
 |                                   | prec.   | recall   |  F1  |
 | --------------------------------- | ------- | -------- | ---- |
@@ -235,34 +233,30 @@ test sets.
 | \+ dev set examples               | 77.0    | 47.0     | 58.3 |
 | \+ NER mentions                   | 56.3    | 62.0     | 59.0 |
 
-End-to-end precision, recall and F1 performance (%) for citation
+Table 6.2: End-to-end precision, recall and F1 performance (%) for citation
 prediction on the development set provided in phase 1 of the
 competition.
-[\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"}
 
 |                   | prec.   | recall   |  F1    |
 | ----------------- | ------- | -------- | ------ |
 | phase 1 holdout   | 35.7    | 19.6     | 25.3   |
 | phase 2 holdout   | 39.6    | 18.8     | 25.5   |
 
-End-to-end precision, recall, and F1 performance (%) for dataset
+Table 6.3: End-to-end precision, recall, and F1 performance (%) for dataset
 prediction on the phase 1 and phase 2 holdout sets. Note that the
 phase 1 holdout results are for citation prediction, while the phase 2 holdout results are for mention prediction.
-[\[tab:test\_results\]]{#tab:test_results label="tab:test_results"}
+
 
 We report the end-to-end performance of our approach (on the development
 set provided by the organizers in the first phase) in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"}. This is the performance after using the
+6.2. This is the performance after using the
 linking classifier to predict which candidate mention--dataset pairs are
 correct extractions. We note that the development set provided in phase
 1 ended up having significantly more overlap with the training data than
 the actual test set did. As a result, the numbers reported in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"} are not indicative of test set performance.
+6.2 are not indicative of test set performance.
 End to end performance from our phase 2 submission can be seen in Table
-[\[tab:test\_results\]](#tab:test_results){reference-type="ref"
-reference="tab:test_results"}. This performance is reflective of our
+6.3. This performance is reflective of our
 focus on the linking component of this task. Aside from the competition
 development set, we also used a random portion of the training set as an
 additional development set. The initial model only uses a dataset
