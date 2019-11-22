@@ -18,7 +18,7 @@ The Allen Institute for Artificial Intelligence (AI2) is a non-profit
 research institute founded by Paul G. Allen with the goal of advancing
 artificial intelligence research for the common good. One of the major
 undertakings at AI2 is to develop an equitable, unbiased software
-platform (Semantic Scholar)[^1] for finding relevant information in the
+platform Semantic Scholar<sup>1</sup> for finding relevant information in the
 scientific literature. Semantic Scholar extracts meaningful structures
 in a paper (e.g., images, entities, relationships) and links them to
 other artifacts when possible (e.g., knowledge bases, GitHub
@@ -86,7 +86,7 @@ test set that did not have mentions in the provided knowledge base. If the provi
 To address this limitation, we developed an NER model to predict
 additional dataset mentions. For NER, we use a bi-LSTM model with a CRF
 decoding layer, similar to [@Peters2018DEEPCW], and implemented using
-the AllenNLP framework.[^2] In order to train the NER model, we
+the AllenNLP framework<sup>2</sup>. In order to train the NER model, we
 automatically generate mention labels by string matching mentions in the
 provided annotations against the full text of a paper. This results in
 noisy labeled data, because it was not possible to find all correct
@@ -112,8 +112,8 @@ for each mention as the linking candidates for that mention.
 
 The linking model takes as input a dataset mention, its context, and one
 of the candidate datasets in the knowledge base, and outputs a binary
-label. We use a gradient boosted trees classifier using the XGBoost
-implementation.[^3] The model takes as input the following features:
+label. We use a gradient boosted trees classifier using the XGBoost<sup>3</sup>
+implementation. The model takes as input the following features:
 
 * prior probability of entity, estimated based on number of occurrences in the training set (float between 0 and 1)
 * prior probability of entity given mention, estimated based on number of occurrences in the training set (float between 0 and 1)
@@ -340,11 +340,15 @@ evaluations, and providing feedback. We also would like to thank Zhihong
 [Appendix](#sec:appendix)
 ========
 
-The code for the submission can be found [here](https://github.com/allenai/coleridge-rich-context-ai2). There is a README with additional documentation at this github repo.
+The code for the submission can be found on GitHub<sup>4</sup>. There is a README with additional documentation at this github repo.
 
+[Footnotes](#sec:footnotes)
+========
 
-[^1]: [www.semanticscholar.org](www.semanticscholar.org)
+1: www.semanticscholar.org
 
-[^2]: <https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py>
+2: https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py
 
-[^3]: <https://xgboost.readthedocs.io/en/latest/>
+3: https://xgboost.readthedocs.io/en/latest/
+
+4: https://github.com/allenai/coleridge-rich-context-ai2
