@@ -23,12 +23,8 @@ author:
     myaeng@kaist.ac.kr\
 bibliography:
 - 'bibliography.bib'
-title: Rich Text Competition
+title: Finding datasets in publications: The KAIST approach: Text Mining Using Question Answering
 ---
-
-# Finding datasets in publications: The KAIST approach
-## Text Mining Using Question Answering
-
 
 Non technical overview
 =============
