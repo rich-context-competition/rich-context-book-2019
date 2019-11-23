@@ -23,7 +23,7 @@ author:
     myaeng@kaist.ac.kr\
 bibliography:
 - 'bibliography.bib'
-title: Finding datasets in publications: The KAIST approach: Text Mining Using Question Answering
+title: 'Finding datasets in publications: The KAIST approach. Text Mining Using Question Answering'
 ---
 
 Non technical overview
