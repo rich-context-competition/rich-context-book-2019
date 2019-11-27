@@ -15,6 +15,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
 %% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+
 
 \makeatother
 
@@ -89,7 +92,7 @@ In this article, we describe a method for extracting dataset mentions
 based on a deep recurrent neural network. In particular, we used a
 Bidirectional Long short-term Memory (BiLSTM) sequence to sequence
 model paired with a Conditional Random Field (CRF) inference mechanism.
-The architecture is similar to\textbf{ chapter 6}, but we only focus
+The architecture is similar to\textbf{ }chapter 6, but we only focus
 on the detection of dataset mentions. We tested our model on a novel
 dataset produced for the Rich Context Competition challenge. We achieve
 a relatively good performance of $F_{1}=0.885$. We discuss the limitations
@@ -116,12 +119,14 @@ the token is inside of dataset mention, and O denotes a token that
 is not a part of dataset mention. We put each token and its tag (separated
 by horizontal tab control character) in one line, and use the end
 of line (\textbackslash n) control character as separator between
-sentences. The dataset were randomly split by 70\%, 15\%, 15\% for
-training set, validation set and testing set, respectively.
+sentences (see Table \ref{tab:annotation_example}). The dataset were
+randomly split by 70\%, 15\%, 15\% for training set, validation set
+and testing set, respectively.
 
 \begin{table}
 
-\centering{}\caption{Example of a sentence annotated by IOB tagging format.}
+\centering{}\caption{\label{tab:annotation_example}Example of a sentence annotated by
+IOB tagging format.}
 \begin{tabular}{cc}
 \hline 
 Token & Annotation\tabularnewline
@@ -175,7 +180,7 @@ vector representation of the the distribution of labels.
 \end{enumerate}
 \begin{figure}
 \begin{centering}
-\includegraphics[width=0.8\textwidth]{img/bilistm_crf_network_structure_pic}
+\includegraphics[width=0.8\textwidth]{img/Figure2\lyxdot 1}
 \par\end{centering}
 \caption{\label{fig:NetworkArchitecture}Network Architecture of BiLSTM-CRF
 network}

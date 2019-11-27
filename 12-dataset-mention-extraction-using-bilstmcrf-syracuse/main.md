@@ -1,33 +1,39 @@
 ---
-abstract: |
-    Datasets are critical for scientific research, playing a role in
-    replication, reproducibility, and efficiency. Researchers have recently
-    shown that datasets are becoming more important for science to function
-    properly, even serving as artifacts of study themselves. However, citing
-    datasets is not a common or standard practice in spite of recent efforts
-    by data repositories and funding agencies. This greatly affects our
-    ability to track their usage and importance. A potential solution to
-    this problem is to automatically extract dataset mentions from
-    scientific articles. In this work, we propose to achieve such extraction
-    by using a neural network based on a BiLSTM-CRF architecture. Our method
-    achieves $F_{1}=0.885$ in social science articles released as part of
-    the Rich Context Dataset. We discuss future improvements to the model
-    and applications beyond social sciences.
 author:
-- 'Tong Zeng$^{1,2}$ and Daniel Acuna$^{1}$[^1]'
+- Tong Zeng$^{1,2}$ and Daniel Acuna$^{1}$[^1]
 bibliography:
 - 'rcc-06.bib'
 subtitle: |
     Dataset mention extraction in scientific articles using a BiLSTM-CRF
     model
 title: 'Finding datasets in publications: The Syracuse University approach'
----
 
-\institute{$^{1}$School of Information Studies, Syracuse University, Syracuse,
+$^{1}$School of Information Studies, Syracuse University, Syracuse,
 USA\\
 $^{2}$School of Information Management, Nanjing University, Nanjing,
-China}
-\maketitle
+China
+
+---
+
+
+Abstract
+========
+
+Datasets are critical for scientific research, playing a role in
+replication, reproducibility, and efficiency. Researchers have recently
+shown that datasets are becoming more important for science to function
+properly, even serving as artifacts of study themselves. However, citing
+datasets is not a common or standard practice in spite of recent efforts
+by data repositories and funding agencies. This greatly affects our
+ability to track their usage and importance. A potential solution to
+this problem is to automatically extract dataset mentions from
+scientific articles. In this work, we propose to achieve such extraction
+by using a neural network based on a BiLSTM-CRF architecture. Our method
+achieves $F_{1}=0.885$ in social science articles released as part of
+the Rich Context Dataset. We discuss future improvements to the model
+and applications beyond social sciences.
+
+
 Introduction
 ============
 
@@ -73,11 +79,10 @@ In this article, we describe a method for extracting dataset mentions
 based on a deep recurrent neural network. In particular, we used a
 Bidirectional Long short-term Memory (BiLSTM) sequence to sequence model
 paired with a Conditional Random Field (CRF) inference mechanism. The
-architecture is similar to **chapter 6**, but we only focus on the
-detection of dataset mentions. We tested our model on a novel dataset
-produced for the Rich Context Competition challenge. We achieve a
-relatively good performance of $F_{1}=0.885$. We discuss the limitations
-of our model.
+architecture is similar to chapter 6, but we only focus on the detection
+of dataset mentions. We tested our model on a novel dataset produced for
+the Rich Context Competition challenge. We achieve a relatively good
+performance of $F_{1}=0.885$. We discuss the limitations of our model.
 
 The dataset
 ===========
@@ -93,6 +98,7 @@ The challenge used the accuracy for measuring the performance of the
 competitors and also the quality of the code, documentation, and
 efficiency.
 
+
 We adopt the CoNLL 2003 format [@tjong2003introduction] to annotate
 whether a token is a part of dataset mention. Concretely, we use the tag
 DS denotes a dataset mention; The B- prefix indicates that the token is
@@ -100,27 +106,29 @@ the beginning of a dataset mention, the I- prefix indicates the token is
 inside of dataset mention, and O denotes a token that is not a part of
 dataset mention. We put each token and its tag (separated by horizontal
 tab control character) in one line, and use the end of line (\\n)
-control character as separator between sentences. The dataset were
-randomly split by 70%, 15%, 15% for training set, validation set and
-testing set, respectively.
+control character as separator between sentences (see Table 2.1). The dataset were randomly split by
+70%, 15%, 15% for training set, validation set and testing set,
+respectively.
 
-\centering{}
-     Token      Annotation
-  ------------ ------------
-      This          O
-               
-      data          O
-      from          O
-      the           O
-   Monitoring      B-DS
-      the          I-DS
-     Future        I-DS
-       (            O
-      MTF          B-DS
-       )            O
-      \\n      
+ Table 2.1. Example of a sentence annotated by IOB
+  tagging format.
 
-  : Example of a sentence annotated by IOB tagging format.
+  |   Token    |  Annotation |
+  |----------|-----------|
+  |    This    |     O       |
+  |    ...     |    ...      |
+  |    data    |      O      |
+  |    from    |      O      |
+  |    the     |      O      |
+  | Monitoring |     B-DS    |
+  |   the      |    I-DS     |
+  |   Future   |     I-DS    |
+  |    (       |      O      |
+  |    MTF     |     B-DS    |
+  |     )      |      O      |
+  |   \\n      |             |
+
+
 
 The Proposed Method
 ===================
@@ -140,9 +148,7 @@ to our particular dataset and problem is new.
 
 We now describe in more detail the choices of word representation,
 hyper-parameters, and training parameters. A schematic view of the model
-is in Fig
-[\[fig:NetworkArchitecture\]](#fig:NetworkArchitecture){reference-type="ref"
-reference="fig:NetworkArchitecture"} and the components are as follows:
+is in Figure 3.1 and the components are as follows:
 
 1.  Character encoder layer: treat a token as a sequence of characters
     and encode the characters by using a bidirectional LSTM to get a
@@ -159,9 +165,9 @@ reference="fig:NetworkArchitecture"} and the components are as follows:
 
 5.  CRF layer: find the most likely sequence of labels.
 
-![[\[fig:NetworkArchitecture\]]{#fig:NetworkArchitecture
-label="fig:NetworkArchitecture"}Network Architecture of BiLSTM-CRF
-network](img/bilistm_crf_network_structure_pic){width="80%"}
+![Figure 3.1. Network Architecture of BiLSTM-CRF network](img/Figure2.1.pdf){width="80%"}
+
+Figure 3.1. Network Architecture of BiLSTM-CRF network
 
 Character encoder
 -----------------
@@ -216,11 +222,18 @@ a output gate controlling the information to flow out of the cell. The
 LSTM could be defined formally by the following equations:
 
 $$i_{t}=\sigma(W_{i}x_{t}+W_{i}h_{t-1}+b_{i})$$
+
 $$f_{t}=\sigma(W_{f}x_{t}+W_{f}h_{t-1}+b_{f})$$
+
 $$g_{t}=tanh(W_{g}x_{t}+W_{g}h_{t-1}+b_{g})$$
+
 $$o_{t}=\sigma(W_{o}x_{t}+W_{o}h_{t-1}+b_{o})$$
+
 $$c_{t}=f_{t}\bigotimes c_{t-1}+i_{t}\bigotimes g_{t}$$
-$$h_{t}=o_{t}\bigotimes tanh(c_{t})$$ where $x_{t}$ is the input at time
+
+$$h_{t}=o_{t}\bigotimes tanh(c_{t})$$
+
+where $x_{t}$ is the input at time
 $t$, $W$ is the weights, $b$ is the bias. The $\sigma$ is the sigmoid
 function, $\bigotimes$ denotes the dot product, $c_{t}$ is the LSTM cell
 state at time $t$ and $h_{t}$ is hidden state at time $t$. The $i_{t}$,
@@ -257,21 +270,22 @@ is the standard measure used in sequence labeling tasks. This metric
 varies from 0 to 1, the higher the better. Our method achieved a
 relatively high $F_{1}$ of 0.885 for detecting mentions.
 
-         Hyper-parameter                 Search space          Best parameter
-  ------------------------------ ---------------------------- ----------------
-         number of epochs                     50                     50
-             patience                         10                     10
-            batch size                        64                     64
-   pre-trained word vector size   choice\[50, 100, 200,300\]        100
-       encoder hidden size                   300                    300
-     number of encoder layers                 2                      2
-           dropout rate               choice\[0.0,0.5\]             0.5
-     learning rate optimizer                 adam                   adam
-          l2 regularizer                     0.01                   0.01
-          learning rate                     0.001                  0.001
+Table 4.1. Model search space and best assignments
 
-  : [\[tab:Model-search-space\]]{#tab:Model-search-space
-  label="tab:Model-search-space"}Model search space and best assignments
+| Hyper-parameter              | Search space             | Best parameter |
+|------------------------------|--------------------------|----------------|
+| number of epochs             | 50                       | 50             |
+| patience                     | 10                       | 10             |
+| batch size                   | 64                       | 64             |
+| pre-trained word vector size | choice[50, 100, 200,300] | 100            |
+| encoder hidden size          | 300                      | 300            |
+| number of encoder layers     | 2                        | 2              |
+| dropout rate                 | choice[0.0,0.5]          | 0.5            |
+| learning rate optimizer      | adam                     | adam           |
+| l2 regularizer               | 0.01                     | 0.01           |
+| learning rate                | 0.001                    | 0.001          |
+
+
 
 We train models using the training data and monitor the performance
 using the validation data (we stop training if the performance does not
@@ -282,31 +296,25 @@ the regularization methods, and to avoid over-fitting, we use L2
 regularization set to 0.01 and we also use dropout rate equal to 0.5. We
 trained 8 models with a combination of different GloVe vector size (50,
 100, 300 and 300) and dropout rate (0.0, 0.5). The hyper-parameter
-settings are present in Table
-[\[tab:Model-search-space\]](#tab:Model-search-space){reference-type="ref"
-reference="tab:Model-search-space"}.
+settings are present in Table 4.1.
 
-   Models   GloVe size   Dropout rate   Precision   Recall    $F_{1}$
-  -------- ------------ -------------- ----------- -------- -----------
-     m1         50           0.0          0.884     0.873      0.878
-     m2         50           0.5          0.877     0.888      0.882
-     m3        100           0.0          0.882     0.871      0.876
-     m4        100           0.5          0.885     0.885    **0.885**
-     m5        200           0.0          0.882     0.884      0.883
-     m6        200           0.5          0.885     0.880      0.882
-     m7        300           0.0          0.868     0.886      0.877
-     m8        300           0.5          0.876     0.878      0.877
+Table 4.2. Performance of proposed network
 
-  : [\[tab:Performance-of-proposed\]]{#tab:Performance-of-proposed
-  label="tab:Performance-of-proposed"}Performance of proposed network
+| Models | GloVe size | Dropout rate | Precision | Recall | F1    |
+|--------|------------|--------------|-----------|--------|-------|
+| m1     | 50         | 0.0          | 0.884     | 0.873  | 0.878 |
+| m2     | 50         | 0.5          | 0.877     | 0.888  | 0.882 |
+| m3     | 100        | 0.0          | 0.882     | 0.871  | 0.876 |
+| m4     | 100        | 0.5          | 0.885     | 0.885  | 0.885 |
+| m5     | 200        | 0.0          | 0.882     | 0.884  | 0.883 |
+| m6     | 200        | 0.5          | 0.885     | 0.880  | 0.882 |
+| m7     | 300        | 0.0          | 0.868     | 0.886  | 0.877 |
+| m8     | 300        | 0.5          | 0.876     | 0.878  | 0.877 |
 
-The test performances are reported in Table
-[\[tab:Performance-of-proposed\]](#tab:Performance-of-proposed){reference-type="ref"
-reference="tab:Performance-of-proposed"}. The best model is trained by
+
+The test performances are reported in Table 4.2. The best model is trained by
 word vector size 100 and dropout rate 0.5 with $F_{1}$ score 0.885
-(Table
-[\[tab:Performance-of-proposed\]](#tab:Performance-of-proposed){reference-type="ref"
-reference="tab:Performance-of-proposed"}), and it takes 15 hours 58
+(Table 4.2), and it takes 15 hours 58
 minutes for the training on an NVIDIA GTX 1080 Ti GPU in a computer with
 an Intel Xeon E5-1650v4 3.6 GHz CPU with 128 GB of RAM.
 
