@@ -177,7 +177,6 @@ cp ../08-Rich_Context_Competition-GESIS/08-Rich_Context_Competition-GESIS.md cha
 cp -r -f ../08-Rich_Context_Competition-GESIS/figures/* 08_images/ 
 cp 08_images/*.png combined_images
 sed -i.bu "s/figures/combined_images/g" chap08.md
-sed -i.bu "s/figures/combined_images/g" chap08.md
 #
 # add a placeholder chapter heading 
 echo ' ' > /tmp/newfile
