@@ -480,7 +480,7 @@ fulltext. Second, we focus on a broader range of semantic classes, i.e.
 Measurement*, tackling also the problem of identifying novel entities.
 
 ![Overview of the entity extraction
-pipeline<span label="fig:pipeline"></span>](figures/research-methods/pipeline.png)
+pipeline<span label="fig:pipeline"></span>](figures/research-methods-pipeline.png)
 
 #### Distributed semantic models
 
@@ -731,7 +731,7 @@ for our model and a selected threshold of 0.1 is 0.56 (precison 0.55,
 recall 0.56).
 
 ![Performance for different selected probability thresholds (validation
-set)](figures/research-fields/fields-precision-recall.png)
+set)](figures/fields-precision-recall.png)
 
 <span id="fig:fields_precision_recall" label="fig:fields_precision_recall">\[fig:fields\_precision\_recall\]</span>
 
