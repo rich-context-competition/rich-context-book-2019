@@ -1069,7 +1069,7 @@ Available at:
 
 4.  <https://www.gesis.org/en/research/external-funding-projects/archive/infolis-i-and-ii>
 
-5.  [search.gesis.org](search.gesis.org)
+5.  <https://search.gesis.org>
 
 6.  <https://datasearch.gesis.org/>
 
