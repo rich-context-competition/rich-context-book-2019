@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chapter 4 - Metadata for Social Science Datasets &#8212; Rich Search and Discovery for Research Datasets 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 5 - Compettion Design" href="chap05.html" />
+    <link rel="prev" title="Chapter 3 - Digital Science Use Cases" href="chap03.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <hr class="docutils" />
+<div class="section" id="chapter-4-metadata-for-social-science-datasets">
+<h1>Chapter 4 - Metadata for Social Science Datasets<a class="headerlink" href="#chapter-4-metadata-for-social-science-datasets" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Metadata for Administrative and Social Science Data</p>
+</div></blockquote>
+<p>Robert B Allen</p>
+<p>[0000-0002-4059-2587]</p>
+<p>rba&#64;boballen.info</p>
+<p>Data are valuable but finding the right data is often difficult. This
+chapter reviews current approaches and issues for metadata about numeric
+data and data sets that may facilitate the identification of relevant
+data. In addition, the chapter reviews how metadata support
+repositories, portals, and services. There are emerging metadata
+standards but they are applied unevenly so that there is no
+comprehensive approach. There has been greater emphasis on structural
+issues than on semantic descriptions.</p>
+</div>
+<div class="section" id="introduction">
+<h1>INTRODUCTION<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Evidence-based policy needs relevant data (Commission on Evidence-Based
+Policy, 2018; Lane, 2016). Such data is valuable, but often difficult to
+find and/or replicate. The FAIR Open Access guidelines suggest that,
+ideally, data should be Findable, Accessible, Interoperable, and
+Reusable.[^1] Therefore, data curation and stewardship is needed.</p>
+<p>While data may include text, image, or video, here we focus on numeric
+observations recorded and maintained in machine-readable form. There are
+many data sets of such observations available online; the DataCite<a class="reference external" href="https://datacite.org/">^2</a>
+repository alone contains over five million. There are many different
+types of data sets. Data sets differ in their structure, their source,
+and their use. In some cases, they are single vectors of data; in other
+cases, they comprise all the data associated with one study or across a
+group of related data sets. Following the approach of W3C-DCAT (World
+Wide Web Consortium-Data Catalog Vocabulary)<a class="reference external" href="https://www.w3.org/TR/vocab-dcat/">^3</a>, a data set may be a
+collection of related observations which is developed and managed by a
+single entity such as a statistical agency. When stored as a unit
+online, the data set is a digital object.</p>
+<p>Metadata consists of short descriptors which refer to a digital object.
+Metadata can support users in finding data sets, and enable users to
+know what is in them. However, there is tremendous variability in the
+types of metadata and how they are applied. One categorization of
+metadata identifies structural (or technical), administrative, and
+descriptive metadata. Structural metadata includes the organization of
+the files. Administrative metadata describes the permissions, rights,
+and usage. Descriptive metadata covers the contents.</p>
+<p>This chapter surveys the state of the art of metadata for numeric data
+sets, focusing on metadata for administrative and social science
+records. Administrative records describe details about the state of the
+world as collected by organizations or agencies. They include
+governmental records, hospital records, educational records, and
+business records. By comparison, social science data generally is
+collected for the purpose of developing or applying theory.</p>
+<p>Section 2 describes data, metadata, and digital objects. Section 3
+discusses semantics. Section 4 considers repositories. Section 5
+describes services. Section 6 describes the techniques for documenting
+the internal structure of data sets. Section 7 discusses
+cyberinfrastructure.</p>
+</div>
+<div class="section" id="data-metadata-and-digital-data-objects">
+<h1>DATA, METADATA, AND DIGITAL DATA OBJECTS<a class="headerlink" href="#data-metadata-and-digital-data-objects" title="Permalink to this headline">¶</a></h1>
+<p>A metadata element describes some attribute of a digital object. The
+simplest metadata identifies the digital object.[^4] Individual metadata
+elements are generally part of a set which describes attributes of a
+data set. Such a set of metadata elements can be structured as a
+catalog, schema, or frame, and restrictions can be placed on the values
+allowed for the individual elements. A fragment of an example of the
+Schema.org[^5] dataset schema is shown in Figure 1. Note the distinct
+metadata elements in that fragment.</p>
+<p>Figure 1: Fragment of schema.org dataset schema[^6].</p>
+<p>The W3C DCAT<a class="reference external" href="https://www.w3.org/TR/vocab-dcat/">^7</a> is a schema standard for data sets that is used by many
+repositories such as data.gov. Other structured frameworks for data sets
+include the DataCite<a class="reference external" href="https://schema.datacite.org/">^8</a> metadata schema and the Inter-university
+Consortium for Political and Social Research Data Documentation
+Initiative (ICPSR DDI) discussed below (Section 4.1). The catalog
+specifications provide a flexible framework. For instance, DCAT allows
+the inclusion of metadata elements drawn from domain schema and
+ontologies. Some of these domain schemas are widely used resources which
+DCAT refers to as assets. For instance, spatial relationships are often
+modeled by the Federal Geographic Data Committee (FGDC) standard.<a class="reference external" href="https://www.fgdc.gov/">^9</a></p>
+<p>Many of the implementations for indexing collections of metadata schemas
+use relational databases. Thus, they use SQL and support tools such as
+data dictionaries. Moreover, they are often characterized by Unified
+Modeling Language (UML) Class Diagrams which are common for data
+modeling.</p>
+</div>
+<div class="section" id="semantic-descriptions">
+<h1>SEMANTIC DESCRIPTIONS<a class="headerlink" href="#semantic-descriptions" title="Permalink to this headline">¶</a></h1>
+<p>Semantic data models have become widely explored. In particular, the
+Semantic Web utilizes nodes which are implemented with XML. RDF
+(Resource Description Framework) extends XML by requiring triples which
+assert a relationship (property) between two identifiers:
+“identifier”-“property”-“identifier”. By connecting triples, RDF can
+define a graph network of the relationships among a set of controlled
+vocabulary terms; this is the essence of linked data.</p>
+<p>RDFS (RDF Schema) extends RDF by supporting class/subclass
+relationships. The classes allowed for identifiers in RDFS triples are
+controlled by domain and range parameters. Traditional thesauri have a
+simple hierarchical structure, the Simple Knowledge Organization System
+(SKOS) is an RDFS standard for a machine-processable representation of
+thesauri. Many administrative and social-science-related thesauri such
+as EDGAR, and those of the World Bank, and the OECD have now been
+implemented with SKOS. In addition, a knowledge graph is a model of a
+domain, sometimes including instances, which may be implemented in SKOS.
+For example, DBpedia<a class="reference external" href="https://wiki.dbpedia.org/">^10</a> is a knowledge graph based on Wikipedia.</p>
+<p>Some frameworks for structural descriptions of data sets include aspects
+of ontologies. For example, less formal ontologies simply provide
+definitions and employ RDFS. Similarly, Schema.org schemas can be used
+with micro-formats which match schema elements with passages in an
+online text. Schema.org has a classification of topics and may
+incorporate other systems such as FOAF (Friend of a Friend) which
+includes attributes associated with people. Formal ontologies use OWL
+(Web Ontology Language) to add features to RDFS. These features lend
+themselves to logical inference provided that the entities and
+relationships are rigorously defined.</p>
+<p>Upper ontologies provide top-down structures for the types of entities
+allowed in derivative domain and application ontologies. One of the best
+known upper ontologies is the Basic Formal Ontology (BFO) (Arp, Smith, &amp;
+Spear, 2015), which is a realist, Aristotelian approach. At the
+top-level, BFO distinguishes between Continuants (endurants) and
+Occurrents (perdurants) and also between Universals and Particulars
+(instances). Many biological ontologies have been developed based on BFO
+and are collected in the Open Biomedical Ontology (OBO) Foundry.</p>
+<p>There are fewer rich ontologies dealing with social science content than
+there are for natural science. One challenge is “social ontology”, that
+is, developing definitions for social terms. It is difficult to define
+exactly what is a family, a crime, or money. In most cases, an
+operational definition or an approximate definition may suffice where
+structured documentation of the definitions are unavailable. Moreover,
+while social terms are especially difficult to define for vernacular
+speech, it seems possible to make clear, though perhaps cumbersome,
+definitions for scholarly applications.</p>
+</div>
+<div class="section" id="data-repositories">
+<h1>DATA REPOSITORIES<a class="headerlink" href="#data-repositories" title="Permalink to this headline">¶</a></h1>
+<p>A data repository holds data sets and related digital objects. It
+provides access to the data sets and supports search. Metadata is
+integral to these services at several levels. In addition to item-level
+metadata for the data sets, there can also be study-level metadata or
+collection-level metadata.</p>
+<div class="section" id="the-inter-university-consortium-for-political-and-social-research-icpsr">
+<h2>The Inter-University Consortium for Political and Social Research (ICPSR)<a class="headerlink" href="#the-inter-university-consortium-for-political-and-social-research-icpsr" title="Permalink to this headline">¶</a></h2>
+<p>ICPSR<a class="reference external" href="https://www.icpsr.umich.edu/icpsrweb/">^11</a> is a major repository of public-use social science and
+administrative data sets derived from questionnaires and surveys. The
+ICPSR DDI[^12] (e.g., Vardigan, Heus, &amp; Thomas, 2009) defines a catalog
+code. A notable feature is a codebook which saves the exact wording of
+all the questions. In addition, the ICPSR provides an index of all
+variable names that are used in the data sets. DDI-Lifecycle is an
+extension of DDI that describes the broader context in which the survey
+was administered as well as the details about the preservation of the
+file (see Section 5.3).</p>
+</div>
+<div class="section" id="repositories-of-governmental-and-ngo-statistical-agencies">
+<h2>Repositories of Governmental and NGO Statistical Agencies<a class="headerlink" href="#repositories-of-governmental-and-ngo-statistical-agencies" title="Permalink to this headline">¶</a></h2>
+<p>Statistical data collection is a core function of government. Most
+countries have national statistical agencies. While these statistical
+collections often emphasize social data, they also include related
+indicators such as agricultural and industrial output and housing, such
+as Statistics New Zealand, and the Korean Social Science Data Archive
+(KOSSDA). European data sets are maintained in the Consortium of
+European Social Science Data Archives (CESSDA)<a class="reference external" href="%5Bhttps://www.cessda.eu/%5D%7B.underline%7D">^13</a> and the European
+Social Survey.<a class="reference external" href="https://www.europeansocialsurvey.org/data/">^14</a> Australia has a broad data management initiative,
+ANDS.[^15] Many U.S. governmental data sets are collected at
+data.gov.[^16] In addition, there are many non-governmental and
+inter-governmental agencies such as the OECD, the World Bank, and the
+United Nations, which host data sets.</p>
+</div>
+<div class="section" id="other-data-repositories">
+<h2>Other Data Repositories<a class="headerlink" href="#other-data-repositories" title="Permalink to this headline">¶</a></h2>
+<p>Many data sets are produced, curated, and used in the natural sciences
+such as astronomy and geosciences. Some of these data sets have highly
+automated data collection, elaborate archives and established curation
+methods. Many of these repositories include multiple data sets for which
+access is supported with portals or data cubes (see Section 6.1). For
+instance, massive amounts of geophysical data and related text documents
+are collected in the EarthCube<a class="reference external" href="https://www.earthcube.org/">^17</a> portal. The Science.gov portal is
+established by the U.S. Office of Science Technology and Policy. NASA
+supports approximately 25 different data portals. Each satellite in the
+Earth Observation System (EOS) may provide hundreds of streams of
+data,<a class="reference external" href="https://pds.nasa.gov/">^18</a> with much common metadata. This provides a context analogous
+to study-level metadata. Likewise, there are massive genomics and
+proteomics data sets which are accessible via portals such as
+UniProt<a class="reference external" href="https://www.uniprot.org/">^19</a> and the Protein Data Bank<a class="reference external" href="http://www.rcsb.org/">^20</a> along with suites of tools
+for exploring them. Similarly, there are very large data sets from
+medical research such as from clinical trials and from clinical practice
+including Electronic Health Records (EHRs).</p>
+</div>
+<div class="section" id="ecosystem-of-texts-and-data-sets">
+<h2>Ecosystem of Texts and Data Sets<a class="headerlink" href="#ecosystem-of-texts-and-data-sets" title="Permalink to this headline">¶</a></h2>
+<p>Data sets are often associated with text reports. For example, the Dryad
+Digital Repository<a class="reference external" href="https://datadryad.org/">^21</a> hosts data sets from scholarly publications
+which require the deposit of data associated with scholarly papers
+accepted for publication. In addition, data sets may be cited in much
+the same way that research reports are cited. Formal citation
+facilitates tracing the origins of data used in analyses and helps to
+acknowledge the work of the creators of the data sets. Standards have
+been developed for such citations (Martone, 2014; Silvello, 2017).</p>
+</div>
+</div>
+<div class="section" id="services">
+<h1>SERVICES<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of metadata and other aspects of information organization
+and management is to provide services to users. Indeed, “service
+science” is an approach in information technology which focuses on the
+design and delivery of services rather than on underlying technologies.</p>
+<div class="section" id="search">
+<h2>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<p>Searching for data sets differs from the familiar web-based text search
+because data repositories are generally hosted by either relational
+databases or semantic triplestores. Even where the data are stored on
+separate servers the metadata can be harvested and searched. This type
+of federated search is supported by the Open Archives Initiative
+Protocol for Metadata Harvesting (OAI-PMH);<a class="reference external" href="https://www.openarchives.org/pmh/">^22</a> both data.gov and ICPSR
+use OAI-PMH.</p>
+</div>
+<div class="section" id="from-statistical-packages-to-virtual-research-environments">
+<h2>From Statistical Packages to Virtual Research Environments<a class="headerlink" href="#from-statistical-packages-to-virtual-research-environments" title="Permalink to this headline">¶</a></h2>
+<p>There is an increasingly rich set of analytic tools. Some of the
+earliest tools were statistical packages such as SPSS, R, SAS, and
+STATA. These were gradually enhanced with data visualization and other
+analytic software. The current generation of tools such as Jupyter,
+RSpace, and eLab notebooks (ELN) integrate annotations, workflows, raw
+data, and data analysis into one platform. In addition, some
+repositories have developed their own powerful data exploration tools
+such as ICPSR Colectica<a class="reference external" href="https://www.colectica.com/">^23</a> for DDI and the GSS Data Explorer<a class="reference external" href="https://gssdataexplorer.norc.org/">^24</a>.
+Virtual research environments (VREs) are typically organized by research
+communities to coordinate data sets with search and analytic tools. For
+instance, the Virtual Astronomy Observation (VAO) uses Jupyter to
+provide users with a robust research environment. WissKI<a class="reference external" href="http://wiss-ki.eu">^25</a> is a
+platform for coordinating digital humanities data sets which are based
+on Drupal.</p>
+</div>
+<div class="section" id="preservation">
+<h2>Preservation<a class="headerlink" href="#preservation" title="Permalink to this headline">¶</a></h2>
+<p>Lost data is often irreplaceable. Even if the data is not entirely lost,
+users need confidence that the quality of stored data has not been
+compromised. Moreover, although data storage prices are declining
+dramatically, we cannot save everything and the cost of maintaining a
+trusted repository remains substantial. Many of these challenges are
+familiar from traditional archives. For instance, selection policies
+typical in archives could help in controlling the many poorly documented
+data sets in some repositories. Yet, prioritization is difficult<a class="reference external" href="http://www.dcc.ac.uk/">^26</a>
+(Whyte &amp; Wilson, 2010).</p>
+<p>The Open Archival Information System (OAIS) provides a reference model
+for the management of archives (Lee, 2010). The OAIS framework has been
+incorporated into the ICPSR DDI-Lifecycle model. The Integrated
+Rule-Oriented Data System (iRODS)<a class="reference external" href="http://irods.org">^27</a> is a policy-based archival
+management system developed for large data stores. It implements a
+service-oriented architecture (SOA) to support best practices
+established by archivists.</p>
+<p>Provenance records the history of an entity. This can help to ensure
+confidence in its authenticity. For data in a repository, provenance
+often means tracing the history of repository operations. The history of
+transitions is often recorded as event data, where the events are what
+happened to the data in the dataset. Typically, provenance ontologies
+include actors, events, and digital objects. Potentially, blockchains
+could provide an even greater level of trust in digital provenance.</p>
+</div>
+<div class="section" id="metadata-quality-and-metadata-management">
+<h2>Metadata Quality and Metadata Management<a class="headerlink" href="#metadata-quality-and-metadata-management" title="Permalink to this headline">¶</a></h2>
+<p>Metadata, whether for texts or data sets, needs to be complete,
+consistent, standardized, machine processable, and timely (Park, 2009).
+A metadata editor supports the assignment of quality metadata (e.g.,
+Gonclaves, O’Conner, et al., 2019). When collections or metadata
+standards change, the repository librarian must revise metadata (Tonkin,
+2009). This might be particularly needed when updating metadata from
+data streams<a class="reference external" href="http://schema.org/dataset/datastreams">^28</a> such as those from satellite downlinks or smart-city
+sensors.</p>
+<p>Although survey results are generally aggregated across individuals,
+individual-level data is sometimes very useful. Some repositories of
+survey data include micro-data, data for the responses that individuals
+gave to survey questions.[^29] Currently, there are no distinct metadata
+tags for such data; they are embedded into repository data. Moreover,
+the individual level of analysis raises privacy concerns and needs to be
+carefully managed; at the least, access should be limited to qualified
+researchers.</p>
+<p>Metadata registries, such as the Marine Metadata Interoperability
+Ontology Registry and Repository,<a class="reference external" href="https://mmisw.org/">^30</a> record usage. The Registry of
+Research Data Repositories (re3data registry),<a class="reference external" href="https://www.re3data.org/">^31</a> which is operated by
+DataCite, links to more than 2000 different repositories each of which
+holds many data sets. Each of the repositories is described by the
+re3data.org schema for the description of research data repositories
+(Rücknagel, Vierkant, et al., 2015).</p>
+<p>Metadata application profiles provide constraints on the types of
+entities that can be included in the metadata for a given application.
+For instance, DCAT Application Profiles (DCAT-AP) support standardized
+metadata exchange between repositories in different jurisdictions in the
+EU.<a class="reference external" href="https://joinup.ec.europa.eu/release/dcat-ap/11">^32</a></p>
+</div>
+</div>
+<div class="section" id="details-about-the-data-in-data-sets">
+<h1>DETAILS ABOUT THE DATA IN DATA SETS<a class="headerlink" href="#details-about-the-data-in-data-sets" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="data-cubes">
+<h2>Data Cubes<a class="headerlink" href="#data-cubes" title="Permalink to this headline">¶</a></h2>
+<p>Many notable data management techniques were originally developed for
+managing and processing business data.[^33] One such technique is data
+cubes, which support access to multidimensional data. They present data
+as if it filled cells of a high-dimensional cube, even if the data will
+probably not fill all of the cells. Users can generate different views
+of the data by drilling-down, rolling-up, and slicing-and-dicing across
+cells. For complex data sets, there will be many dimensions. To
+facilitate retrieval, there can be a rich pre-coordinated index for
+common queries; other queries can be implemented with slower methods
+such as hashing or B-trees.</p>
+<p>Data cubes have been extended beyond business information processing to
+cubes such as the Statistical Data and Metadata eXchange (<em>SDMX) used in
+the financial services industry and the</em> W3C Data Cube<a class="reference external" href="https://www.w3.org/TR/vocab-data-cube/">^34</a> standard
+that is applied in projects such as EarthCube.</p>
+</div>
+<div class="section" id="sequential-activities-and-modeling-research">
+<h2>Sequential Activities and Modeling Research<a class="headerlink" href="#sequential-activities-and-modeling-research" title="Permalink to this headline">¶</a></h2>
+<p>Entities change over time, yet knowledge representation frameworks
+rarely model change. In order to represent changes, models need to
+represent transitions, processes, and other sequential activities. Such
+modeling is closer to the Unified Modeling Language (UML) or even
+programming languages than to ontologies. In fact, modeling change is
+routine for state machines, Petri nets, and other transition models. A
+“model-layer” that allows general statements to be made about sequential
+activities could incorporate both ontology and transitionals (Allen &amp;
+Kim, 2018).</p>
+<p>Models of sequential activities include workflows and mechanisms (e.g.,
+Allen, 2018). A workflow is a structure for managing a sequence of
+activities and is a natural fit for describing research methods and
+analyses (Austin, Bloom, et al., 2017). The Taverna workflow tool has
+been widely used in the MyExperiment<a class="reference external" href="https://www.myexperiment.org/home">^35</a> project, which provides a
+framework for capturing and posting research methods and incorporates
+ontologies such as FOAF.</p>
+<p>Allen (2015, 2018) has proposed direct representation of entire research
+reports. This approach uses a programming language that blends upper
+ontologies with object-oriented programming to do semantic modeling.
+Beyond modeling events, it is also possible to use structured
+argumentation and assertions in scientific research reports.
+Potentially, social mechanisms (e.g., Hedstrom &amp; Ylikoski, 2010) and
+community models could be implemented. Further, highly-structured
+evidence and claims might be applied to the evaluation of evidence-based
+social policy.</p>
+</div>
+</div>
+<div class="section" id="cyberinfrastructure">
+<h1>CYBERINFRASTRUCTURE<a class="headerlink" href="#cyberinfrastructure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="information-institutions-and-organizations">
+<h2>Information Institutions and Organizations<a class="headerlink" href="#information-institutions-and-organizations" title="Permalink to this headline">¶</a></h2>
+<p>Libraries and archives (whether traditional or digital) have the
+mission, and often the resources, to develop standards and maintain
+information over the long-term. As noted earlier (Section 5.3),
+preservation is the fundamental concern for archival collections.
+Information institutions often have formal collection management
+strategies, metrics, and policies. These include Web and repository
+metrics and analytics, usage statistics such as reports of how many
+downloads were made from data sets, and procedures for updates and
+formatting standards.</p>
+<p>In addition to traditional information institutions, there are now many
+other players. These new players have slightly different mandates. For
+example, Schema.org’s primary mission is to provide a structure that
+improves indexing by search engine companies. Nonetheless, these
+organizations often adopt best practices similar to those of traditional
+information organizations.</p>
+<p>CrossRef<a class="reference external" href="https://www.crossref.org/">^36</a> and DataCite are DOI registration agencies. CrossRef is a
+portal to metadata for scholarly articles, while DataCite provides
+metadata for digital objects associated with research. Increasingly, the
+two projects are coordinating. ORCID iDs<a class="reference external" href="https://orcid.org/">^37</a> are persistent digital
+identifiers assigned to authors. The emergence of structured identifiers
+such as DOIs and ORCID iDs has allowed the development of services such
+as VIVO<a class="reference external" href="https://duraspace.org/vivo/">^38</a> and the Microsoft Academic Graph (MAG)<a class="reference external" href="https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/">^39</a> which allow
+authors to be tracked across research reports and projects, and across
+publishers.</p>
+</div>
+<div class="section" id="cloud-technologies-software-as-a-service-and-the-internet-of-things">
+<h2>Cloud Technologies, Software as a Service, and the Internet of Things<a class="headerlink" href="#cloud-technologies-software-as-a-service-and-the-internet-of-things" title="Permalink to this headline">¶</a></h2>
+<p>We are now well into the era of cloud computing (Foster &amp; Gannon, 2017),
+allowing flexible allocation of computing, networking and storage
+resources, which facilitates Software as a Service (SaaS). The
+compatibility of the versions of software packages needed for data
+management is often a challenge. Containers, such as those from Docker,
+allow compatible versions of software to be assembled and run on a
+virtual computer. A container could hold datasets, workflows, and the
+programs used to analyze the data, making the analyses readily
+replicable. Highly-networked data centers also facilitate the Internet
+of Things (IoT) which will generate massive data sets such as for “smart
+cities”.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h1>CONCLUSION<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>Data may not be useful when stand-alone without context. Some of the
+biggest issues for the retrieval of information from data sets concern
+information organization, which help provide context. Metadata supports
+the discovery of and access to data sets. We need richer, more
+systematic, and more interoperable metadata standards. Even more
+attention to metadata would further support evidence-based policy.</p>
+</div>
+<div class="section" id="acknowledgments">
+<h1>ACKNOWLEDGMENTS<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h1>
+<p>Julia Lane and members of NYU’s Center for Urban Science and Progress
+provided useful advice and comments.</p>
+</div>
+<div class="section" id="references-references-listparagraph">
+<h1>REFERENCES {#references .ListParagraph}<a class="headerlink" href="#references-references-listparagraph" title="Permalink to this headline">¶</a></h1>
+<p>Allen, R.B. (2015). Repositories with direct representation, <em>Networked
+Knowledge Representation Systems,</em> arXiv: 1512.09070</p>
+<p>Allen, R.B. (2018). <em>Issues for Using Semantic Modeling to Represent
+Mechanisms</em>, arXiv:1812.11431</p>
+<p>Allen, R.B., &amp; Kim, YH. (2017/2018). Semantic Modeling with Foundries,
+arXiv:1801.00725</p>
+<p>Arp, R., Smith, B., &amp; Spear, A.D. (2015). <em>Building Ontologies with
+Basic Formal Ontology</em>, MIT Press, Cambridge. MA.</p>
+<p>Austin, C.C., Bloom, T., Dallmeier-Tiessen, S., Khodiyar, V.K., Murphy,
+F., Nurnberger, A., et al. (2017). Key components of data publishing:
+Using current best practices to develop a reference model for data
+publishing. <em>In<a class="reference external" href="https://link.springer.com/journal/799">ternational Journal on Digital
+Libraries</a>, 18</em>(2) 77–92, doi:
+10.1007/s00799-016-0178-2</p>
+<p>Commission on Evidence-Based Policymaking. (2018). The Promise of
+Evidence-Based Policymaking, <a class="reference external" href="https://www.cep.gov/cep-final-report.html">https://www.cep.gov/cep-final-report.html</a></p>
+<p>Foster, I., &amp; Gannon, D.B. (2017). Cloud Computing for Science and
+Engineering, MIT Press, Cambridge, MA.</p>
+<p>Gonçalves, R.S., O’Connor, M.J., Martínez-Romero, M., Egyedi, A.L.,
+Willrett, D., Graybeal, J., &amp; Musen, M.A. (2019). <em>The CEDAR workbench:
+an ontology-assisted environment for authoring metadata that describe
+scientific experiments</em>. arXiv: 1905.06480</p>
+<p>Hedström, P., &amp; Ylikoski, P. (2010). Causal mechanisms in the social
+sciences. <em>Annual Review of Sociology</em>, <em>36</em> 49-67.</p>
+<p>Lane, J. (2016). Big data for public policy: The quadruple helix,
+<em>Journal Policy Analysis and Management, 35</em>(3), doi:
+<a class="reference external" href="https://doi.org/10.1002/pam.21921"><strong>10.1002/pam.21921</strong></a></p>
+<p>Lee, C.A. (2010). Open Archival Information System (OAIS) Reference
+Model. <em>Encyclopedia of Library and Information Sciences</em> (3^rd^
+Edition). CRC Press, doi: 10.1081/E-ELIS3-120044377</p>
+<p>Martone M. (ed.) (2014). <em>Joint Declaration of Data Citation
+Principles</em>. San Diego CA: FORCE11, Data Citation Synthesis Group:
+<a class="reference external" href="https://www.force11.org/group/joint-declaration-data-citation-principles-final">https://www.force11.org/group/joint-declaration-data-citation-principles-final</a></p>
+<p>Park, JR., Metadata quality in digital repositories: A survey of the
+current state of the art. <em>Cataloging &amp; Classification Quarterly, 47</em>,
+213–228, 2009, doi: 10.1080/01639370902737240</p>
+<p>Rücknagel, J., Vierkant, P., Ulrich, R., Kloska, G., Schnepf, E.,
+Fichtmüller, D. et al. (2015): Metadata Schema for the Description of
+Research Data Repositories: version 3.0 (29), doi: 10.2312/re3.008</p>
+<p>Silvello, G. (2018). Theory and practice of data citation. <em>Journal of
+the Association for Information Science and Technology, 69</em>(1) 6-20.
+doi: 10.1002/asi.23917</p>
+<p>Starr, J., Castro, E., Crosas, M., Dumontier, M., Downs**, R.R.,**
+Duerr, R., et al. (2015). Achieving human and machine accessibility of
+cited data in scholarly publications, <em>PeerJ Computer Science</em> 1: e1,
+doi 10.7717/peerj-cs.1</p>
+<p>Tonkin, E., (2009). MetRe <a class="reference external" href="https://research-information.bristol.ac.uk/en/publications/metre-supporting-the-metadata-revision-process(b2fa9a79-e50b-4888-b510-336aacf73da5).html">supporting the metadata revision
+process.</a>
+<em>International Conference on Digital Libraries</em>,</p>
+<p>Vardigan, M., Heus,P., &amp; Thomas, W. (2008). Data documentation
+initiative: Toward a standard for the social sciences. <em>International
+Journal of Digital Curation. <strong>3</strong></em>**(1). doi:**
+<a class="reference external" href="https://doi.org/10.2218/ijdc.v3i1.45">10.2218/ijdc.v3i1.45</a></p>
+<p>Whyte, A. &amp; Wilson, A. (2010). How to appraise and select research data
+for curation. <em>DCC How-to Guides. Edinburgh</em>: Digital Curation Centre.
+http://www.dcc.ac.uk/resources/how-guides</p>
+<p>Wilkinson, M.D.,
+<a class="reference external" href="https://www.nature.com/articles/sdata201618#auth-2">Dumontier</a>, M.,
+Aalbersberg, I.J.J., Appleton, G., Axton, M., Baak. A., et al. (2016).
+The FAIR guiding principles for scientific data management and
+stewardship, <em>Scientific Data, 3</em>, 160018. doi: 10.1038/sdata.2016.18</p>
+<p>[^1]: The FAIR Guidelines have been extended from scholarly texts to
+data sets (Wilkinson,
+<a class="reference external" href="https://www.nature.com/articles/sdata201618#auth-2">Dumontier</a>, et
+al., 2018).</p>
+<p>[^4]: Such operators need to be unambiguous. For example, Digital Object
+Identifiers (DOIs, <a class="reference external" href="http://doi.org">http://doi.org</a>) were developed for scholarly
+journals and are assigned by publishers, with a part of the DOI code
+being a unique publisher ID. While the DOIs may identify more than
+one data set, version numbers distinguish the data sets. For
+instance, the entire GSS (General Social Survey) has only one DOI,
+but it is possible to drill down through the different data sets by
+specifying version numbers.</p>
+<p>[^5]: Schema.org is a project of a consortium of search-engine
+companies. The Schema.org dataset schema
+(<a class="reference external" href="https://schema.org/Dataset">https://schema.org/Dataset</a>) is used by the Google Data Search.</p>
+<p>[^6]:</p>
+<p>[^12]: <a class="reference external" href="https://www.ddialliance.org/">https://www.ddialliance.org/</a>. Note that the Data Documentation
+Initiative (DDI) is different from the Data Discovery Index (DDI)
+associated with DataMed.</p>
+<p>[^15]: The Australia National Data Service, <a class="reference external" href="https://www.ands.org.au/">https://www.ands.org.au/</a></p>
+<p>[^16]: There are additional collections at <a class="reference external" href="http://data.census.gov">http://data.census.gov</a>,
+<a class="reference external" href="http://gss.norc.org">http://gss.norc.org</a>. [ ]{.underline} <a class="reference external" href="http://electionstudies.org">http://electionstudies.org</a>,
+<a class="reference external" href="http://psidonline.isr.umich.edu">http://psidonline.isr.umich.edu</a>, and <a class="reference external" href="http://www.nlsinfo.org">http://www.nlsinfo.org</a>.</p>
+<p>[^29]: The term micro-data is used in two distinct ways. In the context
+of HTML, it is associated with embedding Schema.org codes into web
+pages similar to micro-formats. In the context of survey data, it
+refers to individual-level data.</p>
+<p>[^33]: E.g., Online Analytical Processing (OLAP), Enterprise Data
+Warehouses (EDW), and Decision Support Systems (DSS).</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Rich Search and Discovery for Research Datasets</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#how-this-book-came-to-be">How this book came to be</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#book-overview">Book overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-2">Section 2:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-3">Section 3:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-4-looking-forward">Section 4: Looking forward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#more-resources">More resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2 - Bundesbank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3 - Digital Science Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html#enriching-context-and-enhancing-engagement-around-datasets">Enriching context and enhancing engagement around datasets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chapter 4 - Metadata for Social Science Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#introduction">INTRODUCTION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#data-metadata-and-digital-data-objects">DATA, METADATA, AND DIGITAL DATA OBJECTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#semantic-descriptions">SEMANTIC DESCRIPTIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#data-repositories">DATA REPOSITORIES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#services">SERVICES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#details-about-the-data-in-data-sets">DETAILS ABOUT THE DATA IN DATA SETS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#cyberinfrastructure">CYBERINFRASTRUCTURE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#conclusion">CONCLUSION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#acknowledgments">ACKNOWLEDGMENTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#references-references-listparagraph">REFERENCES {#references .ListParagraph}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5 - Compettion Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#methods">Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#future-work-and-lessons-learned">Future Work and Lessons Learned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7 - Finding datasets in publications: The KAIST approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#non-technical-overview">Non technical overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-did-you-do">What did you do</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-worked-and-what-didnt">What worked and what didn’t</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#summary-of-your-results-and-caveats">Summary of your results and caveats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#lessons-learned-and-what-would-you-do-differently">Lessons learned and what would you do differently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-comes-next">What comes next</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#appendix-description-of-the-code-and-documentation">Appendix: Description of the code and documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8 - Finding datasets in publications: The GESIS approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html#the-contribution-of-gesis-to-the-rich-context-competition">The contribution of GESIS to the Rich Context Competition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9 - Finding datasets in publications: The University of Paderborn approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#project-architecture">Project Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#approach">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#evaluation">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#discussion">Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#future-agenda">Future Agenda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10 - Finding datasets in publications: The Singapore Management University approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11 - Finding datasets in publications: The University of Syracuse approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-dataset">The dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-proposed-method">The Proposed Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#acknowledgements-acknowledgements-unnumbered">Acknowledgements {#acknowledgements .unnumbered}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12 - Standard Test Corpora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13 - The future of context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html#the-future-of-ai-in-rich-context">The Future of AI in Rich Context</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="chap03.html" title="previous chapter">Chapter 3 - Digital Science Use Cases</a></li>
+      <li>Next: <a href="chap05.html" title="next chapter">Chapter 5 - Compettion Design</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, NYU.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/chap04.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

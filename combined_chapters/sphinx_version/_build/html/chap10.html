@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chapter 10 - Finding datasets in publications: The Singapore Management University approach &#8212; Rich Search and Discovery for Research Datasets 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 11 - Finding datasets in publications: The University of Syracuse approach" href="chap11.html" />
+    <link rel="prev" title="Chapter 9 - Finding datasets in publications: The University of Paderborn approach" href="chap09.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <hr class="docutils" />
+<div class="section" id="chapter-10-finding-datasets-in-publications-the-singapore-management-university-approach">
+<h1>Chapter 10 - Finding datasets in publications: The Singapore Management University approach<a class="headerlink" href="#chapter-10-finding-datasets-in-publications-the-singapore-management-university-approach" title="Permalink to this headline">¶</a></h1>
+<!--
+---
+author:
+- |
+    Philips Kokoh Prasetyo, Amila Silva, Ee-Peng Lim, Palakorn Achananuparp  
+    Living Analytics Research Centre  
+    Singapore Management University  
+    [{pprasetyo,amilasilva,eplim,palakorna}@smu.edu.sg]{}
+bibliography:
+- 'rcc-02.bib'
+title: Simple Extraction for Social Science Publications
+---
+--><div class="section" id="chapter-simple-extraction-for-social-science-publications">
+<h2>Chapter: Simple Extraction for Social Science Publications<a class="headerlink" href="#chapter-simple-extraction-for-social-science-publications" title="Permalink to this headline">¶</a></h2>
+<p>Philips Kokoh Prasetyo, Amila Silva, Ee-Peng Lim, Palakorn AchananuparpLiving Analytics Research Centre, Singapore Management University{pprasetyo,amilasilva,eplim,palakorna}&#64;smu.edu.sg</p>
+<p>First draft: 11 February 2019; Second draft: 12 June 2019</p>
+<div class="section" id="abstract">
+<h3>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h3>
+<p>With the vast number of datasets and literature collections available for research today, it is very difficult to keep track on the use of datasets and literature articles for scientific research and discovery. Many datasets and research work using them are left undiscovered and under-utilized due to the lack of available search tools to automatically find out who worked with the data, on what research topics, using what research methods and generating what results. The Coleridge Rich Context Competition (RCC) therefore aims to build automated dataset discovery tools for analyzing and searching social science research publications. In this chapter, we describe our approach to solving the first phase of Coleridge Rich Context Competition.</p>
+</div>
+<div class="section" id="table-of-contents">
+<h3>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p><a class="reference external" href="#1-introduction">Introduction</a></p></li>
+<li><p><a class="reference external" href="#2-related-work">Related Work</a></p></li>
+<li><p><a class="reference external" href="#3-data-analysis">Data Analysis</a></p></li>
+<li><p><a class="reference external" href="#4-methods">Methods</a></p></li>
+<li><p><a class="reference external" href="#5-experiment-results">Experiment Results</a></p></li>
+<li><p><a class="reference external" href="#6-conclusion">Lesson Learned</a></p></li>
+<li><p><a class="reference external" href="#7-acknowledgements">Acknowledgement</a></p></li>
+<li><p><a class="reference external" href="#appendix-technical-documentation">Appendix: Technical Documentation</a></p></li>
+</ol>
+</div>
+<div class="section" id="introduction">
+<h3>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>Automated discovery from scientific research publications is an important task for analysts, researchers, and learners as they develop the scientific knowledge and use them to gain new insights. More specifically, on the tasks of discovering datasets and methods mentioned in a research publication, we have seen a lack of available tools to easily find who else worked on a particular dataset, what research methods people apply on the dataset, and what results they have found using the dataset. Furthermore, new datasets are not easy to discover, and as a result, good datasets and methods are often neglected.</p>
+<p>The Coleridge Rich Context Competition (RCC) aims to build automated datasets discovery from social science research publications, filling the gap of this problem. In this competition, given a corpus of social science research publications, we have to automatically identify datasets used, and then infer the research methods and research fields in the publications. Note that no labeled data are given for research methods and fields identification.</p>
+<p>We describes our submission to the first phase of RCC. We perform dataset detection followed by implicit entity linking approach to tackle dataset extraction task. We adopt weakly supervised classification for research methods and fields identification tasks utilizing external resource SAGE Knowledge as proxy for weak labels.</p>
+<!-- This manuscript describes summary of our submission for the first phase
+of RCC. We begin with related work in section \[sec:relatedwork\]. We
+present our analysis on RCC dataset in section \[sec:data\], describe
+our approach in section \[sec:methods\], and discuss our experiment
+results in section \[sec:experiments\]. Finally, we wrap up with
+conclusion and future work in section \[sec:conclusion\].
+ --></div>
+<div class="section" id="related-work">
+<h3>2. Related Work<a class="headerlink" href="#related-work" title="Permalink to this headline">¶</a></h3>
+<p>Extracting information from scientific text has been explored in the past [<a class="reference external" href="#PM04">PM04</a>; <a class="reference external" href="#NCKL15">NCKL15</a>; <a class="reference external" href="#SBP+16">SBP<sup>+</sup>16</a>]. One type of information extraction from scientific articles is extracting keyphrases and relation between them [<a class="reference external" href="#ADR+17">ADR<sup>+</sup>17</a>]. Luan et al. (2017) propose semi-supervised sequence tagging approach to extract keyphrases [<a class="reference external" href="#LOH17">LOH17</a>]. Augenstein and Søgaard (2017) explore multi-task deep recurrent neural network approach with several auxiliary tasks to extract keyphrases [<a class="reference external" href="#AS17">AS17</a>].</p>
+<p>Another type of extraction is citation extraction. Two citation extraction settings have been explored before: reference mining inside the full text [<a class="reference external" href="#ACK18">ACK18</a>], and citation metadata extraction [<a class="reference external" href="#Het08">Het08</a>; <a class="reference external" href="#APBM14">APBM14</a>; <a class="reference external" href="#AGJ+17">AGJ<sup>+</sup>17</a>]. Nasar er al. (2018) write a survey on information extraction from scientific articles [<a class="reference external" href="#NJM18">NJM18</a>].</p>
+<p>Recently, there are some work to explore dataset extraction from
+scientific text [<a class="reference external" href="#BREM12">BREM12</a>; <a class="reference external" href="#GML+16">GML<sup>+</sup>16</a>; <a class="reference external" href="#GMVL16">GMVL16</a>]. Boland et al. (2012) propose weakly supervised pattern induction to identify references in social science publications [<a class="reference external" href="#BREM12">BREM12</a>]. Ghavimi et al. (2016) propose a semi automatic approach for detecting dataset references for social science texts [<a class="reference external" href="#GML+16">GML<sup>+</sup>16</a>; <a class="reference external" href="#GMVL16">GMVL16</a>]. Dataset extraction is a challenging task because of the inconsistency and wide range of dataset mention styles in research publications [<a class="reference external" href="#GMVL16">GMVL16</a>].</p>
+</div>
+<div class="section" id="data-analysis">
+<h3>3. Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h3>
+<p>The first phase of RCC dataset consists of a labeled corpus of 5,000 publications for training set, and additional 100 publications for development set. The RCC organizer keeps a separate corpus of 5,000 publications for evaluation. Each article in the dataset contains full text article and dataset citation labels. The metadata of cited datasets in the corpus are also provided. For research methods and fields, no label information is provided, only SAGE social science research method graph and research fields vocabulary are provided.</p>
+<p><strong>Preprocessing.</strong> In order to reliably access important structures of paper publications, we parse all papers using AllenAI Science Parse<a class="reference external" href="https://github.com/allenai/science-parse"><sup>1</sup></a> [<a class="reference external" href="#AGB+18">AGB<sup>+</sup>18</a>]. AllenAI Science Parse reads PDF file, and returns title, authors, abstract, sections, and bibliography (references). Since this parser utilizes machine learning models to parse PDF file, the parsing results may not be 100% accurate. Furthermore, this parser is unable to parse scan copy of old publication. In the situation where we are unable to access parsed fields, we fall back to the given text files.</p>
+<p><strong>Mention Analysis.</strong> There are 5,499 and 123 dataset citations in training and development set respectively. Among these citations, 320 citations in training set and 6 citations in development set do not have mentions information. We analyze the paper sections where the dataset mentions commonly occur. Table <a class="reference external" href="#user-content-tab_train_top_sections">1</a> and <a class="reference external" href="#user-content-tab_dev_top_sections">2</a> show top 12 most common sections mentioning dataset in training and development set. The tables suggest that abstract, reference titles, discussion, results, and methods are the most common sections where the dataset mentions occur. We exploit reference titles for dataset extraction.</p>
+<p><a name="tab_train_top_sections">Table 1</a>: Top 12 Sections Mentioning Datasets in Training Set</p>
+<p>Section Header | Mention Frequency
+————– | —————–:
+Abstract | 2,548
+Reference Titles | 1,997
+Discussion | 1,390
+Results | 836
+Methods | 804
+Introduction | 530
+Statistical Analysis | 285
+Comment | 279
+Acknowledgements | 261
+Materials and Methods | 254
+Study Population | 227
+Data | 214</p>
+<p><a name="tab_dev_top_sections">Table 2</a>: Top 12 Sections Mentioning Datasets in Development Set</p>
+<p>Section Header | Mention Frequency
+————– | —————–:
+Abstract | 78
+Reference Titles | 37
+Discussion | 19
+Introduction | 14
+Results | 12
+Statistical Analyses | 9
+Methods | 8
+Ethics | 7
+Population | 7
+Population Impact | 7
+Price | 7
+2.1 Data | 5</p>
+<p><strong>Citation Analysis.</strong> We build citation network from training set. Each node in the network is a paper publication, and an edge between two node <img src="https://latex.codecogs.com/svg.latex?A" title="A" /> and <img src="https://latex.codecogs.com/svg.latex?B" title="B" /> is generated if a paper <img src="https://latex.codecogs.com/svg.latex?A" title="A" /> cites paper <img src="https://latex.codecogs.com/svg.latex?B" title="B" />. Table <a class="reference external" href="#user-content-tab_network_stats">3</a> shows the statistics of the citation network.</p>
+<p><a name="tab_network_stats">Table 3</a>: Statistics of Citation Network</p>
+<p>| | |
+————— | ——-:
+Number of nodes | 5,000
+Number of edges | 998
+Network density | 0.008%</p>
+<p>Initially, we propose an approach utilizing citation network based on an intuition that datasets, research methods, and research fields are shared by: 1) same or similar issues, 2) same or similar context, 3) same or similar authors and communities, 4) same or similar metrics used in the publication. However, based on table <a class="reference external" href="#user-content-tab_network_stats">3</a>, we learn that exploring rich context using paper-paper citation network is not viable at this stage because most papers listed in publications’ bibliography are not available in the training set, and therefore, paper-paper citation network becomes very sparse with many unknown information. Due to this reason, we drop our idea on utilizing paper-paper citation graph at this stage. Nevertheless, we believe that bibliography contains important signals and information about datasets, and research fields.</p>
+</div>
+<div class="section" id="methods">
+<h3>4. Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<p>In this section, we describe our approach for RCC tasks: dataset extraction, research methods identification, and research fields identification.</p>
+<div class="section" id="dataset-extraction">
+<h4>Dataset Extraction<a class="headerlink" href="#dataset-extraction" title="Permalink to this headline">¶</a></h4>
+<p>We employ a pipeline of two subtasks for dataset extraction: dataset detection, followed by dataset recognition. The goal of dataset detection is to detect whether a publication cites a dataset or not. This first subtask helps us to quickly filter out non-dataset publications. After the first subtask, we mine dataset mentions for the remaining publications in dataset recognition subtask.</p>
+<p>For dataset detection, we utilize paper title in bibliography (reference list) combined with explicit research methods mentions to detect whether a publication citing a dataset or not. Explicit research methods mentions are determined based on exact match between paper title and SAGE research methods vocabulary. We train an SVM classifier using explicit research method mentions and n-gram features from paper titles in bibliography. We use the SVM classifier to classify each publication, if the classifier gives positive label, then we proceed to dataset recognition subtask, otherwise we ignore the publication.</p>
+<p>For dataset recognition, we use an implicit entity linking approach. We start with the Naive Bayes model, which can be regarded as a standard information retrieval baseline, and entity indicative weighting strategy is used to improve the model. In order to calculate the word distribution of each dataset, we represent each dataset using its title, dataset mentions (provided in the training set), and dataset relevant sentences, filtered from the relevant publications using the rule based approach proposed in [<a class="reference external" href="#GMVL16">GMVL16</a>]. All these text sections related to a particular dataset are considered as a single text chunk, and we calculate the word distribution as follows. Let <img src="https://latex.codecogs.com/svg.latex?$\textbf{w}$" title="$\textbf{w}$" /> be the set of words in a dataset. In our problem setting, we assume the dataset prior probability <img src="https://latex.codecogs.com/svg.latex?p(d)" title="p(d)" /> to be uniform. The probability of dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" /> given <img src="https://latex.codecogs.com/svg.latex?$$w$&space;\in&space;\textbf{w}$" title="$$w$ \in \textbf{w}$" /> is:</p>
+<!-- $$\begin{split}
+    p(d|\textbf{w}) & \propto \prod _{w \in \textbf{w}} p(w|d) \\
+    & = \prod _{w \in \textbf{w}} \frac{f(d,w) + \gamma }{ \sum_{w'} f(d,w') + |W| \gamma}
+\end{split}$$ --><p><a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;p(d|\textbf{w})&space;&&space;\propto&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;p(w|d)&space;\\&space;&&space;=&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;\frac{f(d,w)&space;&plus;&space;\gamma&space;}{&space;\sum_{w'}&space;f(d,w')&space;&plus;&space;|W|&space;\gamma}&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?\begin{align*}&space;p(d|\textbf{w})&space;&&space;\propto&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;p(w|d)&space;\\&space;&&space;=&space;\prod&space;_{w&space;\in&space;\textbf{w}}&space;\frac{f(d,w)&space;&plus;&space;\gamma&space;}{&space;\sum_{w'}&space;f(d,w')&space;&plus;&space;|W|&space;\gamma}&space;\end{align*}" title="\begin{align*} p(d|\textbf{w}) & \propto \prod _{w \in \textbf{w}} p(w|d) \\ & = \prod _{w \in \textbf{w}} \frac{f(d,w) + \gamma }{ \sum_{w'} f(d,w') + |W| \gamma} \end{align*}" /></a></p>
+<p>where <img src="https://latex.codecogs.com/svg.latex?f(d,&space;w)" title="f(d, w)" /> is the number of co-occurrences of word <img src="https://latex.codecogs.com/svg.latex?w" title="w" /> with entity <img src="https://latex.codecogs.com/svg.latex?d" title="d" />, <img src="https://latex.codecogs.com/svg.latex?\gamma" title="\gamma" /> is the smoothing parameter, and <img src="https://latex.codecogs.com/svg.latex?|W|" title="|W|" /> is the vocabulary size. For each dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" />, we derive <img src="https://latex.codecogs.com/svg.latex?f(d,&space;w)" title="f(d, w)" /> by the count of <img src="https://latex.codecogs.com/svg.latex?w" title="w" /> occurrences in the text extracted for each dataset. In order to stress more priority for dataset indicative words, we improved the final objective function of our model as follows:</p>
+<!-- $$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$ --><p><a href="https://www.codecogs.com/eqnedit.php?latex=$$ln(p(d|\textbf{w}))&space;\propto&space;\sum&space;_{w&space;\in&space;\textbf{w}}&space;\beta(w)&space;*&space;ln(p(w|d))$$" target="_blank"><img src="https://latex.codecogs.com/svg.latex?$$ln(p(d|\textbf{w}))&space;\propto&space;\sum&space;_{w&space;\in&space;\textbf{w}}&space;\beta(w)&space;*&space;ln(p(w|d))$$" title="$$ln(p(d|\textbf{w})) \propto \sum _{w \in \textbf{w}} \beta(w) * ln(p(w|d))$$" /></a></p>
+<p>where <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is the entity-indicative weight for word <img src="https://latex.codecogs.com/svg.latex?w" title="w" />. This weight <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is added as an exponent to the term <img src="https://latex.codecogs.com/svg.latex?p(w|d)" title="p(w|d)" />. <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" /> is calculated as:</p>
+<!-- $$\beta(w) = log(1 + E / df(w))$$ --><p><a href="https://www.codecogs.com/eqnedit.php?latex=$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" target="_blank"><img src="https://latex.codecogs.com/svg.latex?$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" title="$$\beta(w) = log(1 + E / df(w))$$" /></a></p>
+<p>where <img src="https://latex.codecogs.com/svg.latex?E" title="E" /> is the number of distinct datasets considered and <img src="https://latex.codecogs.com/svg.latex?df(w)" title="df(w)" /> counts the number of datasets with at least one occurrence of <img src="https://latex.codecogs.com/svg.latex?w" title="w" />.</p>
+<p>Then for a given unseen publication, we use same rule based approach [<a class="reference external" href="#GMVL16">GMVL16</a>] to filter a few relevant sentences, and datasets are ranked by <img src="https://latex.codecogs.com/svg.latex?ln(p(d|w))" title="ln(p(d|w))" /> to select the most suitable datasets. In order to select exact datasets related to particular publication, we select top 10 datasets ranked using above approach. And then the confidence probability related to the top 10 datasets are normalized and select the datasets with the normalized probability higher than a predefined threshold value. We return the entity indicative words as relevant dataset mentions.</p>
+</div>
+<div class="section" id="research-methods-identification">
+<h4>Research Methods Identification<a class="headerlink" href="#research-methods-identification" title="Permalink to this headline">¶</a></h4>
+<p>Since we do not have labeled training data for this task, we use explicit research method mentions (based on exact match with SAGE research methods vocabulary) in a publication as weak signals on research methods used in the publication. When these mentions frequently appear in a publication, there is a high chance that this publication is using these particular research methods.</p>
+<p>Based on this intuition, we generate training set for research method classification utilizing sentences that explicitly mention research method in a publication. Publication title and the sentences mentioning research method serve as context information of a specific research method. In order to reduce noisy weak signals, we apply minimum support of three sentences in a publication. We exclude research methods which only being mentioned one or two times in a publication. We also exclude research methods that only being mentioned in less than 10 different publications from the training set. Finally, we have 133 research methods having sufficient context information for training data. This number is 20.18% of 659 research methods in SAGE research method graph.</p>
+<p>We use the training data to train logistic regression classifier to classify research methods from publication title and sentences. We utilize n-gram features from publication title and sentences for the classifier. We apply the logistic regression classifier to recommend top 3 research methods based on logistic regression probability score.</p>
+<p>This approach can be extended by utilizing research method graph to expand the context. Context information does not only comes from sentences in publication, but also comes from related research methods as well as broader concept information. By using this information, we can potentially expand to more than 133 research methods and perform more accurate prediction.</p>
+</div>
+<div class="section" id="research-fields-identification">
+<h4>Research Fields Identification<a class="headerlink" href="#research-fields-identification" title="Permalink to this headline">¶</a></h4>
+<p>Similar to research methods identification, this task does not have labeled training data. We only have access to list of SAGE research fields. SAGE research fields are organized hierarchically into three levels, namely L1, L2, and L3, for example: Soc-2-4 (<em>kinship</em>) is under Soc (<em>sociology</em>) in L1, and under Soc-2 (<em>anthropology</em>) in L2.</p>
+<p>To gain more understanding about the characteristic of each field, we crawl top search results from SAGE Knowledge<a class="reference external" href="http://sk.sagepub.com/browse/"><sup>2</sup></a>. From the search result snippets, we collect information such as title and abstract on various publications including case, major work, books, handbooks, and dictionary. We exclude video and encyclopedia. Due to sparseness of the SAGE Knowledge, we exclude all research fields with less than 10 search results. In the end, we have samples of 414 L3 research fields under 101 L2 research fields and 10 L1 research fields. This numbers cover 20.87% of 1,984 L3 research fields, and 67.79% of 149 L2 research fields in the list of SAGE research fields. We use this data to train research fields classifiers.</p>
+<p>We build three SVM classifiers for L1, L2, and L3 to classify a publication using paper title and abstract. Instead of taking the highest score, we take top-k research fields and perform re-ranking considering agreement among L1, L2, L3. We return a research field if its upper level are also in top ranks. Since level L1 is too general, we only output research fields from L2, and L3. We outline our heuristic to reorder the ranking below:</p>
+<ol>
+<li><p>Get top-5 L3 research fields, top-4 L2 research fields, and top-3 L1 research fields.</p></li>
+<li><p>Assign initial score <img src="https://latex.codecogs.com/svg.latex?v" title="v" /> for each research field based on its
+ranking.</p>
+<p><a href="https://www.codecogs.com/eqnedit.php?latex=v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" target="_blank"><img src="https://latex.codecogs.com/svg.latex?v(f_i)&space;=&space;(K&space;-&space;i)&space;/&space;K" title="v(f_i) = (K - i) / K" /></a></p>
+<p>where <img src="https://latex.codecogs.com/svg.latex?K" title="K" /> is the length of top-k, and <img src="https://latex.codecogs.com/svg.latex?i" title="i" /> is the ranking of a research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" />. For example, research fields in top-5 L3 have initial score of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0.8,</span> <span class="pre">0.6,</span> <span class="pre">0.4,</span> <span class="pre">0.2]</span></code>, top-4 L2 have initial score of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0.75,</span> <span class="pre">0.5,</span> <span class="pre">0.25]</span></code>, and top-3 L1 have <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0.666,</span> <span class="pre">0.333]</span></code></p>
+</li>
+<li><p>Update the score by multiplying each score with the score of
+matching research fields at upper level, and <img src="https://latex.codecogs.com/svg.latex?0" title="0" /> otherwise.</p>
+<!-- $$score(f_i^l) =
+        \begin{cases}
+        \prod _{l \in L} v(f^l) & \text{if field matched} \\
+        0 & \text{otherwise}
+        \end{cases}$$  --><p><a href="https://www.codecogs.com/eqnedit.php?latex=score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?score(f_i^l)&space;=&space;\begin{cases}&space;\prod&space;_{l&space;\in&space;L}&space;v(f^l)&space;&&space;\text{if&space;field&space;matched}&space;\\&space;0&space;&&space;\text{otherwise}&space;\end{cases}" title="score(f_i^l) = \begin{cases} \prod _{l \in L} v(f^l) & \text{if field matched} \\ 0 & \text{otherwise} \end{cases}" /></a></p>
+<p>where <img src="https://latex.codecogs.com/svg.latex?L" title="L" /> is the level of research field <img src="https://latex.codecogs.com/svg.latex?f" title="f" /> and
+its upper levels. Here are examples of score update:</p>
+<ul class="simple">
+<li><p>Soc-2-4 at rank-2 in L3, Soc-2 at rank-3 in L2, and Soc at
+rank-1 in L1. In this case, the score of Soc-2-4 is
+<code class="docutils literal notranslate"><span class="pre">0.8</span> <span class="pre">*</span> <span class="pre">0.5</span> <span class="pre">*</span> <span class="pre">1</span> <span class="pre">=</span> <span class="pre">0.4</span></code>.</p></li>
+<li><p>Soc-2-4 at rank-1 in L3, Soc-2 at rank-2 in L2, but Soc is not found in top rank in L1. In this case, the score of Soc-2-4 is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Collect score from L2 and L3, and exclude L2 if we see more specific of L2 in top-5 L3.</p></li>
+<li><p>Re-rank L2 and L3 research fields based on the score.</p></li>
+<li><p>Return research fields having score <img src="https://latex.codecogs.com/svg.latex?>=&space;0.4" title=">= 0.4" />.</p></li>
+</ol>
+<p>To expand to more context from paper list in bibliography section, we also build other three Naive Bayes classifiers for L1, L2, and L3 using paper title feature only. We believe that a publication from a certain field also cites other publications from same or similar fields. For each publication in the bibliography, we apply the same procedure as mentioned above, then we average the score to get top research fields from bibliography. Finally, we combine top research fields from paper titles and abstract with results from bibliography.</p>
+</div>
+</div>
+<div class="section" id="experiment-results">
+<h3>5. Experiment Results<a class="headerlink" href="#experiment-results" title="Permalink to this headline">¶</a></h3>
+<p>We discuss our experiment results for each task in this section. We use standard precision, recall, and F1 as evaluation metrics.</p>
+<p><strong>Dataset Extraction.</strong> First, we analyze our experiment for dataset detection subtask comparing Naive Bayes and SVM classifier. Using only paper titles in bibliography and explicit research method mentions, Naive Bayes and SVM classifiers are able to reach 0.88 &amp; 0.92 F1 score respectively. Since SVM outperforms Naive Bayes, we use SVM for our dataset detection module. Table <a class="reference external" href="#user-content-tab_dd_dev_result">4</a> shows detail dataset detection results on development set.</p>
+<p><a name="tab_dd_dev_result">Table 4</a>: Dataset Detection Results on Development Set</p>
+<p>Classifier | Prec. | Rec. | F1
+———- | —-: | —: | —:
+Naive Bayes | 0.85 | 0.92 | 0.88
+SVM | 0.96 | 0.88 | 0.92</p>
+<p>To see the impact of performing dataset detection, we test the performance of dataset extraction with and without dataset detection on development set. Table <a class="reference external" href="#user-content-tab_de_dev_result">5</a> summarizes the results. As shown in the table, performing dataset detection before extraction significantly improves the dataset extraction on development set.</p>
+<p><a name="tab_de_dev_result">Table 5</a>: Dataset Extraction Results on Development Set</p>
+<p>Method | Prec. | Rec. | F1
+—— | —-: | —: | —:
+No Dataset Detection | 0.18 | 0.33 | 0.24
+With Dataset Detection | 0.34 | 0.30 | 0.32</p>
+<p><a name="tab_de_test_result">Table 6</a>: Dataset Extraction Result on Test Set</p>
+<p>Dataset | Prec. | Rec. | F1
+——- | —-: | —: | —:
+Test Set (phase1) | 0.17 | 0.10 | 0.13</p>
+<p>Table <a class="reference external" href="#user-content-tab_de_test_result">6</a> shows dataset extraction performance on test set (phase 1). The significant drop from development set result suggests that the test set might have different distribution compare to the training and development set. It might also contain dataset citations that are never been seen in training set.</p>
+<p><strong>Research Methods Identification.</strong> We only consider Naive Bayes and Logistic Regression classifiers for research method identification because they naturally outputs probability score. We perform 5-fold cross validation to evaluate classification performance, and the result can be seen in table <a class="reference external" href="#user-content-tab_rmethods_5cv">7</a>. Logistic regression classifier outperforms Naive Bayes with 0.86 F1 score in classifying 133 research methods.</p>
+<p><a name="tab_rmethods_5cv">Table 7</a>: F1 Score for Research Method Classification</p>
+<p>Classifier | F1
+———- | —:
+Naive Bayes | 0.55
+Logistic Regression | 0.86</p>
+<p><strong>Research Fields Identification.</strong> We perform 5-fold cross validation to evaluate our classifiers to classify L1, L2, and L3 research fields. Table <a class="reference external" href="#user-content-tab_rfields_pub_5cv">8</a> shows the results using n-gram features from paper title and abstract, whereas table <a class="reference external" href="#user-content-tab_rfields_rt_5cv">9</a> shows the results using n-gram features from title only. Naive Bayes tends to perform slightly better on L3 research fields where we have large number of research field labels. We decide to use SVM for research field identification on publication level because SVM is generally better than Naive Bayes. On the other hand, we decide to use Naive Bayes for research field identification on bibliography level because Naive Bayes prefer to have more accurate L2 and L3 research fields.</p>
+<p><a name="tab_rfields_pub_5cv">Table 8</a>: F1 Score for Research Field Classification on Publication Level using Paper Title and Abstract</p>
+<p>Classifier | L1 | L2 | L3
+———- | —-: | —: | —:
+Naive Bayes | 0.78 | 0.37 | 0.13
+SVM | 0.82 | 0.38 | 0.12</p>
+<p><a name="tab_rfields_rt_5cv">Table 9</a>: F1 Score for Research Field Classification on Bibliography Level using Paper Title Only</p>
+<p>Classifier | L1 | L2 | L3
+———- | —-: | —: | —:
+Naive Bayes | 0.80 | 0.35 | 0.12
+SVM | 0.81 | 0.35 | 0.11</p>
+</div>
+<div class="section" id="lesson-learned">
+<h3>6. Lesson Learned<a class="headerlink" href="#lesson-learned" title="Permalink to this headline">¶</a></h3>
+<p>Extraction of research datasets, associated research methods and fields from social science publication is challenging, yet an important problem to organize social science publications. We have described our approach for the RCC challenge, and table <a class="reference external" href="#user-content-tab_summary">10</a> summarizes our approach. Beside publication content such as paper titles, abstract, full text, our approach also leverages on the information from bibliography. Furthermore, we also collect external information from SAGE Knowledge to get more information about research fields.</p>
+<p><a name="tab_summary">Table 10</a>: Summary of Our Approach</p>
+<p>Method | Features (n-gram)
+—— | —————–
+<strong>Dataset extraction</strong> ||
+SVM for dataset detection | paper titles in bibliography and explicit research method mentions
+Implicit entity linking | paper title and full text
+<strong>Research method identification</strong> ||
+Logistic regression | paper title, abstract, and full text
+<strong>Research field identification</strong> ||
+SVM (on paper) | paper title and abstract
+Naive Bayes (on bibliography) | paper titles in bibliography</p>
+<p>Apart from F1 score on 5-fold cross validation, we have no good way to evaluate research method and research field identification without ground truth label. Our methods are unable to automatically extract and recognize new datasets, research methods, and fields. An extension to automatically handle such cases using advance Natural Language Processing (NLP) approach is a promising direction.</p>
+<p>Our model did not perform well in test set, and unable to advance to the second phase. From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. We are also interested in exploring more advanced information extraction approaches on the RCC datasets. Another challenge is data sparsity. Although we see many paper listed in bibliography, lacks of access to these publication make us difficult to exploit citation network.</p>
+</div>
+<div class="section" id="acknowledgments">
+<h3>7. Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h3>
+<p>We thank the RCC organizers for organizing a competition and workshop on this important, interesting, and challenging problem.</p>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>[<a name="PM04">PM04</a>] Fuchun Peng and Andrew McCallum (2004): Accurate information extraction from research papers using conditional random fields. In HLT-NAACL.</p></li>
+<li><p>[<a name="Het08">Het08</a>] Erik Hetzner (2008): A simple method for citation metadata extraction using hidden markov models. In JCDL.</p></li>
+<li><p>[<a name="BREM12">BREM12</a>] Katarina Boland, Dominique Ritze, Kai Eckert, and Brigitte Mathiak (2012): Identifying references to datasets in publications. In TPDL.</p></li>
+<li><p>[<a name="APBM14">APBM14</a>] Sam Anzaroot, Alexandre Passos, David Belanger, and Andrew McCallum (2014): Learning soft linear constraints with application to citation field extraction. In ACL.</p></li>
+<li><p>[<a name="NCKL15">NCKL15</a>] Viet Cuong Nguyen, Muthu Kumar Chandrasekaran, Min-Yen Kan, and Wee Sun Lee (2015): Scholarly document information extraction using extensible features for efficient higher order semi-crfs. In JCDL.</p></li>
+<li><p>[<a name="GML+16">GML<sup>+</sup>16</a>] Behnam Ghavimi, Philipp Mayr, Christoph Lange, Sahar Vahdati, and Sören Auer (2016a): A semi-automatic approach for detecting dataset references in social science texts. Inf. Services and Use, 36:171–187.</p></li>
+<li><p>[<a name="GMVL16">GMVL16</a>] Behnam Ghavimi, Philipp Mayr, Sahar Vahdati, and Christoph Lange (2016b): Identifying and improving dataset references in social sciences full texts. In ELPUB.</p></li>
+<li><p>[<a name="SBP+16">SBP<sup>+</sup>16</a>] Mayank Singh, Barnopriyo Barua, Priyank Palod, Manvi Garg, Sidhartha Satapathy, Samuel Bushi, Kumar Ayush, Krishna Sai Rohith, Tulasi Gamidi, Pawan Goyal, and Animesh Mukherjee (2016): Ocr++: A robust framework for information extraction from scholarly articles. In COLING.</p></li>
+<li><p>[<a name="ADR+17">ADR<sup>+</sup>17</a>] Isabelle Augenstein, Mrinal Das, Sebastian Riedel, Lakshmi Vikraman, and Andrew McCallum (2017): Semeval 2017 task 10: Scienceie - extracting keyphrases and relations from scientific publications. In SemEval&#64;ACL.</p></li>
+<li><p>[<a name="AGJ+17">AGJ<sup>+</sup>17</a>] Dong An, Liangcai Gao, Zhuoren Jiang, Runtao Liu, and Zhi Tang (2017): Citation metadata extraction via deep neural network-based segment sequence labeling. In CIKM.</p></li>
+<li><p>[<a name="AS17">AS17</a>] Isabelle Augenstein and Anders Søgaard (2017): Multi-task learning of keyphrase boundary classification. In ACL.</p></li>
+<li><p>[<a name="LOH17">LOH17</a>] Yi Luan, Mari Ostendorf, and Hannaneh Hajishirzi (2017): Scientific information extraction with semi-supervised neural tagging. In EMNLP.</p></li>
+<li><p>[<a name="ACK18">ACK18</a>] Danny Rodrigues Alves, Giovanni Colavizza, and Frédéric Kaplan (2018): Deep reference mining from scholarly literature in the arts and humanities. In Front. Res. Metr. Anal.</p></li>
+<li><p>[<a name="AGB+18">AGB<sup>+</sup>18</a>] Waleed Ammar, Dirk Groeneveld, Chandra Bhagavatula, Iz Beltagy, Miles Crawford, Doug Downey, Jason Dunkelberger, Ahmed Elgohary, Sergey Feldman, Vu Ha, Rodney Kinney, Sebastian Kohlmeier, Kyle Lo, Tyler Murray, Hsu-Han Ooi, Matthew E. Peters, Joanna Power, Sam Skjonsberg, Lucy Lu Wang, Chris Wilhelm, Zheng Yuan, Madeleine van Zuylen, and Oren Etzioni (2018): Construction of the literature graph in semantic scholar. In NAACL-HTL.</p></li>
+<li><p>[<a name="NJM18">NJM18</a>] Zara Nasar, S. W. Jaffry, and Muhammad Kamran Malik (2018): Information extraction from scientific articles: a survey. Scientometrics, 117:1931–1990.</p></li>
+</ul>
+</div>
+<div class="section" id="appendix-technical-documentation">
+<h3>Appendix: Technical Documentation<a class="headerlink" href="#appendix-technical-documentation" title="Permalink to this headline">¶</a></h3>
+<p>Source codes to run and replicate our experiments are available at <a class="reference external" href="https://github.com/LARC-CMU-SMU/coleridge-rich-context-larc">https://github.com/LARC-CMU-SMU/coleridge-rich-context-larc</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Rich Search and Discovery for Research Datasets</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#how-this-book-came-to-be">How this book came to be</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#book-overview">Book overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-2">Section 2:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-3">Section 3:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-4-looking-forward">Section 4: Looking forward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#more-resources">More resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2 - Bundesbank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3 - Digital Science Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html#enriching-context-and-enhancing-engagement-around-datasets">Enriching context and enhancing engagement around datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4 - Metadata for Social Science Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#introduction">INTRODUCTION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-metadata-and-digital-data-objects">DATA, METADATA, AND DIGITAL DATA OBJECTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#semantic-descriptions">SEMANTIC DESCRIPTIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-repositories">DATA REPOSITORIES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#services">SERVICES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#details-about-the-data-in-data-sets">DETAILS ABOUT THE DATA IN DATA SETS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#cyberinfrastructure">CYBERINFRASTRUCTURE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#conclusion">CONCLUSION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#acknowledgments">ACKNOWLEDGMENTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#references-references-listparagraph">REFERENCES {#references .ListParagraph}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5 - Compettion Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#methods">Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#future-work-and-lessons-learned">Future Work and Lessons Learned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7 - Finding datasets in publications: The KAIST approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#non-technical-overview">Non technical overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-did-you-do">What did you do</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-worked-and-what-didnt">What worked and what didn’t</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#summary-of-your-results-and-caveats">Summary of your results and caveats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#lessons-learned-and-what-would-you-do-differently">Lessons learned and what would you do differently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-comes-next">What comes next</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#appendix-description-of-the-code-and-documentation">Appendix: Description of the code and documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8 - Finding datasets in publications: The GESIS approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html#the-contribution-of-gesis-to-the-rich-context-competition">The contribution of GESIS to the Rich Context Competition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9 - Finding datasets in publications: The University of Paderborn approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#project-architecture">Project Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#approach">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#evaluation">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#discussion">Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#future-agenda">Future Agenda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#appendix">Appendix</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chapter 10 - Finding datasets in publications: The Singapore Management University approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11 - Finding datasets in publications: The University of Syracuse approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-dataset">The dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-proposed-method">The Proposed Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#acknowledgements-acknowledgements-unnumbered">Acknowledgements {#acknowledgements .unnumbered}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12 - Standard Test Corpora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13 - The future of context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html#the-future-of-ai-in-rich-context">The Future of AI in Rich Context</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="chap09.html" title="previous chapter">Chapter 9 - Finding datasets in publications: The University of Paderborn approach</a></li>
+      <li>Next: <a href="chap11.html" title="next chapter">Chapter 11 - Finding datasets in publications: The University of Syracuse approach</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, NYU.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/chap10.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

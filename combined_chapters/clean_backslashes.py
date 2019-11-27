@@ -1,4 +1,12 @@
-# clean backslashes from manuscript
+"""
+Some of the file conversion introduces double backslashes at the 
+end of lines, creating formatting problems in markdown.
+
+This script looks for a double backslaash at the end of a line
+that is not part of a run on set of backslashes, and replaces them 
+with whitespace.  
+"""
+
 
 import sys
 import glob
@@ -28,11 +36,11 @@ def replace(file_path):
 				try:
  					if line[-2] == "\\" and line[-3] != "\\":
  						line.rstrip()
- 						new_file.write(line.rstrip().replace("\\", "  "))
+ 						new_file.write(line.rstrip().replace("\\", "  ") + "\n")
  					else:
- 						new_file.write(line.rstrip())
+ 						new_file.write(line.rstrip() + "\n")
  				except:
-		 			new_file.write(line.rstrip())
+		 			new_file.write(line.rstrip() + "\n")
     #Remove original file
     remove(file_path)
     #Move new file

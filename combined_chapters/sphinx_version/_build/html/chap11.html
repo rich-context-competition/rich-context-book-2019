@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chapter 11 - Finding datasets in publications: The University of Syracuse approach &#8212; Rich Search and Discovery for Research Datasets 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 12 - Standard Test Corpora" href="chap12.html" />
+    <link rel="prev" title="Chapter 10 - Finding datasets in publications: The Singapore Management University approach" href="chap10.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <hr class="docutils" />
+<div class="section" id="chapter-11-finding-datasets-in-publications-the-university-of-syracuse-approach">
+<h1>Chapter 11 - Finding datasets in publications: The University of Syracuse approach<a class="headerlink" href="#chapter-11-finding-datasets-in-publications-the-university-of-syracuse-approach" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>abstract: |
+Datasets are critical for scientific research, playing a role in
+replication, reproducibility, and efficiency. Researchers have recently
+shown that datasets are becoming more important for science to function
+properly, even serving as artifacts of study themselves. However, citing
+datasets is not a common or standard practice in spite of recent efforts
+by data repositories and funding agencies. This greatly affects our
+ability to track their usage and importance. A potential solution to
+this problem is to automatically extract dataset mentions from
+scientific articles. In this work, we propose to achieve such extraction
+by using a neural network based on a BiLSTM-CRF architecture. Our method
+achieves $F_{1}=0.885$ in social science articles released as part of
+the Rich Context Dataset. We discuss future improvements to the model
+and applications beyond social sciences.
+author:</p>
+<ul class="simple">
+<li><p>‘Tong Zeng$^{1,2}$ and Daniel Acuna$^{1}$[^1]’
+bibliography:</p></li>
+<li><p>‘rcc-06.bib’
+title: |
+Dataset mention extraction in scientific articles using a BiLSTM-CRF
+model</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Science is fundamentally an incremental discipline that depends on
+previous scientist’s work. Datasets form an integral part of this
+process and therefore should be shared and cited as any other scientific
+output. This ideal is far from reality: the credit that datasets
+currently receive does not correspond to their actual usage. One of the
+issues is that there is no standard for citing datasets, and even if
+they are cited, they are not properly tracked by major scientific
+indices. Interestingly, while datasets are still used and mentioned in
+articles, we lack methods to extract such mentions and properly
+reconstruct dataset citations. The Rich Context Competition challenge
+aims at closing this gap by inviting scientists to produce automated
+dataset mention and linkage detection algorithms. In this article, we
+detail our proposal to solve the dataset mention step. Our approach
+attempts to provide a first approximation to better give credit and keep
+track of datasets and their usage.</p>
+<p>The problem of dataset extraction has been explored before.
+&#64;ghavimiIdentifyingImprovingDataset2016 and
+&#64;ghavimiSemiautomaticApproachDetecting2017 use a relatively simple
+tf-idf representation with cosine similarity for matching dataset
+identification in social science articles. Their method consists of four
+major steps: preparing a curated dictionary of typical mention phrases,
+detecting dataset references, and ranking matching datasets based on
+cosine similarity of tf-idf representations. This approach achieved a
+relatively high performance, with $F_{1}=0.84$ for mention detection and
+$F_{1}=0.83$, for matching. &#64;singhalDataExtractMining2013 proposed a
+method using normalized Google distance to screen whether a term is in a
+dataset. However, this method relies on external services and is not
+computational efficient. They achieve a good $F_{1}=0.85$ using Google
+search and $F_{1}=0.75$ using Bing. A somewhat similar project was
+proposed by &#64;luDatasetSearchEngine2012. They built a dataset search
+engine by solving the two challenges: identification of the dataset and
+association to a URL. They build a dataset of 1000 documents with their
+URLs, containing 8922 words or abbreviations representing datasets. They
+also build a web-based interface. This shows the importance of dataset
+mention extraction and how several groups have tried to tackle the
+problem.</p>
+<p>In this article, we describe a method for extracting dataset mentions
+based on a deep recurrent neural network. In particular, we used a
+Bidirectional Long short-term Memory (BiLSTM) sequence to sequence model
+paired with a Conditional Random Field (CRF) inference mechanism. We
+tested our model on a novel dataset produced for the Rich Context
+Competition challenge. We achieve a relatively good performance of
+$F_{1}=0.885$. We discuss the limitations of our model.</p>
+</div>
+<div class="section" id="the-dataset">
+<h1>The dataset<a class="headerlink" href="#the-dataset" title="Permalink to this headline">¶</a></h1>
+<p>The Rich Context Dataset challenge was proposed by the New York
+University’s Coleridge Initiative [&#64;richtextcompetition]. The challenge
+comprised several phases, and participants moved through the phases
+depending on their performance. We only analyze data of the first phase.
+This phase contained a list of datasets and a labeled corpus of around
+5K publications. Each publication was labeled indicating whether a
+dataset was mentioned within it and which part of the text mentioned it.
+The challenge used the accuracy for measuring the performance of the
+competitors and also the quality of the code, documentation, and
+efficiency.</p>
+<p>We adopt the CoNLL 2003 format [&#64;tjong2003introduction] to annotate
+whether a token is a part of dataset mention. Concretely, B-DS denotes a
+token that is the first token of a dataset mention, I-DS denotes a token
+that is inside of dataset mention, and O denotes a token that is not a
+part of dataset mention. We then put each token and its corresponding
+labels in one line and use a empty line as a separator between
+sentences. Sentences were randomly split by 70%, 15%, 15% for training
+set, validation set and testing set, respectively.</p>
+</div>
+<div class="section" id="the-proposed-method">
+<h1>The Proposed Method<a class="headerlink" href="#the-proposed-method" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overall-view-of-the-architecture">
+<h2>Overall view of the architecture<a class="headerlink" href="#overall-view-of-the-architecture" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we propose a model for detecting mentions based on a
+BiLSTM-CRF architecture. At a high level, the model uses a
+sequence-to-sequence recurrent neural network that produces the
+probability of whether a token belongs to a dataset mention. The CRF
+layer takes those probabilities and estimates the most likely sequence
+based on constrains between label transitions (e.g.,
+mention–to–no-mention–to-mention has low probability). While this is a
+standard architecture for modeling sequence labeling, the application to
+our particular dataset and problem is new.</p>
+<p>We now describe in more detail the choices of word representation,
+hyper-parameters, and training parameters. A schematic view of the model
+is in Fig [fig:NetworkArchitecture] and the components are as follows:</p>
+<ol class="simple">
+<li><p>Character embedding layer: treat a token as a sequence of characters
+and encode the characters by using a bidirectional LSTM to get a
+vector representation.</p></li>
+<li><p>Word embedding layer: mapping each token into fixed sized vector
+representation by using a pre-trained word vector.</p></li>
+<li><p>One BiLSTM layer: make use of Bidirectional LSTM network to capture
+the high level representation of the whole token sequence input.</p></li>
+<li><p>Dense layer: project the output of the previous layer to a low
+dimensional vector representation of the the distribution of labels.</p></li>
+<li><p>CRF layer: find the most likely sequence of labels.</p></li>
+</ol>
+<p><img alt="combined_images/bilistm_crf_network_structure_pic" src="combined_images/bilistm_crf_network_structure_pic" />[fig:NetworkArchitecture]Network Architecture of BiLSTM-CRF
+network{width=”80.00000%”}</p>
+</div>
+<div class="section" id="character-embedding">
+<h2>Character Embedding<a class="headerlink" href="#character-embedding" title="Permalink to this headline">¶</a></h2>
+<p>Similar to the bag of words assumption, we can consider a token is
+composed by a bag of characters. In this layer, we convert each token to
+a sequence of characters, then feed the sequence into a bidirectional
+LSTM network to get a fixed length representation of the token. After
+learning the bidirectional LSTM network, we can solve the
+out-of-vocabulary problem for pre-trained word embeddings.</p>
+</div>
+<div class="section" id="word-embedding">
+<h2>Word Embedding<a class="headerlink" href="#word-embedding" title="Permalink to this headline">¶</a></h2>
+<p>The embedding is the first layer of our network and it is responsible
+for mapping the word from string into vectors of numbers as the input
+for other layers on top. For a given sentence $S$, we first convert it
+into a sequence consisting of $n$ tokens,
+$S={c_{1},c_{2},\cdots,c_{n},}$ . For each token $c_{i}$we lookup the
+embedding vector $x_{i}$ from a word embedding matrix
+$M^{tkn}\in\mathbb{R}^{d|V|}$, where the $d$ is the dimension of the
+embedding vector and the $V$ is the Vocabulary of the tokens. In this
+paper, the matrix $M^{tkn}$ is initialized by pre-trained GloVe vectors
+[&#64;pennington2014glove], but will be updated by learning from our corpus.</p>
+</div>
+<div class="section" id="lstm">
+<h2>LSTM<a class="headerlink" href="#lstm" title="Permalink to this headline">¶</a></h2>
+<p>Recurrent neural network (RNN) is a powerful tool to capture features
+from sequential data, such as temporal series, and text. RNN could
+capture long-distance dependency in theory but it suffers from the
+gradient exploding/vanishing problems [&#64;pascanu2013difficulty]. The Long
+short-term memory (LSTM) architecture was proposed by
+&#64;hochreiter1997long and it is a variant of RNN which copes with the
+gradient problem. LSTM introduces several gates to control the
+proportion of information to forget from previous time steps and to pass
+to the next time step. Formally, LSTM could be described by the
+following equations:</p>
+<p>$$i_{t}=\sigma(W_{i}x_{t}+W_{i}h_{t-1}+b_{i})$$</p>
+<p>$$f_{t}=\sigma(W_{f}x_{t}+W_{f}h_{t-1}+b_{f})$$</p>
+<p>$$g_{t}=tanh(W_{g}x_{t}+W_{g}h_{t-1}+b_{g})$$</p>
+<p>$$o_{t}=\sigma(W_{o}x_{t}+W_{o}h_{t-1}+b_{o})$$</p>
+<p>$$c_{t}=f_{t}\bigotimes c_{t-1}+i_{t}\bigotimes g_{t}$$</p>
+<p>$$h_{t}=o_{t}\bigotimes tanh(c_{t})$$</p>
+<p>where the $\sigma$ is the sigmoid function, $\bigotimes$ denotes the dot
+product, $b$ is the bias, $W$ is the parameters, $x_{t}$ is the input at
+time $t$, $c_{t}$ is the LSTM cell state at time $t$ and $h_{t}$ is
+hidden state at time $t$. The $i_{t}$, $f_{t}$, $o_{t}$ and $g_{t}$ are
+named as input, forget, output and cell gates respectively, they control
+the information to keep in its state and pass to next step.</p>
+<p>LSTM gets information from the previous steps, which is left context in
+our task. However, it is important to consider the information in the
+right context. A solution of this information need is bidirectional LSTM
+[&#64;graves2013speech]. The idea of Bi-LSTM is to use LSTM layers and feed
+the forward and backward flows separately, and then concatenate the
+hidden states of the two LSTM to modeling both the left and right
+contexts</p>
+<p>$$h_{t}=[\overrightarrow{h_{t}}\varoplus\overleftarrow{h_{t}}]$$</p>
+<p>Finally, the outcomes of the states are taken by a Conditional Random
+Field (CRF) layer that takes into account the transition nature of the
+beginning, intermediate, and ends of mentions. For a reference of CRF,
+refer to [&#64;lafferty2001conditional]</p>
+</div>
+</div>
+<div class="section" id="results">
+<h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h1>
+<p>In this work, we wanted to propose a model for the Rich Context
+Competition challenge. We propose a relatively standard architecture
+based on a BiLSTM-CRF recurrent neural network. We now describe the
+results of this network on the dataset provided by the competition.</p>
+<p>For all of our results, we use $F_{1}$ as the measure of choice. This
+measure is the harmonic average of the precision and recall and it is
+the standard measure used in sequence labeling tasks. This metric varies
+from 0 to 1, and the unit is the highest possible value. Our method
+achieved a relatively high $F_{1}$ of 0.885 for detecting mentions, in
+line with previous studies.</p>
+<p>Models   GloVe size   Dropout rate   Precision   Recall    $F_{1}$</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">m1</span>         <span class="mi">50</span>           <span class="mf">0.0</span>          <span class="mf">0.884</span>     <span class="mf">0.873</span>      <span class="mf">0.878</span>
+ <span class="n">m2</span>         <span class="mi">50</span>           <span class="mf">0.5</span>          <span class="mf">0.877</span>     <span class="mf">0.888</span>      <span class="mf">0.882</span>
+ <span class="n">m3</span>        <span class="mi">100</span>           <span class="mf">0.0</span>          <span class="mf">0.882</span>     <span class="mf">0.871</span>      <span class="mf">0.876</span>
+ <span class="n">m4</span>        <span class="mi">100</span>           <span class="mf">0.5</span>          <span class="mf">0.885</span>     <span class="mf">0.885</span>    <span class="o">**</span><span class="mf">0.885</span><span class="o">**</span>
+ <span class="n">m5</span>        <span class="mi">200</span>           <span class="mf">0.0</span>          <span class="mf">0.882</span>     <span class="mf">0.884</span>      <span class="mf">0.883</span>
+ <span class="n">m6</span>        <span class="mi">200</span>           <span class="mf">0.5</span>          <span class="mf">0.885</span>     <span class="mf">0.880</span>      <span class="mf">0.882</span>
+ <span class="n">m7</span>        <span class="mi">300</span>           <span class="mf">0.0</span>          <span class="mf">0.868</span>     <span class="mf">0.886</span>      <span class="mf">0.877</span>
+ <span class="n">m8</span>        <span class="mi">300</span>           <span class="mf">0.5</span>          <span class="mf">0.876</span>     <span class="mf">0.878</span>      <span class="mf">0.877</span>
+</pre></div>
+</div>
+<p>: [tab:Performance-of-proposed]Performance of proposed network</p>
+<p>We train models using the training data, monitor the performance using
+the validation data (we stop training if the performance doesn’t improve
+for the last 10 epochs). We are using the Adam optimizer with learning
+rate of 0.001 and batch size equal to 64. The hidden size of LSTM for
+character and word embedding is 80 and 300, respectively. For the
+regularization methods to avoid over-fitting, we use L2 regularization
+with alpha set to 0.01, we also use dropout rate equal to 0.5. We
+trained 8 models with a combination of different GloVe vector size (50,
+100, 300 and 300) and dropout rate (0.0, 0.5). The performances are
+reported on the test dataset in Table [tab:Performance-of-proposed].
+The best model is trained by word vector size 100 and dropout rate 0.5
+with $F_{1}$ score 0.885.</p>
+<p>We also found some limitations to the dataset. Firstly, we found that
+mentions are nested (e.g. HRS, RAND HRS, RAND HRS DATA are linked to the
+same dataset). The second issue most of the mentions have ambiguous
+relationships to datasets. In particular, only 17,267 (16.99%) mentions
+are linked to one dataset, 15,292 (15.04%) mentions are listed to two
+datasets, and 12,624 (12.42%) are linked to three datasets. If these
+difficulties are not overcome, then the predictions from the linkage
+process will be noisy and therefore impossible to tell apart.</p>
+</div>
+<div class="section" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>In this work, we report a high accuracy model for the problem of
+detecting dataset mentions. Because our method is based on a standard
+BiLSTM-CRF architecture, we expect that updating our model with recent
+developments in neural networks would only benefit our results. We also
+provide some evidence of how difficult we believe the linkage step of
+the challenge could be if the dataset noise are not lowered.</p>
+<p>One of the shortcomings of our approach is that the architecture is
+lacking some modern features of RNN networks. In particular, recent work
+has shown that attention mechanisms are important especially when the
+task requires spatially distant information, such as this one. These
+benefits could also translate to better linkage. We are exploring new
+architectures using self-attention and multiple-head attention. We hope
+to explore these approaches in the near future.</p>
+<p>Our proposal, however, is surprisingly effective. Because we have barely
+modified a general RNN architecture, we expect that our results will
+generalize relatively well either to the second phase of the challenge
+or even to other disciplines. We would emphasize, however, that the
+quality of the dataset has a great deal of room for improvement. Given
+how important this task is for the whole of science, we should try to
+strive to improve the quality of these datasets so that techniques like
+this one can be more broadly applied. The importance of dataset mention
+and linkage therefore could be fully appreciated by the community.</p>
+</div>
+<div class="section" id="acknowledgements-acknowledgements-unnumbered">
+<h1>Acknowledgements {#acknowledgements .unnumbered}<a class="headerlink" href="#acknowledgements-acknowledgements-unnumbered" title="Permalink to this headline">¶</a></h1>
+<p>Tong Zeng was funded by the China Scholarship Council #201706190067.
+Daniel E. Acuna was funded by the National Science Foundation awards
+#1646763 and #1800956.</p>
+<p>[^1]: Corresponding author: deacuna&#64;syr.edu</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Rich Search and Discovery for Research Datasets</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#how-this-book-came-to-be">How this book came to be</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#book-overview">Book overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-2">Section 2:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-3">Section 3:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-4-looking-forward">Section 4: Looking forward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#more-resources">More resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2 - Bundesbank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3 - Digital Science Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html#enriching-context-and-enhancing-engagement-around-datasets">Enriching context and enhancing engagement around datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4 - Metadata for Social Science Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#introduction">INTRODUCTION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-metadata-and-digital-data-objects">DATA, METADATA, AND DIGITAL DATA OBJECTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#semantic-descriptions">SEMANTIC DESCRIPTIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-repositories">DATA REPOSITORIES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#services">SERVICES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#details-about-the-data-in-data-sets">DETAILS ABOUT THE DATA IN DATA SETS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#cyberinfrastructure">CYBERINFRASTRUCTURE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#conclusion">CONCLUSION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#acknowledgments">ACKNOWLEDGMENTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#references-references-listparagraph">REFERENCES {#references .ListParagraph}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5 - Compettion Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#methods">Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#future-work-and-lessons-learned">Future Work and Lessons Learned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7 - Finding datasets in publications: The KAIST approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#non-technical-overview">Non technical overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-did-you-do">What did you do</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-worked-and-what-didnt">What worked and what didn’t</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#summary-of-your-results-and-caveats">Summary of your results and caveats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#lessons-learned-and-what-would-you-do-differently">Lessons learned and what would you do differently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-comes-next">What comes next</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#appendix-description-of-the-code-and-documentation">Appendix: Description of the code and documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8 - Finding datasets in publications: The GESIS approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html#the-contribution-of-gesis-to-the-rich-context-competition">The contribution of GESIS to the Rich Context Competition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9 - Finding datasets in publications: The University of Paderborn approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#project-architecture">Project Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#approach">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#evaluation">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#discussion">Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#future-agenda">Future Agenda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10 - Finding datasets in publications: The Singapore Management University approach</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chapter 11 - Finding datasets in publications: The University of Syracuse approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#the-dataset">The dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#the-proposed-method">The Proposed Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#acknowledgements-acknowledgements-unnumbered">Acknowledgements {#acknowledgements .unnumbered}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12 - Standard Test Corpora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13 - The future of context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html#the-future-of-ai-in-rich-context">The Future of AI in Rich Context</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="chap10.html" title="previous chapter">Chapter 10 - Finding datasets in publications: The Singapore Management University approach</a></li>
+      <li>Next: <a href="chap12.html" title="next chapter">Chapter 12 - Standard Test Corpora</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, NYU.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/chap11.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
