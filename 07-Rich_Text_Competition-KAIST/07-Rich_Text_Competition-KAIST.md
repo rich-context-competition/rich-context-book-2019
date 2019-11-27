@@ -113,7 +113,7 @@ What worked and what didn’t
 ===========================
 The KAIST team tried different ideas to extract dataset names. First, they tried to extract the dataset names using some hand-crafted queries in the MRQA model. However, they noticed that these manually generated queries do not have sufficient discriminative power. Therefore, they tried to generate a general query with enough discriminative power to retrieve datasets names. To this end, they converted the sentences containing the dataset into queries, and then clustered the converted queries to get some generalized queries. However, they found that each of the resulting clusters did not reflect generalized queries. Hence, they had to create specific queries for each publication as explained in the previous section.
 
-# TO BE FIXED: They also tried to use the section names as a feature of the paragraph selection module of Document QA. However, the use of section names degraded the overall performance. In our analysis, this seems to be due to the noise that occurred when extracting the section names since they  relied on some heuristics to extract them.
+# TO BE FIXED: They also tried to use the section names as a feature of the paragraph selection module of Document QA. However, the use of section names degraded the overall performance. In their analysis, this seems to be due to the noise that occurred when extracting the section names since they  relied on some heuristics to extract them.
 
 The use of entity typing worked well to remove the wrong candidate answers proposed by the MRQA model. Thanks to this filtering by entity types, they were able to improve the recall using the query generation module without sacrificing the precision.
 
