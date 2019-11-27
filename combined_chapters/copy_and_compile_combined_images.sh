@@ -175,15 +175,15 @@ cp /tmp/newfile chap07.md
 echo "trying chapter 8"
 cp ../08-Rich_Context_Competition-GESIS/08-Rich_Context_Competition-GESIS.md chap08.md
 cp -r -f ../08-Rich_Context_Competition-GESIS/figures/* 08_images/ 
-cp 08_images/*/*.png combined_images
-sed -i.bu "s/figures\/research-methods/combined_images/g" chap08.md
-sed -i.bu "s/figures\/research-fields/combined_images/g" chap08.md
+cp 08_images/*.png combined_images
+sed -i.bu "s/figures/combined_images/g" chap08.md
+sed -i.bu "s/figures/combined_images/g" chap08.md
 #
 # add a placeholder chapter heading 
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 8 - Finding datasets in publications: The GESIS approach' >> /tmp/newfile
+echo '# Chapter 8 - Knowledge Extraction from scholarly publications: The GESIS contribution to the Rich Context Competition' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap08.md   >> /tmp/newfile 
 cp /tmp/newfile chap08.md
