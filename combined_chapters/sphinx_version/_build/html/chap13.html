@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chapter 13 - The future of context &#8212; Rich Search and Discovery for Research Datasets 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Chapter 12 - Standard Test Corpora" href="chap12.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <hr class="docutils" />
+<div class="section" id="chapter-13-the-future-of-context">
+<h1>Chapter 13 - The future of context<a class="headerlink" href="#chapter-13-the-future-of-context" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="the-future-of-ai-in-rich-context">
+<h1>The Future of AI in Rich Context<a class="headerlink" href="#the-future-of-ai-in-rich-context" title="Permalink to this headline">¶</a></h1>
+<p><strong>Paco Nathan</strong></p>
+<p>The setting for Rich Context originated in needs to analyze confidential micro-data for <a class="reference external" href="https://en.wikipedia.org/wiki/Foundations_for_Evidence-Based_Policymaking_Act">evidence-based policymaking</a>.
+The nature of that work involves collaboration using <a class="reference external" href="http://linkeddata.org/"><em>linked data</em></a>, with strict requirements for data privacy and security, plus provisions for data stewardship and dataset curation.
+Due to the highly regulated environments, that data cannot be examined outside of its specific use cases.
+In a world where public search engines crawl and index millions of terabytes, making search results available within milliseconds to anyone with a browser and an Internet connection, the setting for Rich Context may appear utterly alien.
+Seemingly, a reasonable compromise would be to run queries of sensistive data within their secure environments, and otherwise leave the process unexamined.</p>
+<p>However, there’s a broader scope to consider, far beyond the process of managing research projects or curating particular datasets.
+The great challenges of our time are human in nature – climate change, terrorism, overuse of natural resources, the nature of work, and so on – and these require robust social science to understand their causes and consequences.
+Effective use of data for social science research depends on understanding how datasets have been produced and how they’ve been used in previous works.
+That understanding of data provenance is complicated by the fact that research often must link datasets from different data producers, different agencies, different organizations.</p>
+<p>Other factors confound this situation.
+On the one hand, the availability of inexpensive computing resources, ubiquitous connected mobile devices, social networks with global reach, etc., implies that researchers can acquire large, rich datasets.
+Researchers can also fit statistical models that might have seemed intractably complex merely a decade ago.
+On the other hand, accumulating important information about datasets, their provenance, and their usage has historically been a manual process.
+Sharing this kind of information across organizations is difficult in general, and when datasets include confidential data about human subjects it becomes impossible to provide open access to the original data.
+These issues combine to contribute to a lack of reproducibility and replicability in the study of human behavior, and threaten the legitimacy and utility of social science research.</p>
+<p>The problems enumerated above make it difficult for people to understand about data usage, although at the same time they present opportunities for leveraging automation.
+Consider how one of the major challenges in social science research is search and discovery: the vast majority of data and research results cannot be easily discovered by other researchers.
+From one perspective, researchers are the users of micro data and its related <a class="reference external" href="https://en.wikipedia.org/wiki/Metadata"><em>metadata</em></a> – in other words, information about the structure of datasets, their provenance, etc. – and those researchers produce outcomes, often in the form of publications.
+Publications accumulate expertise and nuances about datasets, including the data preparation required, research topics and methodology, what kinds of analyses were attempted and ultimately used, which information within the datasets was most valuable for the results obtained, and so on.
+These details produced through publications represent <em>metadata about datasets</em>.
+While the metadata within publications may be relatively unstructured – i.e., not explicitly articulated, nor shared outside of the current project – advances in machine learning provide means to extract metadata from unstructured sources.</p>
+<p>The exchange of metadata plays another important role.
+From the perspective of a data publisher (i.e., an agency) the many concerns about security and data privacy indicate use of <em>tiered access</em> for sensitive data.
+Datasets which do not contain sensitive data may be made freely available to the public as <a class="reference external" href="https://www.data.gov/"><em>open data</em></a>.
+Other datasets may require DUAs before researchers can access them.
+So the data sharing may need to be organized in tiers.
+Nonetheless, metadata for the private tiers in many cases may still be shared even though the data cannot be linked directly without explicit authorizations and stewardship.
+So metadata provides a role of exchanging information about sensitive data, in ways that can be accumulated across a broader scope than individual research projects.</p>
+<p>The opportunity at hand is to leverage machine learning advances to create feedback loops among the entities involved: researchers, datasets, data publishers, publications, and so on.
+A new generation of tooling for search and discovery could leverage that to augment researchers: informing them about what datasets are being used, in which research fields, the tools involved, as well as the methods used and findings from the research.</p>
+<div class="section" id="the-case-for-rich-context">
+<h2>The Case for Rich Context<a class="headerlink" href="#the-case-for-rich-context" title="Permalink to this headline">¶</a></h2>
+<p>Consider the two most fundamental workflows within Rich Context, where analysts and other researchers interact among data providers, data stewards, training programs, security audits, etc.:</p>
+<ul class="simple">
+<li><p><strong>Collaboration and Workspace:</strong> where researchers collaborate within a secured environment, having obtained authorizations via NDAs (non-disclosure agreements), DUAs (data use authorizations), etc.</p></li>
+<li><p><strong>Data Stewardship:</strong> where data stewards can review and determine whether to approve requests for using the datasets that they curate, and then monitor and report on subsequent usage.</p></li>
+</ul>
+<p>These components represent <em>explicitly</em> linked feedback loops among the researchers, projects, datasets, and data stewards.
+Researchers also use other <em>implicitly</em> linked feedback loops externally to draw from published social science research.
+Overall, the general category of linked data describes these interactions.</p>
+<p>A large body of AI applications leverages linked data.
+Related R&amp;D efforts have focused mostly on public search engines, e-commerce platforms, and research in life sciences – while in social science research the use of this technology is relatively uncharted territory.
+Also, given the security and compliance requirements involved with sensitive data, the process of leveraging linked data in social science research takes on nuanced considerations and compels novel solutions.</p>
+<p>This area of focus represents the core of Rich Context: the interconnection of point solutions that facilitate research, as explicit feedback loops, along with means to leverage the implicit feedback loops that draw from published research.
+Making use of AI applications to augment social science research is the goal of Rich Context work, and that interconnection of feedback loops, through a graph, creates a kind of <em>virtuous cycle</em> for metadata – analogous to the famous <a class="reference external" href="https://youtu.be/21EiKfQYZXc">virtuous cycle of data</a> required for AI applications in industry, as described Andrew Ng.</p>
+<p>In general, guidance for Rich Context can be drawn from the FAIR[^1] data principles for data management and data stewardship in science.
+The FAIR acronym stands for <em>Findable</em>, <em>Accessible</em>, <em>Interoperable</em>, and <em>Reusable</em> data, addressing the issue of reproducibility in scientific research.
+One observation from the original FAIR paper describes core tenets of Rich Context:</p>
+<blockquote>
+<div><p>Humans, however, are not the only critical stakeholders in the milieu of scientific data. Similar problems are encountered by the applications and computational agents that we task to undertake data retrieval and analysis on our behalf. These ‘computational stakeholders’ are increasingly relevant, and demand as much, or more, attention as their importance grows. One of the grand challenges of data-intensive science, therefore, is to improve knowledge discovery through assisting both humans, and their computational agents, in the discovery of, access to, and integration and analysis of, task-appropriate scientific data and other scholarly digital objects.</p>
+</div></blockquote>
+<p>In other words, throughout the use cases for scientific data there are substantial opportunities for human-in-the-loop AI approaches, where the people involved increasingly have their work augmented by automated means, while the automation involved increasingly gets improved by incorporating human expertise.
+One can use the metaphor of a <em>graph</em> to represent the linkages: those that span across distinct research projects, those that require cross-agency collaboration with sensitive data, and those that integrate workflows beyond the scope of specific tools.
+Specifically, this work entails the development of a <a class="reference external" href="https://en.wikipedia.org/wiki/Knowledge_base"><em>knowledge graph</em></a> to represent metadata about datasets, researchers, projects, agencies, etc., – including the computational agents involved – as distinct entities connected through relations that model their linkage.</p>
+<p><img alt="example graph relations" src="_images/illo.2.png" />example graph relations</p>
+<p>Much of the intelligence in this kind of system is based on leveraging inference across the graph, insights which could not be inferred within the scope of a single research project or through the use of one particular tool.
+Over time, the process accumulates a richer context of relations into that graph while clarifying and leveraging the feedback loops among the entities within the graph.
+Rich Context establishes foundations for that work in social science research.</p>
+<p>The <a class="reference external" href="https://coleridgeinitiative.org/richcontextcompetition#problemdescription">Rich Context Competition</a> held during September 2018 through February 2019 invited AI research teams to compete in one aspect of Rich Context requirements.
+Several teams submitted solutions to automate the discovery of research datasets along with associated research methods and fields, as identified in social science research publications.
+Methods for machine learning and text analytics used by the four finalist teams provided complementary approaches, all focused on the problem of <a class="reference external" href="https://en.wikipedia.org/wiki/Entity_linking"><em>entity linking</em></a>, with a corpus of social science research papers used as their training data.</p>
+<p>The results of the competition provided metadata to describe links among datasets used in social science research. In other words, the outcome of the competition generated the basis for a moderately-sized knowledge graph.
+There are many publication sources to analyze, and the project will pursue that work as an ongoing process to extract the implied metadata.
+Meanwhile the increasing adoption and usage of the ADRF framework continues to accumulate metadata directly.</p>
+</div>
+<div class="section" id="use-cases-for-rich-context">
+<h2>Use Cases for Rich Context<a class="headerlink" href="#use-cases-for-rich-context" title="Permalink to this headline">¶</a></h2>
+<p>Looking at potential use cases for Rich Context more formally, we can identify needs for leveraging a knowledge graph about research datasets and related entities.
+For each of these needs, we can associate solutions based on open source software which have well-known use cases in industry.</p>
+<p>As an example, consider a dataset <em>A001</em> published by a data provider <em>XYZ Agency</em> where <em>Jane Smith</em> works as the data steward responsible for curating that dataset.
+Over time, multiple research projects describe the use of <em>A001</em> in their published results.
+Some researchers note, on the one hand, that particular columns in data tables within <em>A001</em> have some troubling data quality issues – inconsistent names and acronyms, identifiers that require transformations before they can be used to join with other datasets, and so on.
+On the other hand, the body of research related to <em>A001</em> illustrates how it gets joined frequently with another dataset <em>B023</em> to support analysis using a particular research method.
+The two datasets provide more benefits when used together.</p>
+<p>While access to the <em>A001</em> dataset gets managed through the <em>XYZ Agency</em> and its use of the ADRF framework, other datasets such as <em>B023</em> get used outside of that context.
+A knowledge graph is used to accumulate information about the datasets, research projects, the resulting published papers, etc., and applications for augmenting research derive quite directly from that graph.
+For example, feedback from researchers about how <em>A001</em> gets combined with other datasets outside of the <em>XYZ Agency</em> domain help guide <em>Jane Smith</em> to resolve some of the data quality issues.
+New columns get added with cleaner data for identifiers, which allows more effective linking.
+Other feedback based on machine learning models that have classified published papers then helps recommend research methods and candidate datasets to new analysts – and also to agencies that have adjacent needs, but did not previously have visibility into the datasets published by <em>XYZ Agency</em>.</p>
+<p>These are the kinds of applications that become enabled through Rich Context.
+Search and discovery is clearly a need, although other use cases can help improve the discovery process and enhance social science research.
+The following sections discuss specific use cases and their high-level requirements for the associated technologies.</p>
+<div class="section" id="search-and-discovery">
+<h3>Search and Discovery<a class="headerlink" href="#search-and-discovery" title="Permalink to this headline">¶</a></h3>
+<p>As described above, the vast majority of social science data and research results cannot be easily discovered by other researchers.
+While public search engines based on keyword search have been popularized by e-commerce platforms such as Google and Bing, the more general problem of search and discovery can be understood best as a graph problem, and the needs in social science research are more formally understood as recommendations across a graph.</p>
+<p>For example, starting with a given dataset, who else has worked with that data?
+Which topics did they research?
+Which methods did they use?
+What were their results?
+In other words, starting from one entity in a knowledge graph, what other neighboring entities are linked?</p>
+<p>These kinds of capabilities may be implemented simply by users traversing directly through the links of the graph.
+However, at scale, that volume of information can become tedious and overwhelming.
+It’s generally more effective for user experience (UX) to have machine learning models summarize, then predict a set of the most likely paths through the graph from a particular starting point.</p>
+<p>One good approach for this is the general case of <em>link prediction</em>[^2]: given a researcher starting with a particular dataset and goals for topics or methods, represent that as a local, smaller graph.
+Then use link prediction to fill-in missing entities and relations, extending the local graph for that researcher.
+In other words, what other datasets should be joined, how can particular fields be used, what research topics or methods are related, which published papers might become foundations for this work?
+The most likely links inferred become top recommendations.
+Also, this kind of recommendation is not limited to the start of projects, it can be leveraged at almost any stage of research.</p>
+</div>
+<div class="section" id="entity-linking">
+<h3>Entity Linking<a class="headerlink" href="#entity-linking" title="Permalink to this headline">¶</a></h3>
+<p>The Rich Context Competition demonstrated how entities and relations used to construct a knowledge graph can be mined from a corpus of scientific papers.
+Machine learning methods for <em>entity linking</em>[^3] used in the competition need to be generalized and extended, then used to analyze the ongoing stream of published social science research.
+This work provides potential benefits for the publishers, for example helping them analyze and annotate newly published papers, developing dashboards about data impact metrics for journals or authors, and so on.</p>
+<p>An additional benefit of entity linking is to help correct abbreviations, localized acronyms, or mistakes in linked data references.
+This is an iterative process which will need integration and feedback with data stewardship workflows.</p>
+</div>
+<div class="section" id="classifiers">
+<h3>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this headline">¶</a></h3>
+<p>As any researcher or librarian knows well, curating a large set of research papers by hand is labor-intensive and prone to errors.
+Machine learning models based on <em>supervised learning</em> or <em>semi-supervised learning</em> (human-in-the-loop) can produce classifiers that annotate research papers automatically.</p>
+<p>At some point, the ADRF framework may run classifiers on the workflows (e.g., Jupyter notebooks) for projects in progress.
+By extension, classifiers may infer across the knowledge graph to add annotations for datasets as well.
+This work can be considered a subset of link prediction, also related to entity linking.</p>
+</div>
+<div class="section" id="transitive-inference">
+<h3>Transitive Inference<a class="headerlink" href="#transitive-inference" title="Permalink to this headline">¶</a></h3>
+<p>The metadata collected through the use of the ADRF framework or extracted from research publications includes relations that link entities in the graph.
+Once a graph is constructed, additional relations may be inferred.
+This is a case of <a class="reference external" href="https://en.wikipedia.org/wiki/Transitive_relation"><em>transitive inference</em></a>, which can help add useful annotations to the graph, as shown in the following diagram:</p>
+<p><img alt="transitive relations" src="_images/illo.3.png" />transitive relations</p>
+<p>In an example from Norse mythology, Torunn is the daughter of Thor, and Thor is the son of Gaea, therefore Torun is the <em>granddaughter</em> of Gaea.
+The same process can apply, for example, to relations that describe links between datasets and researchers.</p>
+<p>Note that embeddings have proven to be a powerful approach for inference about patterns, based on deep learning.
+On the current forefront of AI research, methods that leverage <em>reinforcement learning</em>[^4] are positioned to outperform embeddings soon, since they explore/exploit the graph structure instead of relying on a history of observed patterns.
+This is especially useful for <em>knowledge graph completion</em>, where there are cases of incomplete metadata in the knowledge graph, which is essential for Rich Context work.</p>
+</div>
+<div class="section" id="iterative-improvement-of-the-knowledge-graph">
+<h3>Iterative Improvement of the Knowledge Graph<a class="headerlink" href="#iterative-improvement-of-the-knowledge-graph" title="Permalink to this headline">¶</a></h3>
+<p>Most of the finalist teams in the Rich Context Competition made use of other existing graphs to bootstrap their machine learning development work, such as the <a class="reference external" href="https://docs.microsoft.com/en-us/academic-services/graph/reference-data-schema">Microsoft Academic Graph</a>, <a class="reference external" href="http://api.semanticscholar.org/corpus/">Semantic Scholar</a>, and others purpose-built for the competition.
+Those teams cited how some graph would need to be extended in the future, to improve recognition accuracy.</p>
+<p>Rich Context now subsumes that effort, making the iterative improvement of the knowledge graph an ongoing priority.
+In lieu of those other graphs used for bootstrap purposes during the competition, the Rich Context knowledge graph provides the foundation for machine learning.</p>
+<p>This process of accreting more entities into the graph and refining their relations leads to better training data and improved machine learning models.
+Over time, as our models improve, the previously analyzed research papers can be re-evaluated to extract richer results.
+That work in turn enhances social science research within the ADRF framework, along with data curation.
+That overall dynamic represents the virtuous cycle of metadata, which continually improves Rich Context.</p>
+</div>
+<div class="section" id="axioms-for-dataset-curation">
+<h3>Axioms for Dataset Curation<a class="headerlink" href="#axioms-for-dataset-curation" title="Permalink to this headline">¶</a></h3>
+<p>Another immediate use of Rich Context is to assist the data stewards to understand the broader scope of usage for the datasets that they curate.
+For example, ontology <em>axioms</em> used on the metadata in the graph can help analyze:</p>
+<ul class="simple">
+<li><p>consistency checks for the incoming metadata</p></li>
+<li><p>which data stewardship rules apply in a given case</p></li>
+</ul>
+<p>In a way, that helps codify what would otherwise be “institutional lore” – instead that’s now captured for others to study, use for training new staff, etc.</p>
+<p>Note that the ADRF framework must provide means for customizing and configuring these kinds of axioms, so that data stewardship rules rules are not tightly coupled with the security audits and release cycle.
+Those rules can change rapidly, depending on new legislation or other policy updates, or even due to different agency environments.</p>
+</div>
+</div>
+<div class="section" id="leveraging-open-standards-and-open-source">
+<h2>Leveraging Open Standards and Open Source<a class="headerlink" href="#leveraging-open-standards-and-open-source" title="Permalink to this headline">¶</a></h2>
+<p>Overall, the Rich Context portion of the ARDF framework represents a <em>data catalog</em> along with associated <em>data governance</em> practices.
+As a first step in knowledge graph work, we can make use of existing open standards for metadata about data catalogs and datasets.
+For example, the <a class="reference external" href="https://www.w3.org/2013/data/">W3C Data Activity</a> coordinates a wide range of metadata standards, including:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.w3.org/TR/vocab-dcat/">DCAT</a> – metadata about data catalogs</p></li>
+<li><p><a class="reference external" href="https://www.w3.org/TR/void/#dataset">VoID</a> – metadata about datasets</p></li>
+<li><p><a class="reference external" href="http://dublincore.org/specifications/dublin-core/dcmi-terms/">DCMI</a> – Dublin Core metadata terms</p></li>
+<li><p><a class="reference external" href="https://www.w3.org/TR/swbp-skos-core-guide/">SKOS</a> – “simple knowledge organization system”</p></li>
+</ul>
+<p>These represent <a class="reference external" href="https://en.wikipedia.org/wiki/Controlled_vocabulary">controlled vocabularies</a> described in <a class="reference external" href="https://www.w3.org/OWL/">OWL</a> and based atop <a class="reference external" href="https://www.w3.org/RDF/">RDF</a>.
+These standards can be combined and extended to suit the needs of specific use cases, such as within the ADRF framework.
+In particular, the Rich Context knowledge graph is a superset of a <a class="reference external" href="https://www.w3.org/TR/vocab-dcat/#conformance"><em>DCAT-compliant data catalog</em></a>.
+Taken together, localized extensions of these open standards represent an <a class="reference external" href="https://en.wikipedia.org/wiki/Ontology_(information_science)">ontology</a> – essentially as a specification for defining metadata that can be added into the knowledge graph and how that graph should be structured.
+Development of that ontology along with example metadata plus Python code to validate the graph is managed in the public repository <a class="reference external" href="https://github.com/Coleridge-Initiative/adrf-onto/wiki">adrf-onto</a> on GitHub.</p>
+<p>The workflows within the ADRF framework represent use cases of data governance, and there is substantial overlap between Rich Context and emerging trends for data governance in industry.
+There are open source projects which leverage knowledge graphs to collect metadata about datasets and their usage, where machine learning helps address the complexities[^5] of data governance in industry data science work.
+For instance:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://eng.lyft.com/amundsen-lyfts-data-discovery-metadata-engine-62d27254fbb9">Amundsen</a> from Lyft</p></li>
+<li><p><a class="reference external" href="https://marquezproject.github.io/marquez/">Marquez</a> from WeWork</p></li>
+<li><p><a class="reference external" href="https://github.com/linkedin/WhereHows">WhereHows</a> from LinkedIn</p></li>
+<li><p><a class="reference external" href="https://eng.uber.com/databook/">Databook</a> from Uber (pending release as open source)</p></li>
+</ul>
+<p>Of course the Rich Context work addresses special considerations for sensitive data and compliance requirements.
+Even so, much can be learned from these related open source projects in industry, which are pursuing similar kinds of use cases.
+<a class="reference external" href="https://www.topquadrant.com/">TopQuadrant</a> and <a class="reference external" href="https://www.astrazeneca.com/">AstraZeneca</a> are examples of commercial vendors which construct knowledge graphs about datasets, also for data governance purposes – respectively in the Finance and Pharma business verticals.
+These commercial solutions similarly make use of DCAT, VoID, DMCI, SKOS, and also the FAIR data principles.</p>
+<p>In general, the subject of metadata exchange for data governance use cases is addressed by the <a class="reference external" href="https://www.odpi.org/">ODPi</a> open standard <a class="reference external" href="https://www.odpi.org/projects/egeria">Egeria</a> and related work by Mandy Chessell[^6], et al., including the <a class="reference external" href="https://atlas.apache.org/">Apache Atlas</a> open source project.
+Much of that work focuses on standards used to validate the exchange of metadata reliably across different frameworks.
+This implies potential opportunities for Rich Context to interoperate with other data governance solutions or related metadata services.</p>
+<p>To help establish open standards and open source implementations related to Rich Context, the ADRF team has collaborated with <a class="reference external" href="https://jupyter.org/">Project Jupyter</a>.
+A new Rich Context feature set is being added to <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/">JupyterLab</a>, which is one of the key open source projects used in the architecture of the ADRF framework, and these new features will be integrated into its future releases.
+The new Rich Context features support projects as top-level entities, real-time collaboration and commenting, data registry, metadata handling, annotations, and usage tracking – as described in the Project Jupyter “press release” requests for comments: <a class="reference external" href="https://github.com/jupyterlab/jupyterlab-data-explorer/blob/master/press_release">data explorer</a>, <a class="reference external" href="https://github.com/jupyterlab/jupyterlab-metadata-service/blob/master/press_release">metadata explorer</a>, and <a class="reference external" href="https://github.com/jupyterlab/jupyterlab-commenting/blob/master/press_release">commenting</a>.
+For example, a team of social science researchers working on a project could use the commenting feature in Jupyter to make an annotation about data quality issues encountered in a particular dataset.
+That comment, as metadata about the dataset, would get imported into the knowledge graph, and could later be used for recommendations to a data steward or other researchers.</p>
+<p>Note that most of the machine learning approaches referenced above are specific cases of <a class="reference external" href="https://en.wikipedia.org/wiki/Deep_learning"><em>deep learning</em></a>, based on layered structures of artificial neural networks. In particular, <em>graph embedding</em>[^7] is an approach that vectorizes portions of graphs to use as training data for deep learning models.
+Graph embedding can be used to perform entity linking, link prediction, etc.
+In many of these cases, the resulting machine learning models become proxies for the graph data, such that the entire knowledge graph data is not required in production use cases.
+That practice contrasts earlier and generally less effective approaches which relied on graph queries applied to the full data.
+Note that the <a class="reference external" href="https://ocean.sagepub.com/blog/an-interview-with-the-allen-institute-for-artificial-intelligence">winning team</a> in the Rich Context Competition was from <a class="reference external" href="https://allenai.org/">Allen AI</a> which is a leader in the field of using embedded models for natural language.
+Typical open source frameworks which are popular for deep learning research include <a class="reference external" href="https://pytorch.org/">PyTorch</a> (from Facebook) and the more recent <a class="reference external" href="https://ray.readthedocs.io/en/latest/distributed_training.html">Ray</a> (from UC Berkeley RISElab).</p>
+</div>
+<div class="section" id="system-architecture-overview">
+<h2>System Architecture Overview<a class="headerlink" href="#system-architecture-overview" title="Permalink to this headline">¶</a></h2>
+<p>The following diagram illustrates a proposed system architecture for Rich Context as an additional module in the ADRF framework:</p>
+<p><img alt="Rich Context module" src="_images/illo.4.png" />Rich Context module</p>
+<p>Building on the DFCore features plus the Data Stewardship module, Rich Context provides both a destination for metadata (logging events from components, or extracted metadata from analysis of publications) and a source for metadata ontology used in the ADRF framework.
+Machine learning models get trained and updated based on the knowledge graph, then used for services (recommender system, classifiers, etc.) provided back into the ADRF framework, and additionally to support training initiatives – or for general purpose search and discovery by researchers.</p>
+<p>The additional system components for implementing Rich Context are based primarily on open source software (e.g., PyTorch) and extensions of open standards (e.g., W3C), all within the security context of AWS GovCloud implementation of the ADRF framework.</p>
+</div>
+<div class="section" id="trends-from-origins-to-near-term-future-projections">
+<h2>Trends, from origins to near-term future projections<a class="headerlink" href="#trends-from-origins-to-near-term-future-projections" title="Permalink to this headline">¶</a></h2>
+<p>Meanwhile, the development of Rich Context has followed a familiar progression, echoing how the history of IT and data analytics practices matured over decades – albeit at a much faster pace.
+That progression indicates likely directions for how AI applications will come into use for Rich Context.
+Initial steps for Rich Context allowed researchers to analyze and report about sensistive data, while maintaining security and privacy compliance.
+That’s roughly analogous to data analytics during the heyday of <em>enterprise data warehouses</em> and <em>business intelligence</em> during the 1990s.
+Subsequent work improved online workflows for data stewards, adding reports about usage along with some metadata derived as “exhaust” from logs.
+That’s roughly analogous to “data driven” organizations that emerged during the late 2000s after initial adoption of <em>data science</em> practices.
+Next steps, such as the Rich Context Competition, began to use <em>machine learning models</em> to extract metadata that was embedded in unstructured data (i.e., research publication) to augment research efforts.
+That’s roughly analogous to the trends of machine learning adoption in industry during the mid 2010s.
+In the immediate future, Rich Context applications begin to leverage  inference based on <em>knowledge graph</em> representations about researchers, datasets, publications, data stewards, and so on.
+Contemporary work in <em>deep learning</em> promises AI-based applications that can leverage embeddings in the graph, to give social science researchers better recommendations for their work.
+While that depends on historical patterns, current research on <em>reinforcement learning</em> to explore/exploit the structure of graphs can move beyond history and patterns, effectively considering “what if” scenarios that suggest unexplored research opportunities.
+That echoes the contemporary AI landscape, leading into the 2020s.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Rich Context recognizes that social science research depends on <em>linked data</em> usage of micro data and its metadata.
+Effective management of that metadata is based on a graph that exists outside the context of component point solutions and specific workflows.
+While there is substantial use of linked data for ecommerce platforms and research in life sciences, social science research presents nuances and new challenges that haven’t been addressed previously.</p>
+<p>The Rich Context portions of the ADRF framework interconnect workflows that facilitate research – as explicit feedback loops in the graph – along with means to extract metadata from published research – as implicit feedback loops in the graph.
+That process creates a kind of virtuous cycle for metadata, making use of AI applications to augment social science research, with continual improvement of the entities and relations represented within the graph.</p>
+<p>A prerequisite was to create a corpus of research publications, used for training data during the Rich Context Competition, which demonstrated how to extract metadata from research publications.</p>
+<p>The next step will be a formal implementation of the knowledge graph, based primarily on extensions of open standards and use of open source software.
+That graph is represented as an extension of a DCAT-compliant data catalog. It will eventually incorporate the new Rich Context features going into Project Jupyter.
+Immediate goals are to augment search and discovery in social science research, plus additional use cases that help improve the knowledge graph and augment research through the ADRF framework.</p>
+<p>In the longer term, the process introduces human-in-the-loop AI into data curation, ultimately to reward researchers and data stewards whose work contributes additional information into the system.
+With this latter step, in the broader sense Rich Context helps establish a community focused on contributing code plus knowledge into the research process.</p>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<p>[^1]:
+Wilkinson, M. D. et al. <a class="reference external" href="https://www.nature.com/articles/sdata201618">The FAIR Guiding Principles for scientific data management and stewardship</a>. Sci. Data 3:160018 doi: 10.1038/sdata.2016.18 (2016)</p>
+<p>[^2]:
+For a sample of recent research papers regarding link prediction through graph embedding, see <a class="reference external" href="https://arxiv.org/search/?query=%22link+prediction%22+%22graph+embedding%22&amp;searchtype=all&amp;abstracts=show&amp;order=&amp;size=50">these Arxiv results</a>.</p>
+<p>[^3]:
+One of the better resources online for entity linking is <a class="reference external" href="http://nlpprogress.com/english/entity_linking.html">NLP-progress</a> which specifically tracks the state-of-the-art (SOTA) papers, along with their scores on recognized benchmarks.</p>
+<p>[^4]:
+between approaches based on RL vs. embedding, see  <a class="reference external" href="https://arxiv.org/abs/1808.10568">“Multi-Hop Knowledge Graph Reasoning with Reward Shaping”</a>; Xi Victoria Lin, Richard Socher, Caiming Xiong; _EMNLP 2018 _<a class="reference external" href="https://arxiv.org/abs/1808.10568">arXiv:1808.10568 [cs.AI]</a></p>
+<p>[^5]:
+A good survey paper about these issues is given <a class="reference external" href="http://cidrdb.org/cidr2017/papers/p111-hellerstein-cidr17.pdf">Ground: A Data Context Service</a>, Hellerstein et al., <em>CIDR 2017</em>, based on research by <a class="reference external" href="https://rise.cs.berkeley.edu/blog/publication/ground-data-context-service-2/">UC Berkeley RISElab</a>.</p>
+<p>[^6]:
+See <a class="reference external" href="https://zenodo.org/record/556504#.XSAUAJNKgWo">“The Case for Open Metadata”</a>, Mandy Chessell, <em>Frontiers in Data Science</em>, 2016-09-15.</p>
+<p>[^7]:
+For an overview of graph embedding, see <a class="reference external" href="https://towardsdatascience.com/overview-of-deep-learning-on-graph-embeddings-4305c10ad4a4">“Graph Embedding for Deep Learning”</a>, Flawson Tong (2019-05-06).</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Rich Search and Discovery for Research Datasets</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#how-this-book-came-to-be">How this book came to be</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#book-overview">Book overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-2">Section 2:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-3">Section 3:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-4-looking-forward">Section 4: Looking forward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#more-resources">More resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2 - Bundesbank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3 - Digital Science Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html#enriching-context-and-enhancing-engagement-around-datasets">Enriching context and enhancing engagement around datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4 - Metadata for Social Science Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#introduction">INTRODUCTION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-metadata-and-digital-data-objects">DATA, METADATA, AND DIGITAL DATA OBJECTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#semantic-descriptions">SEMANTIC DESCRIPTIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-repositories">DATA REPOSITORIES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#services">SERVICES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#details-about-the-data-in-data-sets">DETAILS ABOUT THE DATA IN DATA SETS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#cyberinfrastructure">CYBERINFRASTRUCTURE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#conclusion">CONCLUSION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#acknowledgments">ACKNOWLEDGMENTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#references-references-listparagraph">REFERENCES {#references .ListParagraph}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5 - Compettion Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html">Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#methods">Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#future-work-and-lessons-learned">Future Work and Lessons Learned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap06.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7 - Finding datasets in publications: The KAIST approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#non-technical-overview">Non technical overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-did-you-do">What did you do</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-worked-and-what-didnt">What worked and what didn’t</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#summary-of-your-results-and-caveats">Summary of your results and caveats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#lessons-learned-and-what-would-you-do-differently">Lessons learned and what would you do differently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-comes-next">What comes next</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#appendix-description-of-the-code-and-documentation">Appendix: Description of the code and documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8 - Finding datasets in publications: The GESIS approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html#the-contribution-of-gesis-to-the-rich-context-competition">The contribution of GESIS to the Rich Context Competition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9 - Finding datasets in publications: The University of Paderborn approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#project-architecture">Project Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#approach">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#evaluation">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#discussion">Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#future-agenda">Future Agenda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10 - Finding datasets in publications: The Singapore Management University approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11 - Finding datasets in publications: The University of Syracuse approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-dataset">The dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-proposed-method">The Proposed Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#acknowledgements-acknowledgements-unnumbered">Acknowledgements {#acknowledgements .unnumbered}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12 - Standard Test Corpora</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chapter 13 - The future of context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#the-future-of-ai-in-rich-context">The Future of AI in Rich Context</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="chap12.html" title="previous chapter">Chapter 12 - Standard Test Corpora</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, NYU.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/chap13.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach &#8212; Rich Search and Discovery for Research Datasets 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 7 - Finding datasets in publications: The KAIST approach" href="chap07.html" />
+    <link rel="prev" title="Chapter 5 - Compettion Design" href="chap05.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <hr class="docutils" />
+<div class="section" id="chapter-6-finding-datasets-in-publications-the-allen-institute-for-artificial-intelligence-approach">
+<h1>Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach<a class="headerlink" href="#chapter-6-finding-datasets-in-publications-the-allen-institute-for-artificial-intelligence-approach" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>author:</p>
+<ul>
+<li><p>|
+Daniel King, Waleed Ammar, Iz Beltagy, Christine Betts<strong>Suchin Gururangan and Madeleine van Zuylen</strong></p>
+<p>Allen Institute for Artificial Intelligence, Seattle, WA, USAdaniel  &#64;allenai.orgbibliography:</p>
+</li>
+<li><p>‘acl2015.bib’
+title: The AI2 Submission at The Rich Context Competition</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="introduction">
+<h1><a class="reference external" href="#sec:intro">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>The Allen Institute for Artificial Intelligence (AI2) is a non-profit
+research institute founded by Paul G. Allen with the goal of advancing
+artificial intelligence research for the common good. One of the major
+undertakings at AI2 is to develop an equitable, unbiased software
+platform (Semantic Scholar)<a class="reference external" href="%5Bwww.semanticscholar.org%5D(www.semanticscholar.org)">^1</a> for finding relevant information in the
+scientific literature. Semantic Scholar extracts meaningful structures
+in a paper (e.g., images, entities, relationships) and links them to
+other artifacts when possible (e.g., knowledge bases, GitHub
+repositories), hence our interest in the rich context competition (RCC).
+In particular, we participated in the RCC in order to explore methods
+for extracting and linking datasets used in papers. At the time of this
+writing, Semantic Scholar comprehensively covers the computer science
+and biomedical literature, and we plan to expand our coverage in 2019 to
+other scientific areas, including social sciences.</p>
+<p>In the following sections, we describe our approach to the three tasks
+of the RCC competition:</p>
+<ol class="simple">
+<li><p>extracting the datasets used in publications,</p></li>
+<li><p>predicting the field of research of publications</p></li>
+<li><p>extracting the methods used in publications</p></li>
+</ol>
+</div>
+<div class="section" id="methods">
+<h1><a class="reference external" href="#sec:methods">Methods</a><a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dataset-extraction-and-linking">
+<h2><a class="reference external" href="#sec:datasets_methods">Dataset Extraction and Linking</a><a class="headerlink" href="#dataset-extraction-and-linking" title="Permalink to this headline">¶</a></h2>
+<p>This task focuses on identifying datasets used in a scientific paper.
+Datasets which are merely mentioned but not used in the research paper
+are not of interest. This task has two sub-tasks:</p>
+<ol class="simple">
+<li><p>Citation prediction: extraction and linking to a provided knowledge
+base of <em>known datasets</em>, and</p></li>
+<li><p>Mention prediction: extraction of both <em>known and unknown</em> dataset
+mentions.</p></li>
+</ol>
+<div class="section" id="provided-data">
+<h3>Provided Data<a class="headerlink" href="#provided-data" title="Permalink to this headline">¶</a></h3>
+<p>The provided knowledge base of known datasets includes approximately 10K
+datasets used in social science research. The high textual similarity between
+different datasets in the knowledge base informs our approach for linking dataset
+mentions to their dataset in the knowledge base. Approximately 10% of the datasets in the
+knowledge base were linked one or more times in the provided corpus of
+5K papers. To attempt to generalize mention discovery beyond those present in the knowledge base, we train a Named Entity Recognition model on the noisy annotations provided by the labeled mentions in the knowledge base.</p>
+<p><img alt="_images/datasets.png" src="_images/datasets.png" />image{width=”13cm”}</p>
+<p>We provide a high-level overview of our approach in Figure
+<a class="reference external" href="#fig:datasets">[fig:datasets]</a>{reference-type=”ref”
+reference=”fig:datasets”}. First, we use a named entity recognition
+(NER) model to predict dataset mentions. For each mention, we generate a
+list of candidate datasets from the knowledge base. We also developed a
+rule based extraction system which searches for dataset mentions seen in
+the training set, adding the corresponding dataset IDs in the training
+set annotations as candidates. We then use a binary classifier to
+predict which of these candidates is a correct dataset extraction.</p>
+<p>Next, we describe each of the sub-components in more detail.</p>
+</div>
+<div class="section" id="mention-and-candidate-generation">
+<h3>Mention and Candidate Generation<a class="headerlink" href="#mention-and-candidate-generation" title="Permalink to this headline">¶</a></h3>
+<p>We first constructed a set of rule based candidate citations by exact
+string matching mentions and dataset names from the provided knowledge
+base. We found this to have high recall on the provided development fold
+and our own development fold that we created. However, after our test
+submission, it became clear that there were many datasets in the actual
+test set that did not have mentions in the provided knowledge base.</p>
+<p>To address this limitation, we developed an NER model to predict
+additional dataset mentions. For NER, we use a bi-LSTM model with a CRF
+decoding layer, similar to [&#64;Peters2018DEEPCW], and implemented using
+the AllenNLP framework.<a class="reference external" href="https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py">^2</a> In order to train the NER model, we
+automatically generate mention labels by string matching mentions in the
+provided annotations against the full text of a paper. This results in
+noisy labeled data, because it was not possible to find all correct
+mentions this way (e.g., some dataset mentions were not annotated), and
+the same string can appear multiple times in the paper, while only some
+are correct examples of dataset usage.</p>
+<p>We limit the percentage of negative examples (i.e., sentences with no
+mentions) used in training to 50%, and use 40 words as the maximum
+sentence length. We use 50-dimensional Glove word embeddings
+[&#64;Pennington2014GloveGV], 16-dimensional character embeddings with 64
+CNN filters of sizes (2, 3, 4). The CNN character encoder outputs
+128-dimensional vectors. We optimize model parameters using ADAM
+[&#64;Kingma2014AdamAM] with a learning rate of 0.001.</p>
+<p>In order to generate linking candidates for the NER mentions, we score
+each candidate dataset based on TF-IDF weighted token overlap between the mention
+text and the dataset title. For a given mention, many dataset titles can
+have a non-zero overlap score, so we take the top 30 scoring candidates
+for each mention as the linking candidates for that mention.</p>
+</div>
+<div class="section" id="candidate-linking">
+<h3>Candidate Linking<a class="headerlink" href="#candidate-linking" title="Permalink to this headline">¶</a></h3>
+<p>The linking model takes as input a dataset mention, its context, and one
+of the candidate datasets in the knowledge base, and outputs a binary
+label. We use a gradient boosted trees classifier using the XGBoost
+implementation.<a class="reference external" href="https://xgboost.readthedocs.io/en/latest/">^3</a> The model takes as input the following features: prior probability of
+entity, prior probability of entity given mention, prior probability of
+mention given entity, whether a year appears in the mention context and
+in the dataset title, mention length, mention sentence length, whether
+the mention is an acronym, estimated section title of the mention,
+overlap between mention context and dataset keywords provided in the
+knowledge base, and the TF-IDF weighted token overlap. We note that it
+is possible to predict zero, one or multiple dataset IDs for the same
+mention, and each dataset candidate is scored independently.</p>
+</div>
+</div>
+<div class="section" id="research-area-prediction">
+<h2><a class="reference external" href="#sec:areas_methods">Research Area Prediction</a><a class="headerlink" href="#research-area-prediction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data">
+<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>The second task of the competition is to predict research areas of a
+paper. The task does not specify the set of research areas of interest,
+nor is training data provided for the task. After manual inspection of a
+subset of the papers in the provided test set, the SAGE taxonomy of
+research, and the Microsoft Academic Graph (MAG) [&#64;Shen2018AWS], we
+decided to use a subset of the fields of study in MAG as labels. In
+particular, we included all fields related to social science or papers
+from the provided training corpus. However, since the abstract and full
+text of papers are not provided in MAG, we only use the paper titles for
+training our model. The training data we ended up with included
+approximately 75K paper titles along with their fields of study as
+specified in two levels of the MAG hierarchy. We held out about 10% of
+the titles for development data. The coarse level (L0) has 7 fields
+while the more granular one (L1) has 32. Fields associated with less
+than 100 papers were excluded.</p>
+</div>
+<div class="section" id="id1">
+<h3>Methods<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>For each level, we trained a bi-directional LSTM which reads the paper
+title and predicts one of the fields in this level. We additionally
+incorporate ELMo embeddings [&#64;Peters2018DEEPCW] to improve performance.
+In the final submission, we always predict the most likely field from
+the L0 classifier, and only report the most likely field from the L1
+classifier if it exceeds a certain threshold. It takes approximately 1.5
+and 3.5 hours for the L0 and L1 classifiers to converge, respectively.</p>
+</div>
+</div>
+<div class="section" id="research-method-extraction">
+<h2><a class="reference external" href="#sec:methods_methods">Research Method Extraction</a><a class="headerlink" href="#research-method-extraction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Data<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The third task in the competition is to extract the scientific methods
+used in the research paper. Since no training data was provided, we
+started by inspecting a subset of the provided papers to get a better
+understanding of what kind of methods are used in social science and how
+they are referred to within papers.</p>
+</div>
+<div class="section" id="id3">
+<h3>Methods<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Based on the inspection, we designed regular expressions which capture
+common contextual patterns as well as the list of provided SAGE methods.
+In order to score candidates, we used a background corpus to estimate
+the salience of candidate methods in a paper. Two additional strategies
+were attempted but proved unsuccessful: a weakly-supervised model for
+named entity recognition, and using open information extraction (openIE)
+to further generalize the list of candidate methods.</p>
+</div>
+</div>
+</div>
+<div class="section" id="results">
+<h1><a class="reference external" href="#sec:results">Results</a><a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id4">
+<h2><a class="reference external" href="#sec:datasets_results">Dataset Extraction and Linking</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>First, we report the results of our NER model in Table
+<a class="reference external" href="#tab:ner_results">[tab:ner_results]</a>{reference-type=”ref”
+reference=”tab:ner_results”}. Since it is easy for the model to memorize
+the dataset mentions seen at training time, we created disjoint train,
+development, and test sets based on the paper–dataset annotations
+provided for the competition. In particular, we sort datasets by the
+number of papers they appear in, then process one dataset at a time. For
+each dataset, we choose one of the train, development, or test splits at
+random and add the dataset to it, along with all papers which mention that dataset. When there is a
+conflict, (e.g., a paper <em>p</em> has already been added to the
+train split when processing an earlier dataset <em>d<sub>1</sub></em>, but it is
+also associated with a later dataset <em>d<sub>2</sub></em>), the later dataset
+<em>d<sub>2</sub></em> along with all papers associated with it are added to the
+same split as <em>d<sub>1</sub></em>. For any further conflicts, we prefer to
+put papers in the development split over the train split, and the test
+split over the development split.</p>
+<p>We also experimented with adding ELMo embeddings [&#64;Peters2018DEEPCW],
+but it significantly slowed down training and decoding which would have
+disqualified our submission due to the runtime requirements of the
+competition. As a result, we decided not to include ELMo embeddings in
+our final model.</p>
+<p>|            | prec.   | recall  |  F1    |
+| ———- | ——- | ——- | —— |
+| dev set    | 53.4    | 50.3    | 51.8   |
+| test set   | 50.7    | 41.8    | 45.8   |</p>
+<p>NER precision, recall and F1 performance (%) on the development and
+test sets.</p>
+<p>|                                   | prec.   | recall   |  F1  |
+| ——————————— | ——- | ——– | —- |
+| baseline                          | 28.7    | 58.0     | 38.4 |
+| + p(d $\mid$ m), p(m $\mid$ d)   | 39.6    | 42.0     | 40.7 |
+| + year matching                  | 35.1    | 57.0     | 43.5 |
+| + aggregated mentions, tuning, and other features | 72.5 | 45.0 | 55.5 |
+| + dev set examples               | 77.0    | 47.0     | 58.3 |
+| + NER mentions                   | 56.3    | 62.0     | 59.0 |</p>
+<p>End-to-end precision, recall and F1 performance (%) for citation
+prediction on the development set provided in phase 1 of the
+competition.</p>
+<p>|                   | prec.   | recall   |  F1    |
+| —————– | ——- | ——– | —— |
+| phase 1 holdout   | 35.7    | 19.6     | 25.3   |
+| phase 2 holdout   | 39.6    | 18.8     | 25.5   |</p>
+<p>End-to-end precision, recall, and F1 performance (%) for dataset
+prediction on the phase 1 and phase 2 holdout sets. Note that the
+phase 1 holdout results are for citation prediction, while the phase 2 holdout results are for mention prediction.</p>
+<p>We report the end-to-end performance of our approach (on the development
+set provided by the organizers in the first phase) in Table
+<a class="reference external" href="#tab:e2e_results">[tab:e2e_results]</a>{reference-type=”ref”
+reference=”tab:e2e_results”}. This is the performance after using the
+linking classifier to predict which candidate mention–dataset pairs are
+correct extractions. We note that the development set provided in phase
+1 ended up having significantly more overlap with the training data than
+the actual test set did. As a result, the numbers reported in Table
+<a class="reference external" href="#tab:e2e_results">[tab:e2e_results]</a>{reference-type=”ref”
+reference=”tab:e2e_results”} are not indicative of test set performance.
+End to end performance from our phase 2 submission can be seen in Table
+<a class="reference external" href="#tab:test_results">[tab:test_results]</a>{reference-type=”ref”
+reference=”tab:test_results”}. This performance is reflective of our
+focus on the linking component of this task. Aside from the competition
+development set, we also used a random portion of the training set as an
+additional development set. The initial model only uses a dataset
+frequency feature, which gives a baseline performance of 38.4 F1. Adding
+p(d $\mid$ m) and p(m $\mid$ d), which are the probability of entity
+given mention and probability of mention given entity improves the
+performance ($\Delta = 2.3$ F1). Year matching helps disambiguate
+between different datasets in the same series, which was found to be a
+major source of errors in earlier models ($\Delta = 2.8$ F1).
+Aggregating mentions for a given dataset, adding mention and sentence
+length features, adding an is acronym feature, and further
+hyper-parameter tuning improve the results ($\Delta = 12.5$ F1). Adding
+examples in the development set while training the model results in
+further improvements ($\Delta = 2.8$ F1). Finally, adding the NER-based
+mentions significantly improves recall at the cost of lower precision,
+with a positive net effect on F1 score ($\Delta = 0.7$ F1).</p>
+<p>Two clear limitations of our model are its difficulty in generalizing to unseen datasets, and its inability to effectively distinguish between datasets that are used in a publication and datasets that are merely reference. These limitations are the main causes of the low recall (due to difficulty generalizing to unseen datasets) and low precision (due to difficulty distinguishing between used datasets and referenced datasets).</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="reference external" href="#sec:areas_results">Research Area Prediction</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>To select a model, we performed a 100 trial random search across model
+hyper-parameters, evaluated on a held out development set of papers from
+the Microsoft Academic Graph. Our final model contained 512 hidden
+dimensions, 2 layers and 0.5 dropout prior to classification. The top
+performing classifier achieved 84.4% accuracy on our development set on
+L0 fields, and 65.2% accuracy on our development set on L1 fields. The main limitation of using MAG for this problem is that our model cannot find new fields of research, and is limited to those provided by MAG. Additionally, our method performs classification based only on the titles of papers, while there are other pieces of information about the paper that would be useful for classifying the field of research.</p>
+</div>
+<div class="section" id="id6">
+<h2><a class="reference external" href="#sec:methods_results">Research Method Extraction</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>We evaluated performance by manually evaluating the output of our
+extractor for a subset of 50 papers from the provided test set to
+compute precision. Since evaluating recall requires a careful
+annotation, we resorted to using yield as an alternative metric. Our
+final submission for method extraction has 95% precision and yield of
+1.5 methods per paper on the manually inspected subset of papers. Similarly to research area prediction, the main limiation here is the difficulty our model has finding new methods, as it is limited to the SAGE ontology and a few hand-crafted patterns.</p>
+</div>
+</div>
+<div class="section" id="future-work-and-lessons-learned">
+<h1><a class="reference external" href="#sec:future_work">Future Work and Lessons Learned</a><a class="headerlink" href="#future-work-and-lessons-learned" title="Permalink to this headline">¶</a></h1>
+<p>We now provide some possible directions of improvement for each
+component of our submission. For dataset extraction, the most promising
+avenue of improvement is to improve the NER model, and the most
+promising avenue to improve the NER model is to collect less noisy data.
+We effectively have distantly supervised training data for the NER
+model, and the first thing to try would be directly annotating papers
+with dataset mentions to provide a clearer signal for the NER model. For
+research area prediction, it would help to include signals beyond just
+the paper title for predicting the field of study. The difficulty here
+is finding labeled training data that includes richer signals like
+abstract text and paper keywords. For method prediction, exploring
+the use of open information extraction is a potential avenue
+of future research. Additionally, it would be helpful to clarify what
+exactly is meant by a method, as it is currently unclear what a
+successful method extraction looks like.
+The main lesson learned is that, when presented with noisy, distantly supervised, real-world data, to produce a production-quality system, it becomes very important to (1) have a high-confidence evaluation dataset, and (2) look for other data sources that are similar enough to the task at hand to be useful. Taking steps towards both of these objectives are promising avenues of future work.</p>
+</div>
+<div class="section" id="conclusion">
+<h1><a class="reference external" href="#sec:conclusion">Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>This report summarizes the AI2 submission at the RCC competition. We
+identify dataset mentions by combining the predictions of an NER model
+and a rule-based system, use TF-IDF to identify candidates for a given
+mention, and use a gradient boosted trees classifier to predict a binary
+label for each candidate mention–dataset pair. To identify research
+fields of a paper, we train two multi-class classifiers, one for each of
+the top two levels in the MAG hierarchy for fields of study. Finally, to extract research methods, we
+use a rule-based system utilizing a dictionary and common patterns,
+followed by a scoring function which takes into account the prominence
+of a candidate in foreground and background corpora.</p>
+</div>
+<div class="section" id="acknowledgments">
+<h1><a class="reference external" href="#sec:acknowledgements">Acknowledgments</a><a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h1>
+<p>We would like to thank the competition organizers for their tireless
+efforts in preparing the data, answering all our questions, doing the
+evaluations, and providing feedback. We also would like to thank Zhihong
+(Iris) Shen for helping us use the MAG data.</p>
+</div>
+<div class="section" id="appendix">
+<h1><a class="reference external" href="#sec:appendix">Appendix</a><a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h1>
+<p>The code for the submission can be found <a class="reference external" href="https://github.com/allenai/coleridge-rich-context-ai2">here</a>. There is a README with additional documentation at this github repo.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Rich Search and Discovery for Research Datasets</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chap01.html">Chapter 1 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#how-this-book-came-to-be">How this book came to be</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#book-overview">Book overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-2">Section 2:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-3">Section 3:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#section-4-looking-forward">Section 4: Looking forward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#more-resources">More resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap01.html#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap02.html">Chapter 2 - Bundesbank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html">Chapter 3 - Digital Science Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap03.html#enriching-context-and-enhancing-engagement-around-datasets">Enriching context and enhancing engagement around datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html">Chapter 4 - Metadata for Social Science Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#introduction">INTRODUCTION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-metadata-and-digital-data-objects">DATA, METADATA, AND DIGITAL DATA OBJECTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#semantic-descriptions">SEMANTIC DESCRIPTIONS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#data-repositories">DATA REPOSITORIES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#services">SERVICES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#details-about-the-data-in-data-sets">DETAILS ABOUT THE DATA IN DATA SETS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#cyberinfrastructure">CYBERINFRASTRUCTURE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#conclusion">CONCLUSION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#acknowledgments">ACKNOWLEDGMENTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap04.html#references-references-listparagraph">REFERENCES {#references .ListParagraph}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap05.html">Chapter 5 - Compettion Design</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Chapter 6 - Finding datasets in publications: The Allen Institute for Artificial Intelligence approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#future-work-and-lessons-learned">Future Work and Lessons Learned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html">Chapter 7 - Finding datasets in publications: The KAIST approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#non-technical-overview">Non technical overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-did-you-do">What did you do</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-worked-and-what-didnt">What worked and what didn’t</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#summary-of-your-results-and-caveats">Summary of your results and caveats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#lessons-learned-and-what-would-you-do-differently">Lessons learned and what would you do differently</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#what-comes-next">What comes next</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap07.html#appendix-description-of-the-code-and-documentation">Appendix: Description of the code and documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html">Chapter 8 - Finding datasets in publications: The GESIS approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap08.html#the-contribution-of-gesis-to-the-rich-context-competition">The contribution of GESIS to the Rich Context Competition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html">Chapter 9 - Finding datasets in publications: The University of Paderborn approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#literature-review">Literature Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#project-architecture">Project Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#approach">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#evaluation">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#discussion">Discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#future-agenda">Future Agenda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap09.html#appendix">Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap10.html">Chapter 10 - Finding datasets in publications: The Singapore Management University approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html">Chapter 11 - Finding datasets in publications: The University of Syracuse approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-dataset">The dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#the-proposed-method">The Proposed Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap11.html#acknowledgements-acknowledgements-unnumbered">Acknowledgements {#acknowledgements .unnumbered}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap12.html">Chapter 12 - Standard Test Corpora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html">Chapter 13 - The future of context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap13.html#the-future-of-ai-in-rich-context">The Future of AI in Rich Context</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="chap05.html" title="previous chapter">Chapter 5 - Compettion Design</a></li>
+      <li>Next: <a href="chap07.html" title="next chapter">Chapter 7 - Finding datasets in publications: The KAIST approach</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, NYU.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/chap06.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
