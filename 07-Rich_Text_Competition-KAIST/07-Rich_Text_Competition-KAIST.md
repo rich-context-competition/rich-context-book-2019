@@ -140,7 +140,7 @@ To analyze the effects of the query generation module and entity typing module, 
 
 Figure 7.5 shows the results from three publications from the list of analyzed publications using Document QA only. Compared to the other settings, Document QA only setting retrieves high quality answers (dataset mentions). However, the number of retrieved answers is notably small. For example, the result from *153.txt* publication was empty as shown in Figure 7.5. In fact, using this setting the model can only retrieve 260 answers (predictions) from the list of analyzed publications.
 
-![Results from Document QA only[]{label="fig:docqaonly"}](images/phase1.png)*Figure 7.5: Results from Document QA only*
+![Results from Document QA only[]{label="fig:docqaonly"}](images/OnlyDocQA.png)*Figure 7.5: Results from Document QA only. Right answers from the model in blue.*
 
 These results were expected, due to the difficulty of defining general queries as explained in section [*Question Generation Module*](#query-generation-module). Without a query generation module, it is hard to make a query representative enough to retrieve various forms and types of the dataset mentions.
 
@@ -148,7 +148,7 @@ These results were expected, due to the difficulty of defining general queries a
 
 Figure 7.6 shows the results from three publications from the list of analyzed datasets using Document QA and the Query Generation Module. Because of the addition of the Query Generation Module, a larger number of answers were retrieved. For example, the result from *153.txt* publication contains several answers including right ones such as *financial services FDI data* or *Micro Database Direct investment*. Therefore, this and the retrieval of more than 2,000 answers from the list of analyzed datasets proves that the Query Generation Module improves recall of the entire dataset retrieval model. On the other hand, compared to the Document QA only setting, there is a considerable amount of noise. For instance, in Figure 7.6, *empirical, Table 1, Section 4* and etc., are not dataset mentions.
 
-![Results from Document QA + query generation module[]{label="fig:docqaquery"}](images/phase1+querygen.png)*Figure 7.6: Results from Document QA + query generation module*
+![Results from Document QA + query generation module[]{label="fig:docqaquery"}](images/DocQA_QG.png)*Figure 7.6: Results from Document QA + query generation module. Right answers from the model in blue.*
 
 They believe that the reason of this noise is that some query terms may cause the retrieval of wrong answers. For example, the query term *\"study\"* can help to retrieve dataset mentions such as *\"ANES 1952 Time Series Study\"*. However, this term can also retrieve  wrong answers such as *\"empirical study\"*. These kinds of query terms are still needed to retrieve various forms and types of dataset mentions but clearly generate some noise.
 
@@ -156,7 +156,7 @@ They believe that the reason of this noise is that some query terms may cause th
 
 Figure 7.7 shows the results of the analyzed publications using Document QA, the Query Generation Module, and the Entity Typing Module. Thanks to the Entity Typing Module, they can successfully removed most of the wrong candidate answers caused by the Query Generation Module. Although a few right answers such as *\"FDI data\"* were also removed and a few wrong answers such as *\"4.2.1 Micro Data\"* were not, the overall precision is clearly improved using Entity Typing Module.  Using in this setting the model retrieves 526 answers (predictions) from 100 publications from the dev set of the phase 1 of the competition.
 
-![Results from Document QA + query generation module + entity typing module[]{label="fig:docqaqueryentity"}](images/phase1+querygen+entitytyping.png)*Figure 7.7: Results from Document QA + query generation module + entity typing module*
+![Results from Document QA + query generation module + entity typing module[]{label="fig:docqaqueryentity"}](images/FullModel.png)*Figure 7.7: Results from Document QA + query generation module + entity typing module. Right answers from the model in blue.*
 
 Research Fields Retrieval
 -------------------------
