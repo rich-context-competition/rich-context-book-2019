@@ -432,10 +432,10 @@ helps to assess the **relevance of terms** by means of a score.
 Our research method extraction tool builds on Stanford’s CoreNLP and
 Named Entity Recognition System\[19\]. The information extraction
 process follows the workflow depicted in
-Figure 8.2, using separate modules for
+figure 8.2, using separate modules for
 pre-processing, classification, linking and term filtering.
 
-[image](figures/research-methods-pipeline.png)
+![image](figures/research-methods-pipeline.png)
 Figure 8.2: Overview of the entity extraction pipeline
 
 We envision the task of finding entities in scientific publications as a
@@ -710,7 +710,7 @@ simmilar to the recall metric. The final micro f1 value on the test set
 for our model and a selected threshold of 0.1 is 0.56 (precison 0.55,
 recall 0.56).
 
-[image](figures/fields-precision-recall.png)
+![image](figures/fields-precision-recall.png)
 Figure 8.3: Performance for different selected probability thresholds (validation
 set)
 
