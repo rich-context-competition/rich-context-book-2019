@@ -50,7 +50,7 @@ Datasets Retrieval
 
 The followed approach to retrieve dataset names is based on Machine Reading Question Answering (MRQA). First, given a publication, a list of candidate paragraphs in which the dataset is mentioned is selected. Then, using a query generation module, a specific query for each paragraph is created. After that, each pair of paragraph-query is input into the MRQA model. This model creates a list of candidate answers that is further processed using a feed-forward neural network. This network takes as input pairs of candidate answers and their entity types. The types of the answer candidates are obtained using an entity typing module. The output of this feed-forward neural network is the final list of dataset names found in the publication. Figure 7.1 shows an overview of the pipelined system. In following subsections, the MRQA, query generation, and entity typing models are explained in detail.
 
-![image](images/docqaarch3.png) 
+![image](images/OverallModel.png) 
 
 *Figure 7.1: Overall architecture for dataset retrieval*
 
