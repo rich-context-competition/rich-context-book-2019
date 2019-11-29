@@ -32,7 +32,7 @@ The KAIST’s approach for retrieving datasets is to generate questions about da
 
 For research fields retrieval, they proposed to compare publications with Wikipedia articles to discover the research fields. First, they crawled Wikipedia articles that correspond to the list of research fields. Then, they retrieved the research fields of the publications by measuring the similarity between the papers and the crawled Wikipedia documents. For example, they crawled the Wikipedia article *economic history* which corresponds to the research field *economic history*. If the similarity between a publication and the article *economic history* is high enough, it is determined that the publication belongs to the research field *economic history*. They proposed to use TF-IDF as similarity measure, which is based on term frequency and document frequency, but others could be applied too.
 
-For the research methods retrieval, they suggested the use of a model that recognizes named entities through a machine learning system. More specifically, they considered the research methods as named entities and trained a model to retrieve the named entities.
+For the research methods retrieval, they modeled the task as a named-entity recognition problem. They considered research methods as named entities, real world objects that can be denoted with a proper name, and trained a machine learning model to identify and retrieve them.
 
 Literature Review
 =============
