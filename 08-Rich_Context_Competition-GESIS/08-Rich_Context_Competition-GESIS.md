@@ -311,7 +311,6 @@ overlap.
 | Recall (strict match)     | 0.95  |
 | Precision (strict match)  | 0.80  |
 | Recall (strict match)     | 0.81  |
-|                           |       |
 
 Table 8.2: Performance of phase one approach of dataset extraction.
 
@@ -346,7 +345,6 @@ version of the metrics.
 | Recall (partial match)    | 0.90  |
 | Precision (strict match)  | 0.49  |
 | Recall (strict match)     | 0.87  |
-|                           |       |
 
 Table 8.3: Performance of phase two approach for dataset extraction.
 
@@ -436,7 +434,7 @@ figure 8.2, using separate modules for
 pre-processing, classification, linking and term filtering.
 
 ![image](figures/research-methods-pipeline.png)
-Figure 8.2: Overview of the entity extraction pipeline
+Figure 8.2: Overview of the entity extraction pipeline.
 
 We envision the task of finding entities in scientific publications as a
 sequence labeling problem, where each input word is classified as being
@@ -502,7 +500,7 @@ clustering have been used.
 | **Gazetteer**            |                           SAGE Gazetteer                           |
 | **Distributional Model** |                        ACL Anthology model                         |
 
-Table 8.5: Features used for NER
+Table 8.5: Features used for NER.
 
 #### Knowledge resources
 
@@ -563,7 +561,7 @@ listed in Table 8.6.
 | GIS                             | 486,01           | Research Tool      |
 | SPSS                            | 136,52           | Research Tool      |
 
-Table 8.6: Most relevant terms from SAGE by Semantic Type
+Table 8.6: Most relevant terms from SAGE by Semantic Type.
 
 #### Definition of a relevance score
 
@@ -712,7 +710,7 @@ recall 0.56).
 
 ![image](figures/fields-precision-recall.png)
 Figure 8.3: Performance for different selected probability thresholds (validation
-set)
+set).
 
 ## 6. Discussions and Limitations
 
@@ -744,7 +742,7 @@ In general, however, our approach to using a weakly labeled corpus
 created from a list of dataset names could be applied in other research
 domains.
 
-#### 6.2 Research method extraction.
+### 6.2 Research method extraction.
 
 We consider the extraction of research methods from full text as a
 particularly challenging task because the sample vocabulary given by the
@@ -756,7 +754,7 @@ annotated a new corpus for the task and trained a CRF model, adding
 lexical resources. The qualitative reviews during the two phases of the
 competition attested that this approach works fine.
 
-#### 6.3 Research field classification.
+### 6.3 Research field classification.
 
 Our supervised machine learning approach to handle the research field
 classification task performs well on the dataset created from social
