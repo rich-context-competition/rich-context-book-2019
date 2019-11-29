@@ -58,7 +58,7 @@ scientific text [[BREM12](#BREM12); [GML<sup>+</sup>16](#GML+16); [GMVL16](#GMV
 
 ## Data Analysis
 
-The first phase of RCC dataset consists of a labeled corpus of 5,000 publications for training set, and additional 100 publications for development set. The RCC organizer keeps a separate corpus of 5,000 publications for evaluation. Each article in the dataset contains full text article and dataset citation labels. The metadata of cited datasets in the corpus are also provided. For research methods and fields, no label information is provided, only SAGE social science research method graph and research fields vocabulary are provided.
+The first phase of RCC dataset consists of a labeled corpus of 5,000 publications for training set, and additional 100 publications for development set. The RCC organizer keeps a separate corpus of 5,000 publications for evaluation. Each article in the dataset contains full text article and dataset citation labels. The metadata of cited datasets in the corpus are also provided. For research methods and fields, no label information is provided, only SAGE social science research method graph and research fields vocabulary are provided. More details on RCC dataset and competition design can be read on chapter 5.
 
 #### Preprocessing
 
@@ -114,12 +114,14 @@ We build citation network from training set. Each node in the network is a paper
 | | |
 --------------- | -------:
 Number of nodes | 5,000
-Number of edges | 998
-Network density | 0.008%
+Number of edges | 1,222
+Network density | 0.0098%
 
 
-Initially, we propose an approach utilizing citation network based on an intuition that datasets, research methods, and research fields are shared by: 1) same or similar issues, 2) same or similar context, 3) same or similar authors and communities, 4) same or similar metrics used in the publication. However, based on table [10.3](#user-content-tab_network_stats), we learn that exploring rich context using paper-paper citation network is not viable at this stage because most papers listed in publications’ bibliography are not available in the training set, and therefore, paper-paper citation network becomes very sparse with many unknown information. Due to this reason, we drop our idea on utilizing paper-paper citation graph at this stage. Nevertheless, we believe that bibliography contains important signals and information about datasets, and research fields.
+Initially, we propose an approach utilizing citation network based on an intuition that datasets, research methods, and research fields are shared by: 1) same or similar issues, 2) same or similar context, 3) same or similar authors and communities, 4) same or similar metrics used in the publication. However, based on table [10.3](#user-content-tab_network_stats), we learn that exploring rich context using paper-paper citation network is not viable at this stage because most papers listed in publications’ bibliography are not available in the training set, and therefore, paper-paper citation network becomes very sparse with many unknown information. Figure [10.1](#fig_citation_graph) shows the visualization of citation graph. As we can see in citation graph, most papers only have one edge, although the average number of papers in bibliography list are 34.5. Furthermore, only 1,466 out of 5,000 publications are not isolated (having at least one bibliography paper in training data). Due to this reason, we drop our idea on utilizing paper-paper citation graph at this stage. Nevertheless, we believe that bibliography contains important signals and information about datasets, and research fields.
 
+![image](citation_graph.png)
+<a name="fig_citation_graph">Figure 10.1</a>: Citation Graph from training data. Green nodes are publications with dataset citations, and red nodes are publication without dataset citations. Isolated nodes are not visualized.
 
 ## Methods
 
@@ -131,7 +133,7 @@ We employ a pipeline of two subtasks for dataset extraction: dataset detection, 
 
 For dataset detection, we utilize paper title in bibliography (reference list) combined with explicit research methods mentions to detect whether a publication citing a dataset or not. Explicit research methods mentions are determined based on exact match between paper title and SAGE research methods vocabulary. We train an SVM classifier using explicit research method mentions and n-gram features from paper titles in bibliography. We use the SVM classifier to classify each publication, if the classifier gives positive label, then we proceed to dataset recognition subtask, otherwise we ignore the publication.
 
-For dataset recognition, we use an implicit entity linking approach. We start with the Naive Bayes model, which can be regarded as a standard information retrieval baseline, and entity indicative weighting strategy is used to improve the model. In order to calculate the word distribution of each dataset, we represent each dataset using its title, dataset mentions (provided in the training set), and dataset relevant sentences, filtered from the relevant publications using the rule based approach proposed in [[GMVL16](#GMVL16)]. All these text sections related to a particular dataset are considered as a single text chunk, and we calculate the word distribution as follows. Let <img src="https://latex.codecogs.com/svg.latex?$\textbf{w}$" title="$\textbf{w}$" /> be the set of words in a dataset. In our problem setting, we assume the dataset prior probability <img src="https://latex.codecogs.com/svg.latex?p(d)" title="p(d)" /> to be uniform. The probability of dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" /> given <img src="https://latex.codecogs.com/svg.latex?$$w$&space;\in&space;\textbf{w}$" title="$$w$ \in \textbf{w}$" /> is:
+For dataset recognition, we use an implicit entity linking approach. We start with the Naive Bayes model, which can be regarded as a standard information retrieval baseline, and entity indicative weighting strategy is used to improve the model. In order to calculate the word distribution of each dataset, we represent each dataset using its title, dataset mentions (provided in the training set), and dataset relevant sentences, filtered from the relevant publications using the rule based approach proposed in [[GMVL16](#GMVL16)]. All these texts related to a particular dataset are considered as a single string, and we calculate the word distribution as follows. Let <img src="https://latex.codecogs.com/svg.latex?$\textbf{w}$" title="$\textbf{w}$" /> be the set of words in a dataset. In our problem setting, we assume the dataset prior probability <img src="https://latex.codecogs.com/svg.latex?p(d)" title="p(d)" /> to be uniform. The probability of dataset <img src="https://latex.codecogs.com/svg.latex?d" title="d" /> given <img src="https://latex.codecogs.com/svg.latex?$$w$&space;\in&space;\textbf{w}$" title="$$w$ \in \textbf{w}$" /> is:
 
 <!-- $$\begin{split}
     p(d|\textbf{w}) & \propto \prod _{w \in \textbf{w}} p(w|d) \\
@@ -149,7 +151,7 @@ where <img src="https://latex.codecogs.com/svg.latex?\beta(w)" title="\beta(w)" 
 <!-- $$\beta(w) = log(1 + E / df(w))$$ -->
 <a href="https://www.codecogs.com/eqnedit.php?latex=$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" target="_blank"><img src="https://latex.codecogs.com/svg.latex?$$\beta(w)&space;=&space;log(1&space;&plus;&space;E&space;/&space;df(w))$$" title="$$\beta(w) = log(1 + E / df(w))$$" /></a>
 
-where <img src="https://latex.codecogs.com/svg.latex?E" title="E" /> is the number of distinct datasets considered and <img src="https://latex.codecogs.com/svg.latex?df(w)" title="df(w)" /> counts the number of datasets with at least one occurrence of <img src="https://latex.codecogs.com/svg.latex?w" title="w" />.
+where <img src="https://latex.codecogs.com/svg.latex?E" title="E" /> is the number of distinct datasets considered and <img src="https://latex.codecogs.com/svg.latex?df(w)" title="df(w)" /> counts the number of datasets with at least one occurrence of <img src="https://latex.codecogs.com/svg.latex?w" title="w" />. This model can be trained efficiently, and training the model on RCC dataset needs approximately 5 minutes.
 
 Then for a given unseen publication, we use same rule based approach [[GMVL16](#GMVL16)] to filter a few relevant sentences, and datasets are ranked by <img src="https://latex.codecogs.com/svg.latex?ln(p(d|w))" title="ln(p(d|w))" /> to select the most suitable datasets. In order to select exact datasets related to particular publication, we select top 10 datasets ranked using above approach. And then the confidence probability related to the top 10 datasets are normalized and select the datasets with the normalized probability higher than a predefined threshold value. We return the entity indicative words as relevant dataset mentions.
 
@@ -236,7 +238,7 @@ Dataset | Prec. | Rec. | F1
 ------- | ----: | ---: | ---:
 Test Set (phase1) | 0.17 | 0.10 | 0.13
 
-Table [10.6](#user-content-tab_de_test_result) shows dataset extraction performance on test set (phase 1). The significant drop from development set result suggests that the test set might have different distribution compare to the training and development set. It might also contain dataset citations that are never been seen in training set.
+Table [10.6](#user-content-tab_de_test_result) shows dataset extraction performance on test set (phase 1). The significant drop from development set result suggests that the test set might have different distribution compare to the training and development set. It might also contain dataset citations that are never been seen in training set. As mentioned in chapter 5, the test set contains new data source, non-open access journals from Sage publications which are not available in training and development set. It would be better to evaluate open access publications and non-open access publications separately so that we can have better understanding on the characteristics on different set.
 
 #### Research Methods Identification
 
@@ -285,13 +287,13 @@ Logistic regression | paper title, abstract, and full text
 SVM (on paper) | paper title and abstract
 Naive Bayes (on bibliography) | paper titles in bibliography
 
-Apart from F1 score on 5-fold cross validation, we have no good way to evaluate research method and research field identification without ground truth label. Our methods are unable to automatically extract and recognize new datasets, research methods, and fields. An extension to automatically handle such cases using advance Natural Language Processing (NLP) approach is a promising direction.
+Apart from F1 score on 5-fold cross validation, we have no good way to evaluate research method and research field identification without ground truth label. Our methods are unable to automatically extract and recognize new datasets, research methods, and fields. An extension to automatically handle such cases using advance Natural Language Processing (NLP) approach is a promising future direction. All RCC finalists have shown that NLP approaches worked well on dataset extraction. Readers are encouraged to read their solutions on chapter 6, 7, 8, and 9.
 
-Our model did not perform well in test set, and unable to advance to the second phase. From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. We are also interested in exploring more advanced information extraction approaches on the RCC datasets. Another challenge is data sparsity. Although we see many paper listed in bibliography, lacks of access to these publication make us difficult to exploit citation network.
+Our model did not perform well in test set, and unable to advance to the second phase. Nevertheles, we recommend to use our approach as a baseline method as it is simple, efficient, and fast to train. From this competition, we have learned that lacks of labelled training data is a huge challenge, and it directs us to other external resources (i.e., SAGE Knowledge) as proxy for our label. We are also interested in exploring more advanced information extraction approaches on the RCC datasets. Another challenge is data sparsity. Although we see many papers listed in bibliography, lacks of access to these publication make us difficult to exploit citation network. Expanding labeled data from the list of papers in bibliography will be very beneficial to improve rich context of paper publications and datasets.
 
 ## Acknowledgments
 
-We thank the RCC organizers for organizing a competition and workshop on this important, interesting, and challenging problem.
+This research is supported by the National Research Foundation, Prime Minister's Office, Singapore under its International Research Centres in Singapore Funding Initiative.
 
 
 ## References
