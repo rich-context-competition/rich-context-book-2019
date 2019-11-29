@@ -105,8 +105,7 @@ competition.
 
 ![image](figures/information-flow.png)
 Figure 8.1: An overview of the individual software modules described in this
-document and their dependencies. 1- Gray: Our pre-processing pipeline.
-2- Blue: three main tasks of the RCC.
+document and their dependencies. Gray: Our pre-processing pipeline. Blue: three main tasks of the RCC.
 
 The pre-processing step consists of extracting metadata and raw text
 from PDF documents. The output of this step is then used by the software
