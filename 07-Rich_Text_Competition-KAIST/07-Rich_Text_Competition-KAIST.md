@@ -86,7 +86,7 @@ The classifier has the following architecture:
 
 3.  Output size: 2
 
-The training set consists of 25172 examples and the test set of 6293 examples obtained from the training set provided by the competition. To train the network, Adam optimizer was used and cross entropy as the loss function.
+The training set consists of 25172 examples and the test set of 6293 examples obtained from the training set provided by the competition. To train the network, Adam optimizer was used with cross entropy as the loss function.
 
 Research Fields Retrieval
 -------------------------
