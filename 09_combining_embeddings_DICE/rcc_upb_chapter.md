@@ -1,6 +1,7 @@
----
-abstract: |
-    The steadily increasing number of publications available to researchers
+Abstract
+=================
+
+The steadily increasing number of publications available to researchers
     makes it difficult to keep track of the state of the art. In particular,
     tracking the datasets used, topics addressed, experiments performed and
     results achieved by peers becomes increasingly tedious. Current academic
@@ -17,6 +18,8 @@ abstract: |
     Methods, we used word embeddings. In this chapter, we describe how our
     approaches performed, their limitations, some of the encountered
     challenges and our future agenda.
+
+---    
 author:
 - Rricha Jalota
 - Nikit Srivastava
@@ -24,10 +27,12 @@ author:
 - René Speck
 - Michael Röder
 - Ricardo Usbeck
-- 'Axel-Cyrille [Ngonga Ngomo]{}'
+- 'Axel-Cyrille [Ngonga Ngomo]{}' \
 bibliography:
-- 'references.bib'
-title: 'Finding datasets in publications: The University of Paderborn approach'
+- 'references.bib' \
+title: 
+'Finding datasets in publications: The University of Paderborn approach'
+
 ---
 
 Literature Review
