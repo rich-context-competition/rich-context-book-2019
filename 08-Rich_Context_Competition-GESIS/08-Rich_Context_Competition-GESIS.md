@@ -3,11 +3,13 @@
 **Authors:** *Wolfgang Otto, Andrea Zielinski, Behnam Ghavimi, Dimitar
 Dimitrov, Narges Tavakolpoursaleh, Karam Abdulahhad, Katarina Boland,
 Stefan Dietze*  
+
 **Affiliation:** *GESIS – Leibniz Institute for the Social Sciences,
 Cologne, Germany*  
+
 **Corresponding author:** *wolfgang.otto@gesis.org*
 
-## Introduction
+## 1. Introduction
 
 GESIS - the Leibniz Institute for the Social Sciences (GESIS)\[1\] is
 the largest European research and infrastructure provider for the social
@@ -22,7 +24,7 @@ build data infrastructures able to exploit novel forms of social
 sciences research data, such as large Web crawls and archives.
 
 Research at WTS\[3\] addresses areas such as Information Retrieval (IR),
-Information Extraction (IE) <span>&</span> Natural Language
+Information Extraction (IE) & Natural Language
 Processing (NLP), semantic technologies and human computer interaction
 and aims at ensuring access and use of social sciences research data
 along the FAIR principles, for instance, through interlinking of
@@ -75,46 +77,41 @@ chapter describes our approaches, techniques, and additional data used
 to address all three tasks. As described in the following subsections,
 we decided to follow a module-based approach where each module or the
 entire pipeline can be reused. The remaining chapter is organised as
-follows. The following Section [1.2](#sec:overview) provides an overview
+follows. The following Section 2 provides an overview
 of our approach, used background data and preprocessing steps, whereas
-Sections  [1.3](#sec:dataset-extraction),
- [1.4](#sec:research_method_extraction) and
- [1.5](#sec:field_classification) describes our approaches in more
+Sections 3, 4, and 5 describe our approaches in more
 detail, including results towards each of the tasks. Finally, we discuss
-our results in Section [1.6](#sec:discussion) and provide an overview of
-future work in Section [1.7](#sec:conclusion).
+our results in Section 6 and provide an overview of
+future work in Section 7.
 
-## Approach, data and pre-processing
+## 2. Approach, data and pre-processing
 
 This section describes the external data sources we used as well as our
 pre-processing steps.
 
-### Approach overview and initial evaluation feedback
+### 2.1 Approach overview and initial evaluation feedback
 
 The central tasks in the RCC are the extraction of dataset mentions from
 text. Even so, we considered the discovery of research methods and
 research fields important. To this end, we decided to follow a
 module-based approach. Users could choose to use each specific module
 solely or as parts of a data processing pipeline.
-Figure [\[figure:pipeline\]](#figure:pipeline) shows an overview of
+Figure 8.2 shows an overview of
 modules developed and their dependencies. Here, the upper three modules
 (which are in gray) describe the pre-processing steps (cf.
-Section [1.2.3](#sec:prepro)). The lower four modules (blue) are used
+Section 2.3). The lower four modules (blue) are used
 to generate the output in a predefined format as specified by the
 competition.
 
-![An overview of the individual software modules described in this
-document and their dependencies. 1- Gray: Our pre-processing pipeline.
-2- Blue: three main tasks of the
-RCC.<span label="figure:pipeline"></span>](figures/information-flow.png)
+![image](figures/information-flow.png)
+Figure 8.1: An overview of the individual software modules described in this
+document and their dependencies. Gray: Our pre-processing pipeline. Blue: three main tasks of the RCC.
 
 The pre-processing step consists of extracting metadata and raw text
 from PDF documents. The output of this step is then used by the software
 modules responsible for tackling the individual sub-tasks. These
-sub-tasks are to discover research datasets (cf.
-Section [1.3](#sec:dataset-extraction)), methods (cf.
-Section [1.4](#sec:research_method_extraction)) and fields (cf.
-Section [1.5](#sec:field_classification)). First, a Named Entity
+sub-tasks are to discover research datasets (cf. Section 3),
+methods (cf. Section 4) and fields (cf. Section 5). First, a Named Entity
 Recognition module is used to find dataset mentions. This module used a
 supervised approach trained on a weakly labled corpus. In the next step,
 we combine all recognized mentions for each publication and compare
@@ -149,7 +146,7 @@ the judges’ expert knowledge. Similarly to the extraction of dataset
 mentions, specificity and uniqueness have been considered for these two
 tasks. The feedback our team received was overall positive.
 
-### External data sources
+### 2.2 External data sources
 
 For developing our algorithms, we utilized two external data sources.
 For the discovery of research methods and fields, we resort to data from
@@ -169,7 +166,7 @@ ACL Anthology Reference Corpus (Bird et al., 2008). ACL ARC is a corpus
 of scholarly publications about computational linguistics. The corpus
 consists of a total of 22,878 articles.
 
-### Pre-processing
+### 2.3 Pre-processing
 
 Although the organizers of the RCC offered plain texts for the
 publication, we decided to build our own pre-processing pipeline. The
@@ -186,8 +183,7 @@ publication, whereas the \(<\)body\(>\) contains the main textual and
 graphic content of the publication. As a last step of the
 pre-processing, we removed all linebreaks from the publication. The
 output of this step is a list of metadata fields and values, as shown in
-Table [\[tab:example-paragraph\]](#tab:example-paragraph) for each
-publication paragraph.
+Table 8.1 for each publication paragraph.
 
 |                   | Example Text Field Data         |
 | :---------------- | :------------------------------ |
@@ -202,14 +198,11 @@ publication paragraph.
 | text\_field\_nr   | 31                              |
 | para\_in\_section | 1                               |
 
-Example preprocessing output for a paragraph in a given
-publication.
+Table 8.1: Example preprocessing output for a paragraph in a given publication.
 
-<span id="tab:example-paragraph" label="tab:example-paragraph">\[tab:example-paragraph\]</span>
+## 3. Dataset extraction
 
-## Dataset extraction
-
-### Task description
+### 3.1 Task description
 
 In the scientific literature, datasets are cited to reference, for
 example, the data on which an analysis is performed or on which a
@@ -245,7 +238,7 @@ of dataset mentions \(m\) in a sentence, where \(m\) references a
 dataset \(d\) and (ii) linking them, when possible, to one element in
 \(K\) (i.e., the reference dataset list given by the RCC).
 
-### Challenges
+### 3.2 Challenges
 
 We focus on the extraction of dataset mentions in the body of the
 full-text of scientific publications. There are three types of dataset
@@ -265,7 +258,7 @@ as Coreference Resolution. The biggest challenge is again the lack of
 annotated training data. In the following we describe how we have dealt
 with this lack of ground truth data.
 
-### Phase one approach
+### 3.3 Phase one approach
 
 Missing ground truth data is the main problem to handle during this
 competition. To this end, supervised learning methods for dataset
@@ -318,21 +311,16 @@ overlap.
 | Recall (strict match)     | 0.95  |
 | Precision (strict match)  | 0.80  |
 | Recall (strict match)     | 0.81  |
-|                           |       |
 
-Performance of phase one approach of dataset extraction.
+Table 8.2: Performance of phase one approach of dataset extraction.
 
-
-<span id="table:dataset-mention-eval" label="table:dataset-mention-eval">\[table:dataset-mention-eval\]</span>
-
-Table [\[table:dataset-mention-eval\]](#table:dataset-mention-eval) show
-the results of the dataset mention extraction on the holdout set. The
+Table 8.2 shows the results of the dataset mention extraction on the holdout set. The
 model can achieve high strict precision and recall values. As expected,
 the results are even better for the partial version of the metrics. It
 means that even if we couldn’t match the dataset mention in a text
 exactly, we can find the right context with very high precision.
 
-### Phase two approach
+### 3.4 Phase two approach
 
 In the second phase of the competition, additional 5,000 publications
 were provided by RCC. We extended our approach to consider the list with
@@ -346,8 +334,7 @@ and 20% for test.
 We resort to the same evaluation metrics as in phase one. However, we
 calculate precision and recall on the full-text of the publication and
 not on the paragraphs as in the first phase.
-Table [\[table:dataset-mention-eval-phase-two\]](#table:dataset-mention-eval-phase-two)
-shows the results achieved by our model. We observe lower precision and
+Table 8.3 shows the results achieved by our model. We observe lower precision and
 recall values. Compared to phase one, there is also a smaller difference
 between the precision and recall values for the strict and partial
 version of the metrics.
@@ -358,16 +345,13 @@ version of the metrics.
 | Recall (partial match)    | 0.90  |
 | Precision (strict match)  | 0.49  |
 | Recall (strict match)     | 0.87  |
-|                           |       |
 
-Performance of phase two approach for dataset
-extraction.
+Table 8.3: Performance of phase two approach for dataset extraction.
 
-<span id="table:dataset-mention-eval-phase-two" label="table:dataset-mention-eval-phase-two">\[table:dataset-mention-eval-phase-two\]</span>
 
-## Research method extraction
+## 4. Research method extraction
 
-### Task description
+### 4.1 Task description
 
 Inspired by a recent work of Nasar et al. (Nasar et al., 2018), we
 define a list of basic entity types that give key-insights into
@@ -389,22 +373,20 @@ with a *performance* using a specific measure.
 paired t-test* (method) on *Allbus* (dataset) and *ISSP* (dataset).  
 We selected the entity types *research method*, *research theory*,
 *research tool* and *research measurement* as the target research method
-related entity types (see
-Table [\[tab:entityTypes\]](#tab:entityTypes)). This decision is based
+related entity types (see Table 8.4). This decision is based
 on an ecxamination of the SAGE ontology given by the RCC as a sample of
-how research method terms might look
-like.
+how research method terms might look like.
 
-|                                                                                               |                   |                     |                                                  |
-| :-------------------------------------------------------------------------------------------- | :---------------- | :-----------------: | :----------------------------------------------- |
-| <span id="tab:entityTypes" label="tab:entityTypes">\[tab:entityTypes\]</span> **Entity type** | **Corresponding** | **Incl. statistic** | **Examples**                                     |
-|                                                                                               | **SAGE type**     |    **glossary**     |                                                  |
-| Research Method                                                                               | SAGE-METHOD       |                     | Bootstrapping, Active Interviews                 |
-| Research Measurement                                                                          | SAGE-MEASURE      |                     | Latent Variables, Phi coefficient, Z-score       |
-| Research Theory                                                                               | SAGE-THEORY       |                     | Frankfurt school, Feminism, Actor network theory |
-| Research Tool                                                                                 | SAGE-TOOL         |                     | SPSS, R statistical package                      |
+|                            |                   |                                                  |
+| :------------------------- | :---------------- | :----------------------------------------------- |
+| **Entity type**            | **Corresponding** | **Examples**                                     |
+|                            | **SAGE type**     |                                                  |
+| Research Method            | SAGE-METHOD       | Bootstrapping, Active Interviews                 |
+| Research Measurement       | SAGE-MEASURE      | Latent Variables, Phi coefficient, Z-score       |
+| Research Theory            | SAGE-THEORY       | Frankfurt school, Feminism, Actor network theory |
+| Research Tool              | SAGE-TOOL         | SPSS, R statistical package                      |
 
-Entity types of relevance for the research method extraction task.
+Table 8.4: Entity types of relevance for the research method extraction task.
 
 #### Formal problem definition
 
@@ -414,7 +396,7 @@ them, if possible, to a reference knowledge base \(K\) (i.e. the SAGE
 Thesaurus\[17\]) or (iii) assign a type to each entity, e.g. a *research
 method*, selected from a set of predefined types.
 
-### Challenges
+### 4.2 Challenges
 
 There are some major challenges that any named entity recognition,
 classification and linking system needs to handle. First, regarding NER,
@@ -443,20 +425,22 @@ results in an insightful co-occurrence statistics, and provides
 additional detail directly related to entity resolution, and finally
 helps to assess the **relevance of terms** by means of a score.
 
-### Our approach
+### 4.3 Our approach
 
 Our research method extraction tool builds on Stanford’s CoreNLP and
 Named Entity Recognition System\[19\]. The information extraction
 process follows the workflow depicted in
-Figure [\[fig:pipeline\]](#fig:pipeline), using separate modules for
+figure 8.2, using separate modules for
 pre-processing, classification, linking and term filtering.
+
+![image](figures/research-methods-pipeline.png)
+Figure 8.2: Overview of the entity extraction pipeline.
 
 We envision the task of finding entities in scientific publications as a
 sequence labeling problem, where each input word is classified as being
 of a dedicated semantic type or not. In order to handle entities related
 to our domain, we train a CRF based machine learning classifier with
-major semantic classes, (see
-Table [\[tab:entityTypes\]](#tab:entityTypes)), using training material
+major semantic classes, (see Table 8.4, using training material
 from the ACL RD-TEC 2.0 dataset (QasemiZadeh and Schumann, 2016). Apart
 from this, we follow a domain adaptation approach inspired by (Agerri
 and Rigau, 2016) and ingest semantic background knowledge extracted from
@@ -468,7 +452,7 @@ the social sciences. The linking component addresses the synonymy
 problem and matches an entity despite name variations such as spelling
 variations. Finally, term filtering is carried out based on termhood and
 unithood, while scoring is achieved by calculating a relevance score
-based on TF-IDF (cf. Section [1.4.3.6](#para:relscore)).
+based on TF-IDF (cf Table 8.6).
 
 Our research experiments are based on publications from the Social
 Science Open Access Repository (SSOAR)\[20\] as well as the train and
@@ -479,8 +463,6 @@ fulltext. Second, we focus on a broader range of semantic classes, i.e.
 *Research Method*, *Research Theory*, *Research Tool* and *Research
 Measurement*, tackling also the problem of identifying novel entities.
 
-![Overview of the entity extraction
-pipeline<span label="fig:pipeline"></span>](figures/research-methods-pipeline.png)
 
 #### Distributed semantic models
 
@@ -500,13 +482,12 @@ pre-clustering algorithm\[24\].
 #### Features
 
 The features incorporated into the linear chain CRF are shown in the
-Table [\[tab:features\]](#tab:features). The features depend mainly on
+Table 8.5. The features depend mainly on
 the observations and on pairs of adjacent labels, using a log-linear
 combination. However, since simple token level training of CRFs leads to
 poor performance, more effective text features such as word shape,
 orthographic, gazetteer, Part-Of-Speech (POS) tags, along with word
-clustering (see Section [1.4.3.1](#subsec:dist-model)) have been
-used.
+clustering have been used.
 
 | **Type**                 |                            **Features**                            |
 | :----------------------- | :----------------------------------------------------------------: |
@@ -519,7 +500,7 @@ used.
 | **Gazetteer**            |                           SAGE Gazetteer                           |
 | **Distributional Model** |                        ACL Anthology model                         |
 
-Features used for NER<span label="tab:features"></span>
+Table 8.5: Features used for NER.
 
 #### Knowledge resources
 
@@ -563,25 +544,24 @@ Term frequency statistics have been calculated off-line for the entire
 SSOAR corpus. The term frequency at corpus level will be used at run
 time to determine the term relevance at the document level by
 calculating the TF-IDF scores. The most relevant terms from SAGE are
-listed in
-Table [\[tab:SAGET\]](#tab:SAGET).
+listed in Table 8.6.
 
-| <span id="tab:SAGET" label="tab:SAGET">\[tab:SAGET\]</span> **SAGE Term** | **TF-IDF Score** | **Semantic Class** |
-| :------------------------------------------------------------------------ | :--------------- | :----------------- |
-| Fuzzy logic                                                               | 591,29           | Research Method    |
-| arts-based research                                                       | 547,21           | Research Method    |
-| cognitive interviewing                                                    | 521,13           | Research Method    |
-| QCA                                                                       | 463,13           | Research Method    |
-| oral history                                                              | 399,68           | Research Method    |
-| market research                                                           | 345,37           | Research Field     |
-| life events                                                               | 186,61           | Research Field     |
-| Realism                                                                   | 314,34           | Research Theory    |
-| Marxism                                                                   | 206,77           | Research Theory    |
-| ATLAS.ti                                                                  | 544,51           | Research Tool      |
-| GIS                                                                       | 486,01           | Research Tool      |
-| SPSS                                                                      | 136,52           | Research Tool      |
+| **SAGE Term**                   | **TF-IDF Score** | **Semantic Class** |
+| :-----------------------------  | :--------------- | :----------------- |
+| Fuzzy logic                     | 591,29           | Research Method    |
+| arts-based research             | 547,21           | Research Method    |
+| cognitive interviewing          | 521,13           | Research Method    |
+| QCA                             | 463,13           | Research Method    |
+| oral history                    | 399,68           | Research Method    |
+| market research                 | 345,37           | Research Field     |
+| life events                     | 186,61           | Research Field     |
+| Realism                         | 314,34           | Research Theory    |
+| Marxism                         | 206,77           | Research Theory    |
+| ATLAS.ti                        | 544,51           | Research Tool      |
+| GIS                             | 486,01           | Research Tool      |
+| SPSS                            | 136,52           | Research Tool      |
 
-Most relevant terms from SAGE by Semantic Type
+Table 8.6: Most relevant terms from SAGE by Semantic Type.
 
 #### Definition of a relevance score
 
@@ -618,9 +598,9 @@ random publications and generated qualitative scores for each document.
 In this evaluation, the research method extraction tool received the
 overall best results of all competitors for this task.\[27\]
 
-## Research field classification
+## 5. Research field classification
 
-### Task description
+### 5.1 Task description
 
 The goal of this task is to identify the research fields covered in the
 social science publications. In general, two approaches could be applied
@@ -651,7 +631,7 @@ If there is no label \(l_k\) representing the information given by the
 abstract \(a_i\) the set of class labels is the empty set
 \(\varnothing\).
 
-### Our approach
+### 5.2 Our approach
 
 Since we didn’t receive any gold standard for this task during the
 competition we decided to make use of external resources. We decided to
@@ -672,7 +652,7 @@ decided to use the Classification Social Science (classoz) annotation
 scheme. The number of classes in each schema, coverage of each
 classification, and the distribution of data in each schema affected our
 decision. An exhausitve description of the used data can be found in
-[1.2.2](#sec:external_data_sources).
+Section 8.2.
 
 #### Pre-processing and model architecture
 
@@ -697,15 +677,13 @@ architecture and the still comparable to state of the art performance
 (e.g.(Wang et al., 2018)). The model is trained with learning rate 1.0
 for 150 epochs. Also, the negative sampling parameter is set to 25.
 
-### Evaluation
+### 5.3 Evaluation
 
-Figure [\[fig:fields\_precision\_recall\]](#fig:fields_precision_recall)
-shows the performance of the model regarding various evaluation metrics
+Figure 8.3 shows the performance of the model regarding various evaluation metrics
 for different thresholds. A label is assigned to a publication if the
 model outputs a probability for the label above the defined threshold.
 In multi-label classification, this allows us to evaluate our model from
-different perspectives. As illustrated in
-figure [\[fig:fields\_precision\_recall\]](#fig:fields_precision_recall),
+different perspectives. As illustrated in figure 8.3,
 the intersection of the micro precision and the micro recall curves is
 at the threshold of 0.1, where the highest micro f1 score is achieved.
 By increasing the threshold from this point, the micro-precision score
@@ -730,14 +708,13 @@ simmilar to the recall metric. The final micro f1 value on the test set
 for our model and a selected threshold of 0.1 is 0.56 (precison 0.55,
 recall 0.56).
 
-![Performance for different selected probability thresholds (validation
-set)](figures/fields-precision-recall.png)
+![image](figures/fields-precision-recall.png)
+Figure 8.3: Performance for different selected probability thresholds (validation
+set).
 
-<span id="fig:fields_precision_recall" label="fig:fields_precision_recall">\[fig:fields\_precision\_recall\]</span>
+## 6. Discussions and Limitations
 
-## Discussions and Limitations
-
-#### Dataset Extraction.
+### 6.1 Dataset Extraction.
 
 For the dataset extraction task, the proposed methods are only tested on
 social science related data. The performance measures we have introduced
@@ -765,7 +742,7 @@ In general, however, our approach to using a weakly labeled corpus
 created from a list of dataset names could be applied in other research
 domains.
 
-#### Research method extraction.
+### 6.2 Research method extraction.
 
 We consider the extraction of research methods from full text as a
 particularly challenging task because the sample vocabulary given by the
@@ -777,7 +754,7 @@ annotated a new corpus for the task and trained a CRF model, adding
 lexical resources. The qualitative reviews during the two phases of the
 competition attested that this approach works fine.
 
-#### Research field classification.
+### 6.3 Research field classification.
 
 Our supervised machine learning approach to handle the research field
 classification task performs well on the dataset created from social
@@ -799,7 +776,7 @@ approach of basing our classifications on the abstract of the
 publications makes it applicable even in scenarios where the full-text
 of publications is not accessible.
 
-## Conclusion
+## 7. Conclusion
 
 This chapter has provided an overview on our solutions submitted to the
 Rich Context Competition 2018. Aimed at improving search, discovery and
@@ -1044,8 +1021,7 @@ Computational Linguistics. Available at:
 Wang G, Li C, Wang W, et al. (2018) Joint embedding of words and labels
 for text classification. *Proceedings of the 56th Annual Meeting of the
 Association for Computational Linguistics (Volume 1: Long Papers)*.
-Association for Computational Linguistics. DOI:
-[10.18653/v1/p18-1216](https://doi.org/10.18653/v1/p18-1216).
+Association for Computational Linguistics. DOI:10.18653/v1/p18-1216.
 
 </div>
 
@@ -1062,8 +1038,7 @@ Available at:
 
 1.  <https://www.gesis.org/en/institute>
 
-2.  [
-    https://www.gesis.org/en/institute/departments/knowledge-technologies-for-the-social-sciences/](%20https://www.gesis.org/en/institute/departments/knowledge-technologies-for-the-social-sciences/)
+2.  <https://www.gesis.org/en/institute/departments/knowledge-technologies-for-the-social-sciences/>
 
 3.  <https://www.gesis.org/en/research/applied-computer-science/labs/wts-research-labs>
 
@@ -1092,9 +1067,9 @@ Available at:
 
 15. <https://jats.nlm.nih.gov>
 
-16. [spacy.io](spacy.io)
+16. <https://spacy.io>
 
-17. http://methods.sagepub.com
+17. <http://methods.sagepub.com>
 
 18. apart from those used in traditional NER systems like *Person*,
     *Location*, or *Organization* with abundant training data, as
