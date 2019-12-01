@@ -32,7 +32,7 @@ mkdir 13_images
 echo "trying chapter 1"
 cp ../01-Introduction/Intro\ chapter_October\ 28.docx . 
 pandoc Intro\ chapter_October\ 28.docx -o chap01.md
-# sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" 01-Introduction.md
+# sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" 01-Introduction.md
 # 
 # sed -i.bu '1s;^;# Chapter 1 - Introduction  ;' 01-Introduction.md
 #
@@ -175,15 +175,14 @@ cp /tmp/newfile chap07.md
 echo "trying chapter 8"
 cp ../08-Rich_Context_Competition-GESIS/08-Rich_Context_Competition-GESIS.md chap08.md
 cp -r -f ../08-Rich_Context_Competition-GESIS/figures/* 08_images/ 
-cp 08_images/*/*.png combined_images
-sed -i.bu "s/figures\/research-methods/combined_images/g" chap08.md
-sed -i.bu "s/figures\/research-fields/combined_images/g" chap08.md
+cp 08_images/*.png combined_images
+sed -i.bu "s/figures/combined_images/g" chap08.md
 #
 # add a placeholder chapter heading 
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 8 - Finding datasets in publications: The GESIS approach' >> /tmp/newfile
+echo '# Chapter 8 - Knowledge Extraction from scholarly publications: The GESIS contribution to the Rich Context Competition' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
 cat chap08.md   >> /tmp/newfile 
 cp /tmp/newfile chap08.md
@@ -254,8 +253,8 @@ echo "trying chapter 12"
 cp ../04.5-standardised-metadata/04.5_RC_standard_metadata.rtf . 
 textutil -convert html 04.5_RC_standard_metadata.rtf
 pandoc 04.5_RC_standard_metadata.html -o chap12.md
-sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" chap12.md
-sed -i.bu "s/\[  \]{\.Apple-converted-space}//g" chap12.md
+sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" chap12.md
+sed -i.bu "s/\[  \]{\.Apple-converted-space}//g" chap12.md
 sed -i.bu "s/\]{\.Apple-converted-space}//g" chap12.md
 sed -i.bu -E "s/\[[[:space:]]/ /g" chap12.md
 #sed -i.bu "s/'/\'/g" 04.5_RC_standard_metadata.md
@@ -334,7 +333,7 @@ cd sphinx_version/
 sed -i.bu "s/{#acknowledgments \.ListParagraph}//g" chap04.md
 
 
-# chap 6 remove lines like [\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"} 
+# chap 6 remove lines like [\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"} 
 sed -i.bu "s/\[\\\\\[tab:ner\\\_results\\\]\]{#tab:ner\_results label=\"tab:ner\_results\"}//g" chap06.md 
 sed -i.bu "s/\[\\\\\[tab:e2e\\\_results\\\]\]{#tab:e2e\_results label=\"tab:e2e\_results\"}//g" chap06.md
 sed -i.bu "s/\[\\\\\[tab:test\\\_results\\\]\]{#tab:test\_results label=\"tab:test\_results\"}//g" chap06.md

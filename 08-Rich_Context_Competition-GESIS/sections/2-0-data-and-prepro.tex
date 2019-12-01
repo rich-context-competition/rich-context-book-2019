@@ -55,14 +55,14 @@ The lower four modules (blue) are used to generate the output in a predefined fo
 The pre-processing step consists of extracting metadata and raw text from PDF documents.
 The output of this step is then used by the software modules responsible for tackling the individual sub-tasks.
 These sub-tasks are to discover research datasets (cf. Section~\ref{sec:dataset-extraction}), methods (cf. Section~\ref{sec:research_method_extraction}) and fields (cf. Section~\ref{sec:field_classification}).
-First, a Named Enity Recognition module is used to find dataset mentions.
+First, a Named Entity Recognition module is used to find dataset mentions.
 This module used a supervised approach trained on a weakly labled corpus.
 %The creation of the used training corpus and the model are described in Section~\ref{sec:dataset-extraction}.
 In the next step, we combine all recognized mentions for each publication and compare these mentions to the metadata from the list of datasets given by the competition. %`data_sets.json`.
 For this linking step the mentions and year information located in the same sentence are used.
 The corresponding sentence and extracted information are saved for debugging and potential usage in future pipeline components.
 %After retrieving the best matching results, theses are returned in the target format specified by the RCC-competition.
-The task of identifying research methods is done by an adjusted NER module trained on a corpus of scientific publications. 
+The task of identifying research methods is solved unsing a Named Entity Recognition and Linking module with incorporated word embeddings and lexical resources. 
 For identifying research fields, we trained a classifier on openly available abstracts and metadata from the domain of social sciences crawled from the Social Science Open Access Repository\footnote{\url{https://www.ssoar.info}} (SSOAR).
 %We used the OAI-API for this and the crawler is delivered in the module.
 We tried different classifiers and selected the best performing one, a classifier based on fasttext\footnote{\url{https://fasttext.cc/}}, i.e. a neural net based approach with a high performance\cite{joulin2017bag}.
@@ -73,15 +73,16 @@ After the first phase, each team received feedback from the organizers of the RC
 The feedback is two folds, a quantitative and qualitative evaluation.
 Unfortunately, the quantitative assessment showed our algorithm for dataset mention retrieval did not perform well regarding precision and recall metrics.
 In contrast to this, our approach has been found convincing regarding the quality of results.
-The qualitative feedback is based on random sample of ten documents given to four judges.
+The qualitative feedback is based on a random sample of ten documents given to four judges.
 The judges were asked to manually extract dataset mentions.
 After this the overlap between their dataset extractions and the output of our algorithm was calculated.
 Other factors that judges took into consideration are specificity, uniqueness, and multiple occurrences of dataset mentions.
 As for the extraction of research methods and fields, no ground truth has been provided; these tasks were evaluated against the judges' expert knowledge.
 Similarly to the extraction of dataset mentions, specificity and uniqueness have been considered for these two tasks.
-The feedback our team received acknowledged the fact that no ground truth has been provided and our efforts regarding the extraction of research methods and fields.
+The feedback our team received was overall positive.
+% ..acknowledged the fact that no ground truth has been provided and our efforts regarding the extraction of research methods and fields.
 %Feedback by RCC
-%Section~\ref{} gives detailed overview of data provided by the RCC and additional data sources used in our approach. :o .
+%Section~\ref{} gives detailed overview of data provided by the RCC and additional data sources used in our approach.
 
 \subsubsection{External data sources}
 \label{sec:external_data_sources}
