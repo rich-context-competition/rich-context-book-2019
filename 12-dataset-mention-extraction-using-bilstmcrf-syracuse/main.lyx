@@ -1,0 +1,2135 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass llncs
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Finding datasets in publications: The Syracuse University approach
+\end_layout
+
+\begin_layout Subtitle
+Dataset mention extraction in scientific articles using a BiLSTM-CRF model
+\end_layout
+
+\begin_layout Author
+Tong Zeng
+\begin_inset Formula $^{1,2}$
+\end_inset
+
+ and Daniel Acuna
+\begin_inset Formula $^{1}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Corresponding author: deacuna@syr.edu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Institute
+\begin_inset Formula $^{1}$
+\end_inset
+
+School of Information Studies, Syracuse University, Syracuse, USA
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $^{2}$
+\end_inset
+
+School of Information Management, Nanjing University, Nanjing, China
+\end_layout
+
+\begin_layout Abstract
+Datasets are critical for scientific research, playing a role in replication,
+ reproducibility, and efficiency.
+ Researchers have recently shown that datasets are becoming more important
+ for science to function properly, even serving as artifacts of study themselves.
+ However, citing datasets is not a common or standard practice in spite
+ of recent efforts by data repositories and funding agencies.
+ This greatly affects our ability to track their usage and importance.
+ A potential solution to this problem is to automatically extract dataset
+ mentions from scientific articles.
+ In this work, we propose to achieve such extraction by using a neural network
+ based on a BiLSTM-CRF architecture.
+ Our method achieves 
+\begin_inset Formula $F_{1}=0.885$
+\end_inset
+
+ in social science articles released as part of the Rich Context Dataset.
+ We discuss future improvements to the model and applications beyond social
+ sciences.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Science is fundamentally an incremental discipline that depends on previous
+ scientist's work.
+ Datasets form an integral part of this process and therefore should be
+ shared and cited as any other scientific output.
+ This ideal is far from reality: the credit that datasets currently receive
+ does not correspond to their actual usage
+\begin_inset CommandInset citation
+LatexCommand citep
+key "datarank"
+literal "false"
+
+\end_inset
+
+.
+ One of the issues is that there is no standard for citing datasets, and
+ even if they are cited, they are not properly tracked by major scientific
+ indices.
+ Interestingly, while datasets are still used and mentioned in articles,
+ we lack methods to extract such mentions and properly reconstruct dataset
+ citations.
+ The Rich Context Competition challenge aims at closing this gap by inviting
+ scientists to produce automated dataset mention and linkage detection algorithm
+s.
+ In this article, we detail our proposal to solve the dataset mention step.
+ Our approach attempts to provide a first approximation to better give credit
+ and keep track of datasets and their usage.
+\end_layout
+
+\begin_layout Standard
+The problem of dataset extraction has been explored before.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ghavimiIdentifyingImprovingDataset2016"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ghavimiSemiautomaticApproachDetecting2017"
+literal "false"
+
+\end_inset
+
+ use a relatively simple tf-idf representation with cosine similarity for
+ matching dataset identification in social science articles.
+ Their method consists of four major steps: preparing a curated dictionary
+ of typical mention phrases, detecting dataset references, and ranking matching
+ datasets based on cosine similarity of tf-idf representations.
+ This approach achieved a relatively high performance, with 
+\begin_inset Formula $F_{1}=0.84$
+\end_inset
+
+ for mention detection and 
+\begin_inset Formula $F_{1}=0.83$
+\end_inset
+
+, for matching.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "singhalDataExtractMining2013"
+literal "false"
+
+\end_inset
+
+ proposed a method using normalized Google distance to screen whether a
+ term is in a dataset.
+ However, this method relies on external services and is not computational
+ efficient.
+ They achieve a good 
+\begin_inset Formula $F_{1}=0.85$
+\end_inset
+
+ using Google search and 
+\begin_inset Formula $F_{1}=0.75$
+\end_inset
+
+ using Bing.
+ A somewhat similar project was proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "luDatasetSearchEngine2012"
+literal "false"
+
+\end_inset
+
+.
+ They built a dataset search engine by solving the two challenges: identificatio
+n of the dataset and association to a URL.
+ They build a dataset of 1000 documents with their URLs, containing 8922
+ words or abbreviations representing datasets.
+ They also build a web-based interface.
+ This shows the importance of dataset mention extraction and how several
+ groups have tried to tackle the problem.
+\end_layout
+
+\begin_layout Standard
+In this article, we describe a method for extracting dataset mentions based
+ on a deep recurrent neural network.
+ In particular, we used a Bidirectional Long short-term Memory (BiLSTM)
+ sequence to sequence model paired with a Conditional Random Field (CRF)
+ inference mechanism.
+ The architecture is similar to
+\series bold
+ 
+\series default
+chapter 6, but we only focus on the detection of dataset mentions.
+ We tested our model on a novel dataset produced for the Rich Context Competitio
+n challenge.
+ We achieve a relatively good performance of 
+\begin_inset Formula $F_{1}=0.885$
+\end_inset
+
+.
+ We discuss the limitations of our model.
+\end_layout
+
+\begin_layout Section
+The dataset
+\end_layout
+
+\begin_layout Standard
+The Rich Context Dataset challenge was proposed by the New York University's
+ Coleridge Initiative 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "richtextcompetition"
+literal "true"
+
+\end_inset
+
+.
+ The challenge comprised several phases, and participants moved through
+ the phases depending on their performance.
+ We only analyze data of the first phase.
+ This phase contained a list of datasets and a labeled corpus of around
+ 5K publications.
+ Each publication was labeled indicating whether a dataset was mentioned
+ within it and which part of the text mentioned it.
+ The challenge used the accuracy for measuring the performance of the competitor
+s and also the quality of the code, documentation, and efficiency.
+\end_layout
+
+\begin_layout Standard
+We adopt the CoNLL 2003 format 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "tjong2003introduction"
+literal "false"
+
+\end_inset
+
+ to annotate whether a token is a part of dataset mention.
+ Concretely, we use the tag DS denotes a dataset mention; The B- prefix
+ indicates that the token is the beginning of a dataset mention, the I-
+ prefix indicates the token is inside of dataset mention, and O denotes
+ a token that is not a part of dataset mention.
+ We put each token and its tag (separated by horizontal tab control character)
+ in one line, and use the end of line (
+\backslash
+n) control character as separator between sentences (see Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:annotation_example"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ The dataset were randomly split by 70%, 15%, 15% for training set, validation
+ set and testing set, respectively.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:annotation_example"
+
+\end_inset
+
+Example of a sentence annotated by IOB tagging format.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="13" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Token
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Annotation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+This
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+O
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+...
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+data
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+O
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+from
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+O
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+the
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+O
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Monitoring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+B-DS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+the
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I-DS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Future
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I-DS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+O 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MTF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+B-DS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+O
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\backslash
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The Proposed Method
+\end_layout
+
+\begin_layout Subsection
+Overall view of the architecture
+\end_layout
+
+\begin_layout Standard
+In this section, we propose a model for detecting mentions based on a BiLSTM-CRF
+ architecture.
+ At a high level, the model uses a sequence-to-sequence recurrent neural
+ network that produces the probability of whether a token belongs to a dataset
+ mention.
+ The CRF layer takes those probabilities and estimates the most likely sequence
+ based on constrains between label transitions (e.g., mention–to–no-mention–to-men
+tion has low probability).
+ While this is a standard architecture for modeling sequence labeling, the
+ application to our particular dataset and problem is new.
+\end_layout
+
+\begin_layout Standard
+We now describe in more detail the choices of word representation, hyper-paramet
+ers, and training parameters.
+ A schematic view of the model is in Fig 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:NetworkArchitecture"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the components are as follows:
+\end_layout
+
+\begin_layout Enumerate
+Character encoder layer: treat a token as a sequence of characters and encode
+ the characters by using a bidirectional LSTM to get a vector representation.
+\end_layout
+
+\begin_layout Enumerate
+Word embedding layer: mapping each token into fixed sized vector representation
+ by using a pre-trained word vector.
+\end_layout
+
+\begin_layout Enumerate
+BiLSTM layer: make use of Bidirectional LSTM network to capture the high
+ level representation of the whole token sequence input.
+\end_layout
+
+\begin_layout Enumerate
+Dense layer: project the output of the previous layer to a low dimensional
+ vector representation of the the distribution of labels.
+\end_layout
+
+\begin_layout Enumerate
+CRF layer: find the most likely sequence of labels.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/Figure2.1.pdf
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:NetworkArchitecture"
+
+\end_inset
+
+Network Architecture of BiLSTM-CRF network
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Character encoder
+\end_layout
+
+\begin_layout Standard
+Similar to the bag of words assumption, a word could be composed of characters
+ sampled from a bag of characters.
+ Previous research 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "santos2014learning,jozefowicz2016exploring"
+literal "false"
+
+\end_inset
+
+ has shown that the use of character-level embedding could benefit multiple
+ NLP-related tasks.
+ In order to use character-level information, we break down a word into
+ a sequence of characters, then build a vocabulary of characters.
+ We initialize the character embedding weights using the vocabulary size
+ of a pre-defined embedding dimension, then update the weights during the
+ training process to get the fixed-size character embedding.
+ Next, we feed a sequence of the character embedding into an encoder (a
+ bidirectional LSTM network) to produce a vector representation of a word.
+ By using a character encoder, we can solve the out-of-vocabulary problem
+ for pre-trained word embedding, as every word could be composed of characters.
+\end_layout
+
+\begin_layout Subsection
+Word Embedding
+\end_layout
+
+\begin_layout Standard
+The word embedding layer is responsible for storing and retrieving the vector
+ representation of words.
+ Concretely, the word embedding layer contains a word embedding matrix 
+\begin_inset Formula $M^{tkn}\in\mathbb{R}^{|V|d}$
+\end_inset
+
+, where the 
+\begin_inset Formula $V$
+\end_inset
+
+ is the vocabulary of the tokens and the 
+\begin_inset Formula $d$
+\end_inset
+
+ is the size of the embedding vector.
+ The embedding matrix was initialized by a pre-trained GloVe vectors 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "pennington2014glove"
+literal "false"
+
+\end_inset
+
+, and updated by learning from the data.
+ In order to retrieve from the embedding matrix, we first convert a given
+ sentence into a sequence of tokens, then for each token we lookup the embedding
+ matrix to get its vector representation.
+ Finally, we get a sequence of vectors as input for the encoder layer.
+\end_layout
+
+\begin_layout Subsection
+LSTM
+\end_layout
+
+\begin_layout Standard
+The Recurrent Neural Network (RNN) is a type of artificial neural network
+ which takes the output of previous step as input of the current step recurrentl
+y.
+ This recurrent nature allows it to learn from sequential data, for example,
+ the text which consists of a sequence of works.
+ RNN could capture contextual information in variable-length sequences in
+ theory but it suffers from gradient exploding/vanishing problems 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "pascanu2013difficulty"
+literal "false"
+
+\end_inset
+
+.
+ The Long Short-Term Memory (LSTM) architecture was proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hochreiter1997long"
+literal "false"
+
+\end_inset
+
+ to cope with these gradient problems.
+ Similar to standard RNN, the LSTM network also has a repeating module called
+ LSTM cell.
+ The cell remembers information over arbitrary time steps because it allows
+ information to flow along it without change.
+ The cell state is regulated by a forget gate and an input gate which control
+ the proportion of information to forget from a previous time step and to
+ remember for a next time step.
+ Also, there is a output gate controlling the information to flow out of
+ the cell.
+ The LSTM could be defined formally by the following equations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+i_{t}=\sigma(W_{i}x_{t}+W_{i}h_{t-1}+b_{i})
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+f_{t}=\sigma(W_{f}x_{t}+W_{f}h_{t-1}+b_{f})
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+g_{t}=tanh(W_{g}x_{t}+W_{g}h_{t-1}+b_{g})
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+o_{t}=\sigma(W_{o}x_{t}+W_{o}h_{t-1}+b_{o})
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+c_{t}=f_{t}\bigotimes c_{t-1}+i_{t}\bigotimes g_{t}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+h_{t}=o_{t}\bigotimes tanh(c_{t})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ is the input at time 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula $W$
+\end_inset
+
+ is the weights, 
+\begin_inset Formula $b$
+\end_inset
+
+ is the bias.
+ The 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ is the sigmoid function, 
+\begin_inset Formula $\bigotimes$
+\end_inset
+
+ denotes the dot product, 
+\begin_inset Formula $c_{t}$
+\end_inset
+
+ is the LSTM cell state at time 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{t}$
+\end_inset
+
+ is hidden state at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $i_{t}$
+\end_inset
+
+, 
+\begin_inset Formula $f_{t}$
+\end_inset
+
+, 
+\begin_inset Formula $o_{t}$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{t}$
+\end_inset
+
+ are named as input, forget, output and cell gates respectively.
+\end_layout
+
+\begin_layout Standard
+LSTM can learn from the previous steps, which is the left context if we
+ feed the sequence from left to right.
+ However, the information in the right context is also important for some
+ tasks.
+ The bidirectional LSTM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "graves2013speech"
+literal "false"
+
+\end_inset
+
+ satisfies this information need by using two LSTMs.
+ Concretely, one LSTM layer was fed by a forward sequence and the other
+ by a backward sequence.
+ The final hidden states of each LSTM were concatenated to model the left
+ and right contexts
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+h_{t}=[\overrightarrow{h_{t}}\varoplus\overleftarrow{h_{t}}]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, the outcomes of the states are taken by a Conditional Random Field
+ (CRF) layer that takes into account the transition nature of the beginning,
+ intermediate, and ends of mentions.
+ For a reference of CRF, refer to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "lafferty2001conditional"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+In this work, we wanted to propose a model for the Rich Context Competition
+ challenge.
+ We propose a relatively standard architecture based on a BiLSTM-CRF recurrent
+ neural network.
+ We now describe the evaluation metrics, hyper-parameter setting, and the
+ results of this network on the dataset provided by the competition.
+\end_layout
+
+\begin_layout Standard
+For all of our results, we use 
+\begin_inset Formula $F_{1}$
+\end_inset
+
+ as the measure of performance.
+ This measure is the harmonic average of the precision and recall and it
+ is the standard measure used in sequence labeling tasks.
+ This metric varies from 0 to 1, the higher the better.
+ Our method achieved a relatively high 
+\begin_inset Formula $F_{1}$
+\end_inset
+
+ of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.885
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ for detecting mentions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Model-search-space"
+
+\end_inset
+
+Model search space and best assignments
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hyper-parameter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Search space
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Best parameter
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+number of epochs
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+patience
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+batch size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pre-trained word vector size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+choice[50, 100, 200,300]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+encoder hidden size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+300
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+300
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+number of encoder layers
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dropout rate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+choice[0.0,0.5]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+learning rate optimizer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+adam
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+adam
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+l2 regularizer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.01
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.01
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+learning rate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.001
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We train models using the training data and monitor the performance using
+ the validation data (we stop training if the performance does not improve
+ for the last 10 epochs).
+ We are using the Adam optimizer with learning rate of 0.001 and batch size
+ equal to 64.
+ The hidden size of LSTM for character and word embedding is 80 and 300,
+ respectively.
+ For the regularization methods, and to avoid over-fitting, we use L2 regulariza
+tion set to 0.01 and we also use dropout rate equal to 0.5.
+ We trained 8 models with a combination of different GloVe vector size (50,
+ 100, 300 and 300) and dropout rate (0.0, 0.5).
+ The hyper-parameter settings are present in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Model-search-space"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Performance-of-proposed"
+
+\end_inset
+
+Performance of proposed network
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Models
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GloVe size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dropout rate
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Precision
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Recall
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $F_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.884
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.873
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.878
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.877
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.888
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.882
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.882
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.871 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.876
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.885
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.885
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+0.885
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.882
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.884 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.883
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.885
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.880
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.882
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+300
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.868
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.886
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.877
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+300
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.876
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.878
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.877
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The test performances are reported in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Performance-of-proposed"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The best model is trained by word vector size 100 and dropout rate 0.5 with
+ 
+\begin_inset Formula $F_{1}$
+\end_inset
+
+ score 0.885 (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Performance-of-proposed"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), and it takes 15 hours 58 minutes for the training on an NVIDIA GTX 1080
+ Ti GPU in a computer with an Intel Xeon E5-1650v4 3.6 GHz CPU with 128 GB
+ of RAM.
+\end_layout
+
+\begin_layout Standard
+We also found some limitations to the dataset.
+ Firstly, we found that mentions are nested (e.g.
+ HRS, RAND HRS, RAND HRS DATA are linked to the same dataset).
+ The second issue most of the mentions have ambiguous relationships to datasets.
+ In particular, only 17,267 (16.99%) mentions are linked to one dataset,
+ 15,292 (15.04%) mentions are listed to two datasets, and 12,624 (12.42%)
+ are linked to three datasets.
+ If these difficulties are not overcome, then the predictions from the linkage
+ process will be noisy and therefore impossible to tell apart.
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+In this work, we report a high accuracy model for the problem of detecting
+ dataset mentions.
+ Because our method is based on a standard BiLSTM-CRF architecture, we expect
+ that updating our model with recent developments in neural networks would
+ only benefit our results.
+ We also provide some evidence of how difficult we believe the linkage step
+ of the challenge could be if the dataset noise are not lowered.
+ 
+\end_layout
+
+\begin_layout Standard
+One of the shortcomings of our approach is that the architecture is lacking
+ some modern features of RNN networks.
+ In particular, recent work has shown that attention mechanisms are important
+ especially when the task requires spatially distant information, such as
+ this one.
+ These benefits could also translate to better linkage.
+ We are exploring new architectures using self-attention and multiple-head
+ attention.
+ We hope to explore these approaches in the near future.
+\end_layout
+
+\begin_layout Standard
+There are number of improvements that we can make in the future.
+ A first improvement is to use non-recurrent neural architectures such as
+ the Transformer which has shown to be faster and a more effective learner
+ compared to recurrent neural networks.
+ Another improvement would be to bootstrap information from other dataset
+ sources such as open access full-text articles from PubMed Open Access
+ Subset.
+ This dataset contains dataset 
+\emph on
+citations
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "datarank"
+literal "false"
+
+\end_inset
+
+—in contrast to the most common types of citations to publications.
+ The location of this citations within the full-text could be exploited
+ to perform entity recognition.
+ While this would be a somewhat different problem than the one solved in
+ this article, it would still be useful for the goal of tracking dataset
+ usage.
+ In sum, by improving the learning techniques and the dataset size and quality,
+ we could significantly increase the success of finding datasets in publications.
+\end_layout
+
+\begin_layout Standard
+Our proposal, however, is surprisingly effective.
+ Because we have barely modified a general RNN architecture, we expect that
+ our results will generalize relatively well either to the second phase
+ of the challenge or even to other disciplines.
+ We would emphasize, however, that the quality of the dataset has a great
+ deal of room for improvement.
+ Given how important this task is for the whole of science, we should try
+ to strive to improve the quality of these datasets so that techniques like
+ this one can be more broadly applied.
+ The importance of dataset mention and linkage therefore could be fully
+ appreciated by the community.
+ 
+\end_layout
+
+\begin_layout Section*
+Acknowledgements
+\end_layout
+
+\begin_layout Standard
+Tong Zeng was funded by the China Scholarship Council #201706190067.
+ Daniel E.
+ Acuna was funded by the National Science Foundation awards #1646763 and
+ #1800956.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "rcc-06"
+options "apalike"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
