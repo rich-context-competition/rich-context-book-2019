@@ -18,7 +18,7 @@ The Allen Institute for Artificial Intelligence (AI2) is a non-profit
 research institute founded by Paul G. Allen with the goal of advancing
 artificial intelligence research for the common good. One of the major
 undertakings at AI2 is to develop an equitable, unbiased software
-platform (Semantic Scholar)[^1] for finding relevant information in the
+platform Semantic Scholar<sup>1</sup> for finding relevant information in the
 scientific literature. Semantic Scholar extracts meaningful structures
 in a paper (e.g., images, entities, relationships) and links them to
 other artifacts when possible (e.g., knowledge bases, GitHub
@@ -60,11 +60,11 @@ mentions to their dataset in the knowledge base. Approximately 10% of the datase
 knowledge base were linked one or more times in the provided corpus of
 5K papers. To attempt to generalize mention discovery beyond those present in the knowledge base, we train a named entity recognition (NER) model on the noisy annotations provided by the labeled mentions in the knowledge base.
 
-![image](datasets.png){width="13cm"}
+![image](datasets.png)
+Figure 6.1: A high-level overview of our appraoch to dataset mention detection and linking.
 
 We provide a high-level overview of our approach in Figure
-[\[fig:datasets\]](#fig:datasets){reference-type="ref"
-reference="fig:datasets"}. First, we use an NER
+6.1. First, we use an NER
  model to predict dataset mentions. For each mention, we generate a
 list of candidate datasets from the knowledge base. We also developed a
 rule based extraction system which searches for dataset mentions seen in
@@ -85,8 +85,8 @@ test set that did not have mentions in the provided knowledge base. If the provi
 
 To address this limitation, we developed an NER model to predict
 additional dataset mentions. For NER, we use a bi-LSTM model with a CRF
-decoding layer, similar to [@Peters2018DEEPCW], and implemented using
-the AllenNLP framework.[^2] In order to train the NER model, we
+decoding layer, similar to Peters et al., 2018, and implemented using
+the AllenNLP framework<sup>2</sup>. In order to train the NER model, we
 automatically generate mention labels by string matching mentions in the
 provided annotations against the full text of a paper. This results in
 noisy labeled data, because it was not possible to find all correct
@@ -97,10 +97,10 @@ are correct examples of dataset usage.
 We limit the percentage of negative examples (i.e., sentences with no
 mentions) used in training to 50%, and use 40 words as the maximum
 sentence length. We use 50-dimensional Glove word embeddings
-[@Pennington2014GloveGV], 16-dimensional character embeddings with 64
+(Pennington et al., 2014), 16-dimensional character embeddings with 64
 CNN filters of sizes (2, 3, 4). The CNN character encoder outputs
 128-dimensional vectors. We optimize model parameters using ADAM
-[@Kingma2014AdamAM] with a learning rate of 0.001. Training the model took approximately 12 hours on a single GPU.
+(Kingma and Ba, 2014) with a learning rate of 0.001. Training the model took approximately 12 hours on a single GPU.
 
 In order to generate linking candidates for the NER mentions, we score
 each candidate dataset based on TF-IDF weighted token overlap between the mention
@@ -112,8 +112,8 @@ for each mention as the linking candidates for that mention.
 
 The linking model takes as input a dataset mention, its context, and one
 of the candidate datasets in the knowledge base, and outputs a binary
-label. We use a gradient boosted trees classifier using the XGBoost
-implementation.[^3] The model takes as input the following features:
+label. We use a gradient boosted trees classifier using the XGBoost<sup>3</sup>
+implementation. The model takes as input the following features:
 
 * prior probability of entity, estimated based on number of occurrences in the training set (float between 0 and 1)
 * prior probability of entity given mention, estimated based on number of occurrences in the training set (float between 0 and 1)
@@ -145,7 +145,7 @@ The second task of the competition is to predict research areas of a
 paper. The task does not specify the set of research areas of interest,
 nor is training data provided for the task. After manual inspection of a
 subset of the papers in the provided test set, the SAGE taxonomy of
-research, and the Microsoft Academic Graph (MAG) [@Shen2018AWS], we
+research, and the Microsoft Academic Graph (MAG) (Shen et al., 2018), we
 decided to use a subset of the fields of study in MAG as labels. In
 particular, we included all fields related to social science or papers
 from the provided training corpus. However, since the abstract and full
@@ -161,7 +161,7 @@ than 100 papers were excluded.
 
 For each level, we trained a bi-directional LSTM which reads the paper
 title and predicts one of the fields in this level. We additionally
-incorporate ELMo embeddings [@Peters2018DEEPCW] to improve performance.
+incorporate ELMo embeddings (Peters et al., 2018) to improve performance.
 In the final submission, we always predict the most likely field from
 the L0 classifier, and only report the most likely field from the L1
 classifier if its prediction exceeds a score of 0.4. It takes approximately 1.5
@@ -195,8 +195,7 @@ to further generalize the list of candidate methods.
 ------------------------------
 
 First, we report the results of our NER model in Table
-[\[tab:ner\_results\]](#tab:ner_results){reference-type="ref"
-reference="tab:ner_results"}. Since it is easy for the model to memorize
+6.1. Since it is easy for the model to memorize
 the dataset mentions seen at training time, we created disjoint train,
 development, and test sets based on the paper--dataset annotations
 provided for the competition. In particular, we sort datasets by the
@@ -211,7 +210,7 @@ same split as *d<sub>1</sub>*. For any further conflicts, we prefer to
 put papers in the development split over the train split, and the test
 split over the development split.
 
-We also experimented with adding ELMo embeddings [@Peters2018DEEPCW],
+We also experimented with adding ELMo embeddings (Peters et al., 2018),
 but it significantly slowed down training and decoding which would have
 disqualified our submission due to the runtime requirements of the
 competition. As a result, we decided not to include ELMo embeddings in
@@ -222,47 +221,42 @@ our final model. If the requirements for the competition had permitted the use o
 | dev set    | 53.4    | 50.3    | 51.8   |
 | test set   | 50.7    | 41.8    | 45.8   |
 
-NER precision, recall and F1 performance (%) on the development and
+Table 6.1: NER precision, recall and F1 performance (%) on the development and
 test sets.
-[\[tab:ner\_results\]]{#tab:ner_results label="tab:ner_results"}
 
 |                                   | prec.   | recall   |  F1  |
 | --------------------------------- | ------- | -------- | ---- |
 | baseline                          | 28.7    | 58.0     | 38.4 |
-| \+ p(d $\mid$ m), p(m $\mid$ d)   | 39.6    | 42.0     | 40.7 |
+| \+ p(d\|m), p(m\|d)               | 39.6    | 42.0     | 40.7 |
 | \+ year matching                  | 35.1    | 57.0     | 43.5 |
 | \+ aggregated mentions, tuning, and other features | 72.5 | 45.0 | 55.5 |
 | \+ dev set examples               | 77.0    | 47.0     | 58.3 |
 | \+ NER mentions                   | 56.3    | 62.0     | 59.0 |
 
-End-to-end precision, recall and F1 performance (%) for citation
+Table 6.2: End-to-end precision, recall and F1 performance (%) for citation
 prediction on the development set provided in phase 1 of the
 competition.
-[\[tab:e2e\_results\]]{#tab:e2e_results label="tab:e2e_results"}
 
 |                   | prec.   | recall   |  F1    |
 | ----------------- | ------- | -------- | ------ |
 | phase 1 holdout   | 35.7    | 19.6     | 25.3   |
 | phase 2 holdout   | 39.6    | 18.8     | 25.5   |
 
-End-to-end precision, recall, and F1 performance (%) for dataset
+Table 6.3: End-to-end precision, recall, and F1 performance (%) for dataset
 prediction on the phase 1 and phase 2 holdout sets. Note that the
 phase 1 holdout results are for citation prediction, while the phase 2 holdout results are for mention prediction.
-[\[tab:test\_results\]]{#tab:test_results label="tab:test_results"}
+
 
 We report the end-to-end performance of our approach (on the development
 set provided by the organizers in the first phase) in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"}. This is the performance after using the
+6.2. This is the performance after using the
 linking classifier to predict which candidate mention--dataset pairs are
 correct extractions. We note that the development set provided in phase
 1 ended up having significantly more overlap with the training data than
 the actual test set did. As a result, the numbers reported in Table
-[\[tab:e2e\_results\]](#tab:e2e_results){reference-type="ref"
-reference="tab:e2e_results"} are not indicative of test set performance.
+6.2 are not indicative of test set performance.
 End to end performance from our phase 2 submission can be seen in Table
-[\[tab:test\_results\]](#tab:test_results){reference-type="ref"
-reference="tab:test_results"}. This performance is reflective of our
+6.3. This performance is reflective of our
 focus on the linking component of this task. Aside from the competition
 development set, we also used a random portion of the training set as an
 additional development set. The initial model only uses a dataset
@@ -343,14 +337,30 @@ efforts in preparing the data, answering all our questions, doing the
 evaluations, and providing feedback. We also would like to thank Zhihong
 (Iris) Shen for helping us use the MAG data.
 
+[References](#sec:references)
+===========
+
+Diederik  P.  Kingma  and  Jimmy  Ba.    2014.    Adam:A  method  for  stochastic  optimization.CoRR,abs/1412.6980.
+
+Jeffrey   Pennington,   Richard   Socher,   and   Christo-pher D. Manning.  2014.  Glove:  Global vectors forword representation. InEMNLP.
+
+Matthew  E.  Peters,   Mark  Neumann,   Mohit  Iyyer,Matt Gardner, Christopher Clark, Kenton Lee, andLuke  S.  Zettlemoyer.   2018.   
+Deep  contextualizedword representations. InNAACL 2018.
+
+Zhihong  Shen,  Hao  Ma,  and  Kuansan  Wang.   2018.A web-scale system for scientific knowledge explo-ration. InACL
+
+[Footnotes](#sec:footnotes)
+========
+
+1: www.semanticscholar.org
+
+2: https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py
+
+3: https://xgboost.readthedocs.io/en/latest/
+
+4: https://github.com/allenai/coleridge-rich-context-ai2
+
 [Appendix](#sec:appendix)
 ========
 
-The code for the submission can be found [here](https://github.com/allenai/coleridge-rich-context-ai2). There is a README with additional documentation at this github repo.
-
-
-[^1]: [www.semanticscholar.org](www.semanticscholar.org)
-
-[^2]: <https://github.com/allenai/allennlp/blob/master/allennlp/models/crf_tagger.py>
-
-[^3]: <https://xgboost.readthedocs.io/en/latest/>
+The code for the submission can be found on GitHub<sup>4</sup>. There is a README with additional documentation at this github repo.
