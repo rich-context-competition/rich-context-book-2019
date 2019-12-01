@@ -28,8 +28,8 @@ With respect to F1, our approach provides the second best performing system for 
 The results on the manually created hold out set underline, that our system performs better in respect to precision in comparison to the other finalist teams.
 %This could be affected by the decision to annotate only full dataset titles during the automatic annotation process.
 %In comparison to the usage of the ground truth term set there are nearly no abbreviation. 
-Given that our models are supervised through a corpus of social sciences publications, we anticipate limited generalisability across other discipline and plan to investigate this aspect as part of future work. In this context, the focus of our training data towards survey data, also reflected in dataset titles such as \textit{Current Population Survey}, could have biased the model to detect the survey as a specific type of research datasets better than other subtypes like e.g. text corpora in the NLP community.
-In general, however, our apporach to use a weakly labled corpus created using a list of datast names could be applied in other research domains.
+Given that our models are supervised through a corpus of social sciences publications, we anticipate limited generalisability across other disciplines and plan to investigate this aspect as part of future work. In this context, the focus of our training data towards survey data, also reflected in dataset titles such as \textit{Current Population Survey}, could have biased the model to detect the survey as a specific type of research datasets better than other subtypes like e.g. text corpora in the NLP community.
+In general, however, our approach to using a weakly labeled corpus created from a list of dataset names could be applied in other research domains.
 %The needed roussources are a set of full text publications and a sufficiently large list of dataset names for this domain.
 \begin{comment}
 * limitations\
@@ -40,11 +40,16 @@ In general, however, our apporach to use a weakly labled corpus created using a 
 \end{comment}
 
 \paragraph{Research method extraction.} %TODO as above, best to start with a brief summary of the results (evaluation results) and their interpretation. 
-We consider the extraction of research methods from full text as the most challenging task.
-This is because the sample vocabulary given by the RCC covers a large thematic areai.
+We consider the extraction of research methods from full text as a particularly challenging task because the sample vocabulary given by the RCC organizers covers a large thematic variety of areas.
+% We consider the extraction of research methods from full text as the most challenging task.
+% This is because the sample vocabulary given by the RCC covers a large thematic area.
 The task itself was defined as the identification of research methods associated with a specific publication, which in turn are drawn from a specific research field.
-Since no training data has been provided, we combined models from another research domain with a manually currated extension of known research method terms.
-The qualitative reviews during the two phases of the competiton attested that this approach works.
+Since no training data has been provided, we created and annotated a new corpus for the task and trained a CRF model, adding lexical resources.
+The qualitative reviews during the two phases of the competition attested that this approach works fine.
+
+
+
+% old
 
 \paragraph{Research field classification.}
 Our supervised machine learning approach to handle the research field classification task performs well on the dataset created from social science publication metadata. A micro F1 measure of above 55\% seems to indicate reasonable performance considering the small dataset with 44~labels and a mean number of keywords of three terms per publication.
@@ -53,7 +58,7 @@ The models tested by the authors on the task of multilabel prediction from 50 di
 Considering the evaulation approach, focused on publications from the social sciences, the generalisability across other disciplines remains unclear and requires further research.
 Even though the used classification scheme may cover neighbouring disciplines, for instance, medicine, the numbers of samples of the training data covering other research fields than the social science is limited.
 %Taking this into account, it can be assumed that the performance for corpora of other disciplines is lower.
-Our pragmatic approach approach of basing our classifications on the abstract of the publications makes it applicable even in scenarios where the full-text of publications is not accessible. %On the other hand, the use of Cermine to extract information from publications available as PDF files enables us to automatically extract abstracts. With the help of this we are able to classify publications, even if abstracts not present in the publications metadata.
+Our pragmatic approach of basing our classifications on the abstract of the publications makes it applicable even in scenarios where the full-text of publications is not accessible. %On the other hand, the use of Cermine to extract information from publications available as PDF files enables us to automatically extract abstracts. With the help of this we are able to classify publications, even if abstracts not present in the publications metadata.
 
 %For each method, brief summary of:
 %\begin{itemize}
