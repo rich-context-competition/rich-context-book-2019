@@ -79,4 +79,14 @@ Ricardo Usbeck is a senior (guest) researcher at Paderborn University focusing o
 
 Axel-Cyrille Ngonga Ngomo is a full professor at the Computer Science department of Paderborn University. In his work, he focuses on the life cycle of knowledge graphs. He has hence been involved in the development of approaches for the extraction, storage, querying, integration and fusion as well as the exploitation of knowledge graphs. One core usage of knowledge graphs he explores is the development of explainable and responsible active machine learning algorithms. Axel is a proponent of open data, open research, and open science with a keen interest in paradigms and frameworks for reproducible scientific research.
 
+Alex D. Wade is Program Manager for Knowledge Graphs and Open Science at the Chan Zuckerberg Initiative. Alex earned his master’s in library science from the University of Washington and has worked for the libraries at the University of California at Berkeley, the University of Michigan, and the University of Washington. Alex has spent his post-academic career working on problems in information retrieval, knowledge representation, and open science at Microsoft, Amazon, and Facebook, and currently works on the Meta service and the Open Science group at the Chan Zuckerberg Initiative. 
+
+
+Ian Mulvany is head of transformation at SAGE Publishing. He helped setup SAGE’s methods innovation incubator SAGE Ocean following a lean product development approach. Previously he ran technology operations for eLife, was head of product for Mendeley and ran a number of early web2.0 products for Nature Publishing Group. He is passionate about creating digital tools that support the research enterprise. He is interested in the interplay between different stakeholders that can lead to the sustainably of these kinds of tools.
+
+
+Robert B. Allen
+Bob Allen is developing a model-oriented approach to information organization.  His previous work ranged from recommender systems to neural networks. Bob studied at Reed College and UCSD.  He joined the Research organization at Bell Laboratories.  He then joined to the Bellcore Applied Research group in information science and digital libraries.  He was the Editor-in-Chief of the ACM Transactions on Information Systems and later Chair of the ACM Publications Board.  Since 1998 he has been a faculty member at number of universities around the world such as Maryland, Drexel, Victoria (NZ), Tsukuba (Japan), and Yonsei (Korea).
+
+
 
