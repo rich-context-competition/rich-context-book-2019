@@ -245,30 +245,30 @@ cat chap11.md    >> /tmp/newfile
 cp /tmp/newfile chap11.md
 #
 
-# Chapter four and a half 
+# Chapter four and a half - deleted as it is now integraated with Chapter 05. 
 #DONE - work on possesive apostrophe - marked2 has no problem with this 
 #DONE - work on removing errant backspaaces 
 #DONE - work on cleaning up apple inserted spaces
-echo "trying chapter 12"
-cp ../04.5-standardised-metadata/04.5_RC_standard_metadata.rtf . 
-textutil -convert html 04.5_RC_standard_metadata.rtf
-pandoc 04.5_RC_standard_metadata.html -o chap12.md
-sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" chap12.md
-sed -i.bu "s/\[  \]{\.Apple-converted-space}//g" chap12.md
-sed -i.bu "s/\]{\.Apple-converted-space}//g" chap12.md
-sed -i.bu -E "s/\[[[:space:]]/ /g" chap12.md
-#sed -i.bu "s/'/\'/g" 04.5_RC_standard_metadata.md
-# https://apple.stackexchange.com/questions/204296/what-character-is-this-possessive-apostrophe 
-sed -i.bu -E "s/'/\’/g" chap12.md
-#
-# add a placeholder chapter heading 
-echo ' ' > /tmp/newfile
-echo '---' >> /tmp/newfile
-echo ' ' >> /tmp/newfile
-echo '# Chapter 12 - Standard Test Corpora' >> /tmp/newfile
-echo ' ' >> /tmp/newfile
-cat chap12.md      >> /tmp/newfile 
-cp /tmp/newfile chap12.md 
+# echo "trying chapter 12"
+# cp ../04.5-standardised-metadata/04.5_RC_standard_metadata.rtf . 
+# textutil -convert html 04.5_RC_standard_metadata.rtf
+# pandoc 04.5_RC_standard_metadata.html -o chap12.md
+# sed -i.bu "s/\[ \]{\.Apple-converted-space}//g" chap12.md
+# sed -i.bu "s/\[  \]{\.Apple-converted-space}//g" chap12.md
+# sed -i.bu "s/\]{\.Apple-converted-space}//g" chap12.md
+# sed -i.bu -E "s/\[[[:space:]]/ /g" chap12.md
+# #sed -i.bu "s/'/\'/g" 04.5_RC_standard_metadata.md
+# # https://apple.stackexchange.com/questions/204296/what-character-is-this-possessive-apostrophe 
+# sed -i.bu -E "s/'/\’/g" chap12.md
+# #
+# # add a placeholder chapter heading 
+# echo ' ' > /tmp/newfile
+# echo '---' >> /tmp/newfile
+# echo ' ' >> /tmp/newfile
+# echo '# Chapter 12 - Standard Test Corpora' >> /tmp/newfile
+# echo ' ' >> /tmp/newfile
+# cat chap12.md      >> /tmp/newfile 
+# cp /tmp/newfile chap12.md 
 #
 
 
