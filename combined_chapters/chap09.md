@@ -3,9 +3,10 @@
 
 # Chapter 9 - Finding datasets in publications: The University of Paderborn approach
 
----
-abstract: |
-    The steadily increasing number of publications available to researchers
+Abstract
+=================
+
+The steadily increasing number of publications available to researchers
     makes it difficult to keep track of the state of the art. In particular,
     tracking the datasets used, topics addressed, experiments performed and
     results achieved by peers becomes increasingly tedious. Current academic
@@ -19,9 +20,11 @@ abstract: |
     trained an Entity Extraction model based on Conditional Random Fields
     and combined it with the results from a Simple Dataset Mention Search to
     detect datasets in an article. For the identification of Fields and
-    Methods, we used word embeddings. In this paper, we present how our
+    Methods, we used word embeddings. In this chapter, we describe how our
     approaches performed, their limitations, some of the encountered
     challenges and our future agenda.
+
+---
 author:
 - Rricha Jalota
 - Nikit Srivastava
@@ -29,13 +32,12 @@ author:
 - René Speck
 - Michael Röder
 - Ricardo Usbeck
-- 'Axel-Cyrille [Ngonga Ngomo]{}'
+- 'Axel-Cyrille [Ngonga Ngomo]{}'   
 bibliography:
-- 'references.bib'
-title: |
-    DICE @ Rich Context Competition 2018 – Combining Embeddings and
-    Conditional Random Fields for Research Dataset, Field and Method
-    Recognition and Linking
+- 'references.bib'   
+title:
+'Finding datasets in publications: The University of Paderborn approach'
+
 ---
 
 Literature Review
@@ -59,25 +61,25 @@ al [@DBLP:journals/ploscb/WestergaardSTJB18], we built our own
 sections-extraction framework for dataset detection and research fields
 and methods identification.
 
-Apart from content and metadata extraction, keyphrase or topic
+Apart from content and metadata extraction, key-phrase or topic
 extraction from scientific articles has been another emerging research
 problem in the domain of information retrieval from scientific articles.
-Gupta et al. [@gupta2011analyzing] devised a method, based on applying
-semantic extraction patterns to the dependency trees of sentences in an
-article’s abstract, for characterizing a research work in terms of its
-focus, application domain and techniques used. Mahata et
-al. [@mahata2018key2vec] proposed an approach to process text documents
-for training phrase embeddings in order to thematically represent
-scientific articles and for ranking the extracted keyphrases. Jansen et
-al. [@jansen2016extracting] extracted core claims from scientific
-articles by first detecting keywords and keyphrases using rule-based,
-statistical, machine learning and domain-specific approaches and then
-applying document summarization techniques.
+Jansen et al. [@jansen2016extracting] extracted core claims from
+scientific articles by first detecting keywords and key-phrases using
+rule-based, statistical, machine learning and domain-specific approaches
+and then applying document summarization techniques. For characterizing
+a research work in terms of its focus, application domain and techniques
+used, Gupta et al. [@gupta2011analyzing] proposed applying semantic
+extraction patterns to the dependency trees of sentences in an article’s
+abstract. On the other hand, to thematically represent scientific
+articles and for ranking the extracted key-phrases, Mahata et
+al. [@mahata2018key2vec] devised an approach for processing text
+documents to train phrase embeddings.
 
 The problem of dataset detection and methods and fields identification
-is not only somewhat different from the ones mentioned above, but also
-our approach for tackling it is radically disparate. The following
-sections describe our approach in detail.
+is not only different from the ones mentioned above, but also our
+approach for tackling it is radically disparate. The following sections
+describe our approach in detail.
 
 Project Architecture
 ====================
@@ -93,23 +95,24 @@ components: 1) Preprocessing, 2) Fields and Methods Identification and
 publications and generated some additional files (see
 Section \[preprocess\] for details). These files along with the given
 Fields and Methods vocabularies were used to infer Research Fields and
-Methods from the publications. Then, the information regarding fields
-was passed onto the Dataset Detection module and using the Dataset
-Vocabulary, it identified Dataset Citations and Mentions. The following
-sections provide a detailed overview of each of these components.
+Methods from the publications. Then, the information regarding Research
+Fields was passed onto the Dataset Detection module and using the
+Dataset Vocabulary, Dataset Citations and Mentions were identified. The
+following sections provide a detailed overview of each of these
+components.
 
 Preprocessing
 =============
 
-The publications were provided in two formats: PDF and text. For
-Phase-1, we used the given text files, however during Phase-2, we came
-across many articles in the training files that had not been properly
-converted to text and contained mostly non-ASCII characters. To work
-with such articles, we relied on the open source tool `pdf2text` from
-`poppler suite`[^5] to extract text from PDFs. The `pdf2text` command
-served as the first preprocessing step and was called as a subprocess
-from within a python script. It was used with `-nopgbrk` argument to
-generate the text files.
+As discussed in Chapter 5, the publications were provided in two
+formats: PDF and text. For Phase-1, we used the given text files,
+however during Phase-2, we came across many articles in the training
+files that had not been properly converted to text and contained mostly
+non-ASCII characters. To work with such articles, we relied on the open
+source tool `pdf2text` from `poppler suite`[^5] to extract text from
+PDFs. The `pdf2text` command served as the first preprocessing step and
+was called as a subprocess from within a python script. It was used with
+`-nopgbrk` argument to generate the text files.
 
 Once we had the text files, we followed the rule-based approach as
 proposed by Westergaard et al. [@DBLP:journals/ploscb/WestergaardSTJB18]
@@ -136,32 +139,44 @@ and applied regular expressions to search for them and separate them
 from one another. The headings and their corresponding content were
 stored as key-value pairs in a file. For generating noun-phrases, this
 file was parsed and for all the values (content) in key-value
-(heading-content) pairs, a spaCy object `doc` was created sentence-wise.
-Using the built-in function for extracting noun chunks
-[`doc.noun_chunks`]{}, we generated key-value pairs of heading and
-noun-phrases found in the content and stored them in another file, which
-we later used for fields and methods identification.
+(heading-content) pairs, a spaCy object, `doc`, was created
+sentence-wise. Using the built-in function for extracting noun chunks
+([`doc.noun_chunks`]{}), we generated key-value pairs of heading and
+noun-phrases found in the content and stored them in another file. This
+file was later used for fields and methods identification.
 
-If a section was not found in the article (because of no explicit
-mention), then only the sections that could be detected were extracted.
-The remaining content was saved as `reduced_content` after cleaning and
-noun-phrases were extracted from them to prevent loss of any meaningful
-data. Table \[tab:sections\] shows the number of identified sections in
-validation data. For brevity, we have evaluated only four main sections:
-title, abstract, keywords and methodology/data, since these are the ones
-getting preferential treatment in methods and fields identification.
+To determine how well our approach performed in distinguishing sections,
+we evaluated it on the articles in the validation dataset. During
+evaluation, we figured out the limiting cases of our approach. A section
+could not be differentiated either when there was no explicit mention of
+any of its surface forms or if there were multiple mentions of the
+surface forms in the articles. For instance, in the validation dataset
+(see Table \[tab:sections\]), keywords were not extracted from 13
+articles because of no explicit mention of the term ’keywords’ or its
+variants. On manual inspection, we found keywords were actually not
+mentioned in these 13 articles. In the remaining articles where the
+keywords were present, our algorithm could not detect them from 1
+article. For brevity, we have reported only four main sections in
+Table \[tab:sections\]: title, abstract, keywords and methodology/data,
+since these are the ones getting preferential treatment in methods and
+fields identification. If a section was not found in the article
+(because of no explicit mention of any of the surface forms), then only
+the sections that could be detected were extracted. The remaining
+content was saved as `reduced_content` after cleaning and noun-phrases
+were extracted from it to prevent loss of any meaningful data.
 
 [C[4cm]{} C[3.5cm]{} C[4cm]{}]{} **Sections** & **No explicit mention**
-& **Mentioned but not found**  
+& **Mentioned but not distinguished**  
 Title & 0 & 0  
-Keywords & 13 & 2  
+Keywords & 13 & 1  
 Abstract & 0 & 1  
 Methodology/Data & 18 & 4  
 
-We used `pdfinfo` from zhe `poppler suite` to extract PDF metadata that
-very often contained the keywords and subject of an article. This tool
-was helpful in those cases where the keywords were not found by the
-regular expression.  
+In addition to the main sections, we also extracted PDF metadata using
+`pdfinfo` service from the `poppler suite` library. The metadata very
+often contained the keywords and subject of an article, which was
+helpful in those cases where the keywords were not found by the regular
+expression.  
 In the end, the preprocessing module generated four text files for a
 publication: PDF-converted text, PDF-metadata, processed articles
 containing relevant data, and noun phrases from the relevant sections,
@@ -189,7 +204,7 @@ Research Fields and Methods Identification
     from Wikipedia[^8] and fetched their descriptions from the
     corresponding DBpedia resources. For each label in the vocabulary,
     we extracted noun phrases from its description and added them to the
-    vocabulary. For examples, please refer Table \[tab:vocab\].
+    vocabulary. Please refer Table \[tab:vocab\] for examples.
 
     [C[1.5cm]{} C[5cm]{} C[5cm]{}]{} **Label** & **Description** &
     **Noun Phrases from Description**  
@@ -204,11 +219,12 @@ Research Fields and Methods Identification
 
 2.  **Research Fields Vocabulary**: For both the phases, we used the
     given research fields vocabulary and, just like the methods
-    vocabulary, added noun phrases from the description of the labels to
-    it. However, since our phase-1 model seemed to confuse fields with
-    methods, for Phase-2, we additionally created a blacklist of terms
-    that didn’t contain any domain-specific information, such as; Mixed
-    Methods, Meta Analysis, Narrative Analysis and the like.
+    vocabulary, supplemented it with the noun phrases from the
+    description of the research field labels. However, since our phase-1
+    model seemed to confuse fields with methods, for Phase-2, we
+    additionally created a stopword-list of terms that didn’t contain
+    any domain-specific information, such as; Mixed Methods, Meta
+    Analysis, Narrative Analysis and the like.
 
 3.  **Word2Vec Model generation**: In this pre-processing step, we used
     the above-mentioned vocabulary files containing noun phrases to
@@ -222,7 +238,7 @@ Research Fields and Methods Identification
     was used to extract the vectors of the individual words.]{}
 
 4.  **Research Method training results creation**: For research methods,
-    we generated an intermediate result file for the publications
+    we generated an intermediate result file with the publications
     present in the training data. It was generated using a
     `naïve finder algorithm` which, for each publication, selected the
     research method with the highest cosine similarity to any of its
@@ -275,9 +291,19 @@ Research Fields and Methods Identification
         \[preprocess\]), were used to find both fields and methods.
 
     4.  **Research Field Selection** - The top-ranked term from the
-        result of step 3, which was not present in the blacklist of
+        result of step 3, which was not present in the stopword-list of
         irrelevant terms, was marked as the research field of the
         article.
+
+The experimental set-up and average training times (ATT) have been
+reported in Table \[tab:setup\]:
+
+[|C[5cm]{} | C[7cm]{} |]{} Computing Infrastructure & macOS, 2 GHz Intel
+Core i7 processor, 4 cores RAM 16 GB 1600 MHz  
+ATT - RF model & 3m 21s  
+ATT - RM model & 3m 19s  
+Link to Implemented Code &
+<https://github.com/nikit91/Jword2vec/tree/rich-context>  
 
 Dataset Extraction
 ------------------
@@ -298,15 +324,16 @@ have been described below.
     contained many commonly occurring terms like ‘time’, ‘series’, ‘time
     series’, ‘population’ etc. Therefore, we filtered out those dataset
     citations that occurred more than a certain threshold value (=1.20)
-    multiplied by the median of the frequency distribution and had less
-    than 3 distinct mentions in a publication. The remaining citations
-    were written to an interim result file. Table \[tab:simple\] depicts
-    the improvement in performance of Simple Dataset Mention Search with
-    the inclusion of filtering. The filtering process improved the
-    F1-measure by 42.86%. Note, as the validation data consisted of only
-    100 articles, changing the threshold value to 1.10 or 1.30 didn’t
-    result in any significant change, hence we have maintained a
-    constant threshold value of 1.20 in our comparison table.
+    multiplied by the median of the frequency distribution and that had
+    less than 3 distinct mentions in a publication. The remaining
+    citations were written to an interim result file.
+    Table \[tab:simple\] depicts the improvement in performance of
+    Simple Dataset Mention Search with the inclusion of filtering. The
+    filtering process improved the F1-measure by 42.86%. Note, as the
+    validation data consisted of only 100 articles, changing the
+    threshold value to 1.10 or 1.30 didn’t result in any significant
+    change, hence we have maintained a constant threshold value of 1.20
+    in our comparison table.
 
     [C[1.5cm]{} C[3.5cm]{} C[3.5cm]{} C[3.5cm]{}]{} **Metrics** &
     **without filtering** & **Threshold=1.20, mentions $<$ 3** &
@@ -319,19 +346,20 @@ have been described below.
     Citations[]{data-label="fig:graph"}](combined_images/freq.pdf)
 
 2.  **Rasa-based Dataset Detection:** In our second approach, we trained
-    an entity extraction model based on conditional random fields using
-    Rasa NLU [@DBLP:journals/corr/abs-1712-05181]. For training the
-    model we used the Spacy Tokenizer[^9] for the preprocessing step.
-    For Entity Recognition we used BILOU tagging and used 50 iterations
-    to train the CRF. We used the Part of Speech tags, the case of the
-    input tokens and the suffixes of the tokens as input features for
-    the CRF model. We particularly tested two configurations for
-    training the CRF-based NER model. In Phase-1, the 2500 labeled
-    publications from the training dataset were used for training the
-    Rasa NLU[^10] model. Later in Phase-2, when the Phase-1 holdout
-    corpus was released, we combined its 5000 labeled publications with
-    the previously given 2500 labeled publications and then retrained
-    the model again with these 7500 labeled publications.  
+    an entity extraction model based on conditional random fields (CRF)
+    using Rasa NLU [@DBLP:journals/corr/abs-1712-05181]. For training
+    the model we used the Spacy Tokenizer[^9] for the preprocessing
+    step. For Entity Recognition we used BILOU tagging and used 50
+    iterations to train the CRF. We used the Part of Speech tags, the
+    case of the input tokens and the suffixes of the tokens as input
+    features for the CRF model. We particularly tested two
+    configurations for training the CRF-based Named Entity Recognition
+    (NER) model. In Phase-1, the 2500 labeled publications from the
+    training dataset were used for training the Rasa NLU[^10] model.
+    Later in Phase-2, when the Phase-1 holdout corpus was released, we
+    combined its 5000 labeled publications with the previously given
+    2500 labeled publications and then retrained the model again with
+    these 7500 labeled publications.  
     **Running the CRF-Model:** The trained model was run against the
     preprocessed data to detect dataset citations and mentions. Only the
     entities that had a confidence score greater than a certain
@@ -364,18 +392,19 @@ Evaluation
 ==========
 
 We performed a quantitative evaluation for Dataset Extraction using the
-evaluation script provided by the competition organizers. This
-evaluation (see Table \[tab:dataset\]) was carried out against the
-validation data, wherein we compared four different configurations. As
-can be inferred from the table, there was only a slight increase in
-performance for the Rasa-based model, when the training samples were
-increased. However, combining it with the Simple Dataset Mention Search,
-increased the performance by *19.42%*. Interestingly, there was no
-improvement in performance in the combined approach even when the
-training samples for the Rasa-based model were increased. This might be
-because of the removal of frequently-occuring terms from the
-Rasa-generated output, based on the frequency distribution of dataset
-mentions as computed in the Simple Dataset Mention Search.  
+evaluation script provided by the competition organizers (refer Chapter
+5 for more details). This evaluation (see Table \[tab:dataset\]) was
+carried out against the validation data, wherein we compared four
+different configurations. As can be inferred from the table, there was
+only a slight increase in performance for the Rasa-based model, when the
+training samples were increased. However, combining it with the Simple
+Dataset Mention Search, increased the performance by *19.42%*.
+Interestingly, there was no improvement in performance in the combined
+approach even when the training samples for the Rasa-based model were
+increased. This might be because of the removal of frequently-occuring
+terms from the Rasa-generated output, based on the frequency
+distribution of dataset mentions as computed in the Simple Dataset
+Mention Search.  
 
 [ M[2.2cm]{} | M[2.3cm]{} | M[2.2cm]{} M[2.2cm]{} M[2.2cm]{} ]{} & &  
 **Metrics**& **Rasa-based Approach** (2500) & **Rasa-based Approach**
@@ -432,7 +461,7 @@ increased number of training samples. Hence, there was only a slight
 improvement in performance when the Rasa-model was trained with 7500
 publications instead of 2500. This was also why we combined the
 Rasa-based approach with the Simple Dataset Mention Search, so that at
-least the datasets that were present in the vocabulary didn’t get
+least the datasets that were present in the vocabulary do not get
 missed.
 
 Regarding the fields and methods, vocabularies played an immense role in
@@ -440,16 +469,16 @@ their identification. The vocabularies that were provided by the SAGE
 publications contained some terms that were either polysemous or very
 high-level and therefore, were picked up by our model very often. Hence,
 for research methods, we created our own vocabulary containing all the
-relevant statistical methods, and for fields, we introduced a blacklist
-of irrelevant terms and looked it up each time, before writing the
-result to the output file. The goal of blacklist generation was to
-filter the terms that did not carry domain-specific information and
-sounded more like research methods than fields. Since the focus was on
-more granulated results, we tried to look for open ontologies for Social
-Science Fields and Methods and unfortunately, could not find any. It is
-worth mentioning that since our approach for Fields and Methods
-identification relied heavily upon vocabularies, it could not find any
-new methods or fields from the publications.
+relevant statistical methods, and for fields, we introduced a
+stopword-list of irrelevant terms and looked it up each time, before
+writing the result to the output file. The goal of stopword-list
+generation was to filter the terms that did not carry domain-specific
+information and sounded more like research methods than fields. Since
+the focus was on more granulated results, we tried to look for open
+ontologies for Social Science Fields and Methods and unfortunately,
+could not find any. It is worth mentioning that since our approach for
+Fields and Methods identification relied heavily upon vocabularies, it
+could not find any new methods or fields from the publications.
 
 Based on the final evaluation feedback, since our Phase-2 models did not
 perform as good as we expected, following are a few things that we could
@@ -458,8 +487,8 @@ have done differently.
 1.  For research methods, merging the given SAGE methods vocabulary with
     our manually curated vocabulary, could have resulted in methods that
     would have been both granular and statistical while still being
-    relevant to the publications. Introducing a blacklist just as we did
-    for research field identification, could also have been another
+    relevant to the publications. Introducing a stopword-list just as we
+    did for research field identification, could also have been another
     workaround.
 
 2.  For both fields and methods identification, we could have also tried
@@ -485,7 +514,7 @@ Graph [@DBLP:journals/corr/abs-1901-10816][@DBLP:conf/esws/BuscaldiDMOR19].
 Previous works on never-ending learning have shown how humans and
 extraction algorithms can work together to achieve high-precision and
 high-recall knowledge extraction from unstructured sources. In our
-future work, we hence aim to populate a **scientific knowledge graphs**
+future work, we hence aim to populate a **scientific knowledge graph**
 based on never-ending learning. The methodology we plan to develop will
 be domain-independent and rely on active learning to classify, extract,
 link and publish scientific research artifacts extracted from
@@ -502,8 +531,9 @@ can be manually or automatically added.[^13] The resulting graphs will
 -   be self-repairing, i.e., be able to update previous extraction
     results based on insights gathered from new content;
 
--   be weakly supervised by humans, who would assist in correcting wrong
-    hypotheses;
+-   be weakly supervised by humans (e.g. authors of publications), who
+    would assist in correcting wrong hypotheses, thereby leveraging
+    semi-supervised learning;
 
 -   provide standardized access via W3C Standards such as SPARQL.
 

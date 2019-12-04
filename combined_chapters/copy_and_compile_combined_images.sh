@@ -3,6 +3,8 @@
 # updated script as of 2019-06-20
 
 # clear the directory of md and pdf and html files
+
+rm sphinx_version/*.md 
 rm *.md 
 rm *.pdf 
 rm *.html 
@@ -20,14 +22,14 @@ mkdir 09_images
 mkdir 10_images
 mkdir 11_images
 mkdir 12_images
-mkdir 13_images
+
 
 # Chaapter one
 
 ## hoist placeholder title for chapter 1 
 
-
-
+echo "trying contributors"
+cp ../contributor_bios.md chap00.md  
 
 echo "trying chapter 1"
 cp ../01-Introduction/Intro\ chapter_October\ 28.docx . 
@@ -67,8 +69,8 @@ cp /tmp/newfile chap02.md
 
 # Chapter three
 echo "trying chapter 3"
-cp ../03-Use_Case-Dimensions/DS\ article.docx . 
-pandoc DS\ article.docx -o chap03.md
+cp ../03-Use_Case-Dimensions/DS\ article\ Final.docx . 
+pandoc DS\ article\ Final.docx -o chap03.md
 cp ../03-Use_Case-Dimensions/*.png 03_images 
 python3 rename_files.py "03_images/" png chap03
 cp 03_images/*.png combined_images
@@ -89,7 +91,7 @@ sed -i.bu "s/media\/image/combined_images\/chap03_image/g" chap03.md
 
 # Chapter 04.75  
 echo "trying chapter 4"
-cp ../04.75-metadata-datasets/Allen_MetadataForSocialScienceDatasetsV63.docx 04_context.docx 
+cp ../04.75-metadata-datasets/Allen_Metadata_chp4_final.docx 04_context.docx 
 pandoc 04_context.docx  -o chap04.md
 #
 # add a placeholder chapter heading 
@@ -191,7 +193,7 @@ cp /tmp/newfile chap08.md
 
 # Chapter 09 
 echo "trying chapter 9"
-cp ../09_combining_embeddings_DICE/09_combining_embeddings_DICE.md chap09.md
+cp ../09_combining_embeddings_DICE/rcc_upb_chapter.md chap09.md
 cp  ../09_combining_embeddings_DICE/images/* 09_images/ 
 cp 09_images/* combined_images 
 sed -i.bu "s/\](images/\](combined_images/g" chap09.md
@@ -274,20 +276,20 @@ cp /tmp/newfile chap11.md
 
 
 # Chapter 13
-echo "trying chapter 13"
-cp ../13-The_Future_Of_AI/richctx.md chap13.md 
-cp ../13-The_Future_Of_AI/*.png 13_images
-cp 13_images/* combined_images 
-sed -i.bu "s/illo/combined_images\/illo/g" chap13.md 
+echo "trying chapter 12"
+cp ../13-The_Future_Of_AI/richctx.md chap12.md 
+cp ../13-The_Future_Of_AI/*.png 12_images
+cp 12_images/* combined_images 
+sed -i.bu "s/illo/combined_images\/illo/g" chap12.md 
 #
 # add a placeholder chapter heading 
 echo ' ' > /tmp/newfile
 echo '---' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-echo '# Chapter 13 - The future of context' >> /tmp/newfile
+echo '# Chapter 12 - The future of context' >> /tmp/newfile
 echo ' ' >> /tmp/newfile
-cat chap13.md     >> /tmp/newfile 
-cp /tmp/newfile chap13.md 
+cat chap12.md     >> /tmp/newfile 
+cp /tmp/newfile chap12.md 
 #
 
 # cleanup artifacts created in conversion 

@@ -16,6 +16,7 @@ Copyright 2019 NYU.
    :maxdepth: 1
    :caption: Contents:
 
+   chap00.md
    chap01.md
    chap02.md
    chap03.md
@@ -28,4 +29,3 @@ Copyright 2019 NYU.
    chap10.md
    chap11.md
    chap12.md
-   chap13.md

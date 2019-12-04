@@ -1,8 +1,8 @@
-
+ 
 ---
-
-# Chapter 13 - The future of context
-
+ 
+# Chapter 12 - The future of context
+ 
 # The Future of AI in Rich Context
 
 **Paco Nathan**
@@ -80,7 +80,7 @@ Rich Context establishes foundations for that work in social science research.
 
 The [Rich Context Competition](https://coleridgeinitiative.org/richcontextcompetition#problemdescription) held during September 2018 through February 2019 invited AI research teams to compete in one aspect of Rich Context requirements.
 Several teams submitted solutions to automate the discovery of research datasets along with associated research methods and fields, as identified in social science research publications.
-Methods for machine learning and text analytics used by the four finalist teams provided complementary approaches, all focused on the problem of [_entity linking_](https://en.wikipedia.org/wiki/Entity_linking), with a corpus of social science research papers used as their training data.
+Methods for machine learning and text analytics used by the four finalist teams provided complementary approaches, all focused on the problem of [_entity linking_](https://en.wikipedia.org/wiki/Entity_linking), with a corpus of social science research papers used as their training data. 
 
 The results of the competition provided metadata to describe links among datasets used in social science research. In other words, the outcome of the competition generated the basis for a moderately-sized knowledge graph.
 There are many publication sources to analyze, and the project will pursue that work as an ongoing process to extract the implied metadata.
