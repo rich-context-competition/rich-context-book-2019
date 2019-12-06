@@ -88,10 +88,9 @@ cp /tmp/newfile chap03.md
 sed -i.bu "s/media\/image/combined_images\/chap03_image/g" chap03.md
 
 
-
 # Chapter 04.75  
 echo "trying chapter 4"
-cp ../04.75-metadata-datasets/Allen_Metadata_chp4_final.docx 04_context.docx 
+cp ../04.75-metadata-datasets/Allen_Metatata_chp4_final.docx 04_context.docx 
 pandoc 04_context.docx  -o chap04.md
 #
 # add a placeholder chapter heading 
@@ -112,7 +111,7 @@ cp /tmp/newfile chap04.md
 # Chapter 05
 #TODO fix images in this document 
 echo "trying chapter 5"
-cp ../05-Rich_Context_Competition_Design/05-Rich_Context_Competition_Design_Nov\ 30.docx
+cp ../05-Rich_Context_Competition_Design/05-Rich_Context_Competition_Design_Nov\ 30.docx 05_design.docx 
 cp ../05-Rich_Context_Competition_Design/*.png 05_images
 python3 rename_files.py "05_images/" png chap05
 cp 05_images/*.png combined_images
