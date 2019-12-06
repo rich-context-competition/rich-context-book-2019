@@ -51,7 +51,7 @@ cp /tmp/newfile chap01.md
 # Chapter two
 echo "trying chapter 2"
 cp ../02-View_from_the_users-Bundesbank/*.jpg combined_images
-cp ../02-View_from_the_users-Bundesbank/20190614_whos_whaldo.md chap02.md
+cp ../02-View_from_the_users-Bundesbank/20191205_whos_whaldo_final.md chap02.md
 sed -i.bu "s/\[Insert Figure 1\]/\!\[\]\(\.\/combined_images\/20190614_Figure1\.jpg\)/g" chap02.md 
 sed -i.bu "s/\[Insert Figure 2\]/\!\[\]\(\.\/combined_images\/20190614_Figure2\.jpg\)/g" chap02.md
 #
